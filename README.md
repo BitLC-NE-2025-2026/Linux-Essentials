@@ -51,13 +51,14 @@
 ```cd ~``` *homeverzeichniss des Benutzer*  
 ```cd "user"``` *direkte Benutzer angabe*  
 ```pwd``` *= print working directory, shows where your at*  
-```ls "directory" | less``` *programm to open a directory outside of console*  
-```ls "directory" | wc``` ```ls bin | -c``` ```ls bin | -m``` ```ls bin | -l```  
+```ls "directory" | less``` *programm to open a directory outside of console* (doesnt affect console)  
+```ls "directory" | wc``` ```ls "directory" | -c``` ```ls "directory" | -m```  
+```ls "directory" | -l``` ```ls "directory" | -w```  
 *wc shows the amount of words, bytes and lines in "directory"*  
-*-c shows the amount of bytes lines in "directory"*  
-*-m shows the amount of letters lines in "directory"*  
-*-l shows the amount of lines lines in "directory"*  
-
+*-c shows the amount of bytes in "directory"*  
+*-m shows the amount of letters in "directory"*  
+*-l shows the amount of lines in "directory"*  
+*-w shows the amount of words in "directory"*  
 
 ### Überprüfungs Befehl/Check Command
 ```Sha256sum -c "Datei"``` *= Secure Hash Algorithm, ```256sum``` = Prüfsumme  
