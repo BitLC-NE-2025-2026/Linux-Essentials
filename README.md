@@ -8,6 +8,7 @@
 ### NoteNotes
 - Betriebssystem & Programmschicht = Softwareschicht = Betriebssystemkern
 - Enterprise für den Unternehmensbereich (Bis zu 10 Jahre support)
+- 99% aller IT-Systeme laufen unter Linux
 
 # System Arten
 - LTS = Long Term Support (Hängt von den Kernel ab) (Neue Version alle 2 Jahre, Nach 4-5 keine Sicherheits Updates mehr)
@@ -32,5 +33,5 @@
 - Ist für Experimentelle Systeme entwickelt worden
 
 ### Container-Management
--Erzeugen von Instanzen um eine Hohe Datenlast von Anwendungen abzufangen (Wie Objekte in OOP) Container-Instanzen erzeugen, Löschen
+- Erzeugen von Instanzen um eine Hohe Datenlast von Anwendungen abzufangen (Wie Objekte in OOP) Container-Instanzen erzeugen, Löschen
 
