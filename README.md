@@ -35,34 +35,36 @@
 - Erzeugen von Instanzen um eine Hohe Datenlast von Anwendungen abzufangen (Wie Objekte in OOP) Container-Instanzen erzeugen, Löschen
   
 # Linux Command Consol Prompts
-```list/ls -al``` *Shows all Commands for the current state*  
-```man/manual "command z.B. ls" ``` *shows what the command does*  
-```cd "folder"``` *goes into a folder and be used multiple times to go into deeper folders*   
-```q``` *goes back one folder or menu*  
-```clear``` *clears the command console*  
-```echo``` "Text oder $0" *gibt den Text 'text' aus oder bei $0 bash erste stelle*  
-```exit``` *goes back one folder/menu or closes the consol if in no menu*  
+```ls "directory" | less``` programm to open a directory outside of console (doesnt affect console)  
+```| less``` can be added behind any command  
+```head -n 10``` This takes only the first 10 lines of the file, shortens output  
+```list/ls -al``` Shows all Commands for the current state  
+```man/manual "command z.B. ls" ``` shows what the command does    
+```cd "folder"``` goes into a folder and be used multiple times to go into deeper folders   
+```q``` goes back one folder or menu  
+```clear``` clears the command console  
+```echo``` "Text oder $0" gibt den Text 'text' aus oder bei $0 bash erste stelle  
+```exit``` goes back one folder/menu or closes the consol if in no menu  
 ```id```  
-```su -``` *= switch user*  
-```usermod -aG wheel "username"``` *adds user to certain group wheel*  
-```sudo dnf update``` *gives full access to current user*  
-```cd ..``` *goes one "level" back*  
+```su -``` = switch user  
+```usermod -aG wheel "username"``` adds user to certain group wheel  
+```sudo dnf update``` gives full access to current user  
+```cd ..``` goes one "level" back  
 ```ls boot```  
-```cd ~``` *homeverzeichniss des Benutzer*  
-```cd "user"``` *direkte Benutzer angabe*  
-```pwd``` *= print working directory, shows where your at*  
-```ls "directory" | less``` *programm to open a directory outside of console* (doesnt affect console)  
+```cd ~``` homeverzeichniss des Benutzer  
+```cd "user"``` direkte Benutzer angabe  
+```pwd``` = print working directory, shows where your at   
 ```ls "directory" | wc``` ```ls "directory" | -c``` ```ls "directory" | -m```  
 ```ls "directory" | -l``` ```ls "directory" | -w```  
-*wc shows the amount of words, bytes and lines in "directory"*  
-*-c shows the amount of bytes in "directory"*  
-*-m shows the amount of letters in "directory"*  
-*-l shows the amount of lines in "directory"*  
-*-w shows the amount of words in "directory"*  
-
+wc shows the amount of words, bytes and lines in "directory"  
+-c shows the amount of bytes in "directory"  
+-m shows the amount of letters in "directory"  
+-l shows the amount of lines in "directory"  
+-w shows the amount of words in "directory"  
+```cat "directory"``` show the contents of a file
 ### Überprüfungs Befehl/Check Command
-```Sha256sum -c "Datei"``` *= Secure Hash Algorithm, ```256sum``` = Prüfsumme  
-```-c/--check``` Überprüft mit der Prüfsumme aus ```256sum``` die Datei in ```"Datei"``` z.B. Rocky-9.7-x86_64-boot.ISO*  
+```Sha256sum -c "Datei"``` = Secure Hash Algorithm, ```256sum``` = Prüfsumme  
+```-c/--check``` Überprüft mit der Prüfsumme aus ```256sum``` die Datei in ```"Datei"``` z.B. Rocky-9.7-x86_64-boot.ISO  
   
 ### Verzeichnisse
 ```home``` homeverzeichniss  
