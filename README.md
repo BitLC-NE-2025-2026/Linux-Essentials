@@ -17,7 +17,7 @@
 - Container Management (Docker, Podman)
 
 ### NoteNotes
-- Linux besides Enterprise abgesehen von Enterprise Versionen meist Kostenlos
+- Linux abgesehen von Enterprise Versionen sind meistens Kostenlos
 - Treiber bei Linux = Module
 
 ### Hyper Visor 1
