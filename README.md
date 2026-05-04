@@ -15,6 +15,7 @@
 - RR = Rolling Release (Ständige Updates (Sicherheit, System), keine neuinstallationen nötig)
 - Hyper visor 1 = Virtualisierung (Bare Metall)
 - Hyper Visor 2 = Virtualisierung (VM-Ware, Oracle Virtual Box)
+- 
 - Container Management (Docker, Podman)
 
 ### NoteNotes
