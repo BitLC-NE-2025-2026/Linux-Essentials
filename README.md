@@ -35,4 +35,12 @@
 
 ### Container-Management
 - Erzeugen von Instanzen um eine Hohe Datenlast von Anwendungen abzufangen (Wie Objekte in OOP) Container-Instanzen erzeugen, Löschen
+- 
+# Linux Command Consol Prompts
+- list/ls -al Shows all Commands for the current state
+- man/manual "command z.B. ls" shows what the command does
+
+### Überprüfungs Befehl
+- Sha256sum -c "Datei" = Secure Hash Algorithm, 256sum = Prüfsumme, -c/--check Überprüft ISO-Datei Prüfsumme in "Datei", "Datei" z.B. ISO
+
 
