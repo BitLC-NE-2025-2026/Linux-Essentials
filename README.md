@@ -6,7 +6,6 @@
 - LFS
 
 ### NoteNotes
-- Betriebssystem & Programmschicht = Softwareschicht = Betriebssystemkern
 - Enterprise für den Unternehmensbereich (Bis zu 10 Jahre support)
 - 99% aller IT-Systeme laufen unter Linux
 
@@ -41,16 +40,23 @@
 - cd "folder" *goes into a folder and be used multiple times to go into deeper folders*
 - q *goes back one folder or menu*
 - clear *clears the command console*
-
-### Überprüfungs Befehl/Check Command
-- Sha256sum -c "Datei" *= Secure Hash Algorithm, 256sum = Prüfsumme, -c/--check Überprüft ISO-Datei Prüfsumme in "Datei", "Datei" z.B. ISO*
-
-# Shell Commands
 - echo "Text oder $0" *gibt den Text 'text' aus oder bei $0 bash erste stelle*
 - exit *goes back one folder/menu or closes the consol if in no menu*
 - id
 - su - = *switch user*
 - usermod -aG wheel "username" *adds user to certain group wheel*
 - sudo dnf update *gives full access to user*
-- cd .. *goes one "level" higher*
+- cd .. *goes one "level" back*
+- ls boot 
+- cd ~ *homeverzeichniss des Benutzer*
+- cd "user" *direkte Benutzer angabe*
+- pwd *= print working directory, shows where your at*
+
+### Überprüfungs Befehl/Check Command
+- Sha256sum -c "Datei" *= Secure Hash Algorithm, 256sum = Prüfsumme, -c/--check Überprüft ISO-Datei Prüfsumme in "Datei", "Datei" z.B. ISO*
+  
+### Verzeichnisse
+- home homeverzeichniss
+- ~ homeverzeichniss des Benutzers
+- / Wurzelverzeichniss
 
