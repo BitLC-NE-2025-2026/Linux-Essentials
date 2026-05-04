@@ -1,17 +1,49 @@
 # Linux Distributionen und Systemarchitektur
 
-## Hauptfamilien
-* **Red Hat:** Rocky Linux, Red Hat Enterprise Linux
-* **Debian:** Debian, Ubuntu, Kali Linux, Linux Mint basiert auf Ubuntu
-* **Arch Linux:** Manjaro, Garuda
-* **SUSE**
-* **LFS:** Linux From Scratch
+## Linux Hauptfamilien und Distributionen
 
-## Allgemeine Notizen
-* Enterprise Versionen sind für den Unternehmensbereich konzipiert und bieten bis zu 10 Jahre Support.
-* Ein sehr großer Teil der weltweiten IT Systeme läuft unter Linux.
-* Die meisten Linux Distributionen sind abgesehen von kommerziellen Enterprise Versionen kostenlos.
-* Hardware Treiber werden unter Linux als Kernel Module bezeichnet.
+| Familie | Fokus und Beschreibung | Paketmanager | Bekannte Distributionen |
+| :--- | :--- | :--- | :--- |
+| **Debian** | Basis für viele einsteigerfreundliche und serverseitige Systeme. Hohe Stabilität und riesige Softwareauswahl. | APT, dpkg | Debian, Ubuntu, Linux Mint, Kali Linux |
+| **Red Hat** | Fokussiert auf Stabilität, Langzeitunterstützung und Unternehmensumgebungen. Basis für kommerzielle und freie Enterprise Systeme. | DNF, YUM, rpm | Red Hat Enterprise Linux, Fedora, Rocky Linux, AlmaLinux |
+| **Arch Linux** | Minimalistisch und flexibel. Nutzt ein Rolling Release Modell für stets hochaktuelle Softwarepakete. Setzt fortgeschrittene Linux Kenntnisse voraus. | Pacman | Arch Linux, Manjaro, EndeavourOS, Garuda Linux |
+| **SUSE** | Stark im Unternehmensbereich. Bietet mit YaST ein mächtiges zentrales Werkzeug zur Systemverwaltung. | Zypper, rpm | openSUSE Leap, openSUSE Tumbleweed, SUSE Linux Enterprise |
+| **Slackware** | Die älteste noch aktiv gepflegte Distribution. Sehr traditioneller Aufbau, Verzicht auf moderne Automatismen, nah am reinen Unix Konzept. | pkgtools | Slackware, Salix |
+| **Unabhängige Systeme** | Systeme mit völlig eigenen Philosophien. Oft quellcodebasiert zur maximalen Systemoptimierung oder extrem minimalistisch für reine Container Anwendungen. | Portage, apk | Gentoo, Alpine Linux, Linux From Scratch, NixOS |
+## Weitere Linux Kategorien und Zweige
+
+| Kategorie | Fokus und Beschreibung | Bekannte Systeme |
+| :--- | :--- | :--- |
+| **Mobile und Cloud** | Nutzen den Linux Kernel, besitzen aber eine völlig andere Systemarchitektur als klassische Desktop Systeme. Es fehlt die typische GNU Umgebung. | Android, ChromeOS |
+| **Mandriva Zweig** | Historisch sehr bedeutsam. Ursprünglich aus Red Hat entstanden, entwickelte sich das System zu einem eigenständigen Ökosystem mit eigenen Konfigurationswerkzeugen. | Mageia, OpenMandriva, PCLinuxOS |
+| **Embedded und Netzwerk** | Hochgradig optimiert für Router, Firewalls und kleine IoT Geräte mit extrem wenig Speicherplatz. | OpenWrt, DD WRT, pfSense |
+| **Immutable OS** | Moderne Architektur mit einem schreibgeschützten Systemabbild. Updates erfolgen atomar und können bei Fehlern sofort rückgängig gemacht werden. | Fedora Silverblue, Vanilla OS, openSUSE MicroOS |
+
+# Allgemeine Notizen zu Linux
+
+## Enterprise Distributionen
+* Konzipiert für absolute Stabilität und Vorhersehbarkeit im Geschäftsbetrieb
+* Bieten Zertifizierungen für proprietäre Unternehmenssoftware wie SAP oder Oracle
+* Gewährleisten garantierte Sicherheitsupdates und Fehlerbehebungen für einen Zeitraum von bis zu 10 Jahren
+* Umfassen oft kostenpflichtige Service Level Agreements für garantierten Herstellersupport
+
+## Verbreitung und Marktanteil
+* Bildet das absolute Fundament im Cloud Computing bei Anbietern wie AWS oder Microsoft Azure
+* Betreibt nahezu 100 Prozent der weltweit leistungsstärksten Supercomputer
+* Dient als Basis für extrem viele Embedded Systems, Smart Home Geräte und das Android Betriebssystem
+* Bietet enorme Skalierbarkeit vom kleinen Einplatinencomputer bis hin zum Server Cluster
+
+## Lizenzierung und Kosten
+* Entwickelt nach der Open Source Philosophie unter Lizenzen wie der GNU General Public License
+* Der Quellcode ist für jedermann frei einsehbar, auditierbar und modifizierbar
+* Die Betriebssysteme sind in der Regel völlig kostenlos herunterladbar und nutzbar
+* Kommerzielle Anbieter generieren Umsatz primär über Supportverträge, Schulungen und Zertifizierungen
+
+## Hardware und Kernel Module
+* Linux verwendet eine monolithische Architektur mit dynamisch ladbaren Modulen
+* Hardwaretreiber sind direkt als Kernel Module implementiert
+* Module lassen sich im laufenden Betrieb bedarfsgerecht laden und entladen
+* Diese dynamische Verwaltung schont Systemressourcen und verhindert Neustarts bei Hardwareänderungen
 
 # Systemarten und Virtualisierung
 
@@ -26,17 +58,31 @@
 | **Hypervisor Typ 2** | Gehostete Virtualisierung | Setzt ein installiertes Host Betriebssystem und ein ISO Image der Linux Distribution voraus. Das Gastsystem ist gekapselt, nutzt aber die Hardware über das Hostsystem. Entwickelt für Experimentierumgebungen. | VMware, VirtualBox |
 | **Container Management** | Isolierte Instanzen | Erzeugt Instanzen zur Abfangung hoher Datenlasten von Anwendungen, vergleichbar mit Objekten in der objektorientierten Programmierung. Container lassen sich extrem schnell erzeugen und löschen. | Docker, Podman |
 
-# Wichtige Systemverzeichnisse
-| Verzeichnis | Inhalt |
+# Linux Systemverzeichnisse nach Filesystem Hierarchy Standard
+
+| Verzeichnis | Inhalt und Funktion |
 | :--- | :--- |
-| `/` | Wurzelverzeichnis, Root. Höchste Ebene im Dateisystem |
-| `/bin` | Essenzielle Binärdateien und grundlegende Anwenderbefehle |
-| `/boot` | Dateien für den Systemstart |
-| `/etc` | Systemweite Konfigurationsdateien |
-| `/home` | Home Verzeichnisse der Standardbenutzer |
-| `~` | Home Verzeichnis des aktuell angemeldeten Benutzers |
-| `/usr` | Anwenderprogramme, Bibliotheken, lib, und geteilte Daten, share |
-| `/var` | Variable Daten wie Logs, `/var/log`, Cache, `/var/cache`, oder temporäre Spool Daten |
+| `/` | Wurzelverzeichnis. Die höchste Ebene im Dateisystem. Alle anderen Verzeichnisse sind diesem untergeordnet. |
+| `/bin` | Wichtige ausführbare Programme und grundlegende Befehle für alle Benutzer. |
+| `/boot` | Statische Dateien des Bootloaders und der kompilierte Linux Kernel. |
+| `/dev` | Gerätedateien. Physische und virtuelle Hardwarekomponenten werden hier als Dateien repräsentiert. |
+| `/etc` | Systemweite Konfigurationsdateien und lokale Skripte für den Systemstart. |
+| `/home` | Benutzerverzeichnisse. Speichert persönliche Dokumente und benutzerspezifische Programmeinstellungen. |
+| `/lib` | Essenzielle Systembibliotheken und Kernelmodule. Diese werden von Binärdateien in `/bin` und `/sbin` zwingend benötigt. |
+| `/lib32` | 32 Bit Systembibliotheken. |
+| `/lib64` | 64 Bit Systembibliotheken. |
+| `/media` | Automatische Einhängepunkte für erkannte Wechseldatenträger wie USB Sticks oder externe Festplatten. |
+| `/mnt` | Temporäre Einhängepunkte für manuell verbundene Dateisysteme durch den Administrator. |
+| `/opt` | Zusätzliche Anwendungsprogramme und Softwarepakete von Drittanbietern. |
+| `/proc` | Virtuelles Dateisystem. Beinhaltet Laufzeitinformationen über aktive Systemprozesse und den Kernel. |
+| `/root` | Eigenes Home Verzeichnis des Systemadministrators Root. |
+| `/run` | Temporäre Laufzeitdaten aktiver Prozesse. Dieses Verzeichnis wird bei jedem Systemstart vollständig geleert. |
+| `/sbin` | Administrative Systemprogramme für die Systemverwaltung. Primär für den Administrator ausführbar. |
+| `/srv` | Spezifische Daten für vom System bereitgestellte Dienste wie Webserver oder FTP Server. |
+| `/sys` | Virtuelles Dateisystem zur Interaktion mit Hardwareinformationen und Treibereinstellungen des Kernels. |
+| `/tmp` | Speicherort für temporäre Dateien. Von Programmen erstellt und periodisch oder beim Systemstart bereinigt. |
+| `/usr` | Sekundäre Hierarchie für schreibgeschützte Anwenderdaten. Beinhaltet Benutzerprogramme, Bibliotheken und Dokumentationen. |
+| `/var` | Variable Systemdaten. Umfasst Systemprotokolle, Cache Dateien, Datenbanken und Spool Daten für Drucker. |
 
 # Linux Konsolenbefehle
 
