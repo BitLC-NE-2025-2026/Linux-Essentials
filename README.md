@@ -45,7 +45,7 @@
 ```clear``` clears the command console  
 ```echo``` "Text oder $0" gibt den Text 'text' aus oder bei $0 bash erste stelle  
 ```exit``` goes back one folder/menu or closes the consol if in no menu  
-```id```  
+```id``` shows groups which user was added to  
 ```su -``` = switch user  
 ```usermod -aG wheel "username"``` adds user to certain group wheel  
 ```sudo dnf update``` gives full access to current user  
@@ -63,6 +63,9 @@ wc shows the amount of words, bytes and lines in "directory"
 -w shows the amount of words in "directory"  
 ```cat "directory"``` show the contents of a file  
 ```sudo cat /etc/shadow``` shows hashed password of users  
+```reboot``` reboots the system  
+```history``` shows history of used commands  
+
 
 ### ```ls/``` specific
 ```ls "directory"``` Shows files and folders inside the specified directory  
