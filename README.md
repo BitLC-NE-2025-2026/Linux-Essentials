@@ -54,8 +54,8 @@
 ```cd ~``` homeverzeichniss des Benutzer  
 ```cd "user"``` direkte Benutzer angabe  
 ```pwd``` = print working directory, shows where your at   
-```ls "directory" | wc``` ```ls "directory" | -c``` ```ls "directory" | -m```  
-```ls "directory" | -l``` ```ls "directory" | -w```  
+```ls "directory" | wc``` ```ls "directory" | wc -c``` ```ls "directory" | wc -m```  
+```ls "directory" | wc -l``` ```ls "directory" | wc -w```  
 wc shows the amount of words, bytes and lines in "directory"  
 -c shows the amount of bytes in "directory"  
 -m shows the amount of letters in "directory"  
