@@ -45,12 +45,19 @@
 ```id```  
 ```su -``` *= switch user*  
 ```usermod -aG wheel "username"``` *adds user to certain group wheel*  
-```sudo dnf update``` *gives full access current to user*  
+```sudo dnf update``` *gives full access to current user*  
 ```cd ..``` *goes one "level" back*  
 ```ls boot```  
 ```cd ~``` *homeverzeichniss des Benutzer*  
 ```cd "user"``` *direkte Benutzer angabe*  
 ```pwd``` *= print working directory, shows where your at*  
+```ls "directory" | less``` *programm to open a directory outside of console*  
+```ls "directory" | wc``` ```ls bin | -c``` ```ls bin | -m``` ```ls bin | -l```  
+*wc shows the amount of words, bytes and lines in "directory"*  
+*-c shows the amount of bytes lines in "directory"*  
+*-m shows the amount of letters lines in "directory"*  
+*-l shows the amount of lines lines in "directory"*  
+
 
 ### Überprüfungs Befehl/Check Command
 ```Sha256sum -c "Datei"``` *= Secure Hash Algorithm, ```256sum``` = Prüfsumme  
@@ -61,3 +68,5 @@
 ```~``` homeverzeichniss des Benutzers  
 ```/``` Wurzelverzeichniss  
 
+### NoteNotes
+- less = pager
