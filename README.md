@@ -66,6 +66,7 @@ wc shows the amount of words, bytes and lines in "directory"
 ```reboot``` reboots the system  
 ```history``` shows history of used commands  
 ```print current directory``` shows current directory
+```mkdir "name"``` makes a new folder
 
 ### ```ls/``` specific
 ```ls "directory"``` Shows files and folders inside the specified directory  
