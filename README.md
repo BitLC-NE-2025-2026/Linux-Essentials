@@ -1,5 +1,3 @@
-# NOTES
-
 # Linux Distributions Richtungen
 - Red Hat (Rocky, Red Hat Enterprise, )
 - Debien (Debien, Ubuntu, Kali-Linux, Mint(Ubuntu Based), )
@@ -32,4 +30,7 @@
 - Installierte Betriebssystem ist vom Host Betriebssystem gekapselt
 - installiertes Betriebssystem nutzt Treiber und Hardware vom Betriebssystem
 - Ist für Experimentelle Systeme entwickelt worden
+
+### Container-Management
+-Erzeugen von Instanzen um eine Hohe Datenlast von Anwendungen abzufangen (Wie Objekte in OOP) Container-Instanzen erzeugen, Löschen
 
