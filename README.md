@@ -61,7 +61,27 @@ wc shows the amount of words, bytes and lines in "directory"
 -m shows the amount of letters in "directory"  
 -l shows the amount of lines in "directory"  
 -w shows the amount of words in "directory"  
-```cat "directory"``` show the contents of a file
+```cat "directory"``` show the contents of a file  
+```ls "directory"``` Shows files and folders inside the specified directory  
+If no directory is given, it lists the current directory  
+```ls /``` Shows top-level directories in the filesystem  
+```bin``` essential binaries  
+```etc``` config files  
+```home``` user directories  
+```usr``` user programs  
+```var``` variable data  
+```ls /var``` Shows contents of /var, which typically contains  
+```Logs``` (/var/log)  
+```Cache``` (/var/cache)  
+```Temporary/spool``` data  
+```ls /usr``` Shows contents of /usr, usually  
+```bin``` user commands  
+```lib``` libraries  
+```share``` shared data (docs, man pages)  
+```ls /home``` Lists all user home directories  
+```ls /etc``` Shows system configuration files  
+
+
 ### Überprüfungs Befehl/Check Command
 ```Sha256sum -c "Datei"``` = Secure Hash Algorithm, ```256sum``` = Prüfsumme  
 ```-c/--check``` Überprüft mit der Prüfsumme aus ```256sum``` die Datei in ```"Datei"``` z.B. Rocky-9.7-x86_64-boot.ISO  
