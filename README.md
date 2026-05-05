@@ -118,6 +118,7 @@
 | `exit` | Meldet den aktuellen Benutzer ab oder schließt das Terminal |
 | `history` | Zeigt den Verlauf der bisher eingegebenen Befehle an |
 | `reboot` | Startet das System neu |
+| `tree` | Ermöglicht die Anzeige einer Verzeichnisstruktur in der Kommandozeile |
 
 ## Datei und Textverarbeitung
 | Befehl | Funktion |
