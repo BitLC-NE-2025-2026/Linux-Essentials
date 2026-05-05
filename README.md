@@ -218,6 +218,3 @@ else
     echo "Standardbenutzer aktiv, eingeschränkte Rechte"
 fi
 # Beendet die if Anweisung.
-
-<which firefox -> Absoluter Pfad zur ausführbaren Datei/Programm>
-<whereis firefox -> Absoluter Pfad zur ausführbaren Datei/Programm + Biliotheken + Man Pages>
