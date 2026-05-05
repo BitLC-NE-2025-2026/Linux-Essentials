@@ -1,5 +1,19 @@
 # Linux Distributionen und Systemarchitektur
 
+## Unix und Linux Historie
+* 1969: Entstehung von Unix bei AT&T durch Dennis Ritchie und Ken Thompson.
+* 1972: Veröffentlichung des Buches The C Programming Language durch Dennis Ritchie und Brian Kernighan.
+* 1991: Start der Entwicklung des Linux Kernels durch Linus Torvalds.
+* Architektur: Bis Version 2.4 lief der Kernel als 32 Bit Version, ab Version 2.6 erfolgte die Umstellung auf 64 Bit.
+
+## Verbreitung und Marktanteil
+* Bildet das absolute Fundament im Cloud Computing bei Anbietern wie AWS oder Microsoft Azure
+* Betreibt exakt 500 der 500 weltweit leistungsstärksten Supercomputer.
+* Dient als Basis für extrem viele Embedded Systems, Smart Home Geräte und das Android Betriebssystem
+* Bietet enorme Skalierbarkeit vom kleinen Einplatinencomputer bis hin zum Server Cluster
+* Betreibt 99 Prozent aller weltweiten IT Systeme.
+* Das Unternehmen Red Hat wurde an IBM verkauft.
+  
 ## Linux Hauptfamilien und Distributionen
 
 | Familie | Fokus und Beschreibung | Paketmanager | Bekannte Distributionen |
@@ -82,6 +96,7 @@
 | `/sys` | Virtuelles Dateisystem zur Interaktion mit Hardwareinformationen und Treibereinstellungen des Kernels. |
 | `/tmp` | Speicherort für temporäre Dateien. Von Programmen erstellt und periodisch oder beim Systemstart bereinigt. |
 | `/usr` | Sekundäre Hierarchie für schreibgeschützte Anwenderdaten. Beinhaltet Benutzerprogramme, Bibliotheken und Dokumentationen. |
+| `/usr/local` | Speicherort für lokale Softwareinstallationen durch den Systemadministrator zum Schutz vor Überschreibungen bei Systemupdates. |
 | `/var` | Variable Systemdaten. Umfasst Systemprotokolle, Cache Dateien, Datenbanken und Spool Daten für Drucker. |
 
 # Linux Konsolenbefehle
@@ -116,6 +131,11 @@
 | `wc -m DATEI` | Zeigt nur die Anzahl der Zeichen an |
 | `wc -l DATEI` | Zeigt nur die Anzahl der Zeilen an |
 | `wc -w DATEI` | Zeigt nur die Anzahl der Wörter an |
+| `date` | Gibt das aktuelle Systemdatum aus |
+| `date +%Y` | Zeigt das aktuelle Jahr vierstellig an |
+| `date +%F` | Formatiert die Datumsausgabe als vollständiges Datum |
+| `> DATEI` | Leitet die Konsolenausgabe in die angegebene Datei um |
+| `history > datei.txt` | Speichert den kompletten Befehlsverlauf in einer Textdatei |
 
 ## Benutzer und Rechteverwaltung
 | Befehl | Funktion |
@@ -130,6 +150,8 @@
 | Befehl | Funktion |
 | :--- | :--- |
 | `sha256sum -c DATEI` | Überprüft eine Datei anhand einer Prüfsumme nach dem Secure Hash Algorithm 256. `-c` steht für check. Nützlich zur Validierung von ISO Images |
+| `sha256sum -c Rocky-9.7-x86_64-boot.iso` | Überprüft die Boot ISO anhand des Hashwertes 3b5c87b2f9e62fdf0235d424d64c677906096965aad8a580e0e98fcb9f97f267 |
+| `sha256sum -c Rocky-9.7-x86_64-dvd.iso` | Überprüft die DVD ISO anhand des Hashwertes d48e902325dce6793935b4e13672a0d9a4f958e02d4e23fcf0a8a34c49ef03da |
 
 # Dateirechte und Besitzverhältnisse
 
