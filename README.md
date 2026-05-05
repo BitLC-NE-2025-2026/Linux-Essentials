@@ -106,7 +106,7 @@
 ## Datei und Textverarbeitung
 | Befehl | Funktion |
 | :--- | :--- |
-| `BEFEHL | less` | Der Pipe Operator leitet die Ausgabe an den Pager `less` zur seitenweisen Anzeige weiter |
+| `less` | Der Pipe Operator leitet die Ausgabe an den Pager `less` zur seitenweisen Anzeige weiter |
 | `head -n 10 DATEI` | Gibt nur die ersten 10 Zeilen einer Datei aus |
 | `echo "Text"` | Gibt den Text auf der Konsole aus. `$0` zeigt die aktuell verwendete Shell an |
 | `cat DATEI` | Gibt den gesamten Inhalt einer Datei in der Konsole aus |
