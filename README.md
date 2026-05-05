@@ -123,6 +123,7 @@
 | `reboot` | Startet das System neu |
 | `tree` | Ermöglicht die Anzeige einer Verzeichnisstruktur in der Kommandozeile |
 | `uname -a` | Zeigt alle wichtigen Systeminformationen an |
+| `stat` | Zeigt detaillierte Informationen über eine Datei oder ein Verzeichnis |
 
 ## Datei und Textverarbeitung
 | Befehl | Funktion |
