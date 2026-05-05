@@ -98,6 +98,7 @@
 | `ls` | Zeigt Dateien und Ordner im aktuellen Verzeichnis an |
 | `ls -al` | Zeigt alle Dateien inklusive versteckter mit detaillierten Rechten und Status an |
 | `man BEFEHL` | Öffnet das Handbuch, Manual, für den jeweiligen Befehl |
+| `man info --help` | Öffnet die Info seite, für den jeweiligen Befehls |
 | `q` | Beendet Programme wie `less` oder `man` |
 | `exit` | Meldet den aktuellen Benutzer ab oder schließt das Terminal |
 | `history` | Zeigt den Verlauf der bisher eingegebenen Befehle an |
