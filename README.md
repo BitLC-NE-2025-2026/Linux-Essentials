@@ -112,6 +112,8 @@
 | `cd ORDNER` | Wechselt in das angegebene Verzeichnis |
 | `ls` | Zeigt Dateien und Ordner im aktuellen Verzeichnis an |
 | `ls -al` | Zeigt alle Dateien inklusive versteckter mit detaillierten Rechten und Status an |
+| `where DATEI` | Absoluter Pfad zur ausführbaren Datei/Programm |
+| `whereis DATEI` | Absoluter Pfad zur ausführbaren Datei/Programm + Biliotheken + Man Pages |
 | `man BEFEHL` | Öffnet das Handbuch, Manual, für den jeweiligen Befehl |
 | `man info --help` | Öffnet die Info seite, für den jeweiligen Befehls |
 | `q` | Beendet Programme wie `less` oder `man` |
@@ -216,3 +218,6 @@ else
     echo "Standardbenutzer aktiv, eingeschränkte Rechte"
 fi
 # Beendet die if Anweisung.
+
+<which firefox -> Absoluter Pfad zur ausführbaren Datei/Programm>
+<whereis firefox -> Absoluter Pfad zur ausführbaren Datei/Programm + Biliotheken + Man Pages>
