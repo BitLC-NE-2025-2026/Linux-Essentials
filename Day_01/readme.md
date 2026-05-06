@@ -16,15 +16,20 @@ Willkommen zum ersten Tag der Linux Essentials. Heute legen wir das Fundament f�
     - [Enterprise-Systeme & Marktanteil](#enterprise-systeme--marktanteil)
     - [Der Fokus: Rocky Linux (Red Hat Familie)](#der-fokus-rocky-linux-red-hat-familie)
   - [🐚 Einführung in die Shell](#-einführung-in-die-shell)
-    - [Systemarchitektur](#systemarchitektur)
+    - [Die Ebenen des Systems](#die-ebenen-des-systems)
+    - [Bekannte Shell-Varianten](#bekannte-shell-varianten)
+    - [Systemarchitektur & Philosophie](#systemarchitektur--philosophie)
     - [Erste Schritte](#erste-schritte)
   - [📂 Navigation \& Dateisystem](#-navigation--dateisystem)
     - [Wichtige Konzepte](#wichtige-konzepte)
     - [Befehle zur Navigation](#befehle-zur-navigation)
   - [🏗 Filesystem Hierarchy Standard (FHS)](#-filesystem-hierarchy-standard-fhs)
   - [👤 Benutzeridentität \& Berechtigungen](#-benutzeridentität--berechtigungen)
-  - [🛠 Hilfreiche Utilities \& Pipelining](#-hilfreiche-utilities--pipelining)
-    - [Pipelining \& Redirection](#pipelining--redirection)
+  - [🛠 Hilfreiche Utilities & Pipelining](#-hilfreiche-utilities--pipelining)
+    - [Die drei Standard-Datenströme](#die-drei-standard-datenströme)
+    - [Pipelining & Redirection](#pipelining--redirection)
+    - [Logische Operatoren (Befehlsketten)](#logische-operatoren-befehlsketten)
+    - [Fortgeschrittene Redirection](#fortgeschrittene-redirection)
     - [Text-Utilities](#text-utilities)
   - [⚙ Systempflege \& Befehlsübersicht](#-systempflege--befehlsübersicht)
     - [System-Updates (DNF / Rocky Linux)](#system-updates-dnf--rocky-linux)
@@ -38,21 +43,32 @@ Willkommen zum ersten Tag der Linux Essentials. Heute legen wir das Fundament f�
 Linux ist weit mehr als nur ein Betriebssystem; es ist das Ergebnis einer jahrzehntelangen Entwicklung, die auf der Unix-Philosophie basiert.
 
 ### Philosophie & Open Source
-* **GNU-Projekt (1983):** Gegründet von Richard Stallman mit dem Ziel, ein freies, Unix-ähnliches Betriebssystem zu schaffen.
-* **Open Source:** Der Quellcode ist unter der **GPL (General Public License)** frei einsehbar, auditierbar und modifizierbar.
-* **Unix-Philosophie:** "Do one thing and do it well." – Komplexe Aufgaben werden durch das Kombinieren kleiner, spezialisierter Werkzeuge gelöst.
+* **GNU-Projekt (1983):** Richard Stallman startete das GNU-Projekt, um eine freie Alternative zu Unix zu schaffen. "GNU" steht rekursiv für "GNU's Not Unix".
+* **GPL (General Public License):** Die Lizenz nutzt das "Copyleft"-Prinzip: Jeder, der Software verändert oder verbreitet, muss diese unter denselben freien Bedingungen weitergeben.
+* **Der Linux-Kernel (1991):** Linus Torvalds, ein finnischer Student, schrieb den Kernel als Hobbyprojekt. Er entschied sich später für die GPL, was den entscheidenden Durchbruch für die Zusammenarbeit bedeutete.
+* **Die Naming-Kontroverse:** Da das System aus dem Linux-Kernel und den GNU-Systemwerkzeugen besteht, plädiert die Free Software Foundation (FSF) für den Namen **GNU/Linux**.
+* **Entwicklungsmodell (Bazaar vs. Cathedral):** Linux ist das Paradebeispiel für das "Bazaar"-Modell: Offene, dezentrale Entwicklung durch Tausende Freiwillige weltweit, im Gegensatz zum geschlossenen "Cathedral"-Modell klassischer Software.
+* **Unix-Wars & POSIX:** In den 80ern/90ern bekriegten sich Hersteller (Sun, HP, IBM) mit eigenen Unix-Derivaten. Linux bot eine stabile, kostenlose und POSIX-konforme Alternative, die diesen Streit beendete.
+
+> [!IMPORTANT]
+> **POSIX (Portable Operating System Interface)** ist der Grund, warum Ihre Skripte auf fast allen Unix-ähnlichen Systemen laufen. Es standardisiert Befehle, Argumente und Verhalten.
 
 ### Detaillierte Meilensteine
 | Jahr | Ereignis | Bedeutung |
 | :--- | :--- | :--- |
 | **1969** | Entstehung von **Unix** | Entwickelt bei AT&T (Bell Labs) durch Dennis Ritchie und Ken Thompson. |
 | **1972** | Sprache **C** | Veröffentlichung durch Ritchie & Kernighan; Basis für die Portabilität von Unix. |
-| **1983** | **GNU** Projekt | Startschuss für freie Software durch Richard Stallman. |
-| **1991** | **Linux-Kernel** | Linus Torvalds veröffentlicht die erste Version des Kernels. |
-| **1993** | Debian & Slackware | Gründung der ersten großen Distributionen, die bis heute aktiv sind. |
+| **1983** | **GNU** Projekt | Startschuss für freie Software durch Richard Stallman ("GNU's Not Unix"). |
+| **1991** | **Linux-Kernel** | Linus Torvalds veröffentlicht die erste Version des Kernels via Usenet. |
+| **1993** | Debian & Slackware | Gründung der ersten großen Distributionen, die das Fundament für heutige Systeme legten. |
 | **1994** | Red Hat Linux | Start der kommerziell erfolgreichsten Enterprise-Distribution. |
-| **2004** | Ubuntu | Markteintritt der Distribution, die Linux auf dem Desktop populär machte. |
-| **Heute** | Cloud & Supercomputer | Linux betreibt 100% der Top-500 Supercomputer und das Gros der Cloud-Infrastruktur. |
+| **2004** | Ubuntu | Markteintritt der Distribution, die Linux durch Benutzerfreundlichkeit massentauglich machte. |
+| **2005** | **Git** | Linus Torvalds entwickelt Git innerhalb von zwei Wochen zur Verwaltung des Kernels. |
+| **2007** | **Android** | Google stellt Android vor – Linux erobert den mobilen Sektor und wird das meistgenutzte OS. |
+| **2013** | **Docker** | Start der Container-Revolution; Linux wird zur Basis moderner Cloud-Native Anwendungen. |
+| **2014** | **Systemd** | Großflächige Einführung des neuen Init-Systems (RHEL 7), was die Boot-Architektur modernisierte. |
+| **2021** | **Rocky Linux** | Nach dem Ende von CentOS (Stable) füllt Rocky die Lücke für freien Enterprise-Ersatz. |
+| **Heute** | Cloud & KI | Linux ist der Motor hinter AWS, Azure und fast allen KI-Infrastrukturen weltweit. |
 
 ### Die Linux-Hauptfamilien
 Linux-Systeme werden in "Familien" unterteilt, die sich primär durch ihren Paketmanager und ihre Philosophie unterscheiden:
@@ -84,9 +100,38 @@ In diesem Kurs nutzen wir **Rocky Linux**, einen direkten Nachfolger des klassis
 ## 🐚 Einführung in die Shell
 Die Shell ist das primäre Interface für die Interaktion mit dem Linux-Kern. Wir nutzen standardmäßig die `bash`.
 
-### Systemarchitektur
-* **Monolithischer Kernel:** Linux nutzt eine Architektur mit dynamisch ladbaren Modulen.
-* **Open Source:** Der Quellcode ist unter der GPL (General Public License) frei einsehbar und modifizierbar.
+### Die Ebenen des Systems
+Linux ist wie eine Zwiebel aufgebaut. Jede Ebene baut auf der anderen auf:
+
+1. **Hardware:** Die physischen Komponenten (CPU, RAM, HDD).
+2. **Kernel:** Der Kern, der die Hardware verwaltet und den Programmen Zugriff darauf gewährt.
+3. **Shell:** Der Kommandozeileninterpreter (Interface zwischen User und Kernel).
+4. **Applikationen:** Browser, Editoren, Dateimanager etc.
+
+### Bekannte Shell-Varianten
+| Shell | Name | Merkmale |
+| :--- | :--- | :--- |
+| **sh** | Bourne Shell | Die klassische Unix-Shell. Schnell, aber wenig Komfort. |
+| **bash** | Bourne Again Shell | Der Standard unter fast allen Linux-Systemen. |
+| **zsh** | Z-Shell | Sehr mächtig, viele Plugins (Oh My Zsh), Standard unter macOS. |
+| **fish** | Friendly Interactive Shell | Fokus auf Benutzerfreundlichkeit und Auto-Vorschläge. |
+
+### Systemarchitektur & Philosophie
+* **Monolithischer Kernel:** Im Gegensatz zu Micro-Kernels laufen Treiber und Dateisysteme bei Linux direkt im Kernel-Adressraum, was eine extrem hohe Performance ermöglicht.
+* **Alles ist eine Datei (Everything is a file):** Eines der wichtigsten Konzepte. Ob Festplatte (`/dev/sda`), Tastatur oder ein Verzeichnis – für das System ist alles ein Datenstrom, der gelesen oder beschrieben werden kann.
+* **Shell-Konfiguration:** Die Shell wird über versteckte Dateien (Dotfiles) gesteuert:
+    - `.bashrc`: Konfiguration für interaktive Shells (Aliase, Prompt).
+    - `.bash_profile`: Wird beim Login ausgeführt.
+* **Aliase:** Abkürzungen für lange Befehle (z.B. `alias ll='ls -al'`).
+* **Umgebungsvariablen:** Speichern wichtige Systempfade, z.B. `$PATH` (Wo das System nach Befehlen sucht) oder `$HOME`.
+
+**Wichtige Systemvariablen:**
+| Variable | Bedeutung |
+| :--- | :--- |
+| `$PATH` | Liste von Verzeichnissen mit ausführbaren Programmen. |
+| `$USER` | Der aktuell angemeldete Benutzername. |
+| `$SHELL` | Der Pfad zur aktuell verwendeten Shell. |
+| `$PWD` | Das aktuelle Arbeitsverzeichnis. |
 
 ### Erste Schritte
 | Befehl | Funktion |
@@ -173,11 +218,53 @@ Linux ist ein Mehrbenutzersystem. Sicherheit und Identität spielen eine zentral
 ---
 
 ## 🛠 Hilfreiche Utilities & Pipelining
-Befehle lassen sich kombinieren, um komplexe Aufgaben zu lösen.
+Befehle lassen sich kombinieren, um komplexe Aufgaben zu lösen. Dies basiert auf dem Konzept der **Standard-Datenströme**.
+
+### Die drei Standard-Datenströme
+| ID | Name | Beschreibung |
+| :---: | :--- | :--- |
+| **0** | **stdin** | Standard-Eingabe (Tastatur). |
+| **1** | **stdout** | Standard-Ausgabe (Terminal). |
+| **2** | **stderr** | Standard-Fehlerausgabe (Terminal). |
 
 ### Pipelining & Redirection
-- `|` (Pipe): Übergibt die Ausgabe eines Befehls als Eingabe an den nächsten.
-- `>` (Redirection): Schreibt die Ausgabe eines Befehls in eine Datei (z.B. `history > log.txt`).
+| Operator | Funktion | Beispiel |
+| :---: | :--- | :--- |
+| `\|` | **Pipe**: Übergibt stdout von Befehl A als stdin an Befehl B. | `ls \| wc -l` |
+| `>` | **Redirection**: Schreibt stdout in eine Datei (überschreibt Inhalt). | `date > zeit.txt` |
+| `>>` | **Append**: Hängt stdout an eine Datei an. | `uptime >> log.txt` |
+| `<` | **Input**: Liest stdin aus einer Datei statt von der Tastatur. | `wc -l < liste.txt` |
+| `2>` | **Error Redirect**: Leitet nur Fehlermeldungen (stderr) in eine Datei. | `ls /root 2> error.log` |
+| `&>` | **All Redirect**: Leitet sowohl stdout als auch stderr um. | `cmd &> all.log` |
+
+### Logische Operatoren (Befehlsketten)
+Operatoren ermöglichen es, Befehle abhängig vom Erfolg des vorherigen Befehls auszuführen. Ein Befehl gilt als erfolgreich, wenn sein **Exit-Code** `0` ist.
+
+| Operator | Logik | Beschreibung |
+| :---: | :--- | :--- |
+| `;` | **Sequenz** | Führt Befehle nacheinander aus, egal ob der erste klappt. |
+| `&&` | **Logisches UND** | Führt den zweiten Befehl nur aus, wenn der erste **erfolgreich** (Exit-Code 0) war. |
+| `\|\|` | **Logisches ODER** | Führt den zweiten Befehl nur aus, wenn der erste **fehlgeschlagen** ist. |
+
+### Fortgeschrittene Redirection
+Manchmal möchte man Ausgaben komplett unterdrücken oder Ströme zusammenführen.
+
+- `2>&1`: Leitet stderr in den stdout-Kanal um (beide landen im selben Terminal/File).
+- `&>`: Kurzform für die Umleitung von stdout und stderr in ein Ziel.
+- `/dev/null`: Das "schwarze Loch" von Linux. Alles, was hierher geleitet wird, wird gelöscht.
+    - Beispiel: `ls /root 2> /dev/null` (Fehlermeldungen werden ignoriert).
+
+**Praxisbeispiele:**
+```bash
+# Erstellt Ordner und wechselt nur hinein, wenn mkdir geklappt hat
+mkdir Test && cd Test       
+
+# Prüft Verbindung und gibt Fehler aus, falls Ping fehlschlägt
+ping -c 1 google.com || echo "Netzwerkfehler" 
+
+# Sucht nach einem Text und ignoriert alle Fehlermeldungen (z.B. "Permission Denied")
+grep -r "Geheim" /etc 2> /dev/null
+```
 
 ### Text-Utilities
 - `cat`: Zeigt den Inhalt einer Datei an.
