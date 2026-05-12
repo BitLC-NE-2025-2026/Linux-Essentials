@@ -15,7 +15,8 @@ graph TD
     C --> D[Tag 04: Shell-Logik & Text]
     D --> E[Tag 05: Dateisicherheit & Links]
     E --> F[Tag 06: Prozesse & Signale]
-    F -.-> G[Tag 07: User- & Gruppen-Management]
+    F --> G[Tag 07: Archive & Kompression]
+    G -.-> H[Tag 08: Software-Management & Repos]
     
     style A fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
     style B fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
@@ -23,7 +24,8 @@ graph TD
     style D fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
     style E fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
     style F fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
-    style G fill:#90caf9,stroke:#fff,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style G fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
+    style H fill:#90caf9,stroke:#fff,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
 ```
 
 ---
@@ -45,7 +47,7 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | Modul | Status | Fokus-Themen | Link |
 | :--- | :---: | :--- | :--- |
 | **Tag 06** | ✅ | Administration, Prozesse, Spezialrechte | [📖 README](./Day_06/README.md) |
-| **Tag 07** | ⏳ | User- & Gruppen-Management | [📖 README](./Day_07/README.md) |
+| **Tag 07** | ✅ | Archive (tar), Kompression, Meson Compile | [📖 README](./Day_07/README.md) |
 | **Tag 08** | ⏳ | TBD | [📖 README](./Day_08/README.md) |
 | **Tag 09** | ⏳ | TBD | [📖 README](./Day_09/README.md) |
 | **Tag 10** | ⏳ | TBD | [📖 README](./Day_10/README.md) |
