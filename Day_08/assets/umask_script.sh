@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Name: umask_script
+# Author: T-Boyke
+# Date: 2026.05.13
+
 ### <summary>
 ### Iteriert über umask-Werte und validiert die resultierenden Dateirechte.
 ### </summary>
