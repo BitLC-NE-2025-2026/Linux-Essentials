@@ -48,7 +48,7 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | :--- | :---: | :--- | :--- |
 | **Tag 06** | ✅ | Administration, Prozesse, Spezialrechte | [📖 README](./Day_06/README.md) |
 | **Tag 07** | ✅ | Archive (tar), Kompression, Meson Compile | [📖 README](./Day_07/README.md) |
-| **Tag 08** | ⏳ | TBD | [📖 README](./Day_08/README.md) |
+| **Tag 08** | ✅ | Shell Scripting & Automatisierung | [📖 README](./Day_08/README.md) |
 | **Tag 09** | ⏳ | TBD | [📖 README](./Day_09/README.md) |
 | **Tag 10** | ⏳ | TBD | [📖 README](./Day_10/README.md) |
 
@@ -145,7 +145,13 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 ## 📈 System-Status (Dashboard)
 * **Aktuelle Umgebung:** Rocky Linux 9.x (RHEL-basiert)
 * **Shell:** Bash / ZSH + Oh My Zsh (Konfiguriert)
-* **Fortschritt:** 23% (7 von 30 Modulen abgeschlossen)
+* **Fortschritt:** 27% (8 von 30 Modulen abgeschlossen)
+
+---
+
+## 📜 Skripting-Zentrale (Neu)
+* **Master-Skripte:** [umask_script.sh](./Day_08/assets/umask_script.sh)
+* **Themen:** Automatisierung, Rechte-Validierung
 
 ---
 
