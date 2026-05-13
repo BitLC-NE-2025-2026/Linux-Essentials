@@ -1,0 +1,100 @@
+  832  rm -rf build
+  833  ls -alh
+  834  glmark2
+  835  cd src
+  836  ls -alh
+  837  cd Dokumente
+  838  nano script
+  839  ls -al
+  840  ./script
+  841  chmod u+x script
+  842  ls -al
+  843  ./script
+  844  nano script
+  845  ./script
+  846  ./script1
+  847  chmod u+x script1
+  848  ./script1
+  849  nano script1
+  850  chmod u+x script2
+  851  ./script2
+  852  ./script2 a b c d e f g h i j
+  853  nano script1
+  854  nano script2
+  855  ./script2 a b c d e f g h i j
+  856  nano script2
+  857  ./script2 a b c d e f g h i j
+  858  nano script2
+  859  ./script2 a b c d e f g h i j
+  860  nano script2
+  861  ./script2 a b c d e f g h i j
+  862  clear
+  863  nano testAnzPar
+  864  chmod u+x testAnzPar
+  865  ls -al
+  866  ./testAnzPar a
+  867  ./testAnzPar a b
+  868  nano testAnzPar
+  869  ./testAnzPar a
+  870  echo $?
+  871  ./testAnzPar a b
+  872  echo $?
+  873  nano testAnzPar
+  874  ./testAnzPar "a b" c
+  875  ./testAnzPar "a b"
+  876  clear
+  877  nano forDemo.sh
+  878  chmod u+x forDemo.sh
+  879  ls -al
+  880  ./forDemo.sh 
+  881  nano forDemo.sh
+  882  chmod u+x forDemo1.sh
+  883  ./forDemo1.sh "abc" "xyz" "Hallo" 
+  884  ./forDemo1.sh abc xyz Hallo 
+  885  ./forDemo1.sh "Hallo alle./forDemo1.sh abc xyz Hallo " xyz Hallo 
+  886  ./forDemo1.sh "Hallo alle" xyz Hallo
+  887* ./forDemo1.sh "Hallo alle" xyz Hallo
+  888  clear
+  889  nano forDemo1.sh
+  890  chmod u+x forDemo2.sh
+  891  ls -al
+  892  ./forDemo2.sh a b l m n o
+  893  nano forDemo2.sh
+  894  ./forDemo2a.sh a b l m n o
+  895  chmod u+x forDemo2a.sh
+  896  ./forDemo2a.sh a b l m n o
+  897  nano forDemo2.sh
+  898  nano forDemo2a.sh
+  899  ./forDemo2a.sh a b l m n o
+  900  nano forDemo2a.sh
+  901  chmod u+x forDemo3.sh
+  902  ./forDemo3.sh
+  903  nano forDemo3.sh
+  904  chmod u+x forDemo4.sh
+  905  ls -al
+  906  ./forDemo4
+  907  ./forDemo4.sh 
+  908  nano forDemo4.sh
+  909  clear
+  910  nano whileDemo.sh
+  911  chmod u+x whileDemo.sh
+  912  ls -al
+  913  clear
+  914  ./whileDemo.sh /etc/passwd
+  915  ls -al
+  916* 
+  917  nano whileDemo.sh
+  918  ./whileDemo.sh /etc/passwd
+  919  ls -al
+  920  cat datLesen0513-1332.txt 
+  921  clear
+  922  nano whileDemo.sh
+  923  chmod u+x whileDemo1.sh
+  924  ls -al
+  925  ./whileDemo1.sh
+  926  nano whileDemo.sh
+  927  nano whileDemo1.sh
+  928  ./whileDemo1.sh
+  929  nano whileDemo1.sh
+  930  history | less
+  931  history 100 > rockyHis$(date +%Y%m%d-%H%M).txt
