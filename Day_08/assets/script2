@@ -1,0 +1,26 @@
+#! /usr/bin/env bash
+
+# Dies ist das erste Skript
+# Autor: Karsten Matz
+# Datum: 20260513
+# Skriptname: script1
+
+echo "Skriptname: $0"
+echo "Guten Tag, dies ist mein erstes Skript"
+
+echo "Parameter 1: $1"
+echo "Parameter 2: $2"
+echo "Parameter 3: $3"
+echo "Paremeter 4: $4"
+echo "Parameter 5: $5"
+echo "Parameter 6: $6"
+echo "Parameter 7: $7"
+echo "Parameter 8: $8"
+echo "Parameter 9: $9"
+echo "Parameter 10: ${10}"
+
+echo "Anzahl an Parametern: "$#
+echo "Anzahl an Parametern: $#"
+echo "Ü-Parameter, seperate Zeichenkette: $@"
+echo "Alle meine Parameter, eine Zeichenkette: $*"
+# end

@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+# Dies ist das erste Skript
+# Autor: Karsten Matz
+# Datum: 20260513
+# Skriptname: script
+
+echo "Guten Tag, dies ist mein erstes Skript"
+
+# end

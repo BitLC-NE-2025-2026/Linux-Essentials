@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+
+# Alternative /bin/bash, allerdings im Wurzelverzeichnis
+# /usr/bin/env bash ist portabel, Ausführen von Skripten an anderen Orten, z.B cronjobs (Zeitgesteuerte Kommandoausführung)
+
+# Testen der Anzahl der Übergabeparameter
+# Vergleichsoperatoren -lt less than, > < sind nicht mögliche da I/O Operationen
+# -eq equal(gleich) entspricht ==
+# -ne not equal(ungleich) entspricht !=
+# -gt greater than(größer als) entspricht >
+# -ge greater equal(größer oder gleich) entspricht >=
+# -lt less than(kleiner als) entspricht <
+# -le less equal(kleiner oder gleich) entspricht <=
+
+if [ $# -lt 2 ]; then
+	echo "Fehler du musst mindestens zwei Parameter angeben!"
+	exit 1
+fi
+
+# Hier ist alles Ok
+
+echo "Genug Parameter eingegeben"
+exit 0 # Optional: Erfolgreiche Ausführung, Rückgabestatuswert 0, das macht aber schon das echo
