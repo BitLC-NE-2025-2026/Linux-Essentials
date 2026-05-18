@@ -1,0 +1,71 @@
+  931  cat /etc/services | less
+  932  cat /etc/services | grep ' 631/tcp'
+  933  cat /etc/services | grep -o ' 631/tcp'
+  934  man grep
+  935  cat /etc/services | grep -o ' 22/tcp'
+  936  cat /etc/services | grep ' 22/tcp'
+  937  cat /etc/services | grep ' [0-9]/tcp'
+  938  cat /etc/services | grep ' [0-9][0-9]/tcp'
+  939  cat /etc/services | grep '[0-9][0-9]/tcp'
+  940  clear
+  941  ip r
+  942  ip r | grep '1'
+  943  ip r | grep 'm*'
+  944  ip r | grep '[0-9]'
+  945  ip r | grep '[0-9][0-9]'
+  946  ip r | grep '[0-9][0-9][0-9]'
+  947  ip r | grep '[0-9]{1,3}'
+  948  ip r | egrep '[0-9]{1,3}'
+  949  ip r | grep '[0-9]\{1,3\}'
+  950  ip r | grep '[0-9]\{1,3\}\.'
+  951  clear
+  952  ip r | grep '[0-9]\{1,3\}\.'
+  953  ip r | grep '[0-9]\{1,3\}.'
+  954  ip r | grep '[0-9]\{1,3\}\.'
+  955  ip r | grep '[0-9]\{1,3\}\.[0-9][0-9][0-9]'
+  956  ip r | grep '\([0-9]\{1,3\}\.\)\{3}[0-9][0-9][0-9]'
+  957  ip r | grep '\([0-9]\{1,3\}\.\)\{3\}[0-9][0-9][0-9]'
+  958  ip r | grep '[0-9]\{1,3\}\.'
+  959  clear
+  960  ip r | grep '[0-9]\{1,3\}\.'
+  961  ip r | grep '\([0-9]\{1,3\}\.\)'
+  962  ip r | grep '\([0-9]\{1,3\}\.\)\{3\}'
+  963  ip r | grep '\([0-9]\{1,3\}\.\)\{3\}[0-9]'
+  964  ip r | grep '\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}'
+  965  ip r | grep '[0-9]\{1,3\}\.[0-9][0-9][0-9]'
+  966  clear
+  967  ip r | grep '[0-9]\{1,3\}\.[0-9][0-9][0-9]'
+  968  ip r | grep '[0-9]\{1,3\}\.[0-9]'
+  969  ip r | grep '[0-9]\{1,3\}\.[0-9]\{1,3}'
+  970  ip r | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}'
+  971  ip r | grep '\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}'
+  972  ip r | egrep '([0-9]{1,3}\.){3}[0-9]{1,3}'
+  973  ip r | grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'
+  974  ip r | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'
+  975  ip route
+  976  ip address
+  977  ip r | grep -oE '([0-9]{1,3}[.]){3}[0-9]{1,3}'
+  978  ip route | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'
+  979  ip route
+  980  ip r
+  981  ip a
+  982  ip address
+  983  ip a | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'
+  984  cd Dokumente
+  985  mkdir RegEx
+  986  cd RegEx/
+  987  ip r > ip_rDat
+  988  cat ip_rDat 
+  989  ip a > ip_aDat
+  990  cat ip_aDat 
+  991  ifconfig
+  992  ifconfig > ifconfig_ens160
+  993  nmcli
+  994  nmcli > nmcliDat
+  995  cat /etc/passwd > passwdDat
+  996  cat /etc/group > groupDat
+  997  cat /etc/services > servicesDat
+  998  ls -al
+  999  clear
+ 1000  history | less
+ 1001  history 71 > rockyHis$(date +%Y%m%d-%H%M).txt
