@@ -3,7 +3,7 @@
 # Script:      StartEx.sh
 # Beschreibung: Zentrales TUI-Script zur Steuerung und Ausführung der einzelnen
 #              Regex-Aufgaben (Day 09). Bietet ein interaktives, farbiges Menü.
-# Author:      Tobia
+# Author:      Tobias B
 # Datum:       18.05.2026
 # ==============================================================================
 
@@ -38,8 +38,8 @@ draw_line() {
 while true; do
     clear
     echo -e "${BLUE}┌───────────────────────────────────────────────────────────────────────────┐${NC}"
-    echo -e "${BLUE}│${NC}              ${MAGENTA}🛠️  LINUX REGEX TASK MANAGER (Day 09) 🛠️${NC}                       ${BLUE}│${NC}"
-    echo -e "${BLUE}│${NC}  ${CYAN}Author: Tobia${NC}   │   ${CYAN}Datum: 18.05.2026${NC}   │   ${CYAN}Thema: Reguläre Ausdrücke${NC}    ${BLUE}│${NC}"
+    echo -e "${BLUE}│${NC}              ${MAGENTA} REGEX AUFGABEN MANAGER (Day 09) 🛠️${NC}                       ${BLUE}│${NC}"
+    echo -e "${BLUE}│${NC}  ${CYAN}Author: Tobias B${NC}   │   ${CYAN}Datum: 18.05.2026${NC}   │   ${CYAN}Thema: Reguläre Ausdrücke${NC}    ${BLUE}│${NC}"
     echo -e "${BLUE}└───────────────────────────────────────────────────────────────────────────┘${NC}"
     
     echo -e " Wählen Sie eine Aufgabe aus, die Sie ausführen möchten:\n"
