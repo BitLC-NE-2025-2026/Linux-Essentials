@@ -49,13 +49,13 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | **Tag 06** | ✅ | Administration, Prozesse, Spezialrechte | [📖 README](./Day_06/README.md) |
 | **Tag 07** | ✅ | Archive (tar), Kompression, Meson Compile | [📖 README](./Day_07/README.md) |
 | **Tag 08** | ✅ | Shell Scripting & Automatisierung | [📖 README](./Day_08/README.md) |
-| **Tag 09** | ⏳ | TBD | [📖 README](./Day_09/README.md) |
-| **Tag 10** | ⏳ | TBD | [📖 README](./Day_10/README.md) |
+| **Tag 09** | ✅ | Reguläre Ausdrücke (Regex) I - BRE vs. ERE, IPv4/IPv6, TUI-Automatisierung | [📖 README](./Day_09/README.md) |
+| **Tag 10** | ✅ | Reguläre Ausdrücke (Regex) II - Dienste-Auswertung & Bash-Loops | [📖 README](./Day_10/README.md) |
 
 ### 📅 Woche 3: Speicher & Dateisysteme
 | Modul | Status | Fokus-Themen | Link |
 | :--- | :---: | :--- | :--- |
-| **Tag 11** | ⏳ | TBD | [📖 README](./Day_11/README.md) |
+| **Tag 11** | ✅ | Text-Editoren (vi / vim) - Modi, Navigation & Last-Line-Befehle | [📖 README](./Day_11/README.md) |
 | **Tag 12** | ⏳ | TBD | [📖 README](./Day_12/README.md) |
 | **Tag 13** | ⏳ | TBD | [📖 README](./Day_13/README.md) |
 | **Tag 14** | ⏳ | TBD | [📖 README](./Day_14/README.md) |
@@ -145,7 +145,7 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 ## 📈 System-Status (Dashboard)
 * **Aktuelle Umgebung:** Rocky Linux 9.x (RHEL-basiert)
 * **Shell:** Bash / ZSH + Oh My Zsh (Konfiguriert)
-* **Fortschritt:** 27% (8 von 30 Modulen abgeschlossen)
+* **Fortschritt:** 37% (11 von 30 Modulen abgeschlossen)
 
 ---
 
@@ -155,5 +155,5 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 
 ---
 
-*Dieses Repository wird kontinuierlich gepflegt. Letztes Update: 13. Mai 2026.*
+*Dieses Repository wird kontinuierlich gepflegt. Letztes Update: 20. Mai 2026.*
 
