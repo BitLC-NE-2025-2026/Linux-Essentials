@@ -1,0 +1,100 @@
+ 1000  history | less
+ 1001  history 71 > rockyHis$(date +%Y%m%d-%H%M).txt
+ 1002  cp rockyHis20260518-1344.txt ~/
+ 1003  cat servicesDat | less
+ 1004  cd ./Dokumente
+ 1005  cd RegEx/
+ 1006  ls 
+ 1007  cat ip_aDat | less
+ 1008  cat ip_aDat | grep -E '[0-9a-f]'
+ 1009  cat ip_aDat | grep -E '[0-9a-f]{0,4}'
+ 1010  clear
+ 1011  cat ip_aDat | grep -E '[0-9a-f]{0,4}:'
+ 1012  cat ip_aDat | grep -E '([0-9a-f]{0,4}:){2,7}'
+ 1013  cat ip_aDat | grep -E '([0-9a-f]{0,4}:){2,7}[0-9a-f]{0,4}'
+ 1014  cat ip_aDat | grep -E '[c-f0-28]{4}([0-9a-f]{0,4}:){2,6}[0-9a-f]{0,4}'
+ 1015  cat ip_rDat | grep -E '[c-f0-28]{4}([0-9a-f]{0,4}:){2,6}[0-9a-f]{0,4}'
+ 1016  cat ip_rDat | less
+ 1017  clear
+ 1018  ls
+ 1019  cat nmcliDat | less
+ 1020  cat nmcliDat | grep -E '[c-f0-28]{4}([0-9a-f]{0,4}:){2,6}[0-9a-f]{0,4}'
+ 1021  cat nmcliDat | grep -E '([0-9a-f]{0,4}:){2,7}[0-9a-f]{0,4}'
+ 1022  cat ip_aDat | less
+ 1023  cat ip_aDat | grep -E '\<ens[0-9]{1,3}
+ 1024  cat ip_aDat | grep -E '\<ens[0-9]{1,3}'
+ 1025  cat ip_aDat | grep -E '^[0-9]*:' | cut -d: -f2
+ 1026  ls
+ 1027  cat nmcliDat | less
+ 1028  cat nmcliDat 
+ 1029  cat nmcliDat | less
+ 1030  cat ip_aDat | grep -E '^[a-z][^:]'
+ 1031  cat ip_aDat | grep -E '^[a-z][^:]*'
+ 1032  cat nmcliDat | grep -E '\<ens[0-9]{1,3}'
+ 1033  cat ip_aDat | grep -E '^[a-z]*[^:]'
+ 1034  cat nmcliDat | grep -E '^[a-z]*[^:]'
+ 1035  cat nmcliDat | grep -E '^[0-9a-z]*[^:]'
+ 1036  cat nmcliDat | less
+ 1037  cat nmcliDat | grep -Eo '^[a-z]*[^:]'
+ 1038  cat nmcliDat | grep -Eo '^[0-9a-z]*[^:]'
+ 1039  clear
+ 1040  cat passwdDat |
+ 1041  cat passwdDat | less
+ 1042  cat passwdDat | cut -d: -f1,3 | grep -E '([0-9a-z]+:[0-9][4,]'
+ 1043  cat passwdDat | cut -d: -f1,3 | grep -E '([0-9a-z]+):[0-9][4,]'
+ 1044  cat passwdDat | less
+ 1045  cat passwdDat | cut -d: -f1,3 | grep -E '([0-9a-z]+:[0-9][4,])'
+ 1046  cat passwdDat | cut -d: -f1,3 | less
+ 1047  cat passwdDat | cut -d: -f1,3 | grep -E'[0-9a-z]+:
+ 1048  cat passwdDat | cut -d: -f1,3 | grep -E'[0-9a-z]+:'
+ 1049  cat passwdDat | cut -d: -f1,3 | grep -E '[0-9a-z]+:'
+ 1050  clear
+ 1051  cat passwdDat | cut -d: -f1,3 | grep -E '[0-9a-z]+:[0-9]{4,}'
+ 1052  cat groupDat | cut -d: -f1,3 | grep -E '[0-9a-z]+:[0-9]{4,}'
+ 1053  ls
+ 1054  cat servicesDat | grep -E '([0-9]{1,5}/)[a-z]{3,} | less
+ 1055  cat servicesDat | grep -E '([0-9]{1,5}/)[a-z]{3,}' | less
+ 1056  cat servicesDat | grep -Eo '([0-9]{1,5}/)[a-z]{3,}' | less
+ 1057  cat servicesDat | grep -Eo '([0-9]{1,5}/)[a-z]{3,}' > servicesNeu
+ 1058  cat servicesNeu | less
+ 1059  cat servicesNeu | grep -Eo '[0-9]{3}/tcp' | wc -l
+ 1060  cat servicesNeu | grep -Eo '[0-9]{3}/tcp' | less
+ 1061  cat servicesNeu | grep -Eo '[0-9]{3}/tcp' | sort -u | wc -l
+ 1062  cat servicesDat | grep -Eo '([0-9]{1,5}/)[a-z]{3,4}' > servicesNeu
+ 1063  cat servicesNeu | grep -Eo '[0-9]{3}/tcp' | wc -l
+ 1064  cat servicesNeu | grep -Eo '[0-9]{3}/tcp' | sort -u | wc -l
+ 1065  cat servicesNeu | grep -Eo '[0-9]{3}/tcp' | sort -u | less
+ 1066  cat servicesDat | grep -E ' 00[0-9][0-9]/tcp'
+ 1067  cat servicesDat | less
+ 1068  cat servicesDat | grep -Eo '[0-9]{1,5}/[a-z]{3,4}' > servicesNeu
+ 1069  cat servicesNeu | grep -Eo '[0-9]{3}/tcp' | wc -l
+ 1070  cat nmcliDat | grep -Eo '^[0-9a-z]*[^:]'
+ 1071  cd ./Dokumente/RegEx/
+ 1072* 
+ 1073  clear
+ 1074  cat servicesDat | grep -Eo '[0-9]{1,5}/[a-z]{3,4}' | less
+ 1075  cat servicesDat | grep -Eo '[0-9]{1,5}/[a-z]{3,4}' > serviceNeu
+ 1076  cat serviceNeu | less
+ 1077  cat serviceNeu | grep -E '[0-9]{1,5} | less
+ 1078  cat serviceNeu | grep -E '[0-9]{3}/tcp' | less
+ 1079  cat serviceNeu | grep -E '[0-9]{3}/tcp' | wc -l
+ 1080  cat serviceNeu | grep -E '^[0-9]{3}/tcp$' | wc -l
+ 1081  cat serviceNeu | grep -E '^[0-9]{3}/tcp$' | less
+ 1082  cat serviceNeu | grep -E '^[0-9]{3}/tcp' | wc -l
+ 1083  cat nmcliDat | grep -Eo '^[0-9a-z]*[^:]'
+ 1084  clear
+ 1085  cat nmcliDat | grep -Eo '^[a-z][^:]*'
+ 1086  cat serviceNeu | grep -E '^[0-9]{3}/tcp' | sort -u | wc -l
+ 1087  cat serviceNeu | grep -E '^[0-9]{3}/tcp' | wc -l
+ 1088  cat serviceNeu | grep -E '^[0-9]{3}/tcp' | sort -u | wc -l
+ 1089  cat serviceNeu | [a-z]{3,5} | sort -u | less
+ 1090  cat serviceNeu | grep -E '[a-z]{3,5}' | sort -u | less
+ 1091  cat serviceNeu | grep -oE '[a-z]{3,5}' | sort -u | less
+ 1092  cat serviceNeu | grep -oE '[a-z]{3,5}' | sort -u | wc -l
+ 1093  for k in 1 2 3 4 5 , do cat serviceNeu | grep -E '^[0-9]{'$k'}/tcp' | sort -u | wc -l ; done
+ 1094  for k in 1 2 3 4 5 ; do cat serviceNeu | grep -E '^[0-9]{'$k'}/tcp' | sort -u | wc -l ; done
+ 1095  for k in 1 2 3 4 5 ; do cat serviceNeu | grep -E '^[0-9]{'$k'}/udp' | sort -u | wc -l ; done
+ 1096  cat serviceNeu | less
+ 1097  ls
+ 1098  history | less
+ 1099  history 100 > rockyHis$(date +%Y%m%d-%H%M).txt
