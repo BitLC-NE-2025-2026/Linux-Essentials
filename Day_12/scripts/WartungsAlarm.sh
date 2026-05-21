@@ -1,5 +1,16 @@
 #!/bin/bash
+# Überschrift für die saubere Ausgabe
+echo "-----------------------------------"
+echo "Aktive Benutzer | Terminal-ID"
+echo "-----------------------------------"
 
+# Liste aller aktiven pts-Terminals mit Benutzername
+# who | grep 'pts/' filtert alle Netzwerk-Sessions
+who | grep 'pts/' | while read -r USERNAME TTY DATE TIME REST; do
+    echo "$USERNAME        | $TTY"
+done
+
+echo "-----------------------------------"
 # Nachricht definieren
 MESSAGE="ACHTUNG: Systemwartung startet in Kürze!"
 
