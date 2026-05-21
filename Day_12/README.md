@@ -203,6 +203,42 @@ Die Webseite crontab.guru übersetzt die Cron Syntax in lesbaren Text und hilft 
 
 ---
 
+## 🛠️ 6. Steuerung des cron Daemons mit systemctl
+
+Der cron Dienst läuft permanent im Hintergrund. Moderne Linux Distributionen nutzen systemd zur Verwaltung der Hintergrunddienste. Das primäre Werkzeug zur Steuerung ist der Befehl `systemctl`.
+
+Der genaue Name des Dienstes variiert je nach Betriebssystem. Red Hat basierte Distributionen wie Rocky Linux nutzen `crond`. Debian basierte Distributionen verwenden `cron`.
+
+**Wichtige systemctl Befehle zur Dienstverwaltung:**
+
+| Befehl | Aktion | Beschreibung |
+| :--- | :--- | :--- |
+| `systemctl status crond` | Statusprüfung | Zeigt den aktuellen Laufzeitstatus und die letzten Logeinträge an |
+| `systemctl start crond` | Start | Startet den Dienst sofort |
+| `systemctl stop crond` | Stopp | Beendet den Dienst sofort |
+| `systemctl restart crond` | Neustart | Beendet den Dienst und startet ihn umgehend neu |
+| `systemctl enable crond` | Autostart an | Aktiviert den automatischen Start des Dienstes beim Systemhochlauf |
+| `systemctl disable crond` | Autostart aus | Deaktiviert den automatischen Start beim Systemhochlauf |
+
+**Praxisbeispiel zur Dienstkonfiguration:**
+
+```bash
+# Aktiviert den Autostart für den crond Dienst dauerhaft
+systemctl enable crond
+```
+
+```bash
+# Startet den Dienst in der aktuellen Sitzung
+systemctl start crond
+```
+
+```bash
+# Gibt den Status des Dienstes zur sofortigen Kontrolle im Terminal aus
+systemctl status crond
+```
+
+---
+
 ## 🔗 6. Zurück zur Übersicht
 ⬅ Zurück zur Übersicht
 
