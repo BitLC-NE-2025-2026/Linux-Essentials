@@ -1,28 +1,31 @@
 #!/bin/bash
-# Überschrift für die saubere Ausgabe
+# ==============================================================================
+# Skript: broadcast_maintenance.sh
+# Beschreibung: Zeigt aktive Sessions an und sendet eine Nachricht an alle.
+# ==============================================================================
+
+MESSAGE="ACHTUNG: Systemwartung startet in Kürze!"
+
 echo "-----------------------------------"
 echo "Aktive Benutzer | Terminal-ID"
 echo "-----------------------------------"
 
-# Liste aller aktiven pts-Terminals mit Benutzername
-# who | grep 'pts/' filtert alle Netzwerk-Sessions
-who | grep 'pts/' | while read -r USERNAME TTY DATE TIME REST; do
-    echo "$USERNAME        | $TTY"
-done
+# Sichereres Parsing: Wir nutzen awk, um gezielt Spalte 1 (User) und 2 (TTY) zu extrahieren.
+# grep 'pts/' filtert sicher auf Netzwerk-Terminals.
+who | grep 'pts/' | awk '{printf "%-15s | %-10s\n", $1, $2}'
 
 echo "-----------------------------------"
-# Nachricht definieren
-MESSAGE="ACHTUNG: Systemwartung startet in Kürze!"
 
-# Alle aktiven pts-Terminals finden
-# 'who' listet Sessions, 'grep' filtert nach 'pts/', 
-# 'sed' oder 'awk' extrahiert die ID (die Zahl nach pts/)
-# Regex-Logik: Wir suchen nach 'pts/' gefolgt von einer oder mehreren Ziffern
-TERMINALS=$(who | grep -oP 'pts/\K[0-9]+')
+# Extraktion der TTY-IDs für den Versand
+# grep -oP ist effizient, wir speichern die IDs als Array
+mapfile -t TERMINALS < <(who | grep -oP 'pts/\K[0-9]+')
 
-# Iteration über alle gefundenen Terminals
-for TTY_ID in $TERMINALS; do
-    # Nachricht direkt in das entsprechende Gerät schreiben
-    # Erfordert Root-Rechte
-    echo "$MESSAGE" > "/dev/pts/$TTY_ID"
+# Iteration über das Array
+for TTY_ID in "${TERMINALS[@]}"; do
+    # Vor dem Schreiben prüfen, ob das Gerät existiert und schreibbar ist
+    if [ -w "/dev/pts/$TTY_ID" ]; then
+        echo -e "\n\n$MESSAGE\n\n" > "/dev/pts/$TTY_ID"
+    fi
 done
+
+echo "Nachricht an ${#TERMINALS[@]} Terminal(s) gesendet."
