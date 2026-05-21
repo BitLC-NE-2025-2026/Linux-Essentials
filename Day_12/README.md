@@ -85,7 +85,7 @@ echo "export EDITOR=nano" >> ~/.bash_profile && source ~/.bash_profile
 Die Definition der korrekten Zeiten ist fehleranfällig.
 Die Webseite crontab.guru übersetzt die Cron Syntax in lesbaren Text und hilft bei der Erstellung komplexer Intervalle.
 
-- Link: (https://crontab.guru/)[https://crontab.guru/]
+- Link: [crontab.guru/](https://crontab.guru/)
 
 ---
 
