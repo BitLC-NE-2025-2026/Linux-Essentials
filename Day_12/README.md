@@ -222,18 +222,16 @@ Der genaue Name des Dienstes variiert je nach Betriebssystem. Red Hat basierte D
 
 **Praxisbeispiel zur Dienstkonfiguration:**
 
+Aktiviert den Autostart für den crond Dienst dauerhaft
 ```bash
-# Aktiviert den Autostart für den crond Dienst dauerhaft
 systemctl enable crond
 ```
-
+Startet den Dienst in der aktuellen Sitzung
 ```bash
-# Startet den Dienst in der aktuellen Sitzung
 systemctl start crond
 ```
-
+Gibt den Status des Dienstes zur sofortigen Kontrolle im Terminal aus
 ```bash
-# Gibt den Status des Dienstes zur sofortigen Kontrolle im Terminal aus
 systemctl status crond
 ```
 
