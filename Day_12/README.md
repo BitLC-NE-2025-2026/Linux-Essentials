@@ -36,26 +36,31 @@ Der cron Daemon läuft im Hintergrund eines Unix Systems. Er führt geplante Auf
 
 ---
 
-## 🏗️ 2. Aufbau einer Crontab
+### 🏗️ 2. Aufbau einer Crontab
 
-Eine crontab Zeile besteht aus fünf Zeitfeldern und dem auszuführenden Befehl. Die Felder werden durch Leerzeichen getrennt.
+Eine crontab Zeile besteht aus fünf Zeitfeldern und dem auszuführenden Befehl. Ein Leerzeichen trennt die einzelnen Felder.
 
-Syntaxfolge:
-`Minute Stunde Tag Monat Wochentag Befehl`
+**Struktur und Wertebereiche:**
 
-Wertebereiche der Felder:
-* Minute: 0 bis 59
-* Stunde: 0 bis 23
-* Tag des Monats: 1 bis 31
-* Monat: 1 bis 12
-* Wochentag: 0 bis 7. Dabei sind 0 und 7 der Sonntag.
+| Position | Feld | Wertebereich | Beschreibung |
+| :---: | :--- | :--- | :--- |
+| 1 | Minute | 0 bis 59 | Exakte Minute der Ausführung |
+| 2 | Stunde | 0 bis 23 | Stunde im 24 Stunden Format |
+| 3 | Tag | 1 bis 31 | Tag des Monats |
+| 4 | Monat | 1 bis 12 | Monat des Jahres |
+| 5 | Wochentag | 0 bis 7 | Wochentag, wobei 0 und 7 dem Sonntag entsprechen |
+| 6 | Befehl | Text | Absoluter Pfad zum auszuführenden Kommando oder Skript |
 
-Sonderzeichen:
-* `*` steht für jeden möglichen Wert.
-* `,` trennt Einzelwerte wie 1,15,30.
-* `/` definiert Intervalle wie */5 für alle 5 Minuten.
+**Sonderzeichen zur Zeitsteuerung:**
 
-Beispiel für einen cronjob jeden Tag um 04:30 Uhr:
+| Zeichen | Funktion | Anwendungsbeispiel |
+| :---: | :--- | :--- |
+| `*` | Jeder mögliche Wert | Ein Stern im Monatsfeld führt den Befehl jeden Monat aus |
+| `,` | Trennt diskrete Einzelwerte | `1,15,30` im Tagesfeld führt zur Ausführung am ersten, fünfzehnten und dreißigsten Tag |
+| `-` | Definiert einen fortlaufenden Bereich | `1-5` im Wochentagsfeld führt den Befehl von Montag bis Freitag aus |
+| `/` | Definiert ein wiederkehrendes Intervall | `*/5` im Minutenfeld löst die Ausführung alle fünf Minuten aus |
+
+**Beispielhafter cronjob jeden Tag um 04:30 Uhr:**
 `30 4 * * * /pfad/zum/skript.sh`
 
 ---
