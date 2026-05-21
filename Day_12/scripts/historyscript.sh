@@ -1,4 +1,10 @@
 #!/bin/bash
+# ==============================================================================
+# Skript: historyscript.sh
+# Author: Tobias B
+# Beschreibung: Exportiert die tägliche Bash-Historie in datierte Logdateien
+# Speicherort: ~/scripts/historyscript.sh
+# ==============================================================================
 # Bash-Historie
 HISTFILE=$HOME/.bash_history
 set -o history
