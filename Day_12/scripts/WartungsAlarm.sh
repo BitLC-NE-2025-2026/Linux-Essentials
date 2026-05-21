@@ -1,6 +1,7 @@
 #!/bin/bash
 # ==============================================================================
-# Skript: broadcast_maintenance.sh
+# Skript: WartungsAlarm.sh
+# Author: Tobias Boyke
 # Beschreibung: Zeigt aktive Sessions an und sendet eine Nachricht an alle.
 # ==============================================================================
 
@@ -10,17 +11,16 @@ echo "-----------------------------------"
 echo "Aktive Benutzer | Terminal-ID"
 echo "-----------------------------------"
 
-# Sichereres Parsing: Wir nutzen awk, um gezielt Spalte 1 (User) und 2 (TTY) zu extrahieren.
+# Parsing:
 # grep 'pts/' filtert sicher auf Netzwerk-Terminals.
 who | grep 'pts/' | awk '{printf "%-15s | %-10s\n", $1, $2}'
 
 echo "-----------------------------------"
 
-# Extraktion der TTY-IDs für den Versand
-# grep -oP ist effizient, wir speichern die IDs als Array
+# Extraktion al Arry:
 mapfile -t TERMINALS < <(who | grep -oP 'pts/\K[0-9]+')
 
-# Iteration über das Array
+# Iteration:
 for TTY_ID in "${TERMINALS[@]}"; do
     # Vor dem Schreiben prüfen, ob das Gerät existiert und schreibbar ist
     if [ -w "/dev/pts/$TTY_ID" ]; then
