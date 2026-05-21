@@ -36,6 +36,15 @@ Der cron Daemon läuft im Hintergrund eines Unix Systems. Er führt geplante Auf
 * cronjob: Die einzelne geplante Aufgabe.
 * crontab: Die Tabelle mit den Konfigurationen der cronjobs. Jede Zeile repräsentiert einen eigenen cronjob.
 
+### Standardeditor unter Rocky Linux
+
+Auf Betriebssystemen wie Rocky Linux arbeitet das Werkzeug crontab standardmäßig mit dem Editor vim. 
+
+Falls die Bearbeitung nicht mit vim erfolgen soll, lässt sich der Editor nano für den aktuellen Benutzer festlegen. Der kombinierte Befehl schreibt die entsprechende Umgebungsvariable in das persönliche Profil und aktiviert die Änderung sofort für die aktuelle Sitzung.
+```bash
+echo "export EDITOR=nano" >> ~/.bash_profile && source ~/.bash_profile
+```
+
 ---
 
 ### 🏗️ 2. Aufbau einer Crontab
