@@ -12,7 +12,8 @@ Am zwölften Tag der Linux Essentials behandeln wir die zeitgesteuerte Ausführu
 * [Grundlagen zu cron und crontab](#-1-grundlagen-zu-cron-und-crontab)
 * [Aufbau einer Crontab](#-2-aufbau-einer-crontab)
 * [Crontab Befehle und Editor Konfiguration](#-3-crontab-befehle-und-editor-konfiguration)
-* [Ressourcen und Hilfsmittel](#-ressourcen-und-hilfsmittel)
+* [Systemweite Benachrichtigungen mit wall in Cronjobs](#-4-systemweite-benachrichtigungen-mit-wall-in-cronjobs)
+* [Ressourcen und Hilfsmittel](#-6-ressourcen-und-hilfsmittel)
 * [Zurück zur Übersicht](#-zurück-zur-übersicht)
 
 ---
@@ -164,7 +165,37 @@ echo "export EDITOR=nano" >> ~/.bash_profile && source ~/.bash_profile
 ```
 ---
 
-## 📚 4. Ressourcen und Hilfsmittel
+## 📢 4. Systemweite Benachrichtigungen mit wall in Cronjobs
+
+Standardmäßig besitzen Cronjobs kein zugeordnetes Terminal, da sie vollautomatisch im Hintergrund des Systems laufen. Ausgaben, die ein Skript erzeugt, gehen ohne explizite Umleitung verloren oder werden als systeminterne Mail an den Besitzer des Cronjobs gesendet.
+
+Hier kommt der Befehl `wall` ins Spiel. Das Werkzeug sendet eine Textnachricht an alle aktuell am System angemeldeten Benutzer und projiziert den Text direkt in deren offene Terminals. Im Kontext von automatisierten Aufgaben ist dies nützlich, um aktive Benutzer sofort über kritische Ereignisse oder bevorstehende administrative Eingriffe zu informieren.
+
+### Typische Einsatzszenarien im administrativen Alltag
+
+* **Wartungsarbeiten:** Benutzer werden vor einem geplanten Systemneustart gewarnt, um ungespeicherte Arbeiten zu sichern.
+* **Sicherheitsalarme:** Das Erkennen von kritischen Systemzuständen wird sofort gemeldet.
+* **Statusberichte:** Fehlerhafte Backups mit hoher Priorität hinterlassen eine direkte Meldung auf den Konsolen der Administratoren.
+
+### Syntax und Einbindung in die Crontab
+
+Die Übergabe des Textes an `wall` erfolgt über eine Pipeline, indem der Ausgabetext eines Echos an den Standardinput von `wall` weitergeleitet wird.
+
+```bash
+# ==============================================================================
+# Skript: Wartungsankündigung
+# Beschreibung: Sendet jeden Freitag um 17:00 Uhr eine Systemnachricht an alle.
+# Minute: 0
+# Stunde: 17
+# Tag: *
+# Monat: *
+# Wochentag: 5 entspricht dem Wochentag Freitag
+# ==============================================================================
+0 17 * * 5 echo "Achtung: Das System wird in Kürze gewartet" | wall
+```
+---
+
+## 📚 5. Ressourcen und Hilfsmittel
 Die Definition der korrekten Zeiten ist fehleranfällig.
 Die Webseite crontab.guru übersetzt die Cron Syntax in lesbaren Text und hilft bei der Erstellung komplexer Intervalle.
 
@@ -172,7 +203,7 @@ Die Webseite crontab.guru übersetzt die Cron Syntax in lesbaren Text und hilft 
 
 ---
 
-## 🔗 5. Zurück zur Übersicht
+## 🔗 6. Zurück zur Übersicht
 ⬅ Zurück zur Übersicht
 
 Erstellt am 20. Mai 2026 für den Linux-Essentials Kurs.
