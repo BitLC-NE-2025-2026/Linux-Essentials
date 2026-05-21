@@ -13,7 +13,8 @@ Am zwölften Tag der Linux Essentials behandeln wir die zeitgesteuerte Ausführu
 * [Aufbau einer Crontab](#-2-aufbau-einer-crontab)
 * [Crontab Befehle und Editor Konfiguration](#-3-crontab-befehle-und-editor-konfiguration)
 * [Systemweite Benachrichtigungen mit wall in Cronjobs](#-4-systemweite-benachrichtigungen-mit-wall-in-cronjobs)
-* [Ressourcen und Hilfsmittel](#-6-ressourcen-und-hilfsmittel)
+* [Steuerung des cron Daemons mit systemctl](#-6-steuerung-des-cron-daemons-mit-systemctl)
+* [Ressourcen und Hilfsmittel](#-7-ressourcen-und-hilfsmittel)
 * [Zurück zur Übersicht](#-zurück-zur-übersicht)
 
 ---
