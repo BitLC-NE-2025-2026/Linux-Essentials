@@ -74,6 +74,73 @@ Die folgenden Beispiele zeigen typische Konfigurationen für cronjobs.
 | `*/5 8-17 * * *` | Alle 5 Minuten zwischen 08:00 und 17:59 Uhr |
 | `0 4 * * 6,7` | Samstag und Sonntag um 04:00 Uhr |
 
+### 💡 Praxisbeispiele für komplexe Cronjobs
+
+Die folgenden Beispiele zeigen detailliert kommentierte Cronjobs für verschiedene Anwendungsfälle. Die Kommentare entsprechen den erweiterten Vorgaben zur Code Dokumentation.
+
+```bash
+# ==============================================================================
+# Skript: Systemprüfung
+# Beschreibung: Führt das Skript alle 15 Minuten aus.
+# Minute: */15 bedeutet alle 15 Minuten
+# Stunde: * bedeutet jede Stunde
+# Tag: * bedeutet jeden Tag
+# Monat: * bedeutet jeden Monat
+# Wochentag: * bedeutet jeden Wochentag
+# ==============================================================================
+*/15 * * * * /usr/local/bin/check_system.sh
+```
+
+```bash
+# ==============================================================================
+# Skript: Wartung
+# Beschreibung: Startet das Wartungsskript jeden Werktag um 08:30 Uhr.
+# Minute: 30
+# Stunde: 8
+# Tag: * # Monat: *
+# Wochentag: 1 bis 5 bedeutet Montag bis Freitag
+# ==============================================================================
+30 8 * * 1-5 /opt/scripts/wartung.sh
+```
+
+```bash
+# ==============================================================================
+# Skript: Monatliches Backup
+# Beschreibung: Erstellt ein Backup am ersten Tag jedes Monats um Mitternacht.
+# Minute: 0
+# Stunde: 0
+# Tag: 1 bedeutet der erste Tag des Monats
+# Monat: *
+# Wochentag: *
+# ==============================================================================
+0 0 1 * * /var/backups/monthly_backup.sh
+```
+
+```bash
+# ==============================================================================
+# Skript: Bericht senden
+# Beschreibung: Sendet einen Statusbericht jeden Sonntag um 20:45 Uhr.
+# Minute: 45
+# Stunde: 20
+# Tag: *
+# Monat: *
+# Wochentag: 0 bedeutet Sonntag
+# ==============================================================================
+45 20 * * 0 /usr/bin/report_sender.sh
+```
+
+```bash
+# ==============================================================================
+# Skript: Temporäre Dateien löschen
+# Beschreibung: Löscht Dateien alle zwei Stunden zwischen 09:00 und 17:00 Uhr an Wochenenden.
+# Minute: 0
+# Stunde: 9 bis 17 in Zweierschritten
+# Tag: *
+# Monat: *
+# Wochentag: 6 und 0 bedeutet Samstag und Sonntag
+# ==============================================================================
+0 9-17/2 * * 6,0 /bin/rm_temp_files.sh
+```
 ---
 
 ## ⌨️ 3. Crontab Befehle und Editor Konfiguration
