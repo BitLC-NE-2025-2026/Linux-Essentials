@@ -60,8 +60,19 @@ Eine crontab Zeile besteht aus fünf Zeitfeldern und dem auszuführenden Befehl.
 | `-` | Definiert einen fortlaufenden Bereich | `1-5` im Wochentagsfeld führt den Befehl von Montag bis Freitag aus |
 | `/` | Definiert ein wiederkehrendes Intervall | `*/5` im Minutenfeld löst die Ausführung alle fünf Minuten aus |
 
-**Beispielhafter cronjob jeden Tag um 04:30 Uhr:**
-`30 4 * * * /pfad/zum/skript.sh`
+### 💡 Praxisbeispiele für Zeitintervalle
+
+Die folgenden Beispiele zeigen typische Konfigurationen für cronjobs.
+
+| cron Syntax | Ausführungszeitpunkt |
+| :--- | :--- |
+| `0 8 * * 1` | Jeden Montag um 08:00 Uhr |
+| `*/15 * * * *` | Alle 15 Minuten |
+| `0 22 * * 1-5` | Montag bis Freitag um 22:00 Uhr |
+| `0 0 1 * *` | Am ersten Tag jedes Monats um Mitternacht |
+| `0 12 1,15 * *` | Am ersten und fünfzehnten Tag des Monats um 12:00 Uhr |
+| `*/5 8-17 * * *` | Alle 5 Minuten zwischen 08:00 und 17:59 Uhr |
+| `0 4 * * 6,7` | Samstag und Sonntag um 04:00 Uhr |
 
 ---
 
