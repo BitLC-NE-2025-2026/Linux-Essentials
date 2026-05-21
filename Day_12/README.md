@@ -288,6 +288,19 @@ mkdir -p "$TARGET_DIR"
 # Historie filtern: Extrahiert alle Einträge des heutigen Tages
 history | grep " $TODAY " > "$TARGET_DIR/rockyHis${FILE_DATE}.txt"
 ```
+### Zeitgesteuerte Ausführung via Crontab
+Um das Skript werktäglich (Montag bis Freitag) um 15:30 Uhr auszuführen, wird ein entsprechender Eintrag in der Crontab benötigt.
+
+Crontab öffnen:
+
+```Bash
+crontab -e
+```
+Cronjob hinzufügen:
+```Bash
+# Ausführung von Montag bis Freitag um 15:30 Uhr
+30 15 * * 1-5 /home/scripts/historyscript.sh
+```
 
 ## 🔗 6. Zurück zur Übersicht
 ⬅ Zurück zur Übersicht
