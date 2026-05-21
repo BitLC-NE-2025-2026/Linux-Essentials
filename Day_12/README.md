@@ -246,6 +246,48 @@ systemctl status crond
 ```
 
 ---
+## 📝 7. Historien-Automatisierung mit Cronjobs
+
+Um die Bash-Historie täglich automatisiert zu sichern und nach Tagen zu sortieren, erstellen wir ein dediziertes Skript. Dieses Skript nutzt Zeitstempel, um die Historie für den aktuellen Tag in eine spezifische Textdatei im Benutzerverzeichnis zu exportieren.
+
+### Installation des Skripts
+
+1. **Skript ablegen:** Speichere das Skript unter `$HOME/scripts/historyscript.sh`.
+2. **Rechte setzen:** Weise dem Skript die notwendigen Ausführungsrechte zu:
+
+```bash
+chmod +x ~/scripts/historyscript.sh
+```
+### Inhalt des Scripts
+
+```Bash
+#!/bin/bash
+# ==============================================================================
+# Skript: historyscript.sh
+# Author: Tobias B
+# Beschreibung: Exportiert die tägliche Bash-Historie in datierte Logdateien
+# Speicherort: ~/scripts/historyscript.sh
+# ==============================================================================
+
+# Definiert die Historien-Datei und aktiviert die Historien-Funktion
+HISTFILE=$HOME/.bash_history
+set -o history
+history -r
+
+# Zeitstempel-Format für die Historie setzen
+export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
+
+# Variablen für Datumsformate definieren
+TODAY=$(date +%Y-%m-%d)
+FILE_DATE=$(date +%Y%m%d)
+
+# Zielverzeichnis sicherstellen
+TARGET_DIR="$HOME/history_logs"
+mkdir -p "$TARGET_DIR"
+
+# Historie filtern: Extrahiert alle Einträge des heutigen Tages
+history | grep " $TODAY " > "$TARGET_DIR/rockyHis${FILE_DATE}.txt"
+```
 
 ## 🔗 6. Zurück zur Übersicht
 ⬅ Zurück zur Übersicht
