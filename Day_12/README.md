@@ -74,6 +74,22 @@ Standardmäßig öffnet `crontab -e` den Editor vi oder vim. Zur Nutzung von nan
 ```bash
 # Fügt den Befehl zum Setzen der EDITOR Variable an das Ende der Benutzerprofil Datei an.
 # Der doppelte Pfeil >> verhindert das Überschreiben der Datei und hängt den Text unten an.
-# Der logische AND Operator && sorgt dafür, dass der zweite Befehl nur nach erfolgreichem ersten Befehl ausgeführt wird.
+# Der logische AND Operator && sorgt dafür,
+# dass der zweite Befehl nur nach erfolgreichem ersten Befehl ausgeführt wird.
 # Der Befehl source liest die Datei sofort neu ein und macht nano im aktuellen Terminal aktiv.
 echo "export EDITOR=nano" >> ~/.bash_profile && source ~/.bash_profile
+```
+---
+
+## 📚 4. Ressourcen und Hilfsmittel
+Die Definition der korrekten Zeiten ist fehleranfällig.
+Die Webseite crontab.guru übersetzt die Cron Syntax in lesbaren Text und hilft bei der Erstellung komplexer Intervalle.
+
+- Link: (https://crontab.guru/)[https://crontab.guru/]
+
+---
+
+## 🔗 5. Zurück zur Übersicht
+⬅ Zurück zur Übersicht
+
+Erstellt am 20. Mai 2026 für den Linux-Essentials Kurs.
