@@ -62,46 +62,37 @@ clean_csv() {
 process_users() {
     log_action "System: Starte Iteration zur Benutzeranlage"
 
-    # Setze den Internal Field Separator auf Semikolon für das CSV-Parsing
     while IFS=";" read -r id nachname vorname rest; do
         
-        # Bereinige Variablen von störenden Leerzeichen und Zeilenumbrüchen
         local vorname_clean
         vorname_clean=$(echo "$vorname" | tr -d ' ' | tr -d '\r')
         
         local nachname_clean
         nachname_clean=$(echo "$nachname" | tr -d ' ' | tr -d '\r')
         
-        # Generiere das Präfix aus den ersten 3 Zeichen des Vornamens
         local vorname_prefix="${vorname_clean:0:3}"
+        local nachname_prefix="${nachname_clean:0:3}"
         
-        # Konvertiere Sonderzeichen und erzeuge den Benutzernamen in Kleinbuchstaben
         local username
-        username=$(echo "${vorname_prefix}${nachname_clean}" | tr '[:upper:]' '[:lower:]' | sed -e 's/ä/ae/g' -e 's/ö/oe/g' -e 's/ü/ue/g' -e 's/ß/ss/g')
+        username=$(echo "${vorname_prefix}${nachname_prefix}" | tr '[:upper:]' '[:lower:]' | sed -e 's/ä/ae/g' -e 's/ö/oe/g' -e 's/ü/ue/g' -e 's/ß/ss/g')
         
-        # Deklariere das Kommentarfeld mit Vorname und Nachname
         local gecos="${vorname_clean} ${nachname_clean}"
         
-        # Generiere ein zufälliges Passwort mit pwgen
         local raw_pw
         raw_pw=$(pwgen -1 -s 12)
         
-        # Konkateniere Benutzername und Passwort nach Vorgabe
         local userpasswort="${username}${raw_pw}"
         
         log_action "Profil ${username}: Namenskonvention und Variablen generiert"
         
-        # Prüfe zur Vermeidung von Fehlern die Existenz des Benutzers
         if id "$username" &>/dev/null; then
             log_action "Profil ${username}: Übersprungen da das Konto bereits existiert"
             continue
         fi
         
-        # Führe die Kontoerstellung mit Homeverzeichnis und Standard-Shell durch
         useradd -m -c "$gecos" -s /bin/bash "$username"
         log_action "Profil ${username}: Konto erfolgreich im System angelegt"
         
-        # Zuweisung des Passworts über Standardeingabe an chpasswd
         echo "${username}:${userpasswort}" | chpasswd
         log_action "Profil ${username}: Gesichertes Passwort zugewiesen"
         
