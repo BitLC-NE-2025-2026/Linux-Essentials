@@ -2,6 +2,7 @@
 # ==============================================================================
 # Skript: install_service.sh
 # Beschreibung: Automatisches Setup für das History-Skript, systemd und Cron
+# Author Tobias B
 # ==============================================================================
 
 # Pfade dynamisch ermitteln
