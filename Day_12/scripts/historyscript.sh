@@ -1,25 +1,21 @@
 #!/bin/bash
 # ==============================================================================
 # Skript: historyscript.sh
-# Author: Tobias B
-# Beschreibung: Exportiert die tägliche Bash-Historie in datierte Logdateien
-# Speicherort: ~/scripts/historyscript.sh
+# Autor: Tobias B
+# Beschreibung: Sichert die Bash Historie in datierte Logdateien.
 # ==============================================================================
-# Bash-Historie
-HISTFILE=$HOME/.bash_history
-set -o history
-history -r
 
-# Zeitstempel-Format definieren
-export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
+set -euo pipefail
 
-# Aktuelles Datum
-TODAY=$(date +%Y-%m-%d)
-FILE_DATE=$(date +%Y%m%d)
+readonly HIST_FILE="${HOME}/.bash_history"
+readonly TARGET_DIR="${HOME}/history_logs"
+readonly FILE_DATE=$(date +%Y%m%d)
+readonly OUTPUT_FILE="${TARGET_DIR}/rockyHis${FILE_DATE}.txt"
 
-# Zielverzeichnis
-TARGET_DIR="$HOME/history_logs"
 mkdir -p "$TARGET_DIR"
 
-# Historie filtern und exportieren
-history | grep " $TODAY " > "$TARGET_DIR/rockyHis${FILE_DATE}.txt"
+if [ -f "$HIST_FILE" ]; then
+    cat "$HIST_FILE" > "$OUTPUT_FILE"
+fi
+
+exit 0
