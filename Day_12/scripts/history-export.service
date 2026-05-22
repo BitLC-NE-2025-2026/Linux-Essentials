@@ -1,0 +1,12 @@
+[Unit]
+Description=Exportiert die Bash-Historie vor dem Herunterfahren
+DefaultDependencies=no
+Before=shutdown.target exit.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStop=/bin/bash $HOME/scripts/historyscript.sh
+
+[Install]
+WantedBy=default.target
