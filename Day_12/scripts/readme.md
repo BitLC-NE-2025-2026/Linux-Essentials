@@ -1,7 +1,7 @@
 install dir home/scripts/historyscript.sh
 
 ```bash
-chmod +x ~/historyscript.sh
+chmod +x ~/scripts/historyscript.sh
 
 crontab -e
 
