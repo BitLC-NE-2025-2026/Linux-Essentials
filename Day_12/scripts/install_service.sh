@@ -26,6 +26,8 @@ fi
 mkdir -p "$SERVICE_DIR"
 
 # 3. Service-Datei mit absolutem Pfad generieren
+ABS_SCRIPT_PATH=$(realpath "$SCRIPT_PATH")
+
 cat << EOF > "$SERVICE_FILE"
 [Unit]
 Description=Exportiert die Bash-Historie vor dem Herunterfahren
@@ -35,12 +37,11 @@ Before=shutdown.target exit.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStop=/bin/bash $SCRIPT_PATH
+ExecStop=$ABS_SCRIPT_PATH
 
 [Install]
 WantedBy=default.target
 EOF
-echo "[OK] Systemd-Service-Datei dynamisch erstellt."
 
 # 4. Systemd-Dienst aktivieren und starten
 systemctl --user daemon-reload
