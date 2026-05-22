@@ -57,6 +57,38 @@ Bevor man an einem System arbeitet, muss man wissen, womit man es zu tun hat.
 | `w` | Zeigt an, wer angemeldet ist und was sie gerade tun (inkl. Systemlast). |
 | `loginctl` | Verwaltung des Systemd-Login-Managers. |
 
+### Rechte anzeigen
+
+```bash
+ls -al /etc/profile /etc/bashrc
+```
+
+Zeigt:
+
+| Bereich        | Bedeutung            |
+| -------------- | -------------------- |
+| Zugriffsrechte | z. B. `-rw-r--r--`   |
+| Besitzer       | Benutzer der Datei   |
+| Gruppe         | Gruppenzugehörigkeit |
+| Größe          | Dateigröße           |
+| Zeitstempel    | Letzte Änderung      |
+| Pfad           | Speicherort          |
+
+---
+
+## Globale Bash-Konfigurationsdateien
+
+```bash
+ls /etc/profile /etc/bashrc
+ls -al /etc/profile /etc/bashrc
+```
+
+
+| Datei          | Bedeutung                                      |
+| -------------- | ---------------------------------------------- |
+| `/etc/profile` | Globale Profil-Konfiguration für alle Benutzer |
+| `/etc/bashrc`  | Globale Bash-Konfiguration                     |
+
 ---
 
 ## 📂 Fortgeschrittene Dateioperationen
