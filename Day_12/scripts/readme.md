@@ -1,37 +1,42 @@
 # Bash History Exporter Service
 
-Dieses Projekt sichert automatisch die tägliche Bash Historie eines Linux Benutzers. Die Historie wird zu einer festen Uhrzeit sowie vollautomatisch beim Herunterfahren oder Abmelden des Systems in datierte Logdateien exportiert.
+Dieses Projekt sichert automatisch die tägliche Bash-Historie eines Linux-Benutzers. Die Historie wird zu einer festen Uhrzeit sowie vollautomatisch beim Herunterfahren oder Abmelden des Systems in datierte Logdateien exportiert.
 
 ## Features
-* Automatisch beim Shutdown: Nutzt einen systemd User Service zur Sicherung vor dem Systemstopp.
-* Geplanter Backup: Sichert die Historie zusätzlich von Montag bis Freitag um 15:30 Uhr über Cron.
-* Echtzeiterfassung: Zwingt laufende Terminal Sitzungen mit history a ihre Daten vor dem Export in die Historien Datei zu schreiben.
-* Vollautomatisches Setup: Ein einziges Installationsskript richtet alle Pfade sowie Dienste und Cronjobs fehlerfrei ein.
+* **Automatisch beim Shutdown:** Nutzt einen systemd-User-Service zur Sicherung direkt vor dem Systemstopp oder dem Logout.
+* **Geplantes Backup:** Sichert die Historie zusätzlich von Montag bis Freitag um 15:30 Uhr über einen Cronjob.
+* **Ausfallsicherer Export:** Kopiert die physikalische Historien-Datei direkt auf Dateisystemebene, da der interaktive `history`-Befehl im systemd-Kontext funktionslos ist.
+* **Vollautomatisches Setup:** Ein einziges Installationsskript richtet alle Pfade, Dienste und Cronjobs fehlerfrei ein.
 
 ## Projektstruktur
 ```text
 .
 ├── scripts/
-│   ├── historyscript.sh    # Backup Skript
+│   ├── historyscript.sh    # Backup-Skript
 │   └── install_service.sh  # Installationsskript
 └── README.md               # Dokumentation
+
 ```
-Voraussetzungen
-Ein Linux System mit systemd wie Rocky Linux oder Debian.
 
-Die Standard Shell muss bash sein.
+## Voraussetzungen
 
-Installation und Einrichtung
-1. Repository klonen oder Skripte vorbereiten
-Stellen Sie sicher dass sich die Skripte in Ihrem Homeverzeichnis unter ~/scripts/ befinden.
+* Ein Linux-System mit systemd (z. B. Rocky Linux oder Debian).
+* Die Standard-Shell des Benutzers muss `bash` sein.
 
-Das Hauptskript ~/scripts/historyscript.sh muss folgenden Inhalt haben:
+## Installation und Einrichtung
+
+### 1. Repository klonen oder Skripte vorbereiten
+
+Stellen Sie sicher, dass sich die Skripte in Ihrem Home-Verzeichnis unter `~/scripts/` befinden.
+
+Das Hauptskript `~/scripts/historyscript.sh` muss folgenden Inhalt haben:
+
 ```bash
 #!/bin/bash
 # ==============================================================================
 # Skript: historyscript.sh
 # Autor: Tobias B
-# Beschreibung: Sichert die Bash Historie in datierte Logdateien.
+# Beschreibung: Sichert die Bash-Historie in datierte Logdateien.
 # ==============================================================================
 
 # Aktivierung des strikten Modus für eine ausfallsichere Ausführung
@@ -55,49 +60,66 @@ mkdir -p "$TARGET_DIR"
 # Prüfung der Existenz der Quelldatei
 if [ -f "$HIST_FILE" ]; then
     # Direktes Kopieren der physikalischen Datei
-    # Der history Befehl ist im systemd Kontext funktionslos
+    # Der history-Befehl ist im systemd-Kontext funktionslos
     cat "$HIST_FILE" > "$OUTPUT_FILE"
 fi
 
 exit 0
+
 ```
 
-2. Installationsskript ausführen
-Führen Sie das Setupskript aus um den systemd User Service und den Cronjob automatisch einzurichten:
+### 2. Installationsskript ausführen
+
+Führen Sie das Setupskript aus, um den systemd-User-Service und den Cronjob automatisch einzurichten:
+
 ```bash
 chmod +x ~/scripts/install_service.sh
 ~/scripts/install_service.sh
+
 ```
 
-Das Skript erledigt folgendes:
+Das Skript erledigt folgende Aufgaben:
 
-Macht historyscript.sh ausführbar.
+* Macht `historyscript.sh` ausführbar.
+* Erstellt die Datei `~/.config/systemd/user/history-export.service` mit den korrekten absoluten Pfaden.
+* Aktiviert und startet den systemd-Dienst.
+* Trägt den zeitgesteuerten Cronjob in Ihre Benutzer-Crontab ein.
 
-Erstellt die Datei ~/.config/systemd/user/history-export.service mit den korrekten absoluten Pfaden.
+## Status überprüfen
 
-Aktiviert und startet den systemd Dienst.
+### systemd-Dienst kontrollieren
 
-Trägt den Cronjob in Ihre Crontab ein.
+Da es sich um einen User-Service handelt, muss die Abfrage mit dem Flag `--user` erfolgen:
 
-Status überprüfen
-systemd Dienst kontrollieren
-Da es sich um einen User Service handelt muss die Abfrage mit dem Flag user erfolgen:
 ```bash
 systemctl --user status history-export.service
+
 ```
-Hinweis: Der Status muss active exited anzeigen. Das ist korrekt so da der Dienst im Hintergrund darauf wartet beim Shutdown das Signal zum Beenden abzufangen.
 
-Cronjob kontrollieren
-Überprüfen Sie ob der Cronjob in Ihrer Benutzer Crontab hinterlegt ist:
+*Hinweis:* Der Status muss `active (exited)` anzeigen. Dies ist korrekt, da der Dienst im Hintergrund aktiv bleibt, um beim Shutdown das Signal zum Beenden abzufangen und das Skript auszuführen.
 
-```Bash
+### Cronjob kontrollieren
+
+Überprüfen Sie, ob der Cronjob in Ihrer Benutzer-Crontab hinterlegt wurde:
+
+```bash
 crontab -l
+
 ```
-Logdateien
+
+## Logdateien
+
 Die exportierten Historien werden standardmäßig im folgenden Verzeichnis abgelegt:
 
-```Bash
+```bash
 ~/history_logs/rockyHisYYYYMMDD.txt
+
 ```
-Autor
-Tobias B: Initialentwicklung und Konzept
+
+## Autor
+
+* **Tobias B:** Initialentwicklung und Konzept
+
+
+
+---
