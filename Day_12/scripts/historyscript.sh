@@ -9,6 +9,7 @@
 HISTFILE=$HOME/.bash_history
 set -o history
 history -r
+history -a
 
 # Zeitstempel-Format definieren
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
