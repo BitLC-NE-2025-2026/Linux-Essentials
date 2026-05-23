@@ -181,6 +181,8 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 - [Befehle & Datenverarbeitung (PDF)](./assets/LinuxBS_info_Commands_DatVerz.pdf)
 - [Historie Tag 02 (TXT)](./assets/rockyHis20260505-1457.txt)
+- [Praxis-Historie (Navigation & FHS 1) (TXT)](./assets/history-semus-20260512-0938)
+- [Praxis-Historie (Navigation & FHS 2) (TXT)](./assets/history-semus-20260512-0941)
 
 ---
 
