@@ -56,6 +56,28 @@ show_log() {
 }
 
 # ==============================================================================
+# Funktion: print_log
+# Zweck:    Sendet die Protokolldatei an den im System definierten Standarddrucker
+# ==============================================================================
+print_log() {
+    if [[ ! -f "$LOG_FILE" ]]; then
+        whiptail --title "Druckfehler" --msgbox "Die Protokolldatei existiert nicht und kann nicht gedruckt werden." 8 50
+        return
+    fi
+
+    if ! command -v lp &> /dev/null; then
+        whiptail --title "Systemfehler" --msgbox "Der Druckdienst lp ist auf diesem System nicht installiert." 8 50
+        return
+    fi
+
+    if lp "$LOG_FILE" &> /dev/null; then
+        whiptail --title "Druckstatus" --msgbox "Die Datei wurde erfolgreich an den Standarddrucker uebermittelt." 8 50
+    else
+        whiptail --title "Druckfehler" --msgbox "Der Druckauftrag konnte nicht ausgefuehrt werden." 8 50
+    fi
+}
+
+# ==============================================================================
 # Funktion: main_menu
 # Zweck:    Stellt das interaktive Hauptmenue via whiptail dar und steuert Logik
 # ==============================================================================
@@ -63,16 +85,14 @@ main_menu() {
     local choice
 
     while true; do
-        # whiptail sendet die Menueauswahl an den Standardfehlerkanal
-        # Dateideskriptoren werden getauscht um den Rueckgabewert zu laden
         choice=$(whiptail --title "Benutzerverwaltung Manager" \
-                          --menu "Bitte waehlen Sie eine Systemaktion:" 16 65 5 \
+                          --menu "Bitte waehlen Sie eine Systemaktion:" 18 65 6 \
                           "1" "Benutzer automatisiert anlegen" \
                           "2" "Benutzer interaktiv loeschen" \
                           "3" "Protokolldatei anzeigen" \
-                          "4" "Programm beenden" 3>&1 1>&2 2>&3)
+                          "4" "Protokolldatei drucken" \
+                          "5" "Programm beenden" 3>&1 1>&2 2>&3)
 
-        # Abfangen der Abbruchtasten zur sauberen Systembeendigung
         if [[ $? -ne 0 ]]; then
             break
         fi
@@ -96,6 +116,9 @@ main_menu() {
                 show_log
                 ;;
             4)
+                print_log
+                ;;
+            5)
                 break
                 ;;
         esac
