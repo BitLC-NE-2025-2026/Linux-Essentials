@@ -105,17 +105,27 @@ process_users() {
 
     while IFS=";" read -r id nachname vorname rest; do
         
+        # Bereinigung von Leerzeichen und Steuerzeichen
         local vorname_clean="${vorname//[ $'\r']/}"
         local nachname_clean="${nachname//[ $'\r']/}"
         
-        local vorname_prefix="${vorname_clean:0:3}"
-        local nachname_prefix="${nachname_clean:0:3}"
+        # Konvertierung in durchgaengige Kleinschreibung
+        local vorname_lower="${vorname_clean,,}"
+        local nachname_lower="${nachname_clean,,}"
         
-        local username_raw="${vorname_prefix}${nachname_prefix}"
-        local username_lower="${username_raw,,}"
+        # Normalisierung der Umlaute zwingend vor der Kuerzung
+        local vorname_norm
+        vorname_norm=$(echo "$vorname_lower" | sed -e 's/ä/ae/g' -e 's/ö/oe/g' -e 's/ü/ue/g' -e 's/ß/ss/g')
         
-        local username
-        username=$(echo "$username_lower" | sed -e 's/ä/ae/g' -e 's/ö/oe/g' -e 's/ü/ue/g' -e 's/ß/ss/g')
+        local nachname_norm
+        nachname_norm=$(echo "$nachname_lower" | sed -e 's/ä/ae/g' -e 's/ö/oe/g' -e 's/ü/ue/g' -e 's/ß/ss/g')
+        
+        # Extraktion der finalen Praefixe auf exakt drei Zeichen
+        local vorname_prefix="${vorname_norm:0:3}"
+        local nachname_prefix="${nachname_norm:0:3}"
+        
+        # Zusammensetzung des Kontonamens
+        local username="${vorname_prefix}${nachname_prefix}"
         
         local gecos="${vorname_clean} ${nachname_clean}"
         
@@ -145,7 +155,6 @@ process_users() {
     
     log_action "System: Alle Benutzerkonten vollstaendig verarbeitet"
 }
-
 # ==============================================================================
 # Hauptprogramm
 # ==============================================================================
