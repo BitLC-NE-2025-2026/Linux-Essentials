@@ -60,45 +60,44 @@ delete_user() {
 # ==============================================================================
 interactive_deletion() {
     local users
+    
+    # Einlesen der extrahierten Benutzerkonten in ein lokales Array
     mapfile -t users < <(get_users_from_log)
 
     if [[ ${#users[@]} -eq 0 ]]; then
-        echo "Hinweis: Keine angelegten Benutzer in der Logdatei gefunden."
+        whiptail --title "Systemhinweis" --msgbox "Keine angelegten Benutzer in der Logdatei gefunden." 8 60
         exit 0
     fi
 
-    echo "Modusauswahl fuer Deprovisionierung:"
-    echo "1 Alle bekannten Benutzer aus Logdatei loeschen"
-    echo "2 Selektives Loeschen je Benutzerkonto"
-    echo "3 Skript abbrechen"
-    
-    read -r -p "Eingabe: " option
+    local checklist_options=()
+    for user in "${users[@]}"; do
+        # Aufbau der Parameter-Struktur fuer whiptail: <Tag> <Item> <Status>
+        checklist_options+=("$user" "Konto zur Loeschung markieren" "OFF")
+    done
 
-    case "$option" in
-        1)
-            for user in "${users[@]}"; do
-                delete_user "$user"
-            done
-            ;;
-        2)
-            for user in "${users[@]}"; do
-                read -r -p "Benutzer $user loeschen j/n: " choice
-                if [[ "$choice" == "j" || "$choice" == "J" ]]; then
-                    delete_user "$user"
-                else
-                    echo "Uebersprungen: $user"
-                fi
-            done
-            ;;
-        3)
-            echo "Vorgang durch Benutzer abgebrochen."
-            exit 0
-            ;;
-        *)
-            echo "Fehler: Ungueltige Auswahl."
-            exit 1
-            ;;
-    esac
+    local selected_users
+    # Erfassung der Auswahl mittels File-Descriptor Swapping (3>&1 1>&2 2>&3)
+    if ! selected_users=$(whiptail --title "Benutzer Deprovisionierung" \
+        --checklist "Markieren Sie die zu loeschenden Benutzer (Leertaste):" \
+        20 78 10 "${checklist_options[@]}" 3>&1 1>&2 2>&3); then
+        echo "Information: Vorgang durch den Administrator abgebrochen."
+        exit 0
+    fi
+
+    if [[ -z "$selected_users" ]]; then
+        echo "Information: Es wurden keine Benutzerkonten zur Loeschung ausgewaehlt."
+        exit 0
+    fi
+
+    # Entfernen der maskierenden Anfuehrungszeichen aus dem Return-String
+    selected_users=$(echo "$selected_users" | tr -d '"')
+
+    # Iteration ueber die selektierten Accounts
+    for user in $selected_users; do
+        delete_user "$user"
+    done
+    
+    echo "System: Deprovisionierung ausgewaehlter Konten erfolgreich abgeschlossen."
 }
 
 # ==============================================================================
@@ -106,7 +105,7 @@ interactive_deletion() {
 # ==============================================================================
 main() {
     check_root
+    check_dependencies
     interactive_deletion
 }
-
 main
