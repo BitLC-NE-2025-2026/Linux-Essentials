@@ -57,7 +57,7 @@ show_log() {
 
 # ==============================================================================
 # Funktion: print_log
-# Zweck:    Sendet die Protokolldatei an den im System definierten Standarddrucker
+# Zweck:    Liest verfuegbare Drucker aus und sendet die Datei an das gewaehlte Ziel
 # ==============================================================================
 print_log() {
     if [[ ! -f "$LOG_FILE" ]]; then
@@ -66,14 +66,37 @@ print_log() {
     fi
 
     if ! command -v lp &> /dev/null; then
-        whiptail --title "Systemfehler" --msgbox "Der Druckdienst lp ist auf diesem System nicht installiert." 8 50
+        whiptail --title "Systemfehler" --msgbox "Der Druckdienst lp ist nicht installiert." 8 50
         return
     fi
 
-    if lp "$LOG_FILE" &> /dev/null; then
-        whiptail --title "Druckstatus" --msgbox "Die Datei wurde erfolgreich an den Standarddrucker uebermittelt." 8 50
+    local printers
+    printers=$(lpstat -e 2>/dev/null)
+
+    if [[ -z "$printers" ]]; then
+        whiptail --title "Druckfehler" --msgbox "Es wurden keine konfigurierten Drucker im System gefunden." 8 50
+        return
+    fi
+
+    local menu_options=()
+    while IFS= read -r printer; do
+        menu_options+=("$printer" "Drucker")
+    done <<< "$printers"
+
+    local selected_printer
+    selected_printer=$(whiptail --title "Druckerauswahl" \
+                               --menu "Bitte waehlen Sie das Zielgeraet:" 15 60 6 \
+                               "${menu_options[@]}" 3>&1 1>&2 2>&3)
+
+    if [[ -z "$selected_printer" ]]; then
+        return
+    fi
+
+    local print_error
+    if print_error=$(lp -d "$selected_printer" "$LOG_FILE" 2>&1); then
+        whiptail --title "Druckstatus" --msgbox "Die Datei wurde erfolgreich an $selected_printer uebermittelt." 8 50
     else
-        whiptail --title "Druckfehler" --msgbox "Der Druckauftrag konnte nicht ausgefuehrt werden." 8 50
+        whiptail --title "Druckfehler" --msgbox "Der Druckauftrag ist fehlgeschlagen. Systemmeldung:\n\n$print_error" 12 70
     fi
 }
 
