@@ -1,10 +1,14 @@
 #!/bin/bash
 
 # ==============================================================================
-# Skript:       user_provisioning.sh
-# Zweck:        Automatisierte und iterative Erstellung von Benutzerkonten 
-#               basierend auf einer strukturierten CSV-Datei.
-# Architektur:  Separation of Concerns, Modularisierung, Fail-Fast Ansatz
+# Skriptname:       user_provisioning.sh
+# Version:          1.1
+# Zweck:            Automatisierte Erstellung von Benutzerkonten aus einer CSV Datei
+# Parameter:        Keine
+# Rueckgabewert:    0 bei fehlerfreier Ausfuehrung, 1 bei Abbruechen
+# Voraussetzungen:  Administrative Rechte, Paket pwgen
+# Architektur:      Separation of Concerns, Modularisierung, Fail Fast Ansatz
+# Author:           Tobias B
 # ==============================================================================
 
 # Sicherheitsrichtlinien für Bash-Ausführung erzwingen
@@ -17,6 +21,18 @@ set -o pipefail
 INPUT_CSV="Abwesenheit NE5NE4 FIAE WS26.csv"
 CLEANED_CSV="cleaned_users.csv"
 LOG_FILE="userlog.md"
+CREDENTIALS_FILE="credentials.csv"
+
+# ==============================================================================
+# Funktion: check_root
+# Zweck:    Prueft ob das Skript mit administrativen Rechten ausgefuehrt wird
+# ==============================================================================
+check_root() {
+    if [[ $EUID -ne 0 ]]; then
+        echo "Kritischer Fehler: Das Skript erfordert administrative Rechte."
+        exit 1
+    fi
+}
 
 # ==============================================================================
 # Funktion: check_dependencies
@@ -47,12 +63,12 @@ log_action() {
 # Zweck:    Erstellt die bereinigte Zwischendatei durch Filtern valider Zeilen
 # ==============================================================================
 clean_csv() {
-    log_action "System: Starte Bereinigung der Quelldatei ${INPUT_CSV}"
+    log_action "System: Starte Bereinigung der Quelldatei"
     
-    # Extrahiere alle Zeilen, die mit einer Ziffer beginnen und ignoriere Header
-    grep -E '^[0-9]+;' "$INPUT_CSV" > "$CLEANED_CSV"
+    # Ignoriere Fehler von grep falls die Datei komplett leer oder invalid ist
+    grep -E '^[0-9]+;' "$INPUT_CSV" > "$CLEANED_CSV" || true
     
-    log_action "System: Bereinigung abgeschlossen und Zwischendatei ${CLEANED_CSV} erstellt"
+    log_action "System: Bereinigung abgeschlossen und Zwischendatei erstellt"
 }
 
 # ==============================================================================
@@ -62,30 +78,33 @@ clean_csv() {
 process_users() {
     log_action "System: Starte Iteration zur Benutzeranlage"
 
+    # Sichere Ablage fuer Passwoerter initialisieren
+    echo "Benutzername;Passwort" > "$CREDENTIALS_FILE"
+    chmod 600 "$CREDENTIALS_FILE"
+
     while IFS=";" read -r id nachname vorname rest; do
         
-        local vorname_clean
-        vorname_clean=$(echo "$vorname" | tr -d ' ' | tr -d '\r')
-        
-        local nachname_clean
-        nachname_clean=$(echo "$nachname" | tr -d ' ' | tr -d '\r')
+        # Entfernung von Leerzeichen und Wagenruecklaeufen mittels Parameter Expansion
+        local vorname_clean="${vorname//[ $'\r']/}"
+        local nachname_clean="${nachname//[ $'\r']/}"
         
         local vorname_prefix="${vorname_clean:0:3}"
         local nachname_prefix="${nachname_clean:0:3}"
         
+        # Generierung des Benutzernamens und Umwandlung in Kleinbuchstaben
+        local username_raw="${vorname_prefix}${nachname_prefix}"
+        local username_lower="${username_raw,,}"
+        
         local username
-        username=$(echo "${vorname_prefix}${nachname_prefix}" | tr '[:upper:]' '[:lower:]' | sed -e 's/ä/ae/g' -e 's/ö/oe/g' -e 's/ü/ue/g' -e 's/ß/ss/g')
+        username=$(echo "$username_lower" | sed -e 's/ä/ae/g' -e 's/ö/oe/g' -e 's/ü/ue/g' -e 's/ß/ss/g')
         
         local gecos="${vorname_clean} ${nachname_clean}"
         
         local raw_pw
         raw_pw=$(pwgen -1 -s 12)
-        
         local userpasswort="${username}${raw_pw}"
         
-        # Optische Abhebung und initiale Protokollierung der Echtnamen
-        echo -e "\n### Benutzerprofil: ${vorname_clean} ${nachname_clean}" >> "$LOG_FILE"
-        
+        echo -e "\n### Benutzerprofil: ${gecos}" >> "$LOG_FILE"
         log_action "Account ${username}: Namenskonvention und Variablen generiert"
         
         if id "$username" &>/dev/null; then
@@ -97,11 +116,13 @@ process_users() {
         log_action "Account ${username}: Konto erfolgreich angelegt"
         
         echo "${username}:${userpasswort}" | chpasswd
-        log_action "Account ${username}: Passwort ${userpasswort} zugewiesen"
+        log_action "Account ${username}: Systempasswort zugewiesen"
+        
+        # Speicherung der Zugangsdaten in gesicherter separater Datei
+        echo "${username};${userpasswort}" >> "$CREDENTIALS_FILE"
         
     done < "$CLEANED_CSV"
     
-    echo -e "\n***\n" >> "$LOG_FILE"
     log_action "System: Alle Benutzerkonten vollstaendig verarbeitet"
 }
 
@@ -112,6 +133,7 @@ main() {
     # Initialisiere die Logdatei neu bei jedem Durchlauf
     echo "# Verarbeitungsprotokoll Benutzerverwaltung" > "$LOG_FILE"
     
+    check_root
     check_dependencies
     clean_csv
     process_users
