@@ -16,19 +16,41 @@ Am dreizehnten Tag der Linux Essentials behandeln wir fortgeschrittenes Shell Sc
 * [Zurück zur Übersicht](#-zurueck-zur-uebersicht)
 
 ---
+## 🗂️ Übersicht der Skripte
+
+Der Tag 13 beinhaltet vier zentrale Bash Skripte zur Systemadministration:
+
+| Skriptname | Hauptfunktion | LPIC-1 Relevanz |
+| :--- | :--- | :--- |
+| `user_provisioning.sh` | Massenanlage von Benutzern aus CSV Dateien | Hoch |
+| `user_deprovisioning.sh` | Standardisiertes Löschen von Benutzerkonten | Hoch |
+| `user_manager.sh` | Textbasiertes Auswahlmenü für Administration | Mittel |
+| `whiptail_manager.sh` | Grafisches TUI Menü mit Druckfunktion | Mittel |
+
+---
 
 ## 🎯 Lernziele LPIC-1 relevant
 
-* Erstellung und Strukturierung komplexer Shell Skripte.
-* Automatisierung der Benutzerverwaltung.
-* Entwicklung interaktiver Menüs für administrative Aufgaben.
-* Verwaltung von Druckaufträgen im Terminal.
+* **Benutzerverwaltung:** Anwendung von `useradd`, `chpasswd` und Verständnis der Systemdateien.
+* **Shell Scripting Grundlagen:** Nutzung von Schleifen `while`, Bedingungen `if` sowie `case` Verzweigungen.
+* **Textverarbeitung und Filter:** Modifikation von Datenströmen mit `grep`, `tr` und `sed`.
+* **Druckerkonfiguration:** Verwaltung von Druckaufträgen mit `lp` und Statusabfragen mit `lpstat`.
+* **Paketverwaltung:** Automatisierte Erkennung und Installation von Softwarepaketen.
 
 ---
 
 ## ⚙️ 1. Automatisierte Benutzeranlage
 
 Skripte übernehmen das massenhafte Anlegen von Benutzerkonten effizient und fehlerfrei. Unser Skript liest Daten aus einer unformatierten CSV Datei ein und bereinigt diese im ersten Schritt. Das Werkzeug pwgen generiert sichere Initialpasswörter für jeden neuen Account. Die Systembefehle useradd und chpasswd erstellen das Konto und weisen das generierte Systempasswort zu. Alle Vorgänge dokumentiert das Skript in einer dedizierten Protokolldatei.
+
+Das Skript `user_provisioning.sh` demonstriert die automatisierte Verarbeitung einer unformatierten CSV Quelldatei.
+
+**Kernfunktionen und LPIC-1 Bezüge:**
+* **Textbereinigung:** Der Befehl `tr` wandelt inkompatible Zeilenumbrüche um. Der Befehl `grep` filtert valide Datenzeilen anhand regulärer Ausdrücke.
+* **Datenmanipulation:** Der Befehl `sed` ersetzt Umlaute konform. Die native Bash Zeichenkettenmanipulation extrahiert Präfixe für Benutzernamen.
+* **Kontoerstellung:** Der Befehl `useradd` legt Systemkonten mit Heimatverzeichnis und Standard Shell an.
+* **Passwortzuweisung:** Das Werkzeug `pwgen` generiert kryptografisch sichere Zeichenketten. Der Befehl `chpasswd` verarbeitet diese direkt per Standardeingabe.
+* **Sicherheitsarchitektur:** Die gesetzten Optionen `set -e` und `set -o pipefail` erzwingen einen sofortigen Skriptabbruch bei auftretenden Fehlern.
 
 ---
 
@@ -60,6 +82,17 @@ done
 
 Das Werkzeug whiptail erzeugt grafische Fenster direkt im Terminal. Es bietet Funktionen für Messageboxen, Menüs und scrollbare Textboxen. Dies erhöht den Bedienkomfort für Administratoren erheblich. Das Skript fängt die Auswahl des Benutzers ab und leitet die Ausführung entsprechend weiter.
 
+Zwei Skripte bieten unterschiedliche Ansätze für Administrationsmenüs.
+
+**Das Standardskript `user_manager.sh`:**
+Baut auf reinen Bash Builtins auf. Eine Endlosschleife `while true` hält das Programm aktiv. Der Befehl `read` nimmt Eingaben entgegen. Die Kontrollstruktur `case` leitet in die entsprechenden Unterskripte weiter.
+
+**Das erweiterte Skript `whiptail_manager.sh`:**
+Nutzt das externe Paket `whiptail` für grafische Fenster direkt im Terminal. 
+* **Messageboxen:** Zeigen Warnungen und Erfolgsmeldungen an.
+* **Scrolltext:** Liest die generierte Protokolldatei `userlog.md` ein und stellt sie navigierbar dar.
+* **Menüs:** Bieten eine fehlerresistente Navigation per Pfeiltasten.
+* 
 ```bash
 # ==============================================================================
 # Skript: Whiptail Dialogausgabe
@@ -77,6 +110,12 @@ whiptail --title "Hauptmenü" --menu "Bitte wählen:" 15 60 6 "1" "Benutzer anle
 ## 🖨️ 4. Druckersteuerung im Terminal
 
 Protokolle lassen sich direkt aus dem Skript heraus auf physischen Druckern ausgeben. Der Befehl lpstat listet alle konfigurierten Drucker im System auf. Der Befehl lp sendet die gewünschte Textdatei an das gewählte Zielgerät. Im whiptail Skript integrieren wir diese Befehle für einen reibungslosen Workflow.
+
+Das Skript `whiptail_manager.sh` integriert LPIC-1 relevante Druckfunktionen direkt in die Oberfläche.
+
+**Verwendete Befehle:**
+* `lpstat -e`: Listet alle aktiven und verfügbaren Druckerziele auf. Das Skript iteriert über diese Liste und baut daraus dynamisch ein Auswahlmenü.
+* `lp -d`: Sendet die ausgewählte Protokolldatei an das spezifizierte Druckerziel. Die Standardfehlerausgabe wird abgefangen und bei Problemen transparent in einer grafischen Messagebox visualisiert.
 
 ---
 
