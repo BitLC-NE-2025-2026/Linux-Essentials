@@ -36,12 +36,33 @@ check_root() {
 
 # ==============================================================================
 # Funktion: check_dependencies
-# Zweck:    Prüft das Vorhandensein zwingend benötigter Pakete vor Ausführung
+# Zweck:    Prueft das Vorhandensein des Pakets pwgen und installiert dieses
+#           bei Bedarf automatisch ueber den systemspezifischen Paketmanager.
+# Rueckgabewert: Beendet das Skript mit Code 1 bei fehlschlagender Installation
 # ==============================================================================
 check_dependencies() {
     if ! command -v pwgen &> /dev/null; then
-        echo "Kritischer Fehler: Das Paket pwgen ist nicht installiert."
-        exit 1
+        echo "System: Das Paket pwgen fehlt. Starte automatische Installation."
+
+        # Dynamische Erkennung des Paketmanagers fuer verschiedene Distributionen
+        if command -v apt-get &> /dev/null; then
+            DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y pwgen
+        elif command -v pacman &> /dev/null; then
+            pacman -Sy --noconfirm pwgen
+        elif command -v dnf &> /dev/null; then
+            dnf install -y pwgen
+        else
+            echo "Kritischer Fehler: Kein unterstuetzter Paketmanager gefunden."
+            exit 1
+        fi
+
+        # Abschliessende Validierung des Installationsvorgangs
+        if ! command -v pwgen &> /dev/null; then
+            echo "Kritischer Fehler: Automatische Installation fehlgeschlagen."
+            exit 1
+        fi
+        
+        echo "System: Paket pwgen erfolgreich installiert."
     fi
 }
 
