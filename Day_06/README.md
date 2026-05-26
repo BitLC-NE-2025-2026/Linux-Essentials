@@ -1,4 +1,23 @@
-# 📑 Day 06: Administration, Prozesse & Spezialrechte
+# 🐧 Linux Essentials - Tag 06
+
+![Linux Essentials Header](./header.png)
+
+Heute lernen wir das Linux-Prozessmodell kennen, wie man Prozesse überwacht, steuert und priorisiert sowie die drei kritischen Spezialrechte (SUID, SGID, Sticky Bit) zur Härtung von Systemen anwendet.
+
+---
+
+## 📑 Inhaltsverzeichnis
+- [🎯 Lernziele für heute](#-lernziele-für-heute)
+- [🛠 1. Prozess-Monitoring & Identifikation](#-1-prozess-monitoring--identifikation)
+  - [Wichtige Werkzeuge](#wichtige-werkzeuge)
+- [🚦 2. Job Control: Prozesse im Griff](#-2-job-control-prozesse-im-griff)
+- [💀 3. Signale & Priorisierung](#-3-signale--priorisierung)
+  - [Signale senden mit kill](#signale-senden-mit-kill)
+  - [Prioritäten (nice & renice)](#prioritäten-nice--renice)
+- [🔒 4. Spezialrechte (Special Permissions)](#-4-spezialrechte-special-permissions)
+  - [Suchen & Setzen von Spezialrechten](#suchen--setzen-von spezialrechten)
+- [📝 Praktische Übungen (Day 06)](#-praktische-übungen-day-06)
+- [🧠 Wissenstest: Administration & Prozesse](#-wissenstest-administration--prozesse)
 
 ---
 
@@ -17,8 +36,8 @@ Linux verwaltet Aufgaben in Form von **Prozessen**. Jeder Prozess hat eine einde
 
 ### Wichtige Werkzeuge:
 * `ps`: Momentaufnahme der aktuellen Prozesse.
-    * `ps aux`: Umfassende Liste aller Prozesse im System.
-    * `ps -ef`: Standard-Format mit PPID (Parent Process ID).
+    * `ps aux`: Umfassende Liste aller Prozesse im System (BSD-Stil).
+    * `ps -ef`: Standard-Format mit PPID (Parent Process ID) (System-V-Stil).
 * `pstree -p`: Visualisiert die Prozess-Hierarchie als Baumstruktur (inkl. PIDs).
 * `top`: Interaktiver Echtzeit-Monitor.
 * `htop`: Moderne, farbige Alternative zu `top`.
@@ -102,4 +121,37 @@ Zusätzlich zu `rwx` gibt es drei Spezialbits, die für die Systemsicherheit kri
 
 ---
 
-*Letztes Update: 11. Mai 2026*
+## 🧠 Wissenstest: Administration & Prozesse
+Hier sind Kontrollfragen zum Selbststudium:
+
+<details>
+<summary><b>Fragen zu Prozessen & Signalen</b> (Klicken zum Ausklappen)</summary>
+
+1. **Was ist der Unterschied zwischen `ps aux` und `ps -ef`?**
+   <details><summary>Antwort</summary>**`ps aux`** verwendet das BSD-Syntaxformat und zeigt zusätzliche Details wie CPU- und Speicherauslastung. **`ps -ef`** verwendet den System-V-Standard und liefert die Parent Process ID (PPID), die für die Verfolgung von Prozessketten wichtig ist.</details>
+
+2. **Wie holt man einen im Hintergrund laufenden Job wieder in den Vordergrund?**
+   <details><summary>Antwort</summary>Mit dem Befehl `jobs` ermittelt man die Job-ID (z. B. `[1]`). Danach holt man ihn mit `fg %1` in den Vordergrund.</details>
+
+3. **Welches Signal sendet `kill -9` und warum sollte es nur als letztes Mittel genutzt werden?**
+   <details><summary>Antwort</summary>Es sendet **SIGKILL**. Dieses Signal kann vom Prozess weder abgefangen noch ignoriert werden; der Kernel beendet ihn sofort. Dadurch können offene Dateien nicht geschlossen, temporäre Daten nicht gelöscht und keine geordneten Cleanup-Routinen ausgeführt werden (Gefahr von Datenverlust).</details>
+
+</details>
+
+<details>
+<summary><b>Fragen zu Spezialrechten</b> (Klicken zum Ausklappen)</summary>
+
+4. **Warum ist das SUID-Bit auf `/usr/bin/passwd` notwendig?**
+   <details><summary>Antwort</summary>Da normale Benutzer ihr eigenes Passwort ändern dürfen, dies aber das Schreiben in die geschützte Datei `/etc/shadow` erfordert (auf die nur Root Zugriff hat), sorgt das SUID-Bit dafür, dass `passwd` während der Ausführung mit den Rechten des Besitzers (Root) läuft.</details>
+
+5. **Was bewirkt das SGID-Bit auf einem Verzeichnis?**
+   <details><summary>Antwort</summary>Jede neu erstellte Datei in diesem Verzeichnis erbt automatisch die Gruppenzugehörigkeit des Verzeichnisses statt der primären Gruppe des erstellenden Benutzers. Das ist extrem nützlich für gemeinsame Projektordner.</details>
+
+6. **Welchen numerischen Wert hat das Sticky Bit und wie wird es gesetzt?**
+   <details><summary>Antwort</summary>Das Sticky Bit hat den oktalen Wert `1000`. Es wird z. B. mit `chmod 1777 /ordner` oder symbolisch mit `chmod +t /ordner` gesetzt.</details>
+
+</details>
+
+---
+
+*Letztes Update: 26. Mai 2026 für den Linux-Essentials Kurs.*

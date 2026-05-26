@@ -1,6 +1,26 @@
-# 📦 Day 07: Archivierung, Kompression & Software-Builds (LPIC-1 Fokus)
+# 📦 Linux Essentials - Tag 07: Archivierung, Kompression & Software-Builds (LPIC-1 Fokus)
+
+![Linux Essentials Header](./header.png)
 
 Dieses Modul deckt zentrale Themen der LPIC-1 Prüfung (LPI-101) ab, insbesondere die Lernziele 103.3 (Archivierung/Kompression) und 103.5 (Prozess-Management).
+
+---
+
+## 📑 Inhaltsverzeichnis
+- [🎯 Lernziele (LPIC-1 relevant)](#-lernziele-lpic-1-relevant)
+- [📂 1. Archivierung: tar, cpio & dd](#-1-archivierung-tar-cpio--dd)
+  - [A. Der Standard: tar (Tape Archiver)](#a-der-standard-tar-tape-archiver)
+  - [B. Die Alternative: cpio](#b-die-alternative-cpio)
+  - [C. Bit-für-Bit: dd (Data Duplicator)](#c-bit-für-bit-dd-data-duplicator)
+- [🗜 2. Kompression & Transparenter Zugriff](#-2-kompression--transparenter-zugriff)
+- [🛠 3. Software-Builds & Shared Libraries](#-3-software-builds--shared-libraries)
+  - [Der Build-Workflow (Modern vs. Klassisch)](#der-build-workflow-modern-vs-klassisch)
+  - [Shared Libraries prüfen (ldd)](#shared-libraries-prüfen-ldd)
+- [🚦 4. Prozess-Management & Signal-Referenz](#-4-prozess-management--signal-referenz)
+  - [Die essenzielle Signal-Tabelle](#die-essenzielle-signal-tabelle)
+  - [Zombies & Exit-Status](#zombies--exit-status)
+- [📝 LPIC-Übungsszenarien (Day 07)](#-lpic-übungsszenarien-day-07)
+- [🧠 Wissenstest: Archivierung, Kompression & Builds](#-wissenstest-archivierung-kompression--builds)
 
 ---
 
@@ -115,4 +135,36 @@ Ein Zombie entsteht, wenn der Parent das Signal `SIGCHLD` nicht korrekt verarbei
 
 ---
 
-*Letztes Update: 12. Mai 2026*
+## 🧠 Wissenstest: Archivierung, Kompression & Builds
+Hier sind typische Prüfungsfragen und Szenarien zum LPIC-1 Fokus:
+
+<details>
+<summary><b>Fragen zu Archivierung & Kompression</b> (Klicken zum Ausklappen)</summary>
+
+1. **Was ist der Unterschied zwischen `tar -czf` und `tar -cjf`?**
+   <details><summary>Antwort</summary>**`-czf`** komprimiert das Archiv mit **gzip** (schneller, aber größere Datei). **`-cjf`** komprimiert das Archiv mit **bzip2** (langsamer, aber bessere Kompressionsrate).</details>
+
+2. **Wie kann man mit `tar` ein Archiv entpacken, ohne dessen relative Struktur zu verändern?**
+   <details><summary>Antwort</summary>Standardmäßig entpackt `tar -xf` die Dateien in das aktuelle Arbeitsverzeichnis unter Beibehaltung der relativen Pfade des Archivs.</details>
+
+3. **Wie unterscheidet sich `xz` von `gzip` und `bzip2`?**
+   <details><summary>Antwort</summary>`xz` basiert auf dem LZMA-Algorithmus. Es bietet die mit Abstand beste Kompressionsrate (sehr kleine Dateien) und schnelles Entpacken, benötigt beim Komprimieren jedoch deutlich mehr Arbeitsspeicher und Rechenzeit.</details>
+
+</details>
+
+<details>
+<summary><b>Fragen zu Shared Libraries & Builds</b> (Klicken zum Ausklappen)</summary>
+
+4. **Welche Aufgabe hat der Befehl `ldd`?**
+   <details><summary>Antwort</summary>Er analysiert ein ausführbares Programm (oder eine andere Bibliothek) und listet alle dynamisch gelinkten Shared Libraries (`.so`-Dateien) auf, die das Programm zur Ausführung benötigt.</details>
+
+5. **Welche klassischen Schritte gehören zu einem Autotools-basierten Software-Build?**
+   <details><summary>Antwort</summary>1. **`./configure`** (prüft das System auf Abhängigkeiten und erstellt das Makefile).  
+2. **`make`** (kompiliert den Quellcode zu Binaries).  
+3. **`sudo make install`** (kopiert die Binaries und Ressourcen in die Systemverzeichnisse).</details>
+
+</details>
+
+---
+
+*Letztes Update: 26. Mai 2026 für den Linux-Essentials Kurs.*

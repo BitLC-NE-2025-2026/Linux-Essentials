@@ -117,6 +117,34 @@ Wenden Sie die Änderungen mit `source ~/.zshrc` an.
 > [!IMPORTANT]
 > Für das Agnoster-Theme müssen Powerline-Fonts (z.B. "Noto Mono Powerline") im Terminal eingestellt sein.
 
+## 🧠 Wissenstest: Hilfe, Hardware & Dateisystem
+Hier sind typische Kontrollfragen zu den Themen des zweiten Tages:
+
+<details>
+<summary><b>Fragen zu Hilfesystemen & Hardware-Informationen</b> (Klicken zum Ausklappen)</summary>
+
+1. **Was ist der Unterschied zwischen `man 1 passwd` und `man 5 passwd`?**
+   <details><summary>Antwort</summary>**`man 1 passwd`** öffnet das Handbuch für den Benutzerbefehl `passwd` zum Ändern von Passwörtern. **`man 5 passwd`** öffnet das Handbuch für das Dateiformat der Konfigurationsdatei `/etc/passwd`.</details>
+
+2. **Mit welchen Befehlen lässt sich die CPU-Architektur und die Auslastung des RAM anzeigen?**
+   <details><summary>Antwort</summary>Die CPU-Architektur wird mit **`lscpu`** angezeigt. Die Arbeitsspeicherauslastung prüft man am besten mit **`free -h`** (die Option `-h` steht für "human-readable", z. B. in GB).</details>
+
+</details>
+
+<details>
+<summary><b>Fragen zu Dateioperationen & Metadaten</b> (Klicken zum Ausklappen)</summary>
+
+3. **Was bewirkt die Option `-p` beim Befehl `mkdir`?**
+   <details><summary>Antwort</summary>Die Option **`-p`** (parents) erstellt verschachtelte Verzeichnispfade in einem Schritt (z. B. `mkdir -p A/B/C`) und wirft keinen Fehler, wenn die Ordner bereits existieren.</details>
+
+4. **Was ist der Unterschied zwischen `which` und `whereis`?**
+   <details><summary>Antwort</summary>**`which`** sucht nur in den Verzeichnissen der Umgebungsvariable `$PATH` nach der ausführbaren Datei des Befehls. **`whereis`** sucht breiter im System und liefert zusätzlich die Pfade zur Binärdatei, den Quellcodedateien und den zugehörigen Manual-Seiten.</details>
+
+5. **Wie unterscheidet sich `cat` von `tac`?**
+   <details><summary>Antwort</summary>**`cat`** gibt den Dateiinhalt von oben nach unten (normal) aus. **`tac`** (rückwärts geschrieben) gibt den Dateiinhalt von unten nach oben (in umgekehrter Reihenfolge) aus – das ist sehr nützlich, um die neuesten Einträge in Protokolldateien zu sehen.</details>
+
+</details>
+
 ---
 
 ## 📚 Ressourcen & Dokumente
@@ -128,3 +156,4 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 ---
 
 *Erstellt am 06. Mai 2026 für den Linux-Essentials Kurs.*
+

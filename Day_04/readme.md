@@ -91,6 +91,34 @@ sudo dnf update      # Aktualisiert die Paketdatenbank
 sudo dnf upgrade     # Installiert die neuesten Versionen aller Pakete
 ```
 
+## 🧠 Wissenstest: Wildcards, Textwerkzeuge & Logik
+Hier sind typische Fragen zur Überprüfung Ihres Wissens:
+
+<details>
+<summary><b>Fragen zu Wildcards & Textwerkzeugen</b> (Klicken zum Ausklappen)</summary>
+
+1. **Was ist der Unterschied zwischen den Wildcards `*` und `?`?**
+   <details><summary>Antwort</summary>**`*`** steht für beliebig viele (auch null) Zeichen. **`?`** steht für exakt ein beliebiges Zeichen.</details>
+
+2. **Wie löscht man mit dem Befehl `tr` alle Vorkommen bestimmter Zeichen?**
+   <details><summary>Antwort</summary>Mit der Option **`-d`** (delete) (z. B. `echo "Linux" | tr -d 'i'`).</details>
+
+3. **Wie extrahiert man das erste Feld aus einer Datei, die durch Doppelpunkte getrennt ist (wie `/etc/passwd`)?**
+   <details><summary>Antwort</summary>Mit dem Befehl **`cut -d: -f1 <Datei>`** (wobei `-d:` den Doppelpunkt als Trenner definiert und `-f1` das erste Feld auswählt).</details>
+
+</details>
+
+<details>
+<summary><b>Fragen zu logischen Operatoren & Subshells</b> (Klicken zum Ausklappen)</summary>
+
+4. **Wie verhält sich die Befehlskette `Befehl A && Befehl B || Befehl C`?**
+   <details><summary>Antwort</summary>**`Befehl B`** wird nur ausgeführt, wenn **`Befehl A`** erfolgreich war (Exit-Code 0). Falls **`Befehl A`** ODER **`Befehl B`** scheitert, wird **`Befehl C`** ausgeführt.</details>
+
+5. **Welche Auswirkungen haben Änderungen (wie `cd`) in einer Subshell `( ... )` auf die Haupt-Shell?**
+   <details><summary>Antwort</summary>**Keine.** Da eine Subshell in einem isolierten Kindprozess ausgeführt wird, bleiben das aktuelle Arbeitsverzeichnis und Variablenänderungen der übergeordneten Shell unberührt, sobald die Klammern geschlossen sind.</details>
+
+</details>
+
 ---
 
 ## 📚 Ressourcen & Dokumente
@@ -107,4 +135,5 @@ Im [Assets](./assets)-Verzeichnis finden Sie die Mitschriften und Unterlagen zu 
 ---
 
 *Erstellt am 07. Mai 2026 für den Linux-Essentials Kurs.*
+
 

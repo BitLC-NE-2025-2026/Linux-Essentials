@@ -119,7 +119,41 @@ Das Skript `whiptail_manager.sh` integriert LPIC-1 relevante Druckfunktionen dir
 
 ---
 
-## 🔗 5. Zurück zur Übersicht
-⬅ Zurück zur Übersicht
+## 🧠 Wissenstest: Fortgeschrittenes Scripting & TUI
+Hier sind typische Fragen rund um TUI-Erstellung, Massenverwaltung und Drucksysteme:
 
-Erstellt am 22. Mai 2026 für den Linux Essentials Kurs.
+<details>
+<summary><b>Fragen zu Druckersteuerung & CSV-Verarbeitung</b> (Klicken zum Ausklappen)</summary>
+
+1. **Mit welchen Befehlen fragt man den Druckerstatus ab und druckt eine Datei?**
+   <details><summary>Antwort</summary>Mit **`lpstat -p`** (oder **`lpstat -e`** für eine reine Liste der Ziele) wird der Status abgefragt. Eine Datei druckt man mit **`lp -d <Druckername> <Datei>`**.</details>
+
+2. **Wie liest man eine kommagetrennte CSV-Datei zeilenweise sicher in der Shell ein?**
+   <details><summary>Antwort</summary>Das geschieht am besten über eine **`while`**-Schleife mit angepasstem **`IFS`** (Internal Field Separator):  
+```bash
+while IFS=',' read -r spalte1 spalte2; do
+    echo "Feld 1: $spalte1, Feld 2: $spalte2"
+done < datei.csv
+```</details>
+
+</details>
+
+<details>
+<summary><b>Fragen zu TUI & Sicherheitsflags</b> (Klicken zum Ausklappen)</summary>
+
+3. **Welchen großen Vorteil bietet `whiptail` für systemadministrative Aufgaben?**
+   <details><summary>Antwort</summary>Es ermöglicht das einfache Erzeugen von textbasierten grafischen Dialogfenstern (Menüs, Passworteingaben, Ja/Nein-Entscheidungen, Ladebalken) direkt auf der Kommandozeile. Dies minimiert Falscheingaben von Anwendern und erhöht den Komfort.</details>
+
+4. **Was bewirkt die Kombination aus `set -e` und `set -o pipefail`?**
+   <details><summary>Antwort</summary>**`set -e`** bricht das Skript sofort ab, wenn ein einzelner Befehl fehlschlägt (Exit-Code ungleich 0).  
+**`set -o pipefail`** stellt sicher, dass dies auch für Pipelines gilt. Normalerweise wird nur der Rückgabewert des *letzten* Glieds einer Pipeline ausgewertet; mit `pipefail` schlägt die gesamte Kette fehl, wenn ein beliebiges Glied fehlschlägt (z. B. `fehlerhafter_befehl | grep "test"`).</details>
+
+</details>
+
+## 🔗 6. Zurück zur Übersicht
+[⬅ Zurück zur Übersicht](../README.md)
+
+---
+
+*Erstellt am 22. Mai 2026 für den Linux Essentials Kurs.*
+

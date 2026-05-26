@@ -302,7 +302,44 @@ Cronjob hinzufügen:
 30 15 * * 1-5 /home/scripts/historyscript.sh
 ```
 
-## 🔗 6. Zurück zur Übersicht
-⬅ Zurück zur Übersicht
+## 🧠 Wissenstest: Cron & Zeitsteuerung
+Hier sind typische Fragen rund um zeitgesteuerte Jobs unter Linux:
 
-Erstellt am 20. Mai 2026 für den Linux-Essentials Kurs.
+<details>
+<summary><b>Fragen zu Cron-Syntax & Verwaltung</b> (Klicken zum Ausklappen)</summary>
+
+1. **In welcher Reihenfolge sind die fünf Zeitfelder in einer Crontab angeordnet?**
+   <details><summary>Antwort</summary>Die Reihenfolge von links nach rechts lautet:  
+1. **Minute** (0-59)  
+2. **Stunde** (0-23)  
+3. **Tag des Monats** (1-31)  
+4. **Monat** (1-12)  
+5. **Wochentag** (0-7, wobei 0 und 7 für Sonntag stehen)</details>
+
+2. **Was bewirkt der Eintrag `*/15 9-17 * * 1-5`?**
+   <details><summary>Antwort</summary>Der Cronjob wird **alle 15 Minuten** (`*/15`) zwischen den Stunden **9:00 und 17:59 Uhr** (`9-17`) von **Montag bis Freitag** (`1-5`) ausgeführt.</details>
+
+3. **Mit welchem Befehl löscht man seine gesamte persönliche Crontab ohne Nachfrage?**
+   <details><summary>Antwort</summary>Mit dem Befehl **`crontab -r`** (Remove). Da dies ohne Sicherheitsabfrage geschieht, ist hierbei äußerste Vorsicht geboten!</details>
+
+</details>
+
+<details>
+<summary><b>Fragen zu Fehlerbehebung & Umgebung</b> (Klicken zum Ausklappen)</summary>
+
+4. **Warum schlagen Skripte in Cronjobs oft fehl, obwohl sie im interaktiven Terminal fehlerfrei laufen?**
+   <details><summary>Antwort</summary>Cron-Prozesse laufen in einer extrem minimalistischen Umgebung ohne interaktive Shell. Die Umgebungsvariable `$PATH` enthält meist nur `/usr/bin:/bin`, weshalb Programme in `/usr/local/bin` oder `/opt` nicht gefunden werden. Zudem sind relative Pfade ungültig, da das Arbeitsverzeichnis standardmäßig das Home-Verzeichnis des Benutzers ist.  
+*Lösung:* Stets absolute Pfade im Skript und im Cronjob verwenden.</details>
+
+5. **Wie unterscheidet sich der Dienstname für den Cron-Daemon zwischen Debian- und Red-Hat-basierten Distributionen?**
+   <details><summary>Antwort</summary>Unter Debian-basierten Systemen (z. B. Ubuntu) heißt der Dienst **`cron`**. Unter Red-Hat-basierten Systemen (z. B. Rocky Linux, RHEL) heißt der Dienst **`crond`**.</details>
+
+</details>
+
+## 🔗 8. Zurück zur Übersicht
+[⬅ Zurück zur Übersicht](../README.md)
+
+---
+
+*Erstellt am 20. Mai 2026 für den Linux-Essentials Kurs.*
+

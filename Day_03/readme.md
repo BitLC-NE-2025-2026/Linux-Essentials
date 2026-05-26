@@ -102,6 +102,34 @@ Dateien finden und direkt Aktionen darauf ausführen.
 find -name "*.old" | xargs rm     # Löscht alle gefundenen .old Dateien
 ```
 
+## 🧠 Wissenstest: CUPS, Aliases & I/O-Umleitung
+Hier sind typische Fragen zur Vertiefung des heutigen Stoffs:
+
+<details>
+<summary><b>Fragen zu Shell-Konfiguration & Variablen</b> (Klicken zum Ausklappen)</summary>
+
+1. **Was ist der Unterschied zwischen `/etc/profile` und `~/.bashrc`?**
+   <details><summary>Antwort</summary>**`/etc/profile`** ist eine systemweite Konfigurationsdatei, die beim ersten Login eines Benutzers ausgeführt wird. **`~/.bashrc`** ist eine benutzerspezifische Datei, die bei jedem Öffnen eines neuen interaktiven (Non-Login) Terminals ausgeführt wird.</details>
+
+2. **Mit welchem Befehl lässt sich die Liste aller aktuell gesetzten Umgebungsvariablen anzeigen?**
+   <details><summary>Antwort</summary>Das kann mit dem Befehl **`printenv`** (oder kurz **`env`**) geschehen.</details>
+
+3. **Wie macht man einen erstellten Alias dauerhaft für zukünftige Terminalsitzungen haltbar?**
+   <details><summary>Antwort</summary>Man muss die `alias`-Zeile am Ende der Datei **`~/.bashrc`** (bzw. `~/.zshrc` bei Zsh) eintragen und speichern. Danach führt man `source ~/.bashrc` aus, um sie sofort zu aktivieren.</details>
+
+</details>
+
+<details>
+<summary><b>Fragen zu I/O-Umleitung & Pipelines</b> (Klicken zum Ausklappen)</summary>
+
+4. **Wie leitet man sowohl Fehlermeldungen (stderr) als auch Standardausgaben (stdout) in dieselbe Logdatei um?**
+   <details><summary>Antwort</summary>Mit dem Operator **`&>`** (z. B. `befehl &> ausgabe.log`). Alternativ geht auch der klassische Weg: `befehl > ausgabe.log 2>&1`.</details>
+
+5. **Wozu dient das Werkzeug `xargs`?**
+   <details><summary>Antwort</summary>Es nimmt Datenströme von der Standardeingabe (`stdin`) und wandelt sie in Argumente für den nachfolgenden Befehl um. Dies wird oft verwendet, um Ergebnisse von `find` an Befehle wie `rm` oder `grep` zu übergeben (z. B. `find . -name "*.log" | xargs rm`).</details>
+
+</details>
+
 ---
 
 ## 📚 Ressourcen & Dokumente
@@ -118,3 +146,4 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 ---
 
 *Erstellt am 06. Mai 2026 für den Linux-Essentials Kurs.*
+
