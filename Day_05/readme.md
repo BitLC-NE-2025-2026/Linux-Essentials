@@ -313,6 +313,7 @@ Im [Assets](./assets)-Verzeichnis finden Sie die Unterlagen zu diesem Tag:
 - [CHmod, Hard- und Softlinks (PDF)](./assets/CHmod,%20hard%20und%20softlinks.pdf)
 - [Linux Grundlagen: Erste Fragen (PDF)](./assets/LinuxGrundlagenErsteFragen.pdf)
 - [Kommandoverlauf / History (TXT)](./assets/rockyHis20260508-1412.txt)
+- [Praxis-Historie (Berechtigungen, umask & setuid) (TXT)](./assets/history-semus-202605210918)
 
 ---
 
