@@ -7,8 +7,9 @@ Am dritten Tag haben wir uns mit der Systemkonfiguration, dem Drucksystem CUPS u
 ---
 
 ## 📑 Inhaltsverzeichnis
-- [Drucken mit CUPS](#-drucken-mit-cups)
-- [Shell-Konfigurationsdateien](#-shell-konfigurationsdateien)
+
+- [Drucken mit CUPS](#️-drucken-mit-cups)
+- [Shell-Konfigurationsdateien](#️-shell-konfigurationsdateien)
 - [Aliases & Funktionen](#-aliases--funktionen)
 - [Umgebungsvariablen](#-umgebungsvariablen)
 - [Fortgeschrittene I/O-Umleitung](#-fortgeschrittene-io-umleitung)
@@ -18,9 +19,11 @@ Am dritten Tag haben wir uns mit der Systemkonfiguration, dem Drucksystem CUPS u
 ---
 
 ## 🖨️ Drucken mit CUPS
+
 Das **Common UNIX Printing System (CUPS)** ist der Standard für Druckdienste unter Linux.
 
 ### Wichtige Befehle
+
 | Befehl | Funktion |
 | :--- | :--- |
 | `systemctl status cups` | Prüft, ob der Druckdienst läuft. |
@@ -32,6 +35,7 @@ Das **Common UNIX Printing System (CUPS)** ist der Standard für Druckdienste un
 ---
 
 ## ⚙️ Shell-Konfigurationsdateien
+
 Wo werden Einstellungen dauerhaft gespeichert? Es gibt einen Unterschied zwischen systemweiten und benutzerspezifischen Dateien.
 
 - **Systemweit (für alle User):** `/etc/profile`, `/etc/bashrc`.
@@ -43,17 +47,22 @@ Wo werden Einstellungen dauerhaft gespeichert? Es gibt einen Unterschied zwische
 ---
 
 ## 🚀 Aliases & Funktionen
+
 Machen Sie sich das Leben leichter, indem Sie lange Befehle abkürzen oder eigene Logik definieren.
 
 ### Aliases
+
 ```bash
 alias la='ls -al'           # Erstellt einen temporären Alias
 unalias la                  # Entfernt den Alias wieder
 ```
+
 *Um Aliase dauerhaft zu machen, müssen sie in die `~/.bashrc` eingetragen werden.*
 
 ### Funktionen
+
 Einfache Skripte direkt in der Shell:
+
 ```bash
 hallo() { 
     echo "Herzlich Willkommen!"
@@ -64,6 +73,7 @@ hallo() {
 ---
 
 ## 🌍 Umgebungsvariablen
+
 Variablen speichern Informationen, auf die Programme zugreifen können.
 
 - `printenv`: Zeigt alle Umgebungsvariablen an.
@@ -71,6 +81,7 @@ Variablen speichern Informationen, auf die Programme zugreifen können.
 - `env`: Listet Variablen auf oder führt Programme in einer modifizierten Umgebung aus.
 
 **Wichtige Variablen:**
+
 - `$USER`: Der aktuelle Benutzer.
 - `$HOME`: Das Heimatverzeichnis.
 - `$SHELL`: Die Standard-Shell.
@@ -78,6 +89,7 @@ Variablen speichern Informationen, auf die Programme zugreifen können.
 ---
 
 ## 🔄 Fortgeschrittene I/O-Umleitung
+
 Wir vertiefen das Wissen über Datenströme (`stdin`, `stdout`, `stderr`).
 
 | Operator | Funktion |
@@ -90,19 +102,24 @@ Wir vertiefen das Wissen über Datenströme (`stdin`, `stdout`, `stderr`).
 ---
 
 ## 🔍 Suchen & Verarbeiten (find & xargs)
+
 Dateien finden und direkt Aktionen darauf ausführen.
 
 ### find
+
 - `find . -name "dat*"`: Findet Dateien, die mit "dat" beginnen.
 - `find / -perm 755 2> /dev/null`: Findet Dateien mit spezifischen Rechten und ignoriert Fehlermeldungen.
 
 ### xargs
+
 Übergibt die Ausgabe eines Befehls als Argumente an einen anderen Befehl.
+
 ```bash
 find -name "*.old" | xargs rm     # Löscht alle gefundenen .old Dateien
 ```
 
 ## 🧠 Wissenstest: CUPS, Aliases & I/O-Umleitung
+
 Hier sind typische Fragen zur Vertiefung des heutigen Stoffs:
 
 <details>
@@ -122,10 +139,10 @@ Hier sind typische Fragen zur Vertiefung des heutigen Stoffs:
 <details>
 <summary><b>Fragen zu I/O-Umleitung & Pipelines</b> (Klicken zum Ausklappen)</summary>
 
-4. **Wie leitet man sowohl Fehlermeldungen (stderr) als auch Standardausgaben (stdout) in dieselbe Logdatei um?**
-   <details><summary>Antwort</summary>Mit dem Operator **`&>`** (z. B. `befehl &> ausgabe.log`). Alternativ geht auch der klassische Weg: `befehl > ausgabe.log 2>&1`.</details>
+1. **Wie leitet man sowohl Fehlermeldungen (stderr) als auch Standardausgaben (stdout) in dieselbe Logdatei um?**
+   <details><summary>Antwort</summary>Mit dem Operator **`&>`** (z. B. `befehl &> ausgabe.log`). Alternativ geht auch der klassische weg: `befehl > ausgabe.log 2>&1`.</details>
 
-5. **Wozu dient das Werkzeug `xargs`?**
+2. **Wozu dient das Werkzeug `xargs`?**
    <details><summary>Antwort</summary>Es nimmt Datenströme von der Standardeingabe (`stdin`) und wandelt sie in Argumente für den nachfolgenden Befehl um. Dies wird oft verwendet, um Ergebnisse von `find` an Befehle wie `rm` oder `grep` zu übergeben (z. B. `find . -name "*.log" | xargs rm`).</details>
 
 </details>
@@ -133,6 +150,7 @@ Hier sind typische Fragen zur Vertiefung des heutigen Stoffs:
 ---
 
 ## 📚 Ressourcen & Dokumente
+
 Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 - [CUPS & Konfiguration (PDF)](./assets/LinuxCUPS_KonfigDat_Alias_IO-Op.pdf)
@@ -141,9 +159,9 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 ---
 
 ## 🔗 Zurück zum Hauptmenü
+
 [⬅ Zurück zur Übersicht](../README.md)
 
 ---
 
 *Erstellt am 06. Mai 2026 für den Linux-Essentials Kurs.*
-

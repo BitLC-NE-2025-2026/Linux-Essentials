@@ -9,9 +9,9 @@ Dieses Modul widmet sich der mächtigen Welt der **Regulären Ausdrücke (Regula
 ## 📑 Inhaltsverzeichnis
 
 * [Lernziele (LPIC-1 relevant)](#-lernziele-lpic-1-relevant)
-* [BRE vs. ERE (Basic vs. Extended Regular Expressions)](#-1-bre-vs-ere-basic-vs-extended-regular-expressions)
+* [BRE vs. ERE (Basic vs. Extended Regular Expressions)](#️-1-bre-vs-ere-basic-vs-extended-regular-expressions)
 * [Die wichtigsten Regex-Bausteine](#-2-die-wichtigsten-regex-bausteine)
-* [Das Praxisprojekt: StartEx.sh Task Manager](#-3-das-praxisprojekt-startexsh-task-manager)
+* [Das Praxisprojekt: StartEx.sh Task Manager](#️-3-das-praxisprojekt-startexsh-task-manager)
 * [Deep Dive: Der IPv4-Filter (Lehrer-Bug behoben!)](#-4-deep-dive-der-ipv4-filter-lehrer-bug-behoben)
 * [Übersicht der Aufgaben und Lösungen](#-5-übersicht-der-aufgaben-und-lösungen)
 * [Ausführung des Projekts](#-ausführung-des-projekts)
@@ -85,6 +85,7 @@ Um die Aufgaben von Karsten Matz optimal zu bearbeiten, wurde eine **vollständi
 > `\b((([0-2]\d[0-5])|(\d{2})|(\d))\.){3}(([0-2]\d[0-5])|(\d{2})|(\d))\b`
 >
 > Dieser Regex weist zwei gravierende Mängel auf:
+>
 > 1. **Er lässt mathematisch ungültige IPs durch:** Der Teil `[0-2]\d[0-5]` erlaubt z.B. das Oktett **`295`** (da `2` in `[0-2]`, `9` in `\d` und `5` in `[0-5]` liegt).
 > 2. **Er schließt gültige IPs komplett aus:** Eine Standard-IP wie **`192.168.1.1`** wird blockiert! Für das Oktett `168` schlägt jeder Zweig fehl:
 >    * `[0-2]\d[0-5]` scheitert, da die letzte Ziffer `8` nicht im Bereich `0-5` liegt.
@@ -94,17 +95,20 @@ Um die Aufgaben von Karsten Matz optimal zu bearbeiten, wurde eine **vollständi
 ### Unsere mathematisch exakte Lösung
 
 Ein IPv4-Oktett darf exakt Werte von `0` bis `255` annehmen. Wir zerlegen dies logisch in vier sich nicht überschneidende Bereiche:
+
 * `25[0-5]` (250 bis 255)
 * `2[0-4][0-9]` (200 bis 249)
 * `1[0-9][0-9]` (100 bis 199)
 * `[1-9]?[0-9]` (0 bis 99)
 
 Zusammengefügt in eine ERE-Gruppe ergibt sich für ein Oktett:
+
 ```regex
 (25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])
 ```
 
 Vierfach verkettet mit Punkten und Wortgrenzen (`\b`) entsteht unser mathematisch perfekter IPv4-Filter:
+
 ```regex
 \b(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\b
 ```
@@ -116,12 +120,15 @@ Vierfach verkettet mit Punkten und Wortgrenzen (`\b`) entsteht unser mathematisc
 ### [1] [task_1_ipv4.sh](./scripts/task_1_ipv4.sh)
 
 Extrahiert IPv4-Adressen aus `ifconfig`, `ip addr`, `ip route` und `nmcli`.
+
 * **Kern-Regex:** Mathematisch exakter IPv4-Filter (siehe oben).
 
 ### [1b] [task_1b_ipv6.sh](./scripts/task_1b_ipv6.sh)
 
 Extrahiert IPv6-Adressen (einschließlich komprimierter Schreibweisen wie `::`).
+
 * **Kern-Regex:**
+
   ```regex
   (([0-9a-fA-F]{1,4}:){1,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|::([0-9a-fA-F]{1,4}:){0,7}[0-9a-fA-F]{1,4}|...)
   ```
@@ -129,6 +136,7 @@ Extrahiert IPv6-Adressen (einschließlich komprimierter Schreibweisen wie `::`).
 ### [2] [task_2_interfaces.sh](./scripts/task_2_interfaces.sh)
 
 Filtert Schnittstellennamen (z.B. `eth0`, `lo`, `wlan0`).
+
 * **ifconfig:** `grep -E -o '^[a-zA-Z0-9_-]+:' | tr -d ':'`
 * **ip addr:** `grep -E -o '^[0-9]+: [a-zA-Z0-9_-]+:'` + Spaltenextraktion.
 * **ip route:** `grep -E -o '\bdev\s+[a-zA-Z0-9_-]+'` + Spaltenextraktion.
@@ -136,37 +144,44 @@ Filtert Schnittstellennamen (z.B. `eth0`, `lo`, `wlan0`).
 ### [3] [task_3_passwd_users.sh](./scripts/task_3_passwd_users.sh)
 
 Sucht Usernamen aus `/etc/passwd` mit einer UID >= 1000.
+
 * **Bedeutung:** System-Accounts liegen unter 1000, reguläre Benutzer ab 1000.
 * **Kern-Regex:** `^[^:]+:[^:]+:[1-9][0-9]{3,}:`
 
 ### [4] [task_4_group_names.sh](./scripts/task_4_group_names.sh)
 
 Sucht Gruppennamen aus `/etc/group` mit einer GID >= 1000.
+
 * **Kern-Regex:** `^[^:]+:[^:]+:[1-9][0-9]{3,}:`
 
 ### [5] [task_5_extract_services.sh](./scripts/task_5_extract_services.sh)
 
 Filtert alle Kommentare und Leerzeilen aus `/etc/services` und extrahiert die 2. Spalte (Port/Protokoll) in die neue Datei `services_extracted.txt`.
+
 * **Kern-Regex (sed):** `/^[[:space:]]*(#|$)/d; s/^[[:space:]]*[^[:space:]]+[[:space:]]+([^[:space:]]+).*/\1/`
 
 ### [6] [task_6_count_3digit_tcp.sh](./scripts/task_6_count_3digit_tcp.sh)
 
 Filtert und zählt alle exakt 3-stelligen TCP-Ports (z.B. `111/tcp`, `443/tcp`).
+
 * **Kern-Regex:** `^[0-9]{3}/tcp$`
 
 ### [7] [task_7_count_2_5digit_tcp.sh](./scripts/task_7_count_2_5digit_tcp.sh)
 
 Filtert und zählt alle exakt 2- und 5-stelligen TCP-Ports (z.B. `80/tcp` und `32768/tcp`).
+
 * **Kern-Regex:** `^([0-9]{2}|[0-9]{5})/tcp$`
 
 ### [8] [task_8_unique_protocols.sh](./scripts/task_8_unique_protocols.sh)
 
 Identifiziert alle einzigartigen Transportprotokolle (wie `tcp`, `udp`, `sctp`, `ddp`) aus der extrahierten Datei.
+
 * **Pipeline:** `grep -E -o '[a-zA-Z0-9_-]+$' | sort -u | wc -l`
 
 ### [9] [task_9_count_udp.sh](./scripts/task_9_count_udp.sh)
 
 Analog zu Aufgabe 6 & 7 für das Protokoll `udp` (3-stellige sowie 2- und 5-stellige UDP-Ports zählen).
+
 * **Kern-Regex:** `^[0-9]{3}/udp$` und `^([0-9]{2}|[0-9]{5})/udp$`
 
 ---

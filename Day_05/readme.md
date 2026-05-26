@@ -7,13 +7,14 @@ Heute vertiefen wir unser Wissen über die Sicherheit und Verwaltung von Dateien
 ---
 
 ## 📑 Inhaltsverzeichnis
+
 - [🐧 Linux Essentials - Tag 05](#-linux-essentials---tag-05)
   - [📑 Inhaltsverzeichnis](#-inhaltsverzeichnis)
   - [🔐 Dateirechte & Berechtigungen](#-dateirechte--berechtigungen)
     - [Die drei Säulen der Berechtigung](#die-drei-säulen-der-berechtigung)
     - [chmod: Symbolischer vs. Numerischer Modus](#chmod-symbolischer-vs-numerischer-modus)
   - [📁 Verzeichnis-Berechtigungen](#-verzeichnis-berechtigungen)
-  - [🕵️‍♂️ Fortgeschrittene Rechte (ACL & umask)](#-fortgeschrittene-rechte-acl--umask)
+  - [🕵️‍♂️ Fortgeschrittene Rechte (ACL & umask)](#️️-fortgeschrittene-rechte-acl--umask)
     - [umask: Standard-Berechtigungen](#umask-standard-berechtigungen)
     - [ACL: Access Control Lists](#acl-access-control-lists)
   - [📜 Shell-Historie Optimierung](#-shell-historie-optimierung)
@@ -25,9 +26,11 @@ Heute vertiefen wir unser Wissen über die Sicherheit und Verwaltung von Dateien
 ---
 
 ## 🔐 Dateirechte & Berechtigungen
+
 In Linux ist jede Datei und jedes Verzeichnis mit einem Set von Berechtigungen verknüpft, die festlegen, wer lesen, schreiben oder ausführen darf.
 
 ### Die drei Säulen der Berechtigung
+
 | Ebene | Symbol | Beschreibung |
 | :--- | :---: | :--- |
 | **User** | `u` | Der Besitzer der Datei. |
@@ -35,15 +38,19 @@ In Linux ist jede Datei und jedes Verzeichnis mit einem Set von Berechtigungen v
 | **Others** | `o` | Alle anderen Benutzer im System. |
 
 ### chmod: Symbolischer vs. Numerischer Modus
+
 Mit `chmod` (change mode) werden diese Rechte angepasst.
 
 **1. Symbolischer Modus:**
+
 - `chmod u+x <Datei>`: Fügt dem Besitzer das Ausführrecht hinzu.
 - `chmod g-w <Datei>`: Entfernt der Gruppe das Schreibrecht.
 - `chmod o=r <Datei>`: Setzt für andere exklusiv das Leserecht.
 
 **2. Numerischer Modus (Oktal):**
+
 Jedes Recht hat einen Wert: **4 (Read)**, **2 (Write)**, **1 (Execute)**.
+
 | Wert | Rechte (rwx) | Beschreibung |
 | :---: | :---: | :--- |
 | **7** | `rwx` | Vollzugriff (4+2+1) |
@@ -58,7 +65,9 @@ Jedes Recht hat einen Wert: **4 (Read)**, **2 (Write)**, **1 (Execute)**.
 ---
 
 ## 📁 Verzeichnis-Berechtigungen
+
 Berechtigungen verhalten sich bei Verzeichnissen etwas anders als bei Dateien:
+
 - **r (Read):** Erlaubt das Auflisten des Inhalts (`ls`).
 - **w (Write):** Erlaubt das Erstellen oder Löschen von Dateien im Verzeichnis.
 - **x (Execute):** Erlaubt das "Betreten" des Verzeichnisses (`cd`). Ohne `x` kann man keine Informationen über die Dateien darin abrufen, selbst wenn man `r` hat.
@@ -68,7 +77,9 @@ Berechtigungen verhalten sich bei Verzeichnissen etwas anders als bei Dateien:
 ## 🕵️‍♂️ Fortgeschrittene Rechte (ACL & umask)
 
 ### umask: Standard-Berechtigungen
+
 Die `umask` definiert, welche Rechte bei der Erstellung einer neuen Datei **maskiert** (entzogen) werden.
+
 - **Default (Dateien):** `666` minus `umask`.
 - **Default (Ordner):** `777` minus `umask`.
 
@@ -78,30 +89,38 @@ Die `umask` definiert, welche Rechte bei der Erstellung einer neuen Datei **mask
 | `umask 002` | Setzt die Maske so, dass die Gruppe Schreibrechte behält. |
 
 ### ACL: Access Control Lists
+
 Wenn die klassischen Rechte nicht ausreichen (z.B. Zugriff für einen zweiten, spezifischen User), nutzen wir ACLs.
+
 - `getfacl <Datei>`: Zeigt die detaillierten Zugriffskontrolllisten an.
 - `setfacl -m u:benutzer:rwx <Datei>`: Gewährt einem spezifischen Benutzer Rechte.
 
 ---
 
 ## 📜 Shell-Historie Optimierung
+
 Die Bash speichert standardmäßig die letzten Befehle. Dies lässt sich konfigurieren:
+
 - `$HISTSIZE`: Anzahl der Befehle, die im Arbeitsspeicher gehalten werden.
 - `$HISTFILESIZE`: Anzahl der Befehle, die in der Datei `.bash_history` gespeichert werden.
 
 **Dauerhafte Konfiguration in `.bashrc`:**
+
 ```bash
 export HISTSIZE=10000
 export HISTFILESIZE=20000
 ```
+
 Anschließend die Konfiguration mit `source ~/.bashrc` neu laden.
 
 ---
 
 ## 🔗 Links: Hardlinks & Softlinks
+
 Links sind Verweise auf Dateien im Dateisystem.
 
 ### Vergleich: Hard vs. Soft
+
 | Feature | Hardlink | Softlink (Symlink) |
 | :--- | :--- | :--- |
 | **Befehl** | `ln <Ziel> <Link>` | `ln -s <Ziel> <Link>` |
@@ -116,6 +135,7 @@ Links sind Verweise auf Dateien im Dateisystem.
 ---
 
 ## 🧠 Wissenstest: Linux Grundlagen
+
 Hier sind einige Fragen aus den heutigen Unterlagen zum Selbsttest:
 
 <details>
@@ -135,19 +155,19 @@ Hier sind einige Fragen aus den heutigen Unterlagen zum Selbsttest:
 <details>
 <summary><b>Fragen zum Dateisystem & Navigation</b> (Klicken zum Ausklappen)</summary>
 
-4. **Was ist das Wurzelverzeichnis in Linux?**
+1. **Was ist das Wurzelverzeichnis in Linux?**
    <details><summary>Antwort</summary>Das Verzeichnis `/`. Es ist die oberste Ebene, von der alle anderen Verzeichnisse ausgehen.</details>
 
-5. **Unterschied zwischen absolutem und relativem Pfad?**
+2. **Unterschied zwischen absolutem und relativem Pfad?**
    <details><summary>Antwort</summary>**Absolut:** Beginnt immer an der Wurzel `/` (z.B. `/home/user`). **Relativ:** Geht vom aktuellen Standort aus (z.B. `./dokumente` oder `../`).</details>
 
-6. **Welcher Befehl zeigt das aktuelle Verzeichnis?**
+3. **Welcher Befehl zeigt das aktuelle Verzeichnis?**
    <details><summary>Antwort</summary>`pwd` (Print Working Directory).</details>
 
-7. **Wie zeigt man alle Dateien inkl. versteckter an?**
+4. **Wie zeigt man alle Dateien inkl. versteckter an?**
    <details><summary>Antwort</summary>`ls -a` (oder `ls -al` für die Listenansicht).</details>
 
-8. **Wie wechselt man ins Elternverzeichnis?**
+5. **Wie wechselt man ins Elternverzeichnis?**
    <details><summary>Antwort</summary>`cd ..`</details>
 
 </details>
@@ -155,13 +175,13 @@ Hier sind einige Fragen aus den heutigen Unterlagen zum Selbsttest:
 <details>
 <summary><b>Fragen zur Dokumentation</b> (Klicken zum Ausklappen)</summary>
 
-9. **Wozu dient `man`?**
+1. **Wozu dient `man`?**
    <details><summary>Antwort</summary>Zum Aufrufen der Manual Pages (Handbuch) eines Befehls.</details>
 
-10. **Was macht `info`?**
+2. **Was macht `info`?**
     <details><summary>Antwort</summary>Zeigt eine detailliertere, oft hierarchisch aufgebaute Dokumentation an (GNU-Standard).</details>
 
-11. **Was zeigt `whatis`?**
+3. **Was zeigt `whatis`?**
     <details><summary>Antwort</summary>Gibt eine kurze Einzeiler-Beschreibung aus, wofür ein Befehl gut ist.</details>
 
 </details>
@@ -169,13 +189,13 @@ Hier sind einige Fragen aus den heutigen Unterlagen zum Selbsttest:
 <details>
 <summary><b>Fragen zu Shell & Kommandos</b> (Klicken zum Ausklappen)</summary>
 
-12. **Wie prüft man die aktuelle Shell?**
+1. **Wie prüft man die aktuelle Shell?**
     <details><summary>Antwort</summary>`echo $SHELL` oder `echo $0`.</details>
 
-13. **Nenne drei bekannte Shells.**
+2. **Nenne drei bekannte Shells.**
     <details><summary>Antwort</summary>`bash`, `zsh`, `sh` (oder `fish`, `ksh`).</details>
 
-14. **Was ist der Unterschied zwischen internen und externen Kommandos?**
+3. **Was ist der Unterschied zwischen internen und externen Kommandos?**
     <details><summary>Antwort</summary>**Intern (Builtins):** Sind direkt in der Shell fest verbaut (z.B. `cd`, `echo`). **Extern:** Eigenständige Programme, die als Datei auf der Festplatte liegen (z.B. `ls`, `grep`).</details>
 
 </details>
@@ -183,22 +203,22 @@ Hier sind einige Fragen aus den heutigen Unterlagen zum Selbsttest:
 <details>
 <summary><b>Fragen zur Dateiverwaltung & Info</b> (Klicken zum Ausklappen)</summary>
 
-15. **Wie erstellt man ein Verzeichnis?**
+1. **Wie erstellt man ein Verzeichnis?**
     <details><summary>Antwort</summary>`mkdir <verzeichnisname>`</details>
 
-16. **Wie löscht man ein Verzeichnis inkl. Inhalt?**
+2. **Wie löscht man ein Verzeichnis inkl. Inhalt?**
     <details><summary>Antwort</summary>`rm -r <verzeichnisname>` (rekursiv).</details>
 
-17. **Was ist der Unterschied zwischen `cp` und `mv`?**
+3. **Was ist der Unterschied zwischen `cp` und `mv`?**
     <details><summary>Antwort</summary>`cp` kopiert eine Datei (Original bleibt), `mv` verschiebt oder benennt eine Datei um (Original wird am alten Ort entfernt).</details>
 
-18. **Was zeigt `stat <datei>`?**
+4. **Was zeigt `stat <datei>`?**
     <details><summary>Antwort</summary>Detaillierte Datei-Metadaten wie Inodes, exakte Zeitstempel (Access, Modify, Change) und Rechte.</details>
 
-19. **Was macht `file <datei>`?**
+5. **Was macht `file <datei>`?**
     <details><summary>Antwort</summary>Analysiert den Datei-Header und bestimmt den tatsächlichen Dateityp (unabhängig von der Endung).</details>
 
-20. **Wie zählt man Zeilen in einer Datei?**
+6. **Wie zählt man Zeilen in einer Datei?**
     <details><summary>Antwort</summary>`wc -l <dateiname>`</details>
 
 </details>
@@ -206,46 +226,50 @@ Hier sind einige Fragen aus den heutigen Unterlagen zum Selbsttest:
 <details>
 <summary><b>Fragen zu I/O, Pipes & Steuerung</b> (Klicken zum Ausklappen)</summary>
 
-21. **Was ist stdin, stdout und stderr?**
+1. **Was ist stdin, stdout und stderr?**
     <details><summary>Antwort</summary>**stdin (0):** Standardeingabe (Tastatur). **stdout (1):** Standardausgabe (Terminal). **stderr (2):** Fehlerausgabe (Terminal).</details>
 
-22. **Wozu dient eine Pipe `|`?**
+2. **Wozu dient eine Pipe `|`?**
     <details><summary>Antwort</summary>Sie verbindet die Standardausgabe eines Befehls mit der Standardeingabe des nächsten Befehls.</details>
 
-23. **Nenne ein Beispiel für eine Pipe-Nutzung.**
+3. **Nenne ein Beispiel für eine Pipe-Nutzung.**
     <details><summary>Antwort</summary>`ls -l /etc | grep "bash"` (Listet alle Dateien in /etc auf und filtert nach "bash").</details>
 
-24. **Was bedeutet `*` in der Shell?**
+4. **Was bedeutet `*` in der Shell?**
     <details><summary>Antwort</summary>Es ist ein Wildcard (Platzhalter) für beliebig viele (auch null) Zeichen.</details>
 
-25. **Was macht `cmd1 && cmd2`?**
+5. **Was macht `cmd1 && cmd2`?**
     <details><summary>Antwort</summary>`cmd2` wird nur ausgeführt, wenn `cmd1` erfolgreich beendet wurde (Exit-Status 0).</details>
 
-26. **Wie prüft man den Rückgabewert eines Befehls?**
+6. **Wie prüft man den Rückgabewert eines Befehls?**
     <details><summary>Antwort</summary>Mit der Variable `echo $?`.</details>
 
 </details>
 
 <details>
-<summary><b>Fragen zu Variablen & Zugriffsrechten</b> (Klicken zum Ausklappen)</summary>
+<summary><b>Fragen zu Variables & Zugriffsrechten</b> (Klicken zum Ausklappen)</summary>
 
-27. **Wie gibt man den Inhalt einer Variablen aus?**
+1. **Wie gibt man den Inhalt einer Variablen aus?**
     <details><summary>Antwort</summary>`echo $VARIABLENNAME`</details>
 
-28. **Was macht `$(cmd)`?**
+2. **Was macht `$(cmd)`?**
     <details><summary>Antwort</summary>**Command Substitution:** Der Befehl innerhalb der Klammern wird ausgeführt und sein Ergebnis an die Stelle im ursprünglichen Befehl gesetzt.</details>
 
-29. **Was bedeutet `chmod 755 <datei>`?**
+3. **Was bedeutet `chmod 755 <datei>`?**
     <details><summary>Antwort</summary>`rwxr-xr-x`: Der Besitzer darf alles (7), Gruppe und andere dürfen lesen und ausführen (5), aber nicht schreiben.</details>
 
-30. **Wozu dient das Sticky Bit?**
+4. **Wozu dient das Sticky Bit?**
     <details><summary>Antwort</summary>In Verzeichnissen (wie `/tmp`) bewirkt es, dass Benutzer nur die Dateien löschen können, die ihnen selbst gehören, auch wenn sie Schreibrechte im Ordner haben.</details>
+
+</details>
+Dateien löschen können, die ihnen selbst gehören, auch wenn sie Schreibrechte im Ordner haben.</details>
 
 </details>
 
 ---
 
 ## 📚 Ressourcen & Dokumente
+
 Im [Assets](./assets)-Verzeichnis finden Sie die Unterlagen zu diesem Tag:
 
 - [CHmod, Hard- und Softlinks (PDF)](./assets/CHmod,%20hard%20und%20softlinks.pdf)

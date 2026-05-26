@@ -35,6 +35,7 @@ graph TD
 Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 
 ### 📅 Woche 1: Grundlagen
+
 | Modul | Status | Fokus-Themen | Link |
 | :--- | :---: | :--- | :--- |
 | **Tag 01** | ✅ | Shell-Einführung, FHS, Historie | [📖 README](./Day_01/readme.md) |
@@ -44,6 +45,7 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | **Tag 05** | ✅ | Rechte (chmod), Links, umask, Shell-History | [📖 README](./Day_05/README.md) |
 
 ### 📅 Woche 2: Administration
+
 | Modul | Status | Fokus-Themen | Link |
 | :--- | :---: | :--- | :--- |
 | **Tag 06** | ✅ | Administration, Prozesse, Spezialrechte | [📖 README](./Day_06/README.md) |
@@ -53,6 +55,7 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | **Tag 10** | ✅ | Reguläre Ausdrücke (Regex) II - Dienste-Auswertung & Bash-Loops | [📖 README](./Day_10/README.md) |
 
 ### 📅 Woche 3: Speicher & Dateisysteme
+
 | Modul | Status | Fokus-Themen | Link |
 | :--- | :---: | :--- | :--- |
 | **Tag 11** | ✅ | Text-Editoren (vi / vim) - Modi, Navigation & Last-Line-Befehle | [📖 README](./Day_11/README.md) |
@@ -62,6 +65,7 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | **Tag 15** | ⏳ | TBD | [📖 README](./Day_15/README.md) |
 
 ### 📅 Woche 4-6: Fortgeschrittene Themen (WIP)
+
 | Modul | Status | Link |
 | :--- | :---: | :--- |
 | **Tag 16 - 20** | ⏳ | [In Planung](./Day_16/README.md) |
@@ -78,6 +82,7 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 <summary><b>📜 Distributionen & Architektur</b> (Klicken zum Ausklappen)</summary>
 
 ### Linux Hauptfamilien
+
 | Familie | Fokus | Paketmanager | Vertreter |
 | :--- | :--- | :--- | :--- |
 | **Debian** | Stabilität | APT | Ubuntu, Mint, Kali |
@@ -86,6 +91,7 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 | **SUSE** | Business | Zypper | openSUSE |
 
 ### Release Modelle
+
 * **LTS (Long Term Support):** Fokus auf Stabilität (z.B. Rocky Linux, Debian).
 * **RR (Rolling Release):** Stets aktuellste Software (z.B. Arch Linux).
 
@@ -143,6 +149,7 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 ---
 
 ## 📈 System-Status (Dashboard)
+
 * **Aktuelle Umgebung:** Rocky Linux 9.x (RHEL-basiert)
 * **Shell:** Bash / ZSH + Oh My Zsh (Konfiguriert)
 * **Fortschritt:** 37% (11 von 30 Modulen abgeschlossen)
@@ -150,10 +157,10 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 ---
 
 ## 📜 Skripting-Zentrale (Neu)
+
 * **Master-Skripte:** [umask_script.sh](./Day_08/assets/umask_script.sh)
 * **Themen:** Automatisierung, Rechte-Validierung
 
 ---
 
 *Dieses Repository wird kontinuierlich gepflegt. Letztes Update: 20. Mai 2026.*
-

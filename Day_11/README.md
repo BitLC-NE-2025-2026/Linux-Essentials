@@ -9,9 +9,9 @@ Am elften Tag der Linux Essentials widmen wir uns einem der wichtigsten Werkzeug
 ## 📑 Inhaltsverzeichnis
 
 * [Lernziele (LPIC-1 relevant)](#-lernziele-lpic-1-relevant)
-* [Die Philosophie von vi / vim](#-1-die-philosophie-von-vi--vim)
+* [Die Philosophie von vi / vim](#️-1-die-philosophie-von-vi--vim)
 * [Das Drei-Modi-Konzept](#-2-das-drei-modi-konzept)
-* [Praktische Tastenkombinationen & Navigation](#-3-praktische-tastenkombinationen--navigation)
+* [Praktische Tastenkombinationen & Navigation](#️-3-praktische-tastenkombinationen--navigation)
 * [Suchen & Ersetzen im Last-Line-Modus](#-4-suchen--ersetzen-im-last-line-modus)
 * [Ressourcen & Dokumente](#-ressourcen--dokumente)
 * [Zurück zur Übersicht](#-zurück-zur-übersicht)
@@ -141,9 +141,11 @@ Der Befehlszeilenmodus ermöglicht mächtige globale Manipulationen.
   * `n` springt zum nächsten Treffer in Suchrichtung.
   * `N` springt zum vorherigen Treffer (entgegengesetzt).
 * **Globales Ersetzen:**
+
   ```vim
   :%s/alt/neu/g
   ```
+
   Ersetzt jedes Vorkommen von `alt` im gesamten Dokument durch `neu`. Das optionale `c` am Ende (`:%s/alt/neu/gc`) fragt vor jedem Ersetzen interaktiv nach einer Bestätigung.
 
 ### Hilfreiche Anzeige-Einstellungen

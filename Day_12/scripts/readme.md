@@ -3,12 +3,14 @@
 Dieses Projekt sichert automatisch die tägliche Bash-Historie eines Linux-Benutzers. Die Historie wird zu einer festen Uhrzeit sowie vollautomatisch beim Herunterfahren oder Abmelden des Systems in datierte Logdateien exportiert.
 
 ## Features
+
 * **Automatisch beim Shutdown:** Nutzt einen systemd-User-Service zur Sicherung direkt vor dem Systemstopp oder dem Logout.
 * **Geplantes Backup:** Sichert die Historie zusätzlich von Montag bis Freitag um 15:30 Uhr über einen Cronjob.
 * **Ausfallsicherer Export:** Kopiert die physikalische Historien-Datei direkt auf Dateisystemebene, da der interaktive `history`-Befehl im systemd-Kontext funktionslos ist.
 * **Vollautomatisches Setup:** Ein einziges Installationsskript richtet alle Pfade, Dienste und Cronjobs fehlerfrei ein.
 
 ## Projektstruktur
+
 ```text
 .
 ├── scripts/
@@ -119,7 +121,5 @@ Die exportierten Historien werden standardmäßig im folgenden Verzeichnis abgel
 ## Autor
 
 * **Tobias B:** Initialentwicklung und Konzept
-
-
 
 ---

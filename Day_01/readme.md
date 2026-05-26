@@ -7,6 +7,7 @@ Willkommen zum ersten Tag der Linux Essentials. Heute legen wir das Fundament f�
 ---
 
 ## 📑 Inhaltsverzeichnis
+
 - [🐧 Linux Essentials - Tag 01](#-linux-essentials---tag-01)
   - [📑 Inhaltsverzeichnis](#-inhaltsverzeichnis)
   - [📜 Hintergrund & Historie](#-hintergrund--historie)
@@ -40,20 +41,23 @@ Willkommen zum ersten Tag der Linux Essentials. Heute legen wir das Fundament f�
 ---
 
 ## 📜 Hintergrund & Historie
+
 Linux ist weit mehr als nur ein Betriebssystem; es ist das Ergebnis einer jahrzehntelangen Entwicklung, die auf der Unix-Philosophie basiert.
 
 ### Philosophie & Open Source
-* **GNU-Projekt (1983):** Richard Stallman startete das GNU-Projekt, um eine freie Alternative zu Unix zu schaffen. "GNU" steht rekursiv für "GNU's Not Unix".
-* **GPL (General Public License):** Die Lizenz nutzt das "Copyleft"-Prinzip: Jeder, der Software verändert oder verbreitet, muss diese unter denselben freien Bedingungen weitergeben.
-* **Der Linux-Kernel (1991):** Linus Torvalds, ein finnischer Student, schrieb den Kernel als Hobbyprojekt. Er entschied sich später für die GPL, was den entscheidenden Durchbruch für die Zusammenarbeit bedeutete.
-* **Die Naming-Kontroverse:** Da das System aus dem Linux-Kernel und den GNU-Systemwerkzeugen besteht, plädiert die Free Software Foundation (FSF) für den Namen **GNU/Linux**.
-* **Entwicklungsmodell (Bazaar vs. Cathedral):** Linux ist das Paradebeispiel für das "Bazaar"-Modell: Offene, dezentrale Entwicklung durch Tausende Freiwillige weltweit, im Gegensatz zum geschlossenen "Cathedral"-Modell klassischer Software.
-* **Unix-Wars & POSIX:** In den 80ern/90ern bekriegten sich Hersteller (Sun, HP, IBM) mit eigenen Unix-Derivaten. Linux bot eine stabile, kostenlose und POSIX-konforme Alternative, die diesen Streit beendete.
+
+- **GNU-Projekt (1983):** Richard Stallman startete das GNU-Projekt, um eine freie Alternative zu Unix zu schaffen. "GNU" steht rekursiv für "GNU's Not Unix".
+- **GPL (General Public License):** Die Lizenz nutzt das "Copyleft"-Prinzip: Jeder, der Software verändert oder verbreitet, muss diese unter denselben freien Bedingungen weitergeben.
+- **Der Linux-Kernel (1991):** Linus Torvalds, ein finnischer Student, schrieb den Kernel als Hobbyprojekt. Er entschied sich später für die GPL, was den entscheidenden Durchbruch für die Zusammenarbeit bedeutete.
+- **Die Naming-Kontroverse:** Da das System aus dem Linux-Kernel und den GNU-Systemwerkzeugen besteht, plädiert die Free Software Foundation (FSF) für den Namen **GNU/Linux**.
+- **Entwicklungsmodell (Bazaar vs. Cathedral):** Linux ist das Paradebeispiel für das "Bazaar"-Modell: Offene, dezentrale Entwicklung durch Tausende Freiwillige weltweit, im Gegensatz zum geschlossenen "Cathedral"-Modell klassischer Software.
+- **Unix-Wars & POSIX:** In den 80ern/90ern bekriegten sich Hersteller (Sun, HP, IBM) mit eigenen Unix-Derivaten. Linux bot eine stabile, kostenlose und POSIX-konforme Alternative, die diesen Streit beendete.
 
 > [!IMPORTANT]
 > **POSIX (Portable Operating System Interface)** ist der Grund, warum Ihre Skripte auf fast allen Unix-ähnlichen Systemen laufen. Es standardisiert Befehle, Argumente und Verhalten.
 
 ### Detaillierte Meilensteine
+
 | Jahr | Ereignis | Bedeutung |
 | :--- | :--- | :--- |
 | **1969** | Entstehung von **Unix** | Entwickelt bei AT&T (Bell Labs) durch Dennis Ritchie und Ken Thompson. |
@@ -71,6 +75,7 @@ Linux ist weit mehr als nur ein Betriebssystem; es ist das Ergebnis einer jahrze
 | **Heute** | Cloud & KI | Linux ist der Motor hinter AWS, Azure und fast allen KI-Infrastrukturen weltweit. |
 
 ### Die Linux-Hauptfamilien
+
 Linux-Systeme werden in "Familien" unterteilt, die sich primär durch ihren Paketmanager und ihre Philosophie unterscheiden:
 
 | Familie | Fokus | Paketmanager | Bekannte Vertreter |
@@ -83,24 +88,30 @@ Linux-Systeme werden in "Familien" unterteilt, die sich primär durch ihren Pake
 | **Independent** | Spezialisierung | Variiert | Gentoo (Source-based), Alpine, NixOS |
 
 ### Enterprise-Systeme & Marktanteil
+
 Linux ist das absolute Fundament moderner IT-Infrastruktur:
-* **Cloud Computing:** Basis für AWS, Azure und Google Cloud.
-* **Supercomputing:** Betreibt exakt 500 der 500 leistungsstärksten Rechner der Welt.
-* **Embedded & Mobile:** Grundlage für Android, Smart-Home-Geräte und IoT.
-* **Stabilität:** Enterprise-Systeme garantieren Sicherheitsupdates für bis zu 10 Jahre.
+
+- **Cloud Computing:** Basis für AWS, Azure und Google Cloud.
+- **Supercomputing:** Betreibt exakt 500 der 500 leistungsstärksten Rechner der Welt.
+- **Embedded & Mobile:** Grundlage für Android, Smart-Home-Geräte und IoT.
+- **Stabilität:** Enterprise-Systeme garantieren Sicherheitsupdates für bis zu 10 Jahre.
 
 ### Der Fokus: Rocky Linux (Red Hat Familie)
+
 In diesem Kurs nutzen wir **Rocky Linux**, einen direkten Nachfolger des klassischen CentOS.
-* **Binary Compatible:** 1:1 kompatibel mit Red Hat Enterprise Linux (RHEL).
-* **DNF Paketmanager:** Modernes Werkzeug zur Softwareverwaltung.
-* **Sicherheit:** Fokus auf gehärtete Umgebungen (SELinux) und Langzeitstabilität.
+
+- **Binary Compatible:** 1:1 kompatibel mit Red Hat Enterprise Linux (RHEL).
+- **DNF Paketmanager:** Modernes Werkzeug zur Softwareverwaltung.
+- **Sicherheit:** Fokus auf gehärtete Umgebungen (SELinux) und Langzeitstabilität.
 
 ---
 
 ## 🐚 Einführung in die Shell
+
 Die Shell ist das primäre Interface für die Interaktion mit dem Linux-Kern. Wir nutzen standardmäßig die `bash`.
 
 ### Die Ebenen des Systems
+
 Linux ist wie eine Zwiebel aufgebaut. Jede Ebene baut auf der anderen auf:
 
 1. **Hardware:** Die physischen Komponenten (CPU, RAM, HDD).
@@ -109,6 +120,7 @@ Linux ist wie eine Zwiebel aufgebaut. Jede Ebene baut auf der anderen auf:
 4. **Applikationen:** Browser, Editoren, Dateimanager etc.
 
 ### Bekannte Shell-Varianten
+
 | Shell | Name | Merkmale |
 | :--- | :--- | :--- |
 | **sh** | Bourne Shell | Die klassische Unix-Shell. Schnell, aber wenig Komfort. |
@@ -117,23 +129,26 @@ Linux ist wie eine Zwiebel aufgebaut. Jede Ebene baut auf der anderen auf:
 | **fish** | Friendly Interactive Shell | Fokus auf Benutzerfreundlichkeit und Auto-Vorschläge. |
 
 ### Systemarchitektur & Philosophie
-* **Monolithischer Kernel:** Im Gegensatz zu Micro-Kernels laufen Treiber und Dateisysteme bei Linux direkt im Kernel-Adressraum, was eine extrem hohe Performance ermöglicht.
-* **Alles ist eine Datei (Everything is a file):** Eines der wichtigsten Konzepte. Ob Festplatte (`/dev/sda`), Tastatur oder ein Verzeichnis – für das System ist alles ein Datenstrom, der gelesen oder beschrieben werden kann.
-* **Shell-Konfiguration:** Die Shell wird über versteckte Dateien (Dotfiles) gesteuert:
-    - `.bashrc`: Konfiguration für interaktive Shells (Aliase, Prompt).
-    - `.bash_profile`: Wird beim Login ausgeführt.
-* **Aliase:** Abkürzungen für lange Befehle (z.B. `alias ll='ls -al'`).
-* **Umgebungsvariablen:** Speichern wichtige Systempfade, z.B. `$PATH` (Wo das System nach Befehlen sucht) oder `$HOME`.
+
+- **Monolithischer Kernel:** Im Gegensatz zu Micro-Kernels laufen Treiber und Dateisysteme bei Linux direkt im Kernel-Adressraum, was eine extrem hohe Performance ermöglicht.
+- **Alles ist eine Datei (Everything is a file):** Eines der wichtigsten Konzepte. Ob Festplatte (`/dev/sda`), Tastatur oder ein Verzeichnis – für das System ist alles ein Datenstrom, der gelesen oder beschrieben werden kann.
+- **Shell-Konfiguration:** Die Shell wird über versteckte Dateien (Dotfiles) gesteuert:
+  - `.bashrc`: Konfiguration für interaktive Shells (Aliase, Prompt).
+  - `.bash_profile`: Wird beim Login ausgeführt.
+- **Aliase:** Abkürzungen für lange Befehle (z.B. `alias ll='ls -al'`).
+- **Umgebungsvariablen:** Speichern wichtige Systempfade, z.B. `$PATH` (Wo das System nach Befehlen sucht) oder `$HOME`.
 
 **Wichtige Systemvariablen:**
+
 | Variable | Bedeutung |
 | :--- | :--- |
 | `$PATH` | Liste von Verzeichnissen mit ausführbaren Programmen. |
-| `$USER` | Der aktuell angemeldete Benutzername. |
+| `$USER` | Der aktuell angemeldeter Benutzername. |
 | `$SHELL` | Der Pfad zur aktuell verwendeten Shell. |
 | `$PWD` | Das aktuelle Arbeitsverzeichnis. |
 
 ### Erste Schritte
+
 | Befehl | Funktion |
 | :--- | :--- |
 | `echo $0` | Zeigt die aktuell verwendete Shell an. |
@@ -148,9 +163,11 @@ Linux ist wie eine Zwiebel aufgebaut. Jede Ebene baut auf der anderen auf:
 ---
 
 ## 📂 Navigation & Dateisystem
+
 Das Verständnis der Verzeichnisstruktur ist essenziell für die Arbeit unter Linux.
 
 ### Wichtige Konzepte
+
 | Konzept | Beschreibung |
 | :--- | :--- |
 | **Absolute Pfade** | Beginnen immer bei der Wurzel `/` (z.B. `/home/user/Dokumente`). |
@@ -158,12 +175,13 @@ Das Verständnis der Verzeichnisstruktur ist essenziell für die Arbeit unter Li
 | **Home-Verzeichnis** | Abgekürzt durch die Tilde `~`. |
 
 ### Befehle zur Navigation
+
 | Befehl | Funktion |
 | :--- | :--- |
 | `pwd` | Print Working Directory. Zeigt den absoluten Pfad des aktuellen Verzeichnisses an. |
 | `ls -al` | Zeigt alle Dateien (auch versteckte) mit detaillierten Rechten an. |
 | `cd ~` | Wechselt in das eigene Home-Verzeichnis. |
-| `cd /` | Wechselt in das Wurzelverzeichnis (Root). |
+| `cd /` | Wurzelverzeichnis (Root). |
 | `cd ..` | Wechselt eine Verzeichnisebene nach oben. |
 | `mkdir` | Erstellt ein neues Verzeichnis. |
 | `stat <Datei>` | Zeigt detaillierte Informationen über eine Datei oder ein Verzeichnis. |
@@ -171,6 +189,7 @@ Das Verständnis der Verzeichnisstruktur ist essenziell für die Arbeit unter Li
 ---
 
 ## 🏗 Filesystem Hierarchy Standard (FHS)
+
 Linux folgt dem **Filesystem Hierarchy Standard (FHS)**. Jedes Verzeichnis hat eine spezifische Aufgabe:
 
 | Verzeichnis | Inhalt und Funktion |
@@ -204,6 +223,7 @@ Linux folgt dem **Filesystem Hierarchy Standard (FHS)**. Jedes Verzeichnis hat e
 ---
 
 ## 👤 Benutzeridentität & Berechtigungen
+
 Linux ist ein Mehrbenutzersystem. Sicherheit und Identität spielen eine zentrale Rolle.
 
 | Befehl / Datei | Funktion |
@@ -218,9 +238,11 @@ Linux ist ein Mehrbenutzersystem. Sicherheit und Identität spielen eine zentral
 ---
 
 ## 🛠 Hilfreiche Utilities & Pipelining
-Befehle lassen sich kombinieren, um komplexe Aufgaben zu lösen. Dies basiert auf dem Konzept der **Standard-Datenströme**.
+
+Befehle lassen sich kombinieren, um komplexe Aufgaben zu lösen. Dies basiert auf dem concept der **Standard-Datenströme**.
 
 ### Die drei Standard-Datenströme
+
 | ID | Name | Beschreibung |
 | :---: | :--- | :--- |
 | **0** | **stdin** | Standard-Eingabe (Tastatur). |
@@ -228,6 +250,7 @@ Befehle lassen sich kombinieren, um komplexe Aufgaben zu lösen. Dies basiert au
 | **2** | **stderr** | Standard-Fehlerausgabe (Terminal). |
 
 ### Pipelining & Redirection
+
 | Operator | Funktion | Beispiel |
 | :---: | :--- | :--- |
 | `\|` | **Pipe**: Übergibt stdout von Befehl A als stdin an Befehl B. | `ls \| wc -l` |
@@ -238,6 +261,7 @@ Befehle lassen sich kombinieren, um komplexe Aufgaben zu lösen. Dies basiert au
 | `&>` | **All Redirect**: Leitet sowohl stdout als auch stderr um. | `cmd &> all.log` |
 
 ### Logische Operatoren (Befehlsketten)
+
 Operatoren ermöglichen es, Befehle abhängig vom Erfolg des vorherigen Befehls auszuführen. Ein Befehl gilt als erfolgreich, wenn sein **Exit-Code** `0` ist.
 
 | Operator | Logik | Beschreibung |
@@ -247,14 +271,16 @@ Operatoren ermöglichen es, Befehle abhängig vom Erfolg des vorherigen Befehls 
 | `\|\|` | **Logisches ODER** | Führt den zweiten Befehl nur aus, wenn der erste **fehlgeschlagen** ist. |
 
 ### Fortgeschrittene Redirection
+
 Manchmal möchte man Ausgaben komplett unterdrücken oder Ströme zusammenführen.
 
 - `2>&1`: Leitet stderr in den stdout-Kanal um (beide landen im selben Terminal/File).
 - `&>`: Kurzform für die Umleitung von stdout und stderr in ein Ziel.
 - `/dev/null`: Das "schwarze Loch" von Linux. Alles, was hierher geleitet wird, wird gelöscht.
-    - Beispiel: `ls /root 2> /dev/null` (Fehlermeldungen werden ignoriert).
+  - Beispiel: `ls /root 2> /dev/null` (Fehlermeldungen werden ignoriert).
 
 **Praxisbeispiele:**
+
 ```bash
 # Erstellt Ordner und wechselt nur hinein, wenn mkdir geklappt hat
 mkdir Test && cd Test       
@@ -267,6 +293,7 @@ grep -r "Geheim" /etc 2> /dev/null
 ```
 
 ### Text-Utilities
+
 - `cat`: Zeigt den Inhalt einer Datei an.
 - `less`: Ein Pager, der das seitenweise Lesen von Texten ermöglicht.
 - `wc` (Word Count): Zählt Zeilen (`-l`), Wörter (`-w`) oder Zeichen (`-m`).
@@ -274,9 +301,11 @@ grep -r "Geheim" /etc 2> /dev/null
 ---
 
 ## ⚙ Systempflege & Befehlsübersicht
+
 Zum Abschluss haben wir uns mit der Aktualisierung des Systems und Datumsformaten beschäftigt.
 
 ### System-Updates (DNF / Rocky Linux)
+
 ```bash
 sudo dnf update   # Paketquellen aktualisieren
 sudo dnf upgrade  # Installierte Pakete aktualisieren
@@ -284,6 +313,7 @@ reboot            # System neu starten
 ```
 
 ### Hilfe & Information
+
 | Befehl | Funktion |
 | :--- | :--- |
 | `man <Befehl>` | Öffnet das Handbuch (Manual) für einen Befehl. |
@@ -292,12 +322,15 @@ reboot            # System neu starten
 | `date +%F` | Gibt das aktuelle Datum im vollständigen Format aus. |
 
 ### Überprüfung & Sicherheit
+
 Zur Validierung von Dateien (z.B. ISO-Images) nutzen wir Prüfsummen:
+
 - `sha256sum -c <Datei>`: Überprüft eine Datei anhand einer SHA-256 Prüfsumme.
 
 ---
 
 ## 📚 Ressourcen & Dokumente
+
 Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 - [FHS Linux Deutsch (PDF)](./assets/FHS-LinuxDeutsch.pdf)

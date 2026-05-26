@@ -9,13 +9,13 @@ Am zwölften Tag der Linux Essentials behandeln wir die zeitgesteuerte Ausführu
 ## 📑 Inhaltsverzeichnis
 
 * [Lernziele LPIC-1 relevant](#-lernziele-lpic-1-relevant)
-* [Grundlagen zu cron und crontab](#-1-grundlagen-zu-cron-und-crontab)
-* [Aufbau einer Crontab](#-2-aufbau-einer-crontab)
-* [Crontab Befehle und Editor Konfiguration](#-3-crontab-befehle-und-editor-konfiguration)
+* [Grundlagen zu cron und crontab](#️-1-grundlagen-zu-cron-und-crontab)
+* [Aufbau einer Crontab](#️-2-aufbau-einer-crontab)
+* [Crontab Befehle und Editor Konfiguration](#️-3-crontab-befehle-und-editor-konfiguration)
 * [Systemweite Benachrichtigungen mit wall in Cronjobs](#-4-systemweite-benachrichtigungen-mit-wall-in-cronjobs)
-* [Steuerung des cron Daemons mit systemctl](#-6-steuerung-des-cron-daemons-mit-systemctl)
-* [Ressourcen und Hilfsmittel](#-7-ressourcen-und-hilfsmittel)
-* [Zurück zur Übersicht](#-zurück-zur-übersicht)
+* [Steuerung des cron Daemons mit systemctl](#️-6-steuerung-des-cron-daemons-mit-systemctl)
+* [Ressourcen und Hilfsmittel](#-5-ressourcen-und-hilfsmittel)
+* [Zurück zur Übersicht](#-8-zurück-zur-übersicht)
 
 ---
 
@@ -38,9 +38,10 @@ Der cron Daemon läuft im Hintergrund eines Unix Systems. Er führt geplante Auf
 
 ### Standardeditor unter Rocky Linux
 
-Auf Betriebssystemen wie Rocky Linux arbeitet das Werkzeug crontab standardmäßig mit dem Editor vim. 
+Auf Betriebssystemen wie Rocky Linux arbeitet das Werkzeug crontab standardmäßig mit dem Editor vim.
 
 Falls die Bearbeitung nicht mit vim erfolgen soll, lässt sich der Editor nano für den aktuellen Benutzer festlegen. Der kombinierte Befehl schreibt die entsprechende Umgebungsvariable in das persönliche Profil und aktiviert die Änderung sofort für die aktuelle Sitzung.
+
 ```bash
 echo "export EDITOR=nano" >> ~/.bash_profile && source ~/.bash_profile
 ```
@@ -152,6 +153,7 @@ Die folgenden Beispiele zeigen detailliert kommentierte Cronjobs für verschiede
 # ==============================================================================
 0 9-17/2 * * 6,0 /bin/rm_temp_files.sh
 ```
+
 ---
 
 ## ⌨️ 3. Crontab Befehle und Editor Konfiguration
@@ -159,6 +161,7 @@ Die folgenden Beispiele zeigen detailliert kommentierte Cronjobs für verschiede
 Zur Verwaltung der eigenen cronjobs nutzt man den Befehl crontab im Terminal.
 
 Befehle:
+
 * `crontab -e`: Öffnet die crontab zum Bearbeiten.
 * `crontab -l`: Listet alle aktiven cronjobs auf.
 * `crontab -r`: Löscht die aktuelle crontab vollständig.
@@ -173,6 +176,7 @@ Standardmäßig öffnet `crontab -e` den Editor vi oder vim. Zur Nutzung von nan
 # Der Befehl source liest die Datei sofort neu ein und macht nano im aktuellen Terminal aktiv.
 echo "export EDITOR=nano" >> ~/.bash_profile && source ~/.bash_profile
 ```
+
 ---
 
 ## 📢 4. Systemweite Benachrichtigungen mit wall in Cronjobs
@@ -203,13 +207,15 @@ Die Übergabe des Textes an `wall` erfolgt über eine Pipeline, indem der Ausgab
 # ==============================================================================
 0 17 * * 5 echo "Achtung: Das System wird in Kürze gewartet" | wall
 ```
+
 ---
 
 ## 📚 5. Ressourcen und Hilfsmittel
+
 Die Definition der korrekten Zeiten ist fehleranfällig.
 Die Webseite crontab.guru übersetzt die Cron Syntax in lesbaren Text und hilft bei der Erstellung komplexer Intervalle.
 
-- Link: [crontab.guru/](https://crontab.guru/)
+* Link: [crontab.guru/](https://crontab.guru/)
 
 ---
 
@@ -233,19 +239,25 @@ Der genaue Name des Dienstes variiert je nach Betriebssystem. Red Hat basierte D
 **Praxisbeispiel zur Dienstkonfiguration:**
 
 Aktiviert den Autostart für den crond Dienst dauerhaft
+
 ```bash
 systemctl enable crond
 ```
+
 Startet den Dienst in der aktuellen Sitzung
+
 ```bash
 systemctl start crond
 ```
+
 Gibt den Status des Dienstes zur sofortigen Kontrolle im Terminal aus
+
 ```bash
 systemctl status crond
 ```
 
 ---
+
 ## 📝 7. Historien-Automatisierung mit Cronjobs
 
 Um die Bash-Historie täglich automatisiert zu sichern und nach Tagen zu sortieren, erstellen wir ein dediziertes Skript. Dieses Skript nutzt Zeitstempel, um die Historie für den aktuellen Tag in eine spezifische Textdatei im Benutzerverzeichnis zu exportieren.
@@ -258,6 +270,7 @@ Um die Bash-Historie täglich automatisiert zu sichern und nach Tagen zu sortier
 ```bash
 chmod +x ~/scripts/historyscript.sh
 ```
+
 ### Inhalt des Scripts
 
 ```Bash
@@ -288,7 +301,9 @@ mkdir -p "$TARGET_DIR"
 # Historie filtern: Extrahiert alle Einträge des heutigen Tages
 history | grep " $TODAY " > "$TARGET_DIR/rockyHis${FILE_DATE}.txt"
 ```
+
 ### Zeitgesteuerte Ausführung via Crontab
+
 Um das Skript werktäglich (Montag bis Freitag) um 15:30 Uhr auszuführen, wird ein entsprechender Eintrag in der Crontab benötigt.
 
 Crontab öffnen:
@@ -296,13 +311,16 @@ Crontab öffnen:
 ```Bash
 crontab -e
 ```
+
 Cronjob hinzufügen:
+
 ```Bash
 # Ausführung von Montag bis Freitag um 15:30 Uhr
 30 15 * * 1-5 /home/scripts/historyscript.sh
 ```
 
 ## 🧠 Wissenstest: Cron & Zeitsteuerung
+
 Hier sind typische Fragen rund um zeitgesteuerte Jobs unter Linux:
 
 <details>
@@ -310,16 +328,16 @@ Hier sind typische Fragen rund um zeitgesteuerte Jobs unter Linux:
 
 1. **In welcher Reihenfolge sind die fünf Zeitfelder in einer Crontab angeordnet?**
    <details><summary>Antwort</summary>Die Reihenfolge von links nach rechts lautet:  
-1. **Minute** (0-59)  
-2. **Stunde** (0-23)  
-3. **Tag des Monats** (1-31)  
-4. **Monat** (1-12)  
-5. **Wochentag** (0-7, wobei 0 und 7 für Sonntag stehen)</details>
+   1. **Minute** (0-59)  
+   1. **Stunde** (0-23)  
+   1. **Tag des Monats** (1-31)  
+   1. **Monat** (1-12)  
+   1. **Wochentag** (0-7, wobei 0 und 7 für Sonntag stehen)</details>
 
-2. **Was bewirkt der Eintrag `*/15 9-17 * * 1-5`?**
+1. **Was bewirkt der Eintrag `*/15 9-17 * * 1-5`?**
    <details><summary>Antwort</summary>Der Cronjob wird **alle 15 Minuten** (`*/15`) zwischen den Stunden **9:00 und 17:59 Uhr** (`9-17`) von **Montag bis Freitag** (`1-5`) ausgeführt.</details>
 
-3. **Mit welchem Befehl löscht man seine gesamte persönliche Crontab ohne Nachfrage?**
+1. **Mit welchem Befehl löscht man seine gesamte persönliche Crontab ohne Nachfrage?**
    <details><summary>Antwort</summary>Mit dem Befehl **`crontab -r`** (Remove). Da dies ohne Sicherheitsabfrage geschieht, ist hierbei äußerste Vorsicht geboten!</details>
 
 </details>
@@ -327,19 +345,19 @@ Hier sind typische Fragen rund um zeitgesteuerte Jobs unter Linux:
 <details>
 <summary><b>Fragen zu Fehlerbehebung & Umgebung</b> (Klicken zum Ausklappen)</summary>
 
-4. **Warum schlagen Skripte in Cronjobs oft fehl, obwohl sie im interaktiven Terminal fehlerfrei laufen?**
+1. **Warum schlagen Skripte in Cronjobs oft fehl, obwohl sie im interaktiven Terminal fehlerfrei laufen?**
    <details><summary>Antwort</summary>Cron-Prozesse laufen in einer extrem minimalistischen Umgebung ohne interaktive Shell. Die Umgebungsvariable `$PATH` enthält meist nur `/usr/bin:/bin`, weshalb Programme in `/usr/local/bin` oder `/opt` nicht gefunden werden. Zudem sind relative Pfade ungültig, da das Arbeitsverzeichnis standardmäßig das Home-Verzeichnis des Benutzers ist.  
-*Lösung:* Stets absolute Pfade im Skript und im Cronjob verwenden.</details>
+   _Lösung:_ Stets absolute Pfade im Skript und im Cronjob verwenden.</details>
 
-5. **Wie unterscheidet sich der Dienstname für den Cron-Daemon zwischen Debian- und Red-Hat-basierten Distributionen?**
+1. **Wie unterscheidet sich der Dienstname für den Cron-Daemon zwischen Debian- und Red-Hat-basierten Distributionen?**
    <details><summary>Antwort</summary>Unter Debian-basierten Systemen (z. B. Ubuntu) heißt der Dienst **`cron`**. Unter Red-Hat-basierten Systemen (z. B. Rocky Linux, RHEL) heißt der Dienst **`crond`**.</details>
 
 </details>
 
 ## 🔗 8. Zurück zur Übersicht
+
 [⬅ Zurück zur Übersicht](../README.md)
 
 ---
 
 *Erstellt am 20. Mai 2026 für den Linux-Essentials Kurs.*
-

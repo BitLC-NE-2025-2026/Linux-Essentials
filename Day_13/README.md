@@ -13,7 +13,7 @@ Am dreizehnten Tag der Linux Essentials behandeln wir fortgeschrittenes Shell Sc
 * [Textbasierte Benutzeroberflächen](#️-2-textbasierte-benutzeroberflächen)
 * [Grafische Dialoge mit Whiptail](#️-3-grafische-dialoge-mit-whiptail)
 * [Druckersteuerung im Terminal](#️-4-druckersteuerung-im-terminal)
-* [Zurück zur Übersicht](#-6-zur%C3%BCck-zur-%C3%BCbersicht)
+* [Zurück zur Übersicht](#-6-zurück-zur-übersicht)
 
 ---
 
@@ -140,19 +140,21 @@ Hier sind typische Fragen rund um TUI-Erstellung, Massenverwaltung und Drucksyst
 while IFS=',' read -r spalte1 spalte2; do
     echo "Feld 1: $spalte1, Feld 2: $spalte2"
 done < datei.csv
-```</details>
+```
+
+</details>
 
 </details>
 
 <details>
 <summary><b>Fragen zu TUI & Sicherheitsflags</b> (Klicken zum Ausklappen)</summary>
 
-3. **Welchen großen Vorteil bietet `whiptail` für systemadministrative Aufgaben?**
+1. **Welchen großen Vorteil bietet `whiptail` für systemadministrative Aufgaben?**
    <details><summary>Antwort</summary>Es ermöglicht das einfache Erzeugen von textbasierten grafischen Dialogfenstern (Menüs, Passworteingaben, Ja/Nein-Entscheidungen, Ladebalken) direkt auf der Kommandozeile. Dies minimiert Falscheingaben von Anwendern und erhöht den Komfort.</details>
 
-4. **Was bewirkt die Kombination aus `set -e` und `set -o pipefail`?**
+2. **Was bewirkt die Kombination aus `set -e` und `set -o pipefail`?**
    <details><summary>Antwort</summary>**`set -e`** bricht das Skript sofort ab, wenn ein einzelner Befehl fehlschlägt (Exit-Code ungleich 0).  
-**`set -o pipefail`** stellt sicher, dass dies auch für Pipelines gilt. Normalerweise wird nur der Rückgabewert des *letzten* Glieds einer Pipeline ausgewertet; mit `pipefail` schlägt die gesamte Kette fehl, wenn ein beliebiges Glied fehlschlägt (z. B. `fehlerhafter_befehl | grep "test"`).</details>
+   **`set -o pipefail`** stellt sicher, dass dies auch für Pipelines gilt. Normalerweise wird nur der Rückgabewert des *letzten* Glieds einer Pipeline ausgewertet; mit `pipefail` schlägt die gesamte Kette fehl, wenn ein beliebiges Glied fehlschlägt (z. B. `fehlerhafter_befehl | grep "test"`).</details>
 
 </details>
 

@@ -9,7 +9,7 @@ Am zehnten Tag der Linux Essentials haben wir unser Wissen über reguläre Ausdr
 ## 📑 Inhaltsverzeichnis
 
 * [Lernziele (LPIC-1 relevant)](#-lernziele-lpic-1-relevant)
-* [Fortgeschrittene Datenextraktion der Netzwerkdienste](#-1-fortgeschrittene-datenextraktion-der-netzwerkdienste)
+* [Fortgeschrittene Datenextraktion der Netzwerkdienste](#️-1-fortgeschrittene-datenextraktion-der-netzwerkdienste)
 * [Port-Zählung nach Ziffernlänge (Grob- bis Feinanalyse)](#-2-port-zählung-nach-ziffernlänge-grob--bis-feinanalyse)
 * [Bash-Automatisierung mit For-Loops](#-3-bash-automatisierung-mit-for-loops)
 * [Protokoll-Diversität & statistische Auswertung](#-4-protokoll-diversität--statistische-auswertung)
@@ -53,11 +53,15 @@ Wir haben untersucht, wie viele Ports einer bestimmten Ziffernlänge (z. B. exak
 ### Rohdaten-Zählung vs. Eindeutigkeit
 
 Bei der Analyse gibt es einen wesentlichen Unterschied zwischen der Gesamtzahl der Dienst-Einträge und der Anzahl der einzigartigen Ports:
+
 * **Gesamtzahl der Vorkommen:** Zählt jeden Eintrag, der dem Muster entspricht.
+
   ```bash
   cat serviceNeu | grep -E '^[0-9]{3}/tcp' | wc -l
   ```
+
 * **Einzigartige Ports:** Eliminiert mehrfach definierte Ports (z. B. wenn ein Port für mehrere alternative Dienste registriert ist) mit `sort -u`.
+
   ```bash
   cat serviceNeu | grep -E '^[0-9]{3}/tcp' | sort -u | wc -l
   ```
