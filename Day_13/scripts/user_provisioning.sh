@@ -68,7 +68,7 @@ check_dependencies() {
 
 # ==============================================================================
 # Funktion: log_action
-# Zweck:    Protokolliert einen Verarbeitungsschritt in die zentrale Logdatei
+# Zweck:    Protokolliert einen Verarbeitungsschritt in Datei und Terminal
 # Parameter:
 #   $1 : Zu protokollierende Nachricht
 # ==============================================================================
@@ -76,7 +76,7 @@ log_action() {
     local message="$1"
     local timestamp
     timestamp=$(date +"%Y-%m-%d %H:%M:%S")
-    echo "* ${timestamp} : ${message}" >> "$LOG_FILE"
+    echo "* ${timestamp} : ${message}" | tee -a "$LOG_FILE"
 }
 
 # ==============================================================================
@@ -86,8 +86,8 @@ log_action() {
 clean_csv() {
     log_action "System: Starte Bereinigung der Quelldatei"
     
-    # Ignoriere Fehler von grep falls die Datei komplett leer oder invalid ist
-    grep -E '^[0-9]+;' "$INPUT_CSV" > "$CLEANED_CSV" || true
+    # Fehler ignorieren und Zeilenumbrueche plattformunabhaengig normieren
+    tr '\r' '\n' < "$INPUT_CSV" | grep -E '^[0-9]+;' > "$CLEANED_CSV" || true
     
     log_action "System: Bereinigung abgeschlossen und Zwischendatei erstellt"
 }
@@ -99,20 +99,19 @@ clean_csv() {
 process_users() {
     log_action "System: Starte Iteration zur Benutzeranlage"
 
-    # Sichere Ablage fuer Passwoerter initialisieren
     echo "Benutzername;Passwort" > "$CREDENTIALS_FILE"
-    chmod 600 "$CREDENTIALS_FILE"
+    
+    # Leserechte fuer alle Systembenutzer freigeben
+    chmod 644 "$CREDENTIALS_FILE"
 
     while IFS=";" read -r id nachname vorname rest; do
         
-        # Entfernung von Leerzeichen und Wagenruecklaeufen mittels Parameter Expansion
         local vorname_clean="${vorname//[ $'\r']/}"
         local nachname_clean="${nachname//[ $'\r']/}"
         
         local vorname_prefix="${vorname_clean:0:3}"
         local nachname_prefix="${nachname_clean:0:3}"
         
-        # Generierung des Benutzernamens und Umwandlung in Kleinbuchstaben
         local username_raw="${vorname_prefix}${nachname_prefix}"
         local username_lower="${username_raw,,}"
         
@@ -125,7 +124,7 @@ process_users() {
         raw_pw=$(pwgen -1 -s 12)
         local userpasswort="${username}${raw_pw}"
         
-        echo -e "\n### Benutzerprofil: ${gecos}" >> "$LOG_FILE"
+        echo -e "\n### Benutzerprofil: ${gecos}" | tee -a "$LOG_FILE"
         log_action "Account ${username}: Namenskonvention und Variablen generiert"
         
         if id "$username" &>/dev/null; then
@@ -139,7 +138,6 @@ process_users() {
         echo "${username}:${userpasswort}" | chpasswd
         log_action "Account ${username}: Systempasswort zugewiesen"
         
-        # Speicherung der Zugangsdaten in gesicherter separater Datei
         echo "${username};${userpasswort}" >> "$CREDENTIALS_FILE"
         
     done < "$CLEANED_CSV"
@@ -151,7 +149,6 @@ process_users() {
 # Hauptprogramm
 # ==============================================================================
 main() {
-    # Initialisiere die Logdatei neu bei jedem Durchlauf
     echo "# Verarbeitungsprotokoll Benutzerverwaltung" > "$LOG_FILE"
     
     check_root
@@ -160,5 +157,4 @@ main() {
     process_users
 }
 
-# Auslöser der gesamten Skriptlogik
 main
