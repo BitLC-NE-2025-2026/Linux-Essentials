@@ -38,17 +38,6 @@ check_dependencies() {
 }
 
 # ==============================================================================
-# Funktion: check_dependencies
-# Zweck:    Prueft das Vorhandensein zwingend benoetigter Pakete vor Ausfuehrung
-# ==============================================================================
-check_dependencies() {
-    if ! command -v whiptail &> /dev/null; then
-        echo "Kritischer Fehler: Das Paket whiptail ist nicht installiert."
-        exit 1
-    fi
-}
-
-# ==============================================================================
 # Funktion: get_users_from_log
 # Zweck:    Extrahiert alle erfolgreich angelegten Benutzernamen aus der Logdatei
 # ==============================================================================
