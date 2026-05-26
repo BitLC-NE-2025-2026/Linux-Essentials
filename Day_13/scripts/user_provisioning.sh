@@ -101,7 +101,6 @@ process_users() {
 
     echo "Benutzername;Passwort" > "$CREDENTIALS_FILE"
     
-    # Leserechte fuer alle Systembenutzer freigeben
     chmod 644 "$CREDENTIALS_FILE"
 
     while IFS=";" read -r id nachname vorname rest; do
@@ -125,6 +124,8 @@ process_users() {
         local userpasswort="${username}${raw_pw}"
         
         echo -e "\n### Benutzerprofil: ${gecos}" | tee -a "$LOG_FILE"
+        echo "**Initialpasswort:** ${userpasswort}" | tee -a "$LOG_FILE"
+        
         log_action "Account ${username}: Namenskonvention und Variablen generiert"
         
         if id "$username" &>/dev/null; then
