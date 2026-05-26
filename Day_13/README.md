@@ -9,13 +9,14 @@ Am dreizehnten Tag der Linux Essentials behandeln wir fortgeschrittenes Shell Sc
 ## 📑 Inhaltsverzeichnis
 
 * [Lernziele LPIC-1 relevant](#-lernziele-lpic-1-relevant)
-* [Automatisierte Benutzeranlage](#-1-automatisierte-benutzeranlage)
-* [Textbasierte Benutzeroberflächen](#-2-textbasierte-benutzeroberflaechen)
-* [Grafische Dialoge mit Whiptail](#-3-grafische-dialoge-mit-whiptail)
-* [Druckersteuerung im Terminal](#-4-druckersteuerung-im-terminal)
-* [Zurück zur Übersicht](#-zurueck-zur-uebersicht)
+* [Automatisierte Benutzeranlage](#️-1-automatisierte-benutzeranlage)
+* [Textbasierte Benutzeroberflächen](#️-2-textbasierte-benutzeroberflächen)
+* [Grafische Dialoge mit Whiptail](#️-3-grafische-dialoge-mit-whiptail)
+* [Druckersteuerung im Terminal](#️-4-druckersteuerung-im-terminal)
+* [Zurück zur Übersicht](#-6-zur%C3%BCck-zur-%C3%BCbersicht)
 
 ---
+
 ## 🗂️ Übersicht der Skripte
 
 Der Tag 13 beinhaltet vier zentrale Bash Skripte zur Systemadministration:
@@ -46,6 +47,7 @@ Skripte übernehmen das massenhafte Anlegen von Benutzerkonten effizient und feh
 Das Skript `user_provisioning.sh` demonstriert die automatisierte Verarbeitung einer unformatierten CSV Quelldatei.
 
 **Kernfunktionen und LPIC-1 Bezüge:**
+
 * **Textbereinigung:** Der Befehl `tr` wandelt inkompatible Zeilenumbrüche um. Der Befehl `grep` filtert valide Datenzeilen anhand regulärer Ausdrücke.
 * **Datenmanipulation:** Der Befehl `sed` ersetzt Umlaute konform. Die native Bash Zeichenkettenmanipulation extrahiert Präfixe für Benutzernamen.
 * **Kontoerstellung:** Der Befehl `useradd` legt Systemkonten mit Heimatverzeichnis und Standard Shell an.
@@ -56,7 +58,7 @@ Das Skript `user_provisioning.sh` demonstriert die automatisierte Verarbeitung e
 
 ## ⌨️ 2. Textbasierte Benutzeroberflächen
 
-Ein Menüskript steuert die Ausführung verschiedener Administrationsaufgaben. Eine while Schleife hält das Menü dauerhaft offen. Die case Verzweigung wertet die Benutzereingabe aus und startet die entsprechenden Unterskripte zur Provisionierung oder Deprovisionierung. 
+Ein Menüskript steuert die Ausführung verschiedener Administrationsaufgaben. Eine while Schleife hält das Menü dauerhaft offen. Die case Verzweigung wertet die Benutzereingabe aus und startet die entsprechenden Unterskripte zur Provisionierung oder Deprovisionierung.
 
 ```bash
 # ==============================================================================
@@ -88,11 +90,12 @@ Zwei Skripte bieten unterschiedliche Ansätze für Administrationsmenüs.
 Baut auf reinen Bash Builtins auf. Eine Endlosschleife `while true` hält das Programm aktiv. Der Befehl `read` nimmt Eingaben entgegen. Die Kontrollstruktur `case` leitet in die entsprechenden Unterskripte weiter.
 
 **Das erweiterte Skript `whiptail_manager.sh`:**
-Nutzt das externe Paket `whiptail` für grafische Fenster direkt im Terminal. 
+Nutzt das externe Paket `whiptail` für grafische Fenster direkt im Terminal.
+
 * **Messageboxen:** Zeigen Warnungen und Erfolgsmeldungen an.
 * **Scrolltext:** Liest die generierte Protokolldatei `userlog.md` ein und stellt sie navigierbar dar.
 * **Menüs:** Bieten eine fehlerresistente Navigation per Pfeiltasten.
-* 
+
 ```bash
 # ==============================================================================
 # Skript: Whiptail Dialogausgabe
@@ -114,12 +117,14 @@ Protokolle lassen sich direkt aus dem Skript heraus auf physischen Druckern ausg
 Das Skript `whiptail_manager.sh` integriert LPIC-1 relevante Druckfunktionen direkt in die Oberfläche.
 
 **Verwendete Befehle:**
+
 * `lpstat -e`: Listet alle aktiven und verfügbaren Druckerziele auf. Das Skript iteriert über diese Liste und baut daraus dynamisch ein Auswahlmenü.
 * `lp -d`: Sendet die ausgewählte Protokolldatei an das spezifizierte Druckerziel. Die Standardfehlerausgabe wird abgefangen und bei Problemen transparent in einer grafischen Messagebox visualisiert.
 
 ---
 
 ## 🧠 Wissenstest: Fortgeschrittenes Scripting & TUI
+
 Hier sind typische Fragen rund um TUI-Erstellung, Massenverwaltung und Drucksysteme:
 
 <details>
@@ -129,7 +134,8 @@ Hier sind typische Fragen rund um TUI-Erstellung, Massenverwaltung und Drucksyst
    <details><summary>Antwort</summary>Mit **`lpstat -p`** (oder **`lpstat -e`** für eine reine Liste der Ziele) wird der Status abgefragt. Eine Datei druckt man mit **`lp -d <Druckername> <Datei>`**.</details>
 
 2. **Wie liest man eine kommagetrennte CSV-Datei zeilenweise sicher in der Shell ein?**
-   <details><summary>Antwort</summary>Das geschieht am besten über eine **`while`**-Schleife mit angepasstem **`IFS`** (Internal Field Separator):  
+   <details><summary>Antwort</summary>Das geschieht am besten über eine **`while`**-Schleife mit angepasstem **`IFS`** (Internal Field Separator):
+
 ```bash
 while IFS=',' read -r spalte1 spalte2; do
     echo "Feld 1: $spalte1, Feld 2: $spalte2"
@@ -151,9 +157,9 @@ done < datei.csv
 </details>
 
 ## 🔗 6. Zurück zur Übersicht
+
 [⬅ Zurück zur Übersicht](../README.md)
 
 ---
 
 *Erstellt am 22. Mai 2026 für den Linux Essentials Kurs.*
-
