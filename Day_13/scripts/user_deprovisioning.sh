@@ -2,12 +2,12 @@
 
 # ==============================================================================
 # Skriptname:       user_deprovisioning.sh
-# Version:          1.0
-# Zweck:            Interaktives Loeschen von Benutzern basierend auf Logdatei
+# Version:          1.1
+# Zweck:            Interaktives Loeschen von Benutzern ueber Whiptail TUI
 # Parameter:        Keine
 # Rueckgabewert:    0 bei fehlerfreier Ausfuehrung, 1 bei Abbruechen
-# Voraussetzungen:  Administrative Rechte
-# Architektur:      Separation of Concerns, Modularisierung
+# Voraussetzungen:  Administrative Rechte, Paket whiptail
+# Architektur:      Separation of Concerns, Modularisierung, Fail Fast Ansatz
 # Author:           Tobias B
 # ==============================================================================
 
