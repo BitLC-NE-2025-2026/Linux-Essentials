@@ -8,6 +8,7 @@
 # Rueckgabewert:    0 bei fehlerfreier Ausfuehrung, 1 bei Abbruechen
 # Voraussetzungen:  Administrative Rechte, ausführbare Unterskripte
 # Architektur:      Modularisierung, Endlosschleife
+# Author:           Tobias B
 # ==============================================================================
 
 set -euo pipefail
