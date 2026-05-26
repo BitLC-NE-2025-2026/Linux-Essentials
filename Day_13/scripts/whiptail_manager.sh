@@ -45,11 +45,11 @@ check_requirements() {
 
 # ==============================================================================
 # Funktion: show_log
-# Zweck:    Liest die Protokolldatei ein und stellt sie in einer Textbox dar
+# Zweck:    Liest die Protokolldatei ein und stellt sie in einer scrollbaren Textbox dar
 # ==============================================================================
 show_log() {
     if [[ -f "$LOG_FILE" ]]; then
-        whiptail --title "Verarbeitungsprotokoll" --textbox "$LOG_FILE" 22 80
+        whiptail --title "Verarbeitungsprotokoll" --scrolltext --textbox "$LOG_FILE" 22 80
     else
         whiptail --title "Dateifehler" --msgbox "Die Protokolldatei existiert noch nicht im System." 8 50
     fi
