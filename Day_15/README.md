@@ -43,15 +43,17 @@ Dieses Dokument beschreibt die Netzwerkkonfiguration für `srv-rocky`. Die VM fu
 | Hostname | Adapter-Name | Zweck | LAN Segment | IP-Adresse | IPv4-Methode | DNS |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `srv-rocky` | `ens160` | Outbound (WAN) | VMnet | DHCP/Statisch | - | 1.1.1.1 |
-| `srv-rocky` | `ens256` | Inbound (LAN) | `switch_net1` | 172.21.1.14/16 | Manual | 1.1.1.1 |
+| `srv-rocky` | `ens256` | Inbound A (LAN) | `switch_net1` | 172.16.7.33/27 | Manual | 1.1.1.1 |
+| `srv-rocky` | `ens224` | Inbound B (LAN) | `switch_net1` | 172.16.7.97/27 | Manual | 1.1.1.1 |
 
 ### Konfigurations-Schritte (CLI)
 
 #### 1. Inbound-Interface (ens256) einrichten
+
 ```bash
 # Verbindung für das LAN-Segment erstellen
 sudo nmcli con add type ethernet con-name "ens256" ifname ens256 \
-ipv4.addresses 172.21.1.14/16 ipv4.gateway 172.21.0.9 \
+ipv4.addresses 172.16.7.33/27 ipv4.gateway 172.21.0.9 \
 ipv4.dns "1.1.1.1" ipv4.method manual
 
 # Verbindung aktivieren
@@ -73,7 +75,7 @@ sudo sysctl -p /etc/sysctl.d/99-ip-forward.conf
 ```
 
 #### 3. Routing & Firewall (Voraussetzungen)
-- Routing: Sicherstellen, dass die Ziel-VMs im `switch_net1` die IP `172.21.1.14` als Gateway verwenden.
+- Routing: Sicherstellen, dass die Ziel-VMs im `switch_net1` die IP `172.16.7.33` als Gateway verwenden.
 - Firewall: `nftables` oder `firewalld` muss so konfiguriert werden, dass Masquerading (NAT) auf dem `ens160` Interface aktiviert ist, damit die internen VMs via `srv-rocky` nach außen kommunizieren können.
 
 ```bash
@@ -86,3 +88,24 @@ ip route
 # Forwarding-Status prüfen
 cat /proc/sys/net/ipv4/ip_forward
 ``` 
+#### 4. Einrichtung von Firewalld (Masquerading)
+Da du Rocky Linux nutzt, ist `firewalld` der Standard-Service. Hier ist die notwendige Konfiguration:
+
+```bash
+/// <summary>
+/// Konfiguriert Firewalld zur Aktivierung von Masquerading (NAT) auf dem WAN-Interface.
+/// Dies erlaubt den internen VMs, über ens160 den Host zu verlassen.
+/// </summary>
+sudo firewall-cmd --permanent --zone=public --add-masquerade
+
+/// <summary>
+/// Fügt die internen Interfaces der trusted Zone hinzu, um Routing zuzulassen.
+/// </summary>
+sudo firewall-cmd --permanent --zone=trusted --add-interface=ens256
+sudo firewall-cmd --permanent --zone=trusted --add-interface=ens224
+
+/// <summary>
+/// Lädt die Firewall-Konfiguration neu, um die Änderungen anzuwenden.
+/// </summary>
+sudo firewall-cmd --reload
+```
