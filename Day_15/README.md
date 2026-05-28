@@ -22,9 +22,13 @@ Diese Tabelle dient als zentrale Datenquelle für das geplante Automatisierungss
 * **IP-Bereich**: Der Bereich `192.168.10.0/24` wurde für das VLAN 10 reserviert.
 * **MAC-Adressen**: Die aufgeführten MAC-Adressen sind Beispiele (im Bereich `52:54:00` für KVM/QEMU). Diese sollten für die statische DHCP-Zuweisung im Router reserviert werden.
 
+´´´Bash
 cat /proc/sys/net/ipv4/ip_forward
 sudo sysctl -w net.ipv4.ip_forward=1
 nmcli
 nmtui
 ip a
 ip route
+nmcli connection down ens160
+nmcli connection up ens160
+```
