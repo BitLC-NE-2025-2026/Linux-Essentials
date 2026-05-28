@@ -32,3 +32,19 @@ ip route
 nmcli connection down ens160
 nmcli connection up ens160
 ```
+# Netzwerkadapter-Konfiguration: `srv-rocky`
+
+Diese Konfiguration spezifiziert den neuen Adapter für die Einbindung in das definierte LAN-Segment.
+
+| Hostname | Adapter-Name | LAN Segment | MAC-Adresse | IPv4-Methode | DNS-Server |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `srv-rocky` | `ens256` | `switch_net1` | 00:0C:29:XX:YY:ZZ | Static | 1.1.1.1 |
+
+## Konfigurationsdetails für `srv-rocky` (ens256)
+
+Um den neuen Adapter dauerhaft über die Kommandozeile zu konfigurieren, sind folgende Schritte erforderlich:
+
+### 1. Verbindung definieren
+```bash
+# Erstellen der neuen Verbindung mit statischer IP
+sudo nmcli con add type ethernet con-name "ens256" ifname ens256 ipv4.addresses 172.21.1.14/16 ipv4.gateway 172.21.0.9 ipv4.dns "1.1.1.1" ipv4.method manual
