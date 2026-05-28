@@ -33,20 +33,56 @@ nmcli connection down ens160
 nmcli connection up ens160
 ```
 
-# Netzwerkadapter-Konfiguration: `srv-rocky`
+## Netzwerk-Konfiguration srv-rocky
 
-Diese Konfiguration spezifiziert den neuen Adapter für die Einbindung in das definierte LAN-Segment.
+## Übersicht
+Dieses Dokument beschreibt die Netzwerkkonfiguration für `srv-rocky`. Die VM fungiert als zentraler Knotenpunkt, wobei `ens160` als Gateway-Verbindung (Outbound) und `ens256` als Schnittstelle für das interne LAN-Segment (Inbound) dient.
 
-| Hostname | Adapter-Name | LAN Segment | MAC-Adresse | IPv4-Methode |IPv4 | DNS-Server |
+### Netzwerk-Schnittstellen
+
+| Hostname | Adapter-Name | Zweck | LAN Segment | IP-Adresse | IPv4-Methode | DNS |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `srv-rocky` | `ens256` | `switch_net1` | 00:0C:29:XX:YY:ZZ | Manual | N/A | 1.1.1.1 |
+| `srv-rocky` | `ens160` | Outbound (WAN) | VMnet | DHCP/Statisch | - | 1.1.1.1 |
+| `srv-rocky` | `ens256` | Inbound (LAN) | `switch_net1` | 172.21.1.14/16 | Manual | 1.1.1.1 |
 
-## Konfigurationsdetails für `srv-rocky` (ens256)
+### Konfigurations-Schritte (CLI)
 
-Um den neuen Adapter dauerhaft über die Kommandozeile zu konfigurieren, sind folgende Schritte erforderlich:
-
-### 1. Verbindung definieren
+#### 1. Inbound-Interface (ens256) einrichten
 ```bash
-# Erstellen der neuen Verbindung mit statischer IP
-sudo nmcli con add type ethernet con-name "ens256" ifname ens256 ipv4.addresses 172.21.1.14/16 ipv4.gateway 172.21.0.9 ipv4.dns "1.1.1.1" ipv4.method manual
+# Verbindung für das LAN-Segment erstellen
+sudo nmcli con add type ethernet con-name "ens256" ifname ens256 \
+ipv4.addresses 172.21.1.14/16 ipv4.gateway 172.21.0.9 \
+ipv4.dns "1.1.1.1" ipv4.method manual
+
+# Verbindung aktivieren
+sudo nmcli con up "ens256"
 ```
+
+#### 2. IP-Forwarding aktivieren (Persistenz)
+Damit srv-rocky Traffic zwischen ens256 und ens160 weiterleiten kann, muss IP-Forwarding dauerhaft aktiviert werden.
+
+```bash
+# Aktivierung für laufende Session
+sudo sysctl -w net.ipv4.ip_forward=1
+
+# Persistente Konfiguration schreiben
+echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/99-ip-forward.conf
+
+# Konfiguration neu laden
+sudo sysctl -p /etc/sysctl.d/99-ip-forward.conf
+```
+
+#### 3. Routing & Firewall (Voraussetzungen)
+- Routing: Sicherstellen, dass die Ziel-VMs im `switch_net1` die IP `172.21.1.14` als Gateway verwenden.
+- Firewall: `nftables` oder `firewalld` muss so konfiguriert werden, dass Masquerading (NAT) auf dem `ens160` Interface aktiviert ist, damit die internen VMs via `srv-rocky` nach außen kommunizieren können.
+
+```bash
+# Interface-Status prüfen
+ip a show ens256
+
+# Routing-Tabelle prüfen
+ip route
+
+# Forwarding-Status prüfen
+cat /proc/sys/net/ipv4/ip_forward
+``` 
