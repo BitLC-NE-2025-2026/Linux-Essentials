@@ -14,9 +14,9 @@ Diese Tabelle dient als zentrale Datenquelle für das geplante Automatisierungss
 | `srv-rocky`  | Rocky Linux | ens160 |  |  | 172.21.0.9 | 1.1.1.1 |  |  |  |
 | `srv-rocky` | Rocky Linux | ens224 | 172.16.7.32 | 172.16.7.33/27 |  | 1.1.1.1 |  |  | switch_net01 |
 | `srv-rocky` | Rocky Linux | ens256 | 172.16.7.96 | 172.16.7.97/27 |  | 1.1.1.1 |  |  | switch_net02 |
-| `srv-deb-01` | Debian 13.5 |  | 172.16.7.42 | 172.16.7.33/27 | 172.16.7.32 |  | 1.1.1.1 |  | switch_net01 |
+| `srv-deb-01` | Debian 13.5 |  | 172.16.7.42 | 172.16.7.33/27 | 172.16.7.32 | 1.1.1.1 |  |  | switch_net01 |
 | `srv-deb-02` | Debian 13.5 |  | 172.16.7.111 | 172.16.7.97/27 |  | 1.1.1.1 |  |  | switch_net02 |
-| `ws-cachy` | CachyOS |  | 172.16.7.47 | 172.16.7.33/27 | 172.16.7.32 |  | 1.1.1.1 |  | switch_net01 |
+| `ws-cachy` | CachyOS |  | 172.16.7.47 | 172.16.7.33/27 | 172.16.7.32 | 1.1.1.1 |  |  | switch_net01 |
 | `ws-manjaro` | Manjaro |  | 172.16.7.106 | 172.16.7.97/27 |  | 1.1.1.1 |  |  | switch_net02 |
 
 ## Hinweise zur Implementierung
