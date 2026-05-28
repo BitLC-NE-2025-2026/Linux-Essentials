@@ -9,7 +9,7 @@ Diese Tabelle dient als zentrale Datenquelle für das geplante Automatisierungss
 
 | Hostname | OS | Interface Name | IP-Adresse | Subnetzmaske | Gateway | DNS-Server | MAC-Adresse | VLAN ID | VMWare LAN Segments |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `gw-router` | Gateway |  | 172.21.0.9 | 255.255.255.0 | - | 1.1.1.1 |  |  |  |
+| `gw-router` | Gateway | N/A | 172.21.0.9 | 255.255.255.0 | N/A | N/A | N/A | N/A | N/A |
 | `rocky-host`| HOST |  | 172.21.1.13 | 255.255.0.0 | 172.21.0.9 |  | 24:4B:FE:5B:11:96 |  |  |
 | `srv-rocky` | Rocky Linux |  |  |  |  |  |  |  |  |
 | `srv-deb-01` | Debian 13.5 |  |  |  |  |  |  |  |  |
@@ -37,9 +37,9 @@ nmcli connection up ens160
 
 Diese Konfiguration spezifiziert den neuen Adapter für die Einbindung in das definierte LAN-Segment.
 
-| Hostname | Adapter-Name | LAN Segment | MAC-Adresse | IPv4-Methode | DNS-Server |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `srv-rocky` | `ens256` | `switch_net1` | 00:0C:29:XX:YY:ZZ | Static | 1.1.1.1 |
+| Hostname | Adapter-Name | LAN Segment | MAC-Adresse | IPv4-Methode |IPv4 | DNS-Server |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `srv-rocky` | `ens256` | `switch_net1` | 00:0C:29:XX:YY:ZZ | Manual | N/A | 1.1.1.1 |
 
 ## Konfigurationsdetails für `srv-rocky` (ens256)
 
