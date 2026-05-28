@@ -11,11 +11,13 @@ Diese Tabelle dient als zentrale Datenquelle für das geplante Automatisierungss
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `gw-router` | Gateway | N/A | 172.21.0.9 | 255.255.255.0 | N/A | N/A | N/A | N/A | N/A |
 | `rocky-host`| HOST |  | 172.21.1.13 | 255.255.0.0 | 172.21.0.9 |  | 24:4B:FE:5B:11:96 |  |  |
-| `srv-rocky` | Rocky Linux |  |  |  |  |  |  |  |  |
-| `srv-deb-01` | Debian 13.5 |  |  |  |  |  |  |  |  |
-| `srv-deb-02` | Debian 13.5 |  |  |  |  |  |  |  |  |
-| `ws-cachy` | CachyOS |  |  |  |  |  |  |  |  |
-| `ws-manjaro` | Manjaro |  |  |  |  |  |  |  |  |
+| `srv-rocky`  | Rocky Linux | ens160 |  |  |  |  |  |  |  |
+| `srv-rocky` | Rocky Linux | ens224 | 172.16.7.32 | 172.16.7.33/27 |  | 1.1.1.1 |  |  | switch_net01 |
+| `srv-rocky` | Rocky Linux | ens256 | 172.16.7.96 | 172.16.7.97/27) |  | 1.1.1.1 |  |  | switch_net02 |
+| `srv-deb-01` | Debian 13.5 |  | 172.16.7.42 | 172.16.7.33/27 | 172.16.7.32 |  |  |  | switch_net01 |
+| `srv-deb-02` | Debian 13.5 |  | 172.16.7.111 | 172.16.7.97/27 |  |  |  |  | switch_net02 |
+| `ws-cachy` | CachyOS |  | 172.16.7.47 | 172.16.7.33/27 |  | 172.16.7.32 |  |  | switch_net01 |
+| `ws-manjaro` | Manjaro |  | 172.16.7.106 | 172.16.7.97/27 |  |  |  |  | switch_net02 |
 
 ## Hinweise zur Implementierung
 * **VLAN Tagging**: Die VLAN ID 10 muss auf dem Switch-Port sowie in der jeweiligen Netzwerkkonfiguration der VM (z. B. via `netplan`, `nmcli` oder `systemd-networkd`) definiert werden.
