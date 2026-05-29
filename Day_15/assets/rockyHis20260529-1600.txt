@@ -1,0 +1,76 @@
+ 1402  clear
+ 1403  ping -c3 www.google.com
+ 1404  traceroute www.google.com
+ 1405  cat /etc/resolc.conf
+ 1406  cat /etc/resolve.conf
+ 1407  sudo cat /etc/resolve.conf
+ 1408  sudo cat /etc/resolv.conf
+ 1409  cat /etc/resolv.conf
+ 1410  cat /proc/sys/net/ipv4/ip_forward
+ 1411  cat /proc/cpuinfo
+ 1412  lscpu
+ 1413  clear
+ 1414  cat /proc/sys/net/ipv4/ip_forward
+ 1415  sudo sysctl -w net.ipv4.ip_forward=1
+ 1416  cat /proc/sys/net/ipv4/ip_forward
+ 1417  ip a
+ 1418  ip r
+ 1419  nmtui
+ 1420  nmcli connection show
+ 1421  nmcli connection down ens160
+ 1422  nmcli connection up ens160
+ 1423  ifdown ens160
+ 1424  nmcli radio wifi
+ 1425  nmcli radio all
+ 1426  clear
+ 1427  ip a
+ 1428  nmcli connection show
+ 1429  nmcli connection delete ens256
+ 1430  nmcli connection show
+ 1431  ip a
+ 1432* 
+ 1433* nmcli connection 
+ 1434  nmcli connection add ens160
+ 1435  nmcli connection show
+ 1436  nmcli connection up ens160
+ 1437  nmcli connection show
+ 1438  nmcli connection up ens256
+ 1439* 
+ 1440  nmcli connection up ens160
+ 1441  nmcli connection show
+ 1442  ip r
+ 1443  nmcli connection show
+ 1444* 
+ 1445  nmcli connection show
+ 1446  nmcli connection up ens256
+ 1447  nmcli connection modify ens256 ipv4.addresses 172.16.7.33/27
+ 1448  nmcli connection modify ens256 ipv4.method manual
+ 1449  nmcli connection down ens256
+ 1450  nmcli connection up ens256
+ 1451  nmcli connection show
+ 1452  ip a
+ 1453  cat /proc/sys/net/ipv4/ip_forward
+ 1454  ping -c3 172.16.7.37
+ 1455  nmcli connection down ens256
+ 1456  nmcli connection up ens256
+ 1457  ping -c3 172.16.7.37
+ 1458  ip a
+ 1459  clear
+ 1460  ip r
+ 1461  nmcli connection modify ens256 ipv4.addresses 172.16.49.33/27
+ 1462  nmcli connection modify ens256 ipv4.method manual
+ 1463  nmcli connection down ens256
+ 1464* 
+ 1465  ip r
+ 1466  nmcli connection down ens160
+ 1467  nmcli connection up ens160
+ 1468  ip r
+ 1469  nmcli connection modify ens256 ipv4.addresses 172.16.7.33/27
+ 1470  nmcli connection modify ens256 ipv4.method manual
+ 1471  nmcli connection down ens256
+ 1472  nmcli connection up ens256
+ 1473  ping -c3 172.16.7.37
+ 1474  clear
+ 1475  ls
+ 1476  history 100 | less
+ 1477  history 76 > rockyHis$(date +%Y%m%d-%H%M).txt
