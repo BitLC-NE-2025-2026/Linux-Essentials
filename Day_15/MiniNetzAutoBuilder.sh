@@ -6,6 +6,15 @@
 # Zweck: Universelles System und Netzwerk Setup
 # Beschreibung: Konfiguriert Netzwerk, SSH, Nftables, ZSH und Fastfetch.
 # Nutzt das SFC Muster zur modularen und sicheren Ausführung.
+#
+# Bekannte Hosts in der Topologie:
+# gw-router: Externes Gateway
+# rocky-host: Physikalischer Host
+# srv-rocky: Zentraler Router
+# srv-deb-01: Client Debian Netz A
+# ws-cachy: Client CachyOS Netz A
+# srv-deb-02: Client Debian Netz B
+# ws-manjaro: Client Manjaro Netz B
 # ==============================================================================
 
 set -euo pipefail
