@@ -35,6 +35,9 @@ nmcli connection down ens160
 nmcli connection up ens160
 ```
 
+
+
+
 ## Netzwerk-Konfiguration srv-rocky
 
 ## Übersicht
@@ -105,6 +108,32 @@ sudo firewall-cmd --permanent --zone=public --add-masquerade
 /// </summary>
 sudo firewall-cmd --permanent --zone=trusted --add-interface=ens256
 sudo firewall-cmd --permanent --zone=trusted --add-interface=ens224
+
+
+Im Router Terminal
+Achten auf Konfiguration in den Netzwerkeinstellungen im Desktop
+Namen des Netzwerkgeräts (z.B ens160) eintragen und mit MAC-Adresse verknüpfen
+
+Kommandos für die Schnittstelle als Standard Gateway für ein Subnetz
+nmcli connection modify nameSchnittstelle ipv4.addresses 172.16.7.33/27 32er Netz, 2. Netz 1.IP (nur ein Beispiel für ein Gateway)
+nmcli connection modify nameSchnittstelle ipv4.method manual
+nmcli connection down nameSchnittstelle
+nmcli connection up nameSchnittstelle
+
+Client, die Virtuellen Maschinen mit verschiedenen Distros
+Name Schnittstelle überprüfen in den Netzwerkeinstellung und mit der MAC-Adresse verknüpfen
+In VM-Ware Workstation:
+    1. VM	2. Settings	3. Netzwerkadapter auswählen, von NAT auf Lan-Segment umstellen und für das Netz A siehe oben „Lan-semgment 1“ einstellen
+nmcli connection modifiy nameSchnittstelle ipv4.addresses 172.16.7.37/27 32er Netz, 2.Netz 5.IP (nur ein Beispiel für eine Client-IP-Adresse)
+nmcli connection modify nameSchnittstelle ipv4.method manual
+nmcli connection modify nameSchnittstelle ipv4.gateway 172.16.7.33 siehe oben
+nmcli connection down nameSchnittstelle
+nmcli connection up nameSchnittstelle
+
+Clients und Gateways pingen um die Verbindung in beiden Richtungen zu prüfen.
+Für alle weiteren Clients genauso verfahren und gegebenenfalls Lan-Segment, IP-Adresse und Gateway anpassen.
+
+Router für Forwarding und NAT Masquerade einstellen.
 
 /// <summary>
 /// Lädt die Firewall-Konfiguration neu, um die Änderungen anzuwenden.
