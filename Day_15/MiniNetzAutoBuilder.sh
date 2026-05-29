@@ -105,7 +105,7 @@ EOF
     if [[ "$CURRENT_HOST" == "$ROUTER_HOST" ]]; then
         cat << 'EOF' >> /etc/nftables.conf
         ct state established,related accept
-        iifname "ens224" accept
+        iifname "ens161" accept
         iifname "ens256" accept
     }
 }
@@ -170,26 +170,42 @@ configure_zsh_and_fastfetch() {
 }
 
 # ==============================================================================
-# Funktion: configure_router
-# Zweck: Einrichtung Netzwerkschnittstellen und Forwarding
+# Funktion: reset_network_connections
+# Zweck: Loescht alle aktiven und gespeicherten NetworkManager Verbindungen
 # Parameter: Keine
-# Rückgabewert: nmcli Befehlsstatus
+# Rueckgabewert: nmcli Befehlsstatus
+# ==============================================================================
+reset_network_connections() {
+    log_info "Bereinige vorhandene Netzwerkverbindungen"
+    for conn in $(nmcli -t -f UUID con show); do
+        nmcli con delete uuid "$conn" >/dev/null 2>&1 || true
+    done
+    log_success "Alte Verbindungen entfernt"
+}
+
+# ==============================================================================
+# Funktion: configure_router
+# Zweck: Einrichtung Netzwerkschnittstellen und Forwarding mittels MAC Adressen
+# Parameter: Keine
+# Rueckgabewert: nmcli Befehlsstatus
 # ==============================================================================
 configure_router() {
     log_info "Starte Router Netzwerk Konfiguration"
-    nmcli con modify ens160 ipv4.method auto ipv4.dns "$DNS_SERVER" || nmcli con add type ethernet con-name ens160 ifname ens160 ipv4.method auto ipv4.dns "$DNS_SERVER"
-    nmcli con modify ens224 ipv4.addresses 172.16.7.33/27 ipv4.method manual || nmcli con add type ethernet con-name ens224 ifname ens224 ipv4.addresses 172.16.7.33/27 ipv4.method manual
-    nmcli con modify ens256 ipv4.addresses 172.16.7.97/27 ipv4.method manual || nmcli con add type ethernet con-name ens256 ifname ens256 ipv4.addresses 172.16.7.97/27 ipv4.method manual
+    
+    reset_network_connections
+    
+    nmcli con add type ethernet con-name ens160 ifname ens160 mac "00:0C:29:9E:B3:12" ipv4.method auto ipv4.dns "$DNS_SERVER"
+    nmcli con add type ethernet con-name ens161 ifname ens161 mac "00:0C:29:9E:B3:26" ipv4.addresses 172.16.7.33/27 ipv4.method manual
+    nmcli con add type ethernet con-name ens256 ifname ens256 mac "00:0C:29:9E:B3:1C" ipv4.addresses 172.16.7.97/27 ipv4.method manual
 
     nmcli con up ens160
-    nmcli con up ens224
+    nmcli con up ens161
     nmcli con up ens256
 
     sysctl -w net.ipv4.ip_forward=1
     echo "net.ipv4.ip_forward = 1" > /etc/sysctl.d/99-ip-forward.conf
     log_success "Router Netzwerk aktiv"
 }
-
 # ==============================================================================
 # Funktion: configure_client
 # Zweck: Setzt statische IP Adressen anhand des Hostnamens
