@@ -14,10 +14,10 @@ Diese Tabelle dient als zentrale Datenquelle für das geplante Automatisierungss
 | `srv-rocky`  | Rocky Linux | ens160 |  |  |  | 172.21.0.9 | 1.1.1.1 |  |  |  |
 | `srv-rocky` | Rocky Linux | ens224 | 172.16.7.32 | 172.16.7.33 | 255.255.255.224 | 172.16.7.33 | 1.1.1.1 |  |  | switch_net01 |
 | `srv-rocky` | Rocky Linux | ens256 | 172.16.7.96 | 172.16.7.97 | 255.255.255.224 | 172.16.7.97 | 1.1.1.1 |  |  | switch_net02 |
-| `srv-deb-01` | Debian 13.5 |  | 172.16.7.32 | 172.16.7.42 | 255.255.255.224 | 172.16.7.32 | 1.1.1.1 |  |  | switch_net01 |
-| `ws-cachy` | CachyOS |  | 172.16.7.32 | 172.16.7.47 | 255.255.255.224 | 172.16.7.32 | 1.1.1.1 |  |  | switch_net01 |
-| `srv-deb-02` | Debian 13.5 |  | 172.16.7.96 | 172.16.7.111 | 255.255.255.224 |  | 1.1.1.1 |  |  | switch_net02 |
-| `ws-manjaro` | Manjaro |  | 172.16.7.96 | 172.16.7.106 | 255.255.255.224 |  | 1.1.1.1 |  |  | switch_net02 |
+| `srv-deb-01` | Debian 13.5 |  | 172.16.7.32 | 172.16.7.42 | 255.255.255.224 | 172.16.7.33 | 1.1.1.1 |  |  | switch_net01 |
+| `ws-cachy` | CachyOS |  | 172.16.7.32 | 172.16.7.47 | 255.255.255.224 | 172.16.7.33 | 1.1.1.1 |  |  | switch_net01 |
+| `srv-deb-02` | Debian 13.5 |  | 172.16.7.96 | 172.16.7.111 | 255.255.255.224 | 172.16.7.97 | 1.1.1.1 |  |  | switch_net02 |
+| `ws-manjaro` | Manjaro |  | 172.16.7.96 | 172.16.7.106 | 255.255.255.224 | 172.16.7.97 | 1.1.1.1 |  |  | switch_net02 |
 
 ## Hinweise zur Implementierung
 * **VLAN Tagging**: Die VLAN ID 10 muss auf dem Switch-Port sowie in der jeweiligen Netzwerkkonfiguration der VM (z. B. via `netplan`, `nmcli` oder `systemd-networkd`) definiert werden.
