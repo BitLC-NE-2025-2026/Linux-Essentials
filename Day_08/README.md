@@ -190,6 +190,12 @@ Hier sind typische Fragen rund um Shell Scripting:
 
 </details>
 
+## 📚 Ressourcen & Dokumente
+Im [Assets](./assets)-Verzeichnis finden Sie die Unterlagen zu diesem Tag:
+
+- [Praxis-Skript (Umask Check) (SH)](./assets/umask_script.sh)
+- [Praxis-Historie (Variablen, Export & Funktionen) (TXT)](./assets/history-function-set-env-202605291048)
+
 ---
 
 *Letztes Update: 26. Mai 2026 für den Linux-Essentials Kurs.*
