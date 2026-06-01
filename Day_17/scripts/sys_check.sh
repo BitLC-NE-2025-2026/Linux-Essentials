@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# MNBTUI Module: sys_check.sh
+# OmniTUI Module: sys_check.sh
 # Autor: Tobias Boyke
 # Zweck: Systemprüfungen, Root/Sudoers-Härtung und Paket-Abhängigkeiten
 # ==============================================================================

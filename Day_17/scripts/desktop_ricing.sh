@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# MNBTUI Module: desktop_ricing.sh
+# OmniTUI Module: desktop_ricing.sh
 # Autor: Tobias Boyke
 # Zweck: r/unixporn Ultimate Eyecandy & Ricing Assistent (FHD Edition)
 # ==============================================================================

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# MNBTUI Module: backup_manager.sh
+# OmniTUI Module: backup_manager.sh
 # Autor: Tobias Boyke
 # Zweck: Systemkonfigurations-Backup & Wiederherstellung (FHD Optimiert)
 # ==============================================================================
@@ -12,7 +12,7 @@ W_HEIGHT=24
 W_WIDTH=95
 W_LIST=8
 
-BACKUP_DIR="/var/backups/mnbtui"
+BACKUP_DIR="/var/backups/omnitui"
 sudo mkdir -p "$BACKUP_DIR"
 
 ACTION=$(whiptail --title "Backup & Wiederherstellungs Manager" \
@@ -30,7 +30,7 @@ case "$ACTION" in
         whiptail --title "Backup wird erstellt" --infobox "Komprimiere System-Konfigurationen..." 8 60
         
         DATE=$(date +%Y%m%d_%H%M%S)
-        FILE_PATH="${BACKUP_DIR}/mnbtui_backup_${DATE}.tar.gz"
+        FILE_PATH="${BACKUP_DIR}/omnitui_backup_${DATE}.tar.gz"
         
         # Liste der zu sichernden Pfade
         PATHS_TO_BACKUP=(
@@ -64,7 +64,7 @@ case "$ACTION" in
         
     "RESTORE")
         # Alle tar.gz Dateien im Backup-Verzeichnis auflisten
-        BACKUPS=($(sudo find "$BACKUP_DIR" -name "mnbtui_backup_*.tar.gz" -printf "%f\n" 2>/dev/null | sort -r))
+        BACKUPS=($(sudo find "$BACKUP_DIR" -name "omnitui_backup_*.tar.gz" -printf "%f\n" 2>/dev/null | sort -r))
         
         if [[ ${#BACKUPS[@]} -eq 0 ]]; then
             whiptail --title "Keine Backups" --msgbox "Es wurden keine Backup-Dateien in $BACKUP_DIR gefunden!" 10 55
@@ -101,8 +101,8 @@ case "$ACTION" in
         ;;
         
     "LIST")
-        BACKUPS_LIST=$(sudo find "$BACKUP_DIR" -name "mnbtui_backup_*.tar.gz" -exec ls -lh {} \; 2>/dev/null || echo "Keine Backups vorhanden.")
-        TEMP_LIST_FILE="/tmp/mnbtui_backups_list.txt"
+        BACKUPS_LIST=$(sudo find "$BACKUP_DIR" -name "omnitui_backup_*.tar.gz" -exec ls -lh {} \; 2>/dev/null || echo "Keine Backups vorhanden.")
+        TEMP_LIST_FILE="/tmp/omnitui_backups_list.txt"
         echo "$BACKUPS_LIST" > "$TEMP_LIST_FILE"
         whiptail --title "Vorhandene System-Backups" --scrolltext --textbox "$TEMP_LIST_FILE" 20 80
         ;;

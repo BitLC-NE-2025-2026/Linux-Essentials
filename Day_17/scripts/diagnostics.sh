@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# MNBTUI Module: diagnostics.sh
+# OmniTUI Module: diagnostics.sh
 # Autor: Tobias Boyke
 # Zweck: Integrierte Netzwerk- & Konnektivitäts-Diagnose (FHD Optimiert)
 # ==============================================================================
@@ -12,7 +12,7 @@ CONFIG_PATH="$(dirname "$0")/../config.yaml"
 PARSER="$(dirname "$0")/parse_config.py"
 
 CURRENT_HOST=$(hostname -s)
-DIAG_LOG="/tmp/mnbtui_diagnostics.txt"
+DIAG_LOG="/tmp/omnitui_diagnostics.txt"
 rm -f "$DIAG_LOG"
 
 whiptail --title "Netzwerk-Diagnose läuft" --infobox "Führe automatisierte Latenz- & Routingtests im Subnetz durch..." 8 70
@@ -20,7 +20,7 @@ whiptail --title "Netzwerk-Diagnose läuft" --infobox "Führe automatisierte Lat
 # Header für den Diagnosebericht schreiben
 {
     echo "============================================================================="
-    echo "            MNBTUI NETZWERK-DIAGNOSEBERICHT  --  $(date)"
+    echo "            OmniTUI NETZWERK-DIAGNOSEBERICHT  --  $(date)"
     echo "============================================================================="
     echo "Lokaler Hostname: $CURRENT_HOST"
     echo ""

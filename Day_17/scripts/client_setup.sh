@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# MNBTUI Module: client_setup.sh
+# OmniTUI Module: client_setup.sh
 # Autor: Tobias Boyke
 # Zweck: Dynamische Client Netzwerk-Konfiguration statischer IPs, Gateways & DNS
 # ==============================================================================

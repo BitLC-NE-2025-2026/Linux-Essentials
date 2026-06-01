@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Master TUI: MNBTUI.sh
+# Master TUI: OmniTUI.sh
 # Autor: Tobias Boyke
 # Zweck: Zentrale Interaktive Steuerung für Netzwerk, Services & Tweaks (FHD Optimiert)
 # ==============================================================================
@@ -29,7 +29,7 @@ bash "${SCRIPT_DIR}/scripts/sys_check.sh"
 CURRENT_HOST=$(hostname -s)
 
 while true; do
-    CHOICE=$(whiptail --title "MiniNetzBuilderTUI (MNBTUI) - Day 17 [FHD Edition]" \
+    CHOICE=$(whiptail --title "OmniTUI (OmniTUI) - Day 17 [FHD Edition]" \
                       --menu "Zentrales Verwaltungsmenü (Host: $CURRENT_HOST)\nBitte wählen Sie eine Administrations-Aufgabe:" $W_HEIGHT $W_WIDTH $W_LIST \
                       "1" "Systemprüfungen & Abhängigkeiten (sys_check)" \
                       "2" "DNS-Latenz-Benchmark & Selektor (dns_selector)" \

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# MNBTUI Module: ntp_setup.sh
+# OmniTUI Module: ntp_setup.sh
 # Autor: Tobias Boyke
 # Zweck: NTP Zeitsynchronisation & Server-Auswahl (FHD Optimiert)
 # ==============================================================================

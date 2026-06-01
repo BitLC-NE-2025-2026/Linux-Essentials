@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# MNBTUI Module: system_tweaks.sh
+# OmniTUI Module: system_tweaks.sh
 # Autor: Tobias Boyke
 # Zweck: System Tuning, Kernel Optimierung, DNS-Cache & Default Editor (TUI)
 # ==============================================================================

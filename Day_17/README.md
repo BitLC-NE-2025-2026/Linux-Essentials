@@ -1,4 +1,4 @@
-# 🖥️ MiniNetzBuilderTUI (MNBTUI) - Tag 17
+# 🖥️ OmniTUI (OmniTUI) - Tag 17
 
 ![Linux Essentials Day 17 Header](./header.png)
 
@@ -10,7 +10,7 @@
 
 ## 📖 Einführung & Vision
 
-**MNBTUI** (MiniNetzBuilderTUI) ist ein hochgradig modulares, interaktives und professionelles Administrations- und Netzwerkeinrichtungs-System auf Basis von **Whiptail TUI**. Es transformiert die monolithische Automatisierung von Tag 16 in eine zukunftsweisende, benutzerfreundliche und fehlerresistente Suite.
+**OmniTUI** (OmniTUI) ist ein hochgradig modulares, interaktives und professionelles Administrations- und Netzwerkeinrichtungs-System auf Basis von **Whiptail TUI**. Es transformiert die monolithische Automatisierung von Tag 16 in eine zukunftsweisende, benutzerfreundliche und fehlerresistente Suite.
 
 Das System steuert die gesamte Netzwerkarchitektur (Zentrales Gateway, IP-Forwarding, `nftables` NAT-Masquerading, statisches Routing auf Clients) und erlaubt die Zuweisung von Geräten über ihre spezifischen **ENS-Namen** oder **physikalischen MAC-Adressen** direkt aus der YAML-Datei.
 
@@ -43,7 +43,7 @@ Das System teilt sich in eine zentrale TUI-Hauptsteuerung und dedizierte, modula
 
 ```mermaid
 graph TD
-    A["MNBTUI.sh (Hauptmenü Loop)"] --> B["config.yaml (Zentrale Topologie)"]
+    A["OmniTUI.sh (Hauptmenü Loop)"] --> B["config.yaml (Zentrale Topologie)"]
     A --> C["scripts/sys_check.sh (Dependency- & Sudo-Resolver)"]
     A --> D["scripts/dns_selector.sh (Dual-IP Live Ping & Benchmark)"]
     A --> E["scripts/router_setup.sh (Gateway, Routing & nftables NAT)"]
@@ -99,7 +99,7 @@ clients:
 
 | Skriptname | Hauptfunktion | LPIC-1 Bezug | TUI-Typ |
 | :--- | :--- | :--- | :--- |
-| **`MNBTUI.sh`** | Hauptmenü, Navigations-Loop & Config-Viewer | - | Menü (FHD) |
+| **`OmniTUI.sh`** | Hauptmenü, Navigations-Loop & Config-Viewer | - | Menü (FHD) |
 | **`sys_check.sh`** | Sudoers-Härtung, OS-Erkennung & Dependency-Install | 109.4 | Info-Box |
 | **`dns_selector.sh`** | Dual-Ping Benchmark & sofortige systemweite Aktivierung | 109.1, 109.4 | Menü (Live-Werte) |
 | **`router_setup.sh`** | IP-Forwarding, nmcli Interface-Profile, nftables NAT | 109.1, 110.1 | Status-Box |
@@ -166,7 +166,7 @@ clients:
 * Richtet die persistente Konfigurationsdatei ein, erzwingt die Synchronisation und gibt Drift- und Zeitstatus aus.
 
 ### 9. Backup & Restore Manager (`backup_manager.sh`)
-* Archiviert und komprimiert alle durch MNBTUI modifizierten Konfigurationsdateien in einem datierten `.tar.gz`-Archiv unter `/var/backups/mnbtui/`.
+* Archiviert und komprimiert alle durch OmniTUI modifizierten Konfigurationsdateien in einem datierten `.tar.gz`-Archiv unter `/var/backups/omnitui/`.
 * Das **Wiederherstellungsmenü** listet alle vorhandenen Backups samt Dateigröße auf und erlaubt das Zurückspielen alter Zustände mit anschließendem automatischen Dienst-Neustart.
 
 ---
@@ -177,10 +177,10 @@ Stellen Sie vor der Ausführung sicher, dass Sie sich im Verzeichnis `Day_17` be
 
 ```bash
 # Skript ausführbar machen
-chmod +x MNBTUI.sh scripts/*.sh scripts/*.py
+chmod +x OmniTUI.sh scripts/*.sh scripts/*.py
 
 # Hauptsteuerung im Full-HD Modus starten
-bash MNBTUI.sh
+bash OmniTUI.sh
 ```
 
 > [!TIP]

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# MNBTUI Module: tools_installer.sh
+# OmniTUI Module: tools_installer.sh
 # Autor: Tobias Boyke
 # Zweck: Premium Tools-Installer, ZSH-Plugins, Fastfetch & Terminal Emulatoren TUI
 # ==============================================================================
@@ -177,11 +177,11 @@ fi
 if [[ "$CHOICES" =~ "ALIASES" ]]; then
     zshrc_file="$USER_HOME/.zshrc"
     if [[ -f "$zshrc_file" ]]; then
-        sudo sed -i '/### MNBTUI ADMIN ALIASES ###/,/fastfetch --logo os/d' "$zshrc_file" || true
+        sudo sed -i '/### OmniTUI ADMIN ALIASES ###/,/fastfetch --logo os/d' "$zshrc_file" || true
         
         cat << 'EOF' | sudo -u "$TARGET_USER" tee -a "$zshrc_file" >/dev/null
 
-### MNBTUI ADMIN ALIASES ###
+### OmniTUI ADMIN ALIASES ###
 # Netzwerk & Verbindungen
 alias ipbrief="ip -br -4 a"
 alias fwlist="sudo nft list ruleset"
