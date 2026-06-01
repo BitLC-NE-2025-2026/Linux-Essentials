@@ -39,8 +39,9 @@ while true; do
                       "6" "System Tuning & TCP/BBR Optimierung (tweaks)" \
                       "7" "Uniforme CLI-Tools, ZSH & Aliases (tools)" \
                       "8" "Cronjob Maker TUI (cron_maker)" \
-                      "9" "YAML-Konfiguration anzeigen (config.yaml)" \
-                      "10" "Alles sequenziell ausführen (Voll-Setup)" \
+                      "9" "Desktop Ricing & Premium Eyecandy (ricing)" \
+                      "10" "YAML-Konfiguration anzeigen (config.yaml)" \
+                      "11" "Alles sequenziell ausführen (Voll-Setup)" \
                       "0" "Beenden" 3>&1 1>&2 2>&3)
 
     if [[ -z "$CHOICE" || "$CHOICE" == "0" ]]; then
@@ -74,10 +75,13 @@ while true; do
             sudo bash "${SCRIPT_DIR}/scripts/cron_maker.sh"
             ;;
         "9")
+            sudo bash "${SCRIPT_DIR}/scripts/desktop_ricing.sh"
+            ;;
+        "10")
             # Config Datei formatiert in Textbox ausgeben
             whiptail --title "Konfigurations-Struktur (config.yaml)" --scrolltext --textbox "$CONFIG_PATH" 22 85
             ;;
-        "10")
+        "11")
             # Vollständiges sequenzielles Setup ausführen
             if whiptail --title "Voll-Setup bestätigen" --yesno "Möchten Sie das komplette System-Setup sequenziell ausführen?" 10 70; then
                 sudo bash "${SCRIPT_DIR}/scripts/sys_check.sh"
