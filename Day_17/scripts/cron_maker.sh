@@ -7,9 +7,8 @@
 
 set -euo pipefail
 
-# FHD-optimierte Whiptail-Größen
-W_HEIGHT=24
-W_WIDTH=95
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
 W_LIST=8
 
 # 1. Intervall-Auswahl

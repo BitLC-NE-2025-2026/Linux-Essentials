@@ -21,9 +21,8 @@ PROVIDERS=(
     "Uncensored;91.239.100.100;89.233.43.71;Zensurfreies DNS (Dänemark)"
 )
 
-# FHD-optimierte Whiptail-Größen
-W_HEIGHT=24
-W_WIDTH=95
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
 W_LIST=10
 
 TEMP_PING_LOG="/tmp/dns_benchmark.txt"
@@ -107,9 +106,8 @@ if [[ -n "$CHOICE" ]]; then
     echo "$CHOICE $SELECTED_SECONDARY" > /tmp/selected_dns.txt
     
     # 2. In config.yaml eintragen
-    CONFIG_PATH="$(dirname "$0")/../config.yaml"
     if [[ -f "$CONFIG_PATH" ]]; then
-        sed -i "s/dns_fallback: .*/dns_fallback: \"$CHOICE $SELECTED_SECONDARY\"/" "$CONFIG_PATH"
+        python3 "$UPDATER" "$CONFIG_PATH" "global:dns_fallback" "$CHOICE $SELECTED_SECONDARY"
     fi
     
     # 3. DIREKTE SOFORTIGE SYSTEMWEITE AKTIVIERUNG (Override)

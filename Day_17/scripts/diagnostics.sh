@@ -7,9 +7,8 @@
 
 set -euo pipefail
 
-# Pfade zu Konfigurationsdaten
-CONFIG_PATH="$(dirname "$0")/../config.yaml"
-PARSER="$(dirname "$0")/parse_config.py"
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
 
 CURRENT_HOST=$(hostname -s)
 DIAG_LOG="/tmp/omnitui_diagnostics.txt"
@@ -111,7 +110,7 @@ if command -v nmcli >/dev/null 2>&1 && nmcli -t -f NAME,DEVICE connection show -
 fi
 
 # Ergebnis in scrollbarer TUI-Textbox ausgeben
-whiptail --title "System- & Netzwerk-Diagnoseergebnisse" --scrolltext --textbox "$DIAG_LOG" 24 85
+whiptail --title "System- & Netzwerk-Diagnoseergebnisse" --scrolltext --textbox "$DIAG_LOG" $W_HEIGHT $W_WIDTH
 
 # --- AUTOMATISIERTER SELF-HEALING DOCTOR ---
 

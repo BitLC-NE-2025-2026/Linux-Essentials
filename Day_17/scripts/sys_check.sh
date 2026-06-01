@@ -7,9 +7,8 @@
 
 set -euo pipefail
 
-log_info() { echo -e "\e[34m[INFO]\e[0m $1"; }
-log_success() { echo -e "\e[32m[ERFOLG]\e[0m $1"; }
-log_err() { echo -e "\e[31m[FEHLER]\e[0m $1"; exit 1; }
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
 
 # 1. Root / Sudo-Rechte Prüfung
 CURRENT_USER=$(whoami)

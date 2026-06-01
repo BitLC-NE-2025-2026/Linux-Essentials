@@ -7,9 +7,8 @@
 
 set -euo pipefail
 
-# Pfade zu Konfigurationsdaten
-CONFIG_PATH="$(dirname "$0")/../config.yaml"
-PARSER="$(dirname "$0")/parse_config.py"
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
 
 CURRENT_HOST=$(hostname -s)
 ROUTER_HOST=$(python3 "$PARSER" "$CONFIG_PATH" "router:hostname")

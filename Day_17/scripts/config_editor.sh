@@ -7,14 +7,8 @@
 
 set -euo pipefail
 
-# Pfade zu Konfigurationsdaten
-CONFIG_PATH="$(dirname "$0")/../config.yaml"
-PARSER="$(dirname "$0")/parse_config.py"
-UPDATER="$(dirname "$0")/update_config.py"
-
-# FHD-optimierte Whiptail-Größen
-W_HEIGHT=24
-W_WIDTH=95
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
 W_LIST=10
 
 while true; do

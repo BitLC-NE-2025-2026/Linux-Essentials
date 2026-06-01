@@ -7,9 +7,8 @@
 
 set -euo pipefail
 
-# FHD-optimierte Whiptail-Größen
-W_HEIGHT=24
-W_WIDTH=95
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
 W_LIST=8
 
 BACKUP_DIR="/var/backups/omnitui"
@@ -104,6 +103,6 @@ case "$ACTION" in
         BACKUPS_LIST=$(sudo find "$BACKUP_DIR" -name "omnitui_backup_*.tar.gz" -exec ls -lh {} \; 2>/dev/null || echo "Keine Backups vorhanden.")
         TEMP_LIST_FILE="/tmp/omnitui_backups_list.txt"
         echo "$BACKUPS_LIST" > "$TEMP_LIST_FILE"
-        whiptail --title "Vorhandene System-Backups" --scrolltext --textbox "$TEMP_LIST_FILE" 20 80
+        whiptail --title "Vorhandene System-Backups" --scrolltext --textbox "$TEMP_LIST_FILE" $W_HEIGHT $W_WIDTH
         ;;
 esac

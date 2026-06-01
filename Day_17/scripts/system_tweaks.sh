@@ -7,17 +7,12 @@
 
 set -euo pipefail
 
-# Lade Konfigurationspfad
-CONFIG_PATH="$(dirname "$0")/../config.yaml"
-PARSER="$(dirname "$0")/parse_config.py"
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
+W_LIST=8
 
 TARGET_USER=${SUDO_USER:-root}
 USER_HOME=$(eval echo "~$TARGET_USER")
-
-# FHD-optimierte Whiptail-Größen
-W_HEIGHT=24
-W_WIDTH=95
-W_LIST=8
 
 # 1. Menü zur Auswahl der System-Tweaks
 TWEAKS=$(whiptail --title "System Tuning & Optimierungen" \

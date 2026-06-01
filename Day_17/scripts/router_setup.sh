@@ -7,9 +7,8 @@
 
 set -euo pipefail
 
-# Pfade zu Konfigurationsdaten
-CONFIG_PATH="$(dirname "$0")/../config.yaml"
-PARSER="$(dirname "$0")/parse_config.py"
+# Lade gemeinsame Variablen und Funktionen
+source "$(dirname "$(readlink -f "$0")")/common.sh"
 
 # Überprüfen ob Router
 CURRENT_HOST=$(hostname -s)
