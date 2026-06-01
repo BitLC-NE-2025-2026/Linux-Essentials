@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Master TUI: MNBTUI.sh
-# Zweck: Zentrale Interaktive Steuerung für Netzwerk, Services & Tweaks
+# Zweck: Zentrale Interaktive Steuerung für Netzwerk, Services & Tweaks (FHD Optimiert)
 # ==============================================================================
 
 set -euo pipefail
@@ -9,6 +9,11 @@ set -euo pipefail
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 CONFIG_PATH="${SCRIPT_DIR}/config.yaml"
 PARSER="${SCRIPT_DIR}/scripts/parse_config.py"
+
+# FHD-optimierte Whiptail-Größen
+W_HEIGHT=24
+W_WIDTH=95
+W_LIST=12
 
 # Stellt sicher, dass das Terminal nach dem Beenden wieder sauber aussieht
 cleanup() {
@@ -23,8 +28,8 @@ bash "${SCRIPT_DIR}/scripts/sys_check.sh"
 CURRENT_HOST=$(hostname -s)
 
 while true; do
-    CHOICE=$(whiptail --title "MiniNetzBuilderTUI (MNBTUI) - Day 17" \
-                      --menu "Zentrales Verwaltungsmenü (Host: $CURRENT_HOST)\nBitte wählen Sie eine Administrations-Aufgabe:" 20 75 11 \
+    CHOICE=$(whiptail --title "MiniNetzBuilderTUI (MNBTUI) - Day 17 [FHD Edition]" \
+                      --menu "Zentrales Verwaltungsmenü (Host: $CURRENT_HOST)\nBitte wählen Sie eine Administrations-Aufgabe:" $W_HEIGHT $W_WIDTH $W_LIST \
                       "1" "Systemprüfungen & Abhängigkeiten (sys_check)" \
                       "2" "DNS-Latenz-Benchmark & Selektor (dns_selector)" \
                       "3" "Router-Setup (IP, Forwarding, nftables-NAT)" \
@@ -44,7 +49,7 @@ while true; do
     case "$CHOICE" in
         "1")
             bash "${SCRIPT_DIR}/scripts/sys_check.sh"
-            whiptail --title "Check Komplett" --msgbox "Die Systemprüfung war erfolgreich." 8 40
+            whiptail --title "Check Komplett" --msgbox "Die Systemprüfung war erfolgreich." 8 $W_WIDTH
             ;;
         "2")
             bash "${SCRIPT_DIR}/scripts/dns_selector.sh"
@@ -69,11 +74,11 @@ while true; do
             ;;
         "9")
             # Config Datei formatiert in Textbox ausgeben
-            whiptail --title "Konfigurations-Struktur (config.yaml)" --scrolltext --textbox "$CONFIG_PATH" 22 70
+            whiptail --title "Konfigurations-Struktur (config.yaml)" --scrolltext --textbox "$CONFIG_PATH" 22 85
             ;;
         "10")
             # Vollständiges sequenzielles Setup ausführen
-            if whiptail --title "Voll-Setup bestätigen" --yesno "Möchten Sie das komplette System-Setup sequenziell ausführen?" 10 60; then
+            if whiptail --title "Voll-Setup bestätigen" --yesno "Möchten Sie das komplette System-Setup sequenziell ausführen?" 10 70; then
                 sudo bash "${SCRIPT_DIR}/scripts/sys_check.sh"
                 
                 # Rolle ermitteln
@@ -88,7 +93,7 @@ while true; do
                 sudo bash "${SCRIPT_DIR}/scripts/services_mgmt.sh"
                 sudo bash "${SCRIPT_DIR}/scripts/tools_installer.sh"
                 
-                whiptail --title "Voll-Setup beendet" --msgbox "Alle Skripte wurden erfolgreich nacheinander ausgeführt!" 8 50
+                whiptail --title "Voll-Setup beendet" --msgbox "Alle Skripte wurden erfolgreich nacheinander ausgeführt!" 8 60
             fi
             ;;
     esac

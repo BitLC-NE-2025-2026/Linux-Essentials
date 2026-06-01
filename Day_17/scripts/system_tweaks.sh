@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # MNBTUI Module: system_tweaks.sh
-# Zweck: System Tuning, TCP/IP Optimierung, BBR, DNS-Cache & Limits
+# Zweck: System Tuning, TCP/IP Optimierung, BBR, DNS-Cache & Limits (Checklist)
 # ==============================================================================
 
 set -euo pipefail
@@ -10,14 +10,19 @@ set -euo pipefail
 CONFIG_PATH="$(dirname "$0")/../config.yaml"
 PARSER="$(dirname "$0")/parse_config.py"
 
+# FHD-optimierte Whiptail-Größen
+W_HEIGHT=24
+W_WIDTH=95
+W_LIST=8
+
 # Menü zur Auswahl der Tweaks
 TWEAKS=$(whiptail --title "System Tuning & Optimierungen" \
-                  --checklist "Wählen Sie die gewünschten Kernel- und Netzwerk-Tweaks:" 16 65 6 \
-                  "BBR" "Google BBR Congestion Control aktivieren" ON \
-                  "TCP" "TCP/IP Buffer Tuning (High-Performance)" ON \
-                  "FASTOPEN" "TCP Fast Open aktivieren" ON \
-                  "DNSCACHE" "Lokalen DNS-Caching Resolver aktivieren" ON \
-                  "LIMITS" "Systemlimits erhöhen (limits.conf)" ON 3>&1 1>&2 2>&3)
+                  --checklist "Wählen Sie die gewünschten Kernel- und Netzwerk-Tweaks:" $W_HEIGHT $W_WIDTH $W_LIST \
+                  "BBR" "Google BBR Congestion Control (TCP Staukontrolle)" ON \
+                  "TCP" "TCP/IP Buffer Tuning (Performance für hohe Bandbreiten)" ON \
+                  "FASTOPEN" "TCP Fast Open (Reduziert Verbindungs-Overhead)" ON \
+                  "DNSCACHE" "Lokalen DNS-Caching Resolver (systemd-resolved/dnsmasq)" ON \
+                  "LIMITS" "Systemlimits erhöhen (maximale offene Dateien in limits.conf)" ON 3>&1 1>&2 2>&3)
 
 if [[ -z "$TWEAKS" ]]; then
     exit 0
@@ -26,14 +31,17 @@ fi
 # Erstelle temporäre sysctl Datei
 SYSCTL_CONF="/etc/sysctl.d/99-network-tweaks.conf"
 sudo mkdir -p /etc/sysctl.d
+sudo rm -f "$SYSCTL_CONF"
 
 whiptail --title "Tuning läuft" --infobox "Die ausgewählten Optimierungen werden angewendet..." 8 50
 
 # 1. BBR
 if [[ "$TWEAKS" =~ "BBR" ]]; then
-    echo "# Google BBR Congestion Control" | sudo tee -a "$SYSCTL_CONF" >/dev/null
-    echo "net.core.default_qdisc = fq" | sudo tee -a "$SYSCTL_CONF" >/dev/null
-    echo "net.ipv4.tcp_congestion_control = bbr" | sudo tee -a "$SYSCTL_CONF" >/dev/null
+    {
+        echo "# Google BBR Congestion Control"
+        echo "net.core.default_qdisc = fq"
+        echo "net.ipv4.tcp_congestion_control = bbr"
+    } | sudo tee -a "$SYSCTL_CONF" >/dev/null
 fi
 
 # 2. TCP Buffers
@@ -51,9 +59,11 @@ fi
 
 # 3. Fast Open
 if [[ "$TWEAKS" =~ "FASTOPEN" ]]; then
-    echo "" | sudo tee -a "$SYSCTL_CONF" >/dev/null
-    echo "# TCP Fast Open" | sudo tee -a "$SYSCTL_CONF" >/dev/null
-    echo "net.ipv4.tcp_fastopen = 3" | sudo tee -a "$SYSCTL_CONF" >/dev/null
+    {
+        echo ""
+        echo "# TCP Fast Open"
+        echo "net.ipv4.tcp_fastopen = 3"
+    } | sudo tee -a "$SYSCTL_CONF" >/dev/null
 fi
 
 # Sysctl anwenden
@@ -64,13 +74,11 @@ if [[ "$TWEAKS" =~ "DNSCACHE" ]]; then
     # Für systemd-resolved (standardmäßig auf Debian/Ubuntu/Arch)
     if systemctl list-unit-files | grep -q "systemd-resolved.service"; then
         sudo systemctl enable systemd-resolved --now >/dev/null 2>&1 || true
-        # Caching explizit erzwingen in /etc/systemd/resolved.conf
         sudo mkdir -p /etc/systemd/resolved.conf.d
         echo -e "[Resolve]\nCache=yes\nDNSStubListener=yes" | sudo tee /etc/systemd/resolved.conf.d/cache.conf >/dev/null
         sudo systemctl restart systemd-resolved >/dev/null 2>&1 || true
     elif command -v apt-get >/dev/null 2>&1 || command -v dnf >/dev/null 2>&1; then
         # DNSmasq als fallback falls kein systemd-resolved
-        # Prüfe Paketmanager und installiere dnsmasq
         if command -v dnf >/dev/null 2>&1; then
             sudo dnf install -y dnsmasq >/dev/null 2>&1 || true
         elif command -v apt-get >/dev/null 2>&1; then
@@ -97,4 +105,4 @@ if [[ "$TWEAKS" =~ "LIMITS" ]]; then
     } | sudo tee "$LIMITS_CONF" >/dev/null
 fi
 
-whiptail --title "Tweaks erfolgreich" --msgbox "Die ausgewählten Optimierungen wurden erfolgreich angewendet!\n\nDetails wurden in /etc/sysctl.d/99-network-tweaks.conf geschrieben." 12 55
+whiptail --title "Tweaks erfolgreich" --msgbox "Die ausgewählten Optimierungen wurden erfolgreich angewendet!\n\nDetails wurden in /etc/sysctl.d/99-network-tweaks.conf geschrieben." $W_HEIGHT $W_WIDTH

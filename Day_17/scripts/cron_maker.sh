@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # MNBTUI Module: cron_maker.sh
-# Zweck: Interaktiver Cronjob Generator via Whiptail TUI
+# Zweck: Interaktiver Cronjob Generator via Whiptail TUI (FHD Optimiert)
 # ==============================================================================
 
 set -euo pipefail
 
+# FHD-optimierte Whiptail-Größen
+W_HEIGHT=24
+W_WIDTH=95
+W_LIST=8
+
 # 1. Intervall-Auswahl
 INTERVAL=$(whiptail --title "Cronjob Generator - Intervall" \
-                    --menu "Wählen Sie die Ausführungshäufigkeit für den neuen Cronjob:" 15 60 5 \
+                    --menu "Wählen Sie die Ausführungshäufigkeit für den neuen Cronjob:" $W_HEIGHT $W_WIDTH $W_LIST \
                     "HOURLY" "Stündlich ausführen" \
                     "DAILY" "Täglich ausführen (um 02:00 Uhr nachts)" \
                     "WEEKLY" "Wöchentlich ausführen (Sonntags um 03:00 Uhr)" \
@@ -27,14 +32,14 @@ case "$INTERVAL" in
     "MONTHLY") CRON_TIME="0 4 1 * *" ;;
     "CUSTOM")
         CRON_TIME=$(whiptail --title "Custom Cron-Syntax" \
-                             --inputbox "Geben Sie die 5-stellige Cron-Zeitsyntax ein (z. B. '*/15 * * * *' für alle 15 Minuten):" 10 60 "*/15 * * * *" 3>&1 1>&2 2>&3)
+                             --inputbox "Geben Sie die 5-stellige Cron-Zeitsyntax ein (z. B. '*/15 * * * *' für alle 15 Minuten):" 10 70 "*/15 * * * *" 3>&1 1>&2 2>&3)
         if [[ -z "$CRON_TIME" ]]; then exit 0; fi
         ;;
 esac
 
 # 2. Aufgaben-Auswahl
 TASK=$(whiptail --title "Cronjob Generator - Aufgabe" \
-                --menu "Wählen Sie die auszuführende System-Aufgabe:" 15 60 4 \
+                --menu "Wählen Sie die auszuführende System-Aufgabe:" $W_HEIGHT $W_WIDTH $W_LIST \
                 "UPDATE" "Automatisches Paket-Update (apt/dnf)" \
                 "CLEAN" "/tmp Verzeichnis von alten Dateien befreien" \
                 "BACKUP" "Sicherung von /etc in ein tar-Archiv schreiben" \
@@ -63,7 +68,7 @@ case "$TASK" in
         ;;
     "CUSTOM")
         CRON_CMD=$(whiptail --title "Custom Befehlszeile" \
-                            --inputbox "Geben Sie die komplette Konsolen-Befehlszeile ein:" 10 60 "logger 'Hallo Welt aus dem Cronjob'" 3>&1 1>&2 2>&3)
+                            --inputbox "Geben Sie die komplette Konsolen-Befehlszeile ein:" 10 75 "logger 'Hallo Welt aus dem Cronjob'" 3>&1 1>&2 2>&3)
         if [[ -z "$CRON_CMD" ]]; then exit 0; fi
         ;;
 esac
@@ -73,11 +78,8 @@ FULL_CRON_LINE="$CRON_TIME $CRON_CMD"
 
 # Bestätigungs-Dialog
 if whiptail --title "Cronjob bestätigen" \
-            --yesno "Möchten Sie folgenden Cronjob aktiv einrichten?\n\n$FULL_CRON_LINE" 12 65; then
+            --yesno "Möchten Sie folgenden Cronjob aktiv einrichten?\n\n$FULL_CRON_LINE" 12 75; then
     
-    # In die Crontab des Root-Benutzers schreiben
-    # Vorhandene Crontab auslesen, Zeile anhängen, zurückschreiben
     (sudo crontab -l 2>/dev/null || true; echo "$FULL_CRON_LINE") | sudo crontab -
-    
-    whiptail --title "Erfolg" --msgbox "Der Cronjob wurde erfolgreich in die System-Crontab eingetragen!" 8 45
+    whiptail --title "Erfolg" --msgbox "Der Cronjob wurde erfolgreich in die System-Crontab eingetragen!" 8 60
 fi
