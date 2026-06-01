@@ -229,6 +229,10 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 * [Shell Scripting Vorlage (SH)](./assets/regexScripte.sh)
 * [Regex Projekt Walkthrough (MD)](./assets/regex_project_walkthrough.md)
 * [Historie Tag 09 (TXT)](./assets/rockyHis20260518-1344.txt)
+* [Regex Praxis-Historie (20260528-1401) (TXT)](./assets/semus-admin-regex-202605281401)
+* [Regex Praxis-Historie (20260528-1410) (TXT)](./assets/semus-admin-regex-202605281410)
+* [Regex Praxis-Historie (20260528-1426) (TXT)](./assets/semus-admin-regex-202605281426)
+* [Regex Praxis-Historie (20260529-0907) (TXT)](./assets/semus-admin-regex-202605290907)
 
 ---
 
