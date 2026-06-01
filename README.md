@@ -59,16 +59,18 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | Modul | Status | Fokus-Themen | Link |
 | :--- | :---: | :--- | :--- |
 | **Tag 11** | ✅ | Text-Editoren (vi / vim) - Modi, Navigation & Last-Line-Befehle | [📖 README](./Day_11/README.md) |
-| **Tag 12** | ⏳ | TBD | [📖 README](./Day_12/README.md) |
-| **Tag 13** | ⏳ | TBD | [📖 README](./Day_13/README.md) |
-| **Tag 14** | ⏳ | TBD | [📖 README](./Day_14/README.md) |
-| **Tag 15** | ⏳ | TBD | [📖 README](./Day_15/README.md) |
+| **Tag 12** | ✅ | Zeitgesteuerte Ausführung (cron, crontab, wall, at) | [📖 README](./Day_12/README.md) |
+| **Tag 13** | ✅ | Fortg. Shell Scripting (Massen-User, Whiptail TUI) | [📖 README](./Day_13/README.md) |
+| **Tag 14** | ✅ | LPIC-1 Leistungsabfrage & Multi-OS VM Setups | [📖 README](./Day_14/README.md) |
+| **Tag 15** | ✅ | Netzwerk-Grundlagen (IP-Adressierung, Subnetze & VLANs) | [📖 README](./Day_15/README.md) |
 
 ### 📅 Woche 4-6: Fortgeschrittene Themen (WIP)
 
 | Modul | Status | Link |
 | :--- | :---: | :--- |
-| **Tag 16 - 20** | ⏳ | [In Planung](./Day_16/README.md) |
+| **Tag 16** | ✅ | Netzwerk-Routing & Forwarding (VMware, nftables, NAT) | [📖 README](./Day_16/README.md) |
+| **Tag 17** | ✅ | Netzwerk-Routing & NTP-Zeitsynchronisation (chrony, timedatectl) | [📖 README](./Day_17/README.md) |
+| **Tag 18 - 20** | ⏳ | [In Planung](./Day_18/README.md) |
 | **Tag 21 - 25** | ⏳ | [In Planung](./Day_21/README.md) |
 | **Tag 26 - 30** | ⏳ | [In Planung](./Day_26/README.md) |
 
@@ -150,17 +152,17 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 
 ## 📈 System-Status (Dashboard)
 
-* **Aktuelle Umgebung:** Rocky Linux 9.x (RHEL-basiert)
-* **Shell:** Bash / ZSH + Oh My Zsh (Konfiguriert)
-* **Fortschritt:** 37% (11 von 30 Modulen abgeschlossen)
+* **Aktuelle Umgebung:** Rocky Linux 9.x (Router) & Debian/Cachy/Manjaro (Clients)
+* **Shell:** Bash / ZSH + Oh My Zsh & Whiptail TUIs
+* **Fortschritt:** 57% (17 von 30 Modulen abgeschlossen)
 
 ---
 
 ## 📜 Skripting-Zentrale (Neu)
 
-* **Master-Skripte:** [umask_script.sh](./Day_08/assets/umask_script.sh)
-* **Themen:** Automatisierung, Rechte-Validierung
+* **Master-Skripte:** [umask_script.sh](./Day_08/assets/umask_script.sh), [MiniNetzAutoBuilder.sh](./Day_16/MiniNetzAutoBuilder.sh), [OmniTUI.sh](./Day_17/OmniTUI.sh)
+* **Themen:** Automatisierung, Netzwerk-Routing, Firewall-Sicherung, NTP-Zeitsynchronisation
 
 ---
 
-*Dieses Repository wird kontinuierlich gepflegt. Letztes Update: 20. Mai 2026.*
+*Dieses Repository wird kontinuierlich gepflegt. Letztes Update: Juni 2026.*
