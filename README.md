@@ -85,50 +85,104 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 
 ### Linux Hauptfamilien
 
-| Familie | Fokus | Paketmanager | Vertreter |
-| :--- | :--- | :--- | :--- |
-| **Debian** | Stabilität | APT | Ubuntu, Mint, Kali |
-| **Red Hat** | Enterprise | DNF | RHEL, Rocky, Fedora |
-| **Arch** | Minimalismus | Pacman | Manjaro, Endeavour |
-| **SUSE** | Business | Zypper | openSUSE |
+| Familie | Fokus | Paketmanager | Vertreter | Hauptmerkmale |
+| :--- | :--- | :--- | :--- | :--- |
+| **Debian** | Stabilität & Community | APT / dpkg | Ubuntu, Mint, Kali | Enormer Paketpool, Basis für benutzerfreundliche Derivate. |
+| **Red Hat** | Enterprise | DNF / rpm | RHEL, **Rocky Linux**, Fedora | Industriestandard, Fokus auf Serverstabilität & 10 Jahre Support. |
+| **Arch** | Minimalismus (KISS) | Pacman | Manjaro, EndeavourOS | Rolling-Release (stets aktuell), manuelle Installation. |
+| **SUSE** | Business & Enterprise | Zypper / rpm | openSUSE, SLE | Starke administrative Kontrollwerkzeuge (YaST). |
 
-### Release Modelle
+### Release- und Kernelmodelle
 
-* **LTS (Long Term Support):** Fokus auf Stabilität (z.B. Rocky Linux, Debian).
-* **RR (Rolling Release):** Stets aktuellste Software (z.B. Arch Linux).
+* **LTS (Long Term Support):** Fokus auf Langzeitstabilität. Pakete bleiben versionsstabil, Sicherheitsfixes werden zurückportiert (Backporting).
+* **RR (Rolling Release):** Kontinuierliche Updates. Software wird sofort nach Erscheinen bereitgestellt. Höheres Risiko für Inkompatibilitäten.
+* **Monolithischer Kernel:** Linux ist monolithisch: Treiber und Kernelfunktionen laufen im privilegierten Kernel-Adressraum für maximale Geschwindigkeit. Module (`.ko` - Kernel Objects) können jedoch dynamisch geladen und entladen werden (`modprobe`).
+
+> [!NOTE]  
+> **Rocky Linux** wurde von Gregory Kurtzer ins Leben gerufen, nachdem das klassische, stabile CentOS zugunsten von CentOS Stream eingestellt wurde. Es garantiert eine 1:1-Binärkompatibilität mit Red Hat Enterprise Linux (RHEL).
 
 </details>
 
 <details>
 <summary><b>🏗 Filesystem Hierarchy Standard (FHS)</b> (Klicken zum Ausklappen)</summary>
 
-| Verzeichnis | Zweck |
+Das Linux-Verzeichnissystem folgt einem strikten Standard (FHS). Jedes Verzeichnis hat einen fest definierten Zweck:
+
+| Verzeichnis | Inhalt und Funktion |
 | :--- | :--- |
-| `/bin` / `/sbin` | Essenzielle Binärdateien. |
-| `/etc` | Konfigurationen. |
-| `/var` | Variable Daten (Logs, Datenbanken). |
-| `/proc` / `/sys` | Virtuelle Dateisysteme (Kernel-Infos). |
-| `/home` / `/root` | Benutzerdaten. |
+| `/` | **Wurzelverzeichnis (Root).** Die höchste Ebene, unter der alle anderen Verzeichnisse eingehängt sind. |
+| `/bin` / `/sbin` | **Essenzielle Binärdateien.** Systembefehle für alle User (`/bin`) bzw. administrative Befehle für root (`/sbin`). |
+| `/boot` | **Bootloader-Dateien.** Enthält den Linux-Kernel (`vmlinuz`), die Initial RAM Disk (`initramfs`) und GRUB-Konfigurationen. |
+| `/dev` | **Gerätedateien.** Repräsentiert physikalische und virtuelle Hardware (z.B. `/dev/sda` = 1. Festplatte, `/dev/null` = Bit-Loch). |
+| `/etc` | **Systemweite Konfigurationsdateien.** Statische Textdateien zur Systemsteuerung (z.B. `/etc/passwd`, `/etc/hosts`). Keine Binärdateien! |
+| `/home` | **Benutzerverzeichnisse.** Persönliche Daten der normalen Systembenutzer (z.B. `/home/student`). |
+| `/root` | **Home-Verzeichnis des Administrators.** Persönliches Heimatverzeichnis exklusiv für den Superuser `root`. |
+| `/lib` / `/lib64` | **Systembibliotheken.** Essenzielle Shared Libraries (`.so`-Dateien) und Kernel-Module, die von `/bin` und `/sbin` benötigt werden. |
+| `/media` / `/mnt` | **Einhängepunkte (Mounts).** `/media` für automatische Wechselmedien (USB, CD); `/mnt` für temporäre manuelle Mounts. |
+| `/opt` | **Zusatzsoftware.** Für große, in sich geschlossene Anwendungspakete von Drittanbietern. |
+| `/proc` / `/sys` | **Virtuelle Dateisysteme (procfs & sysfs).** Liegen rein im RAM. Schnittstelle zum Kernel und zur Hardware. |
+| `/tmp` | **Temporäre Dateien.** Wird periodisch (oder bei jedem Systemstart) automatisch gelöscht. |
+| `/usr` | **Anwenderprogramme.** Sekundäre Hierarchie für schreibgeschützte Benutzerdaten (`/usr/bin`, `/usr/lib`). |
+| `/usr/local` | **Lokale Installationen.** Software, die manuell am Paketmanager vorbei installiert wurde (Schutz vor Überschreiben). |
+| `/var` | **Variable Systemdaten.** Daten, die sich im laufenden Betrieb ständig ändern (Logfiles in `/var/log`, Druckspooler, Caches). |
+
+> [!IMPORTANT]  
+> **LPIC-1 FHS-PRÜFUNGSWISSEN:**  
+> * `/proc` und `/sys` belegen **0 Byte** auf der Festplatte! Sie sind reine RAM-Dateisysteme.  
+> * Das Verzeichnis `/etc` darf **niemals** ausführbare Programme (Binaries) enthalten.  
+> * Um ein Überlaufen der Festplatte durch massive Logfiles zu verhindern, sollte `/var` in Produktivumgebungen auf einer separaten Partition liegen.
+
+> [!CAUTION]  
+> Da das Verzeichnis `/tmp` bei jedem Neustart gelöscht wird, sollten dort niemals Skripte oder Protokolle dauerhaft abgelegt werden. Nutzen Sie dafür `/var/tmp` oder Ihr Home-Verzeichnis!
 
 </details>
 
 <details>
-<summary><b>🛡 Dateirechte & Besitz</b> (Klicken zum Ausklappen)</summary>
+<summary><b>🛡 Dateirechte, Besitz & Spezialrechte</b> (Klicken zum Ausklappen)</summary>
 
-* `chmod`: Ändern von Zugriffsrechten (Oktal vs. Symbolisch).
-* `chown`: Ändern von Besitzverhältnissen.
-* `umask`: Standard-Berechtigungen für neue Dateien.
-* **ACL (Access Control Lists):** Fein-granulare Rechteverwaltung.
-* **Links:** Hardlinks vs. Softlinks (ln / ln -s).
+Linux schützt Dateien über das klassische Benutzer-Gruppen-Andere-Modell (UGO).
+
+### Zugriffsrechte (chmod)
+Rechte können **symbolisch** (z.B. `chmod u+x,g-w datei`) oder **oktal** (numerisch) gesetzt werden:
+* **`r` (Read = 4):** Lesen der Datei / Auflisten des Ordners.
+* **`w` (Write = 2):** Ändern der Datei / Erstellen & Löschen von Dateien im Ordner.
+* **`x` (Execute = 1):** Ausführen der Datei / Betreten des Ordners (`cd`).
+
+**Spezialberechtigungen (Numerisch als 4. vordere Stelle):**
+* **`4` (SUID - Set User ID):** Führt die Datei mit Rechten des Dateibesitzers aus. Symbolisch: `rwsr-xr-x`.
+* **`2` (SGID - Set Group ID):** Führt die Datei mit Rechten der Gruppe aus. Verzeichnisse vererben ihre Gruppe an neue Dateien. Symbolisch: `rwxr-sr-x`.
+* **`1` (Sticky Bit):** Benutzer dürfen nur eigene Dateien löschen. Symbolisch: `rwxrwxrwt` (z.B. für `/tmp`).
+
+### umask (User Mask)
+Zieht Berechtigungen bei der Dateierstellung ab. Maximale Standard-Ausgangsbasis: **`666`** für Dateien, **`777`** für Ordner.
+* Eine `umask` von `022` führt zu Dateirechten von `644` (`rw-r--r--`) und Ordnerrechten von `755` (`rwxr-xr-x`).
+* Anzeige im symbolischen Klartext mit **`umask -S`**.
+
+### Hardlinks vs. Softlinks
+* **Hardlink (`ln ziel link`):** Verweist direkt auf die Inode-Nummer der Originaldatei. Kann nicht dateisystemübergreifend erstellt werden und ist für Verzeichnisse verboten.
+* **Softlink (`ln -s ziel link`):** Ein Zeiger (Pfad-Referenz) auf das Original. Kann über Partitionen hinweg zeigen und funktioniert für Ordner. Wird beim Löschen des Originals ungültig (Broken Link).
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTE SYMBOLIK:**  
+> Ein großes **`S`** (bei SUID/SGID) oder großes **`T`** (beim Sticky Bit) in `ls -l` signalisiert, dass das jeweilige Spezialrecht zwar gesetzt ist, das darunterliegende Standard-Ausführrecht **`x` jedoch fehlt**! (z.B. `rwS` statt `rws`).
 
 </details>
 
 <details>
-<summary><b>🤖 Virtualisierung & Container</b> (Klicken zum Ausklappen)</summary>
+<summary><b>🤖 Virtualisierung, Container & Netzwerke</b> (Klicken zum Ausklappen)</summary>
 
-* **Hypervisor Typ 1:** Bare Metal (Proxmox, ESXi).
-* **Hypervisor Typ 2:** Gehostet (VirtualBox, VMware).
-* **Container:** Isolierte Anwendungen (Docker, Podman).
+### Hypervisoren und Container
+* **Typ 1 Hypervisor (Bare-Metal):** Läuft direkt auf der physischen Hardware (z.B. Proxmox VE, VMware ESXi). Extrem performant.
+* **Typ 2 Hypervisor (Hosted):** Läuft innerhalb eines Wirts-Betriebssystems (z.B. VMware Workstation, VirtualBox).
+* **Container (OS-Level Virtualization):** Nutzen Namespaces und Control Groups (cgroups) des Host-Kernels zur Isolation. Es wird kein eigener Kernel gebootet, was Container extrem leichtgewichtig macht (z.B. Docker, Podman).
+
+### Netzwerk & Routing-Grundlagen
+* **IP Forwarding:** Erlaubt dem Linux-Kernel, eingehende Pakete an andere Schnittstellen weiterzuleiten (`net.ipv4.ip_forward = 1`).
+* **NAT / Masquerading:** Übersetzt private IP-Adressen (z.B. `/27` Subnetze) auf dem WAN-Interface in die öffentliche Router-IP, damit Antworten zurückgeroutet werden können.
+* **DNS Resolution:** Gesteuert durch `/etc/resolv.conf` (Nameserver) und `/etc/nsswitch.conf` (Reihenfolge-Steuerung).
+
+> [!TIP]  
+> Container teilen sich den Kernel des Wirtssystems. Daher können Sie in einem Linux-Container keine Kernel-Module laden, die nicht bereits auf dem Host-System aktiv sind!
 
 </details>
 
@@ -139,14 +193,88 @@ Hier sind die essenziellen Informationen zusammengefasst, die über alle Kurstag
 > [!TIP]
 > Drücke `Strg + F` in dieser README, um schnell nach Befehlen zu suchen.
 
-| Kategorie | Top-Befehle |
-| :--- | :--- |
-| **Navigation** | `cd`, `ls`, `pwd`, `tree` |
-| **Info** | `uname`, `lscpu`, `free`, `df`, `id` |
-| **Hilfe** | `man`, `info`, `whatis`, `--help` |
-| **Manipulation** | `mkdir`, `cp`, `mv`, `rm`, `touch`, `ln` |
-| **Text** | `cat`, `less`, `grep`, `diff`, `nano`, `chmod` |
-| **Monitore** | `top`, `htop`, `btop` |
+### 📂 1. Navigation & Dateiverwaltung
+* **`pwd`** (Print Working Directory): Zeigt den absoluten Pfad des aktuellen Standorts an.
+* **`ls`** (List): Listet Verzeichnisinhalte auf.
+  * `ls -l` = Listenansicht mit Berechtigungen, Inode-Links und Größe.
+  * `ls -la` = Zeigt auch versteckte Dateien (Dotfiles) an.
+  * `ls -ih` = Zeigt die Inode-Nummern und Dateigrößen in lesbarer Form (`h` = human-readable).
+* **`cd`** (Change Directory): Wechselt das Verzeichnis. `cd ~` wechselt ins Home-Verzeichnis, `cd ..` eine Ebene nach oben.
+* **`mkdir -p <Pfad>`**: Erstellt verschachtelte Verzeichnisbäume in einem Schritt (z.B. `mkdir -p A/B/C`).
+* **`cp`** (Copy): Kopiert Dateien.
+  * `cp -r` = Kopiert Verzeichnisse rekursiv.
+  * `cp -a` (Archive) = **Sehr wichtig!** Entspricht `-dpR` (kopiert rekursiv unter Erhalt aller Rechte, Besitzer, Zeitstempel und symbolischen Links).
+* **`rm`** (Remove): Löscht Dateien.
+  * `rm -r` = Löscht Verzeichnisse rekursiv.
+  * `rm -f` (Force) = Löscht ohne Sicherheitsnachfragen.
+  * `rm -rf` = Rekursives Löschen ohne Nachfrage. **Mit Vorsicht anwenden!**
+* **`ln`** (Link): Erstellt Verknüpfungen.
+  * `ln ziel link` = Erstellt einen Hardlink (zeigt auf dieselbe Inode).
+  * `ln -s ziel link` = Erstellt einen symbolischen Softlink (Symlink).
+* **`stat <Datei>`**: Zeigt alle detaillierten Metadaten einer Datei (Inode, genaue Zeitstempel, Oktalrechte).
+* **`file <Datei>`**: Analysiert die Magic-Bytes einer Datei und gibt den echten Dateityp unabhängig von der Endung an.
+
+### 🔍 2. Suchen & Textfilterung
+* **`find <Pfad> <Filter> -exec <Befehl> {} \;`**: Findet Dateien auf der Festplatte.
+  * `find . -name "*.txt"` = Sucht nach Name.
+  * `find / -type d` = Sucht nur nach Verzeichnissen.
+  * `find / -perm 4755` = Sucht nach Dateien mit gesetztem SUID-Bit.
+  * `find /home -user student -exec chown teacher {} \;` = Führt Aktionen direkt aus.
+* **`grep -E <Muster> <Datei>`**: Durchsucht Textströme.
+  * `grep -i` = Ignoriert Groß-/Kleinschreibung.
+  * `grep -v` = Invertiert die Suche (zeigt Zeilen an, die das Muster **nicht** enthalten).
+  * `grep -o` = Gibt ausschließlich den gematchten Textteil aus, nicht die ganze Zeile.
+  * `grep -E` (oder `egrep`) = Nutzt Extended Regular Expressions (ERE).
+  * `grep -F` (oder `fgrep`) = Sucht nach fixen Strings (deaktiviert alle Regex-Metazeichen für maximales Tempo).
+* **`tr`** (Translate): Ersetzt oder löscht Zeichen aus der Standardeingabe (`stdin`).
+  * `tr -d 'äöü'` = Löscht Zeichen.
+  * `tr -s '-'` = Komprimiert mehrfache Bindestriche zu einem einzigen.
+* **`cut`** (Spalten schneiden): Extrahiert Spalten aus Texten.
+  * `cut -d: -f1,3 /etc/passwd` = Nutzt Doppelpunkt als Trenner (`-d`) und gibt Spalte 1 und 3 aus (`-f`).
+* **`sort`**: Sortiert Textzeilen.
+  * `sort -n` = Sortiert numerisch (z.B. für Ports/Zahlen).
+  * `sort -r` = Sortiert rückwärts (reverse).
+  * `sort -t: -k3` = Definiert Doppelpunkt als Trenner (`-t`) und sortiert nach der 3. Spalte (`-k`).
+* **`uniq`**: Filtert aufeinanderfolgende doppelte Zeilen heraus.
+  > [!CAUTION]  
+  > `uniq` erkennt Duplikate nur, wenn sie direkt nacheinander stehen! Daten müssen **immer** vorher mit `sort` sortiert werden: `sort datei.txt | uniq`.
+* **`tail -f <Datei>`**: Gibt die letzten Zeilen einer Datei aus. Mit `-f` (Follow) bleibt die Datei geöffnet und gibt neue Log-Einträge in Echtzeit aus.
+
+### 🚦 3. Prozessverwaltung & Signale
+* **`ps`** (Process Status): Zeigt eine Momentaufnahme aller Prozesse.
+  * `ps aux` (BSD-Stil) = Zeigt alle Prozesse im System mit CPU- und RAM-Last sowie Status (`STAT`).
+  * `ps -ef` (System-V-Stil) = Zeigt alle Prozesse inklusive der Parent-PID (`PPID`) an.
+* **`pstree -p`**: Zeigt die Prozess-Hierarchie als Baumstruktur inklusive PIDs an.
+* **`kill -<Signal> <PID>`**: Sendet ein Signal an eine Prozess-ID.
+  * `kill -15` (SIGTERM) = Standard. Höfliche Aufforderung zum Beenden (erlaubt Aufräumen).
+  * `kill -9` (SIGKILL) = Erzwingt das sofortige Beenden durch den Kernel. Kann nicht abgefangen werden.
+  * `kill -19` (SIGSTOP) = Pausiert den Prozess sofort.
+  * `kill -18` (SIGCONT) = Setzt den pausierten Prozess fort.
+* **`pgrep <Name>`** / **`pkill <Name>`**: Sucht PIDs nach Name / sendet Signale an Prozesse nach Name.
+* **`nice -n <Wert> <Befehl>`**: Startet einen neuen Prozess mit einer Priorität von `-20` (höchste) bis `19` (niedrigste).
+* **`renice -n <Wert> -p <PID>`**: Ändert die Priorität eines bereits laufenden Prozesses zur Laufzeit.
+  > [!WARNING]  
+  > Nur **root** darf negative Nice-Werte vergeben oder die Priorität eines Prozesses erhöhen!
+
+### ⏰ 4. Automatisierung & Scheduling
+* **`crontab`**: Verwaltet zeitgesteuerte Cron-Jobs.
+  * `crontab -e` = Crontab bearbeiten.
+  * `crontab -l` = Aktive Cron-Jobs auflisten.
+  * `crontab -r` = Crontab unwiderruflich löschen.
+* **`at <Zeitpunkt>`**: Plant einen einmaligen Job (z.B. `at now + 1 hour`).
+  * `atq` = Listet anstehende `at`-Jobs auf.
+  * `atrm <ID>` = Löscht anstehenden `at`-Job.
+  * `at -c <ID>` = Zeigt den genauen Inhalt und die Variablen des Jobs an.
+
+### 🔌 5. Netzwerke & Diagnostics
+* **`ip`**: Modernes All-in-One Netzwerk-Tool.
+  * `ip addr show` = Zeigt alle IP-Schnittstellen an.
+  * `ip route show` = Zeigt die Routing-Tabelle an.
+* **`route -n`**: Zeigt die Kernel-Routingtabelle rein numerisch an (unterbindet langsame DNS-Lookups).
+* **`ss`** (Socket Statistics):
+  * `ss -tulpen` = Listet alle lauschenden (`-l`) TCP (`-t`) und UDP (`-u`) Ports numerisch (`-n`) mit zugehörigen PIDs (`-p`) auf.
+* **`dig <Domain>`** / **`host <Domain>`**: Führt detaillierte DNS-Abfragen an Nameserver aus.
+* **`traceroute <Ziel>`** / **`tracepath <Ziel>`**: Verfolgt den genauen Router-Pfad zum Ziel. `tracepath` benötigt keine Root-Rechte.
 
 ---
 
