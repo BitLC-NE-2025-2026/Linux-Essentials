@@ -14,7 +14,7 @@ PARSER="${SCRIPT_DIR}/scripts/parse_config.py"
 # FHD-optimierte Whiptail-Größen
 W_HEIGHT=24
 W_WIDTH=95
-W_LIST=12
+W_LIST=15
 
 # Stellt sicher, dass das Terminal nach dem Beenden wieder sauber aussieht
 cleanup() {
@@ -40,8 +40,11 @@ while true; do
                       "7" "Uniforme CLI-Tools, ZSH & Aliases (tools)" \
                       "8" "Cronjob Maker TUI (cron_maker)" \
                       "9" "Desktop Ricing & Premium Eyecandy (ricing)" \
-                      "10" "YAML-Konfiguration anzeigen (config.yaml)" \
-                      "11" "Alles sequenziell ausführen (Voll-Setup)" \
+                      "10" "System- & Netzwerk-Diagnose (diagnostics)" \
+                      "11" "NTP Zeitsynchronisation & Zeitserver (ntp_setup)" \
+                      "12" "Backup & Wiederherstellungs Manager (backup_manager)" \
+                      "13" "YAML-Konfiguration anzeigen (config.yaml)" \
+                      "14" "Alles sequenziell ausführen (Voll-Setup)" \
                       "0" "Beenden" 3>&1 1>&2 2>&3)
 
     if [[ -z "$CHOICE" || "$CHOICE" == "0" ]]; then
@@ -78,10 +81,19 @@ while true; do
             sudo bash "${SCRIPT_DIR}/scripts/desktop_ricing.sh"
             ;;
         "10")
+            sudo bash "${SCRIPT_DIR}/scripts/diagnostics.sh"
+            ;;
+        "11")
+            sudo bash "${SCRIPT_DIR}/scripts/ntp_setup.sh"
+            ;;
+        "12")
+            sudo bash "${SCRIPT_DIR}/scripts/backup_manager.sh"
+            ;;
+        "13")
             # Config Datei formatiert in Textbox ausgeben
             whiptail --title "Konfigurations-Struktur (config.yaml)" --scrolltext --textbox "$CONFIG_PATH" 22 85
             ;;
-        "11")
+        "14")
             # Vollständiges sequenzielles Setup ausführen
             if whiptail --title "Voll-Setup bestätigen" --yesno "Möchten Sie das komplette System-Setup sequenziell ausführen?" 10 70; then
                 sudo bash "${SCRIPT_DIR}/scripts/sys_check.sh"
@@ -97,6 +109,7 @@ while true; do
                 sudo bash "${SCRIPT_DIR}/scripts/system_tweaks.sh"
                 sudo bash "${SCRIPT_DIR}/scripts/services_mgmt.sh"
                 sudo bash "${SCRIPT_DIR}/scripts/tools_installer.sh"
+                sudo bash "${SCRIPT_DIR}/scripts/ntp_setup.sh"
                 
                 whiptail --title "Voll-Setup beendet" --msgbox "Alle Skripte wurden erfolgreich nacheinander ausgeführt!" 8 60
             fi
