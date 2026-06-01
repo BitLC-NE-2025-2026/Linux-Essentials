@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # MNBTUI Module: tools_installer.sh
+# Autor: Tobias Boyke
 # Zweck: Premium Tools-Installer, Legendäres ZSH & Fastfetch-Setup
 # ==============================================================================
 

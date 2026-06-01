@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # MNBTUI Module: dns_selector.sh
+# Autor: Tobias Boyke
 # Zweck: Latenz-Benchmark für DNS und sofortige systemweite Aktivierung
 # ==============================================================================
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # MNBTUI Module: services_mgmt.sh
+# Autor: Tobias Boyke
 # Zweck: Steuerung und Härtung von System-Diensten (SSH, nftables) via TUI
 # ==============================================================================
 

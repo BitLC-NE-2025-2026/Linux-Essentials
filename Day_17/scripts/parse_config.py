@@ -60,6 +60,7 @@ def parse_yaml(file_path):
 if __name__ == '__main__':
     if len(sys.argv) < 3:
         print("Usage: parse_config.py <config.yaml> <query>", file=sys.stderr)
+# Autor: Tobias Boyke
         print("Queries: router:hostname, global:dns_fallback, client:<hostname>:ip, client:<hostname>:gateway", file=sys.stderr)
         sys.exit(1)
         

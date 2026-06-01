@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # MNBTUI Module: cron_maker.sh
+# Autor: Tobias Boyke
 # Zweck: Interaktiver Cronjob Generator via Whiptail TUI (FHD Optimiert)
 # ==============================================================================
 

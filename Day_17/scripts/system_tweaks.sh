@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # MNBTUI Module: system_tweaks.sh
+# Autor: Tobias Boyke
 # Zweck: System Tuning, TCP/IP Optimierung, BBR, DNS-Cache & Limits (Checklist)
 # ==============================================================================
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # MNBTUI Module: router_setup.sh
+# Autor: Tobias Boyke
 # Zweck: Einrichtung Netzwerk-Interfaces, IP-Forwarding & nftables auf dem Router
 # ==============================================================================
 

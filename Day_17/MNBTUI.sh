@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Master TUI: MNBTUI.sh
+# Autor: Tobias Boyke
 # Zweck: Zentrale Interaktive Steuerung für Netzwerk, Services & Tweaks (FHD Optimiert)
 # ==============================================================================
 
