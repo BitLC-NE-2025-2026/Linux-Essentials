@@ -11,6 +11,9 @@ SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 CONFIG_PATH="${SCRIPT_DIR}/config.yaml"
 PARSER="${SCRIPT_DIR}/scripts/parse_config.py"
 
+# Automatische Berechtigungserteilung für alle Sub-Skripte beim Start
+chmod +x "${SCRIPT_DIR}/OmniTUI.sh" "${SCRIPT_DIR}"/scripts/*.sh "${SCRIPT_DIR}"/scripts/*.py 2>/dev/null || true
+
 # FHD-optimierte Whiptail-Größen
 W_HEIGHT=24
 W_WIDTH=95
