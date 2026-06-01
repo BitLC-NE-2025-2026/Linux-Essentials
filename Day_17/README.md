@@ -43,20 +43,50 @@ Das System teilt sich in eine zentrale TUI-Hauptsteuerung und dedizierte, modula
 
 ```mermaid
 graph TD
-    A["OmniTUI.sh (Hauptmenü Loop)"] --> B["config.yaml (Zentrale Topologie)"]
-    A --> C["scripts/sys_check.sh (Dependency- & Sudo-Resolver)"]
-    A --> D["scripts/dns_selector.sh (Dual-IP Live Ping & Benchmark)"]
-    A --> E["scripts/router_setup.sh (Gateway, Routing & nftables NAT)"]
-    A --> F["scripts/client_setup.sh (Dynamic Interface nmcli-Config)"]
-    A --> G["scripts/services_mgmt.sh (systemd Control & SSH Hardening)"]
-    A --> H["scripts/system_tweaks.sh (BBR, TCP Buffer, DNS-Cache)"]
-    A --> I["scripts/tools_installer.sh (btop, micro, Custom ZSH, Aliases)"]
-    A --> J["scripts/cron_maker.sh (Cronjob-TUI Generator)"]
-    A --> K["scripts/desktop_ricing.sh (GNOME, KDE, Hyprland Eyecandy)"]
-    A --> L["scripts/diagnostics.sh (Automatisierter Konnektivitäts-Sweep)"]
-    A --> M["scripts/ntp_setup.sh (timedatectl & chronyd Zeitsynchronisation)"]
-    A --> N["scripts/backup_manager.sh (tar.gz Kompression & Restore)"]
-    A --> O["scripts/parse_config.py (Lightweight Python YAML Parser)"]
+    A["OmniTUI.sh (Hauptmenü Loop)"] --> B["config.yaml (Single Source of Truth)"]
+    
+    %% Shared library & helpers
+    A -.-> CO["scripts/common.sh (Shared Constants & Helpers)"]
+    CO -.-> C
+    CO -.-> D
+    CO -.-> E
+    CO -.-> F
+    CO -.-> G
+    CO -.-> H
+    CO -.-> I
+    CO -.-> J
+    CO -.-> K
+    CO -.-> L
+    CO -.-> M
+    CO -.-> N
+    CO -.-> SC
+    CO -.-> CE
+    
+    %% Action Modules
+    A --> C["scripts/sys_check.sh (Dependency & Sudoers)"]
+    A --> D["scripts/dns_selector.sh (Dual-IP Benchmark)"]
+    A --> E["scripts/router_setup.sh (Routing & nftables NAT)"]
+    A --> F["scripts/client_setup.sh (Dynamic IP & nmcli config)"]
+    A --> G["scripts/services_mgmt.sh (SSH Hardening & systemd)"]
+    A --> H["scripts/system_tweaks.sh (BBR, TCP Tuning, Cache, Editor)"]
+    A --> I["scripts/tools_installer.sh (Fastfetch, Terminals, OMZ ZSH)"]
+    A --> J["scripts/cron_maker.sh (Cronjob-TUI Assistant)"]
+    A --> K["scripts/desktop_ricing.sh (GNOME, KDE, Hyprland Rices)"]
+    A --> L["scripts/diagnostics.sh (Auto Self-Healing Doctor)"]
+    A --> SC["scripts/subnet_scanner.sh (High-Speed Sweep)"]
+    A --> M["scripts/ntp_setup.sh (timedatectl & chronyd Sync)"]
+    A --> N["scripts/backup_manager.sh (Config tar.gz Backup/Restore)"]
+    A --> CE["scripts/config_editor.sh (TUI YAML Parameter Modifier)"]
+    
+    %% Parsing layer
+    CE --> UC["scripts/update_config.py (Write YAML)"]
+    D --> UC
+    
+    C --> PY["scripts/parse_config.py (Read YAML)"]
+    E --> PY
+    F --> PY
+    L --> PY
+    CE --> PY
 ```
 
 ---
@@ -172,19 +202,32 @@ clients:
 * Archiviert und komprimiert alle durch OmniTUI modifizierten Konfigurationsdateien in einem datierten `.tar.gz`-Archiv unter `/var/backups/omnitui/`.
 * Das **Wiederherstellungsmenü** listet alle vorhandenen Backups samt Dateigröße auf und erlaubt das Zurückspielen alter Zustände mit anschließendem automatischen Dienst-Neustart.
 
+### 10. Subnetz-Scanner / Host-Discovery (`subnet_scanner.sh`)
+* **Parallele Ping-Sweeps:** Pingt alle IPs im ausgewählten `/27` Subnetz (Netz A oder Netz B) parallel im Hintergrund an.
+* **DNS Reverse Resolution:** Versucht automatisch, Online-Hosts über lokale DNS-Auflösungen (`getent hosts`) einem Rechnernamen zuzuordnen.
+* **Scan-Berichte:** Generiert einen scrollbaren Whiptail-Bericht über alle aktiven (ONLINE) und freien (offline) IP-Adressen zur einfachen Netzübersicht.
+
+### 11. Interaktiver Konfigurations-Editor (`config_editor.sh`)
+* **Live-Parameteranpassung:** Ermöglicht das Bearbeiten wichtiger Parameter aus `config.yaml` direkt aus der Benutzeroberfläche heraus.
+* **Zentraler Schreibzugriff:** Nutzt die Python-Bibliothek `update_config.py`, um Werte sauber und ohne Drittanbieter-Abhängigkeiten in der YAML-Struktur zu aktualisieren.
+
+### 12. Gemeinsame System-Bibliothek (`common.sh`)
+* **DRY-Konformität:** Bündelt alle globalen Variablen (FHD-Größen, Parser-Pfade) und Hilfsfunktionen (Root-Rechteprüfung, Farb-Logging) an einem einzigen, zentralen Ort.
+* **Wartungsfreundlichkeit:** Änderungen an Anzeigegrößen oder Pfaden müssen nur noch in dieser einen Datei vorgenommen werden und vererben sich automatisch auf alle Sub-Module.
+
 ---
 
 ## 🚀 Ausführung & Live-Betrieb
 
-Stellen Sie vor der Ausführung sicher, dass Sie sich im Verzeichnis `Day_17` befinden:
+Stellen Sie sicher, dass Sie sich im Verzeichnis `Day_17` befinden. Sie können das Hauptmenü direkt starten:
 
 ```bash
-# Skript ausführbar machen
-chmod +x OmniTUI.sh scripts/*.sh scripts/*.py
-
-# Hauptsteuerung im Full-HD Modus starten
+# Hauptsteuerung starten (Rechte werden automatisch vergeben!)
 bash OmniTUI.sh
 ```
+
+> [!NOTE]
+> **Automatische Rechtevergabe:** Beim ersten Start vergibt `OmniTUI.sh` automatisch alle nötigen Ausführungsrechte (`chmod +x`) für sämtliche Sub-Skripte und Parser im Hintergrund. Sie müssen keine manuellen Berechtigungsanpassungen vornehmen.
 
 > [!TIP]
 > **FHD-Modus:** Die TUI wurde gezielt für Auflösungen ab Full HD (1920x1080) optimiert (Fenstergröße 24x95). Sie bietet dadurch ein erstklassiges, übersichtliches Layout auf modernen Monitoren.
