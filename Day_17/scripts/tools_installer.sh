@@ -38,15 +38,15 @@ fi
 
 # 2. System-Tools installieren
 if [[ "$CHOICES" =~ "SYS_TOOLS" ]]; then
-    whiptail --title "Tools Installation" --infobox "Installiere btop, ncdu und micro..." 8 60
+    whiptail --title "Tools Installation" --infobox "Installiere btop, ncdu, micro, bat, ripgrep, fd, fzf, tldr..." 8 60
     if command -v apt-get >/dev/null 2>&1; then
         sudo apt-get update -y >/dev/null
-        sudo apt-get install -y btop ncdu micro zsh git curl wget >/dev/null
+        sudo apt-get install -y btop ncdu micro zsh git curl wget bat ripgrep fd-find fzf tldr >/dev/null
     elif command -v dnf >/dev/null 2>&1; then
         sudo dnf install -y epel-release >/dev/null || true
-        sudo dnf install -y btop ncdu micro zsh git curl wget >/dev/null
+        sudo dnf install -y btop ncdu micro zsh git curl wget bat ripgrep fd fzf tldr >/dev/null
     elif command -v pacman >/dev/null 2>&1; then
-        sudo pacman -Sy --noconfirm btop ncdu micro zsh git curl wget >/dev/null
+        sudo pacman -Sy --noconfirm btop ncdu micro zsh git curl wget bat ripgrep fd fzf tldr >/dev/null
     fi
     log_success "CLI-Tools installiert."
 fi
@@ -123,10 +123,16 @@ alias cpuinfo="lscpu | grep -E 'Model name|Core\(s\) per socket|Socket\(s\)|Thre
 alias meminfo="free -h -t"
 alias diskusage="ncdu"
 
-# Editoren & Helpers
+# Editoren & Modern CLI-Helpers
 alias edit="micro"
 alias cls="clear"
 alias h="history"
+alias help="tldr"
+
+# Dynamische Aliases für modern CLI-Tools (Debian/RHEL/Arch Kompatibilität)
+if command -v batcat >/dev/null 2>&1; then alias cat="batcat"; elif command -v bat >/dev/null 2>&1; then alias cat="bat"; fi
+if command -v fdfind >/dev/null 2>&1; then alias find="fdfind"; elif command -v fd >/dev/null 2>&1; then alias find="fd"; fi
+if command -v rg >/dev/null 2>&1; then alias grep="rg"; fi
 
 # Führe fastfetch beim Login aus
 if [ -f ~/.config/fastfetch/config.jsonc ]; then
