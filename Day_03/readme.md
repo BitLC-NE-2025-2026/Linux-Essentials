@@ -42,7 +42,16 @@ Wo werden Einstellungen dauerhaft gespeichert? Es gibt einen Unterschied zwische
 - **Benutzerspezifisch:** `~/.bashrc`, `~/.bash_profile`.
 
 > [!TIP]
-> Nach Änderungen an der `.bashrc` muss diese neu eingelesen werden: `source ~/.bashrc`.
+> Nach Änderungen an der `.bashrc` muss diese neu eingelesen werden: `source ~/.bashrc` (oder `. ~/.bashrc`).
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Shell-Startup-Dateien Sequence:**  
+> Bei einer **Login-Shell** (z.B. SSH-Anmeldung oder GUI-Login) wird folgende Reihenfolge eingehalten:  
+> 1. **`/etc/profile`** (systemweit) wird als erstes ausgeführt.  
+> 2. Die erste gefundene benutzerspezifische Datei: **`~/.bash_profile`**, falls nicht vorhanden **`~/.bash_login`**, falls nicht vorhanden **`~/.profile`**.  
+> Bei einer **Non-Login-Shell** (z.B. Öffnen eines Terminal-Fensters in der GUI oder Starten einer Subshell) wird diese Datei geladen:  
+> 1. **`~/.bashrc`** (benutzerspezifisch), welche meist ihrerseits die systemweite **`/etc/bashrc`** (oder `/etc/bash.bashrc` auf Debian) einliest.  
+> Beachten Sie: Ein `export` von Umgebungsvariablen wird typischerweise in `~/.bash_profile` vorgenommen, während interaktive Elemente wie Aliase in `~/.bashrc` abgelegt werden.
 
 ---
 
@@ -86,6 +95,15 @@ Variablen speichern Informationen, auf die Programme zugreifen können.
 - `$HOME`: Das Heimatverzeichnis.
 - `$SHELL`: Die Standard-Shell.
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - export & env:**  
+> * **Lokale Shell-Variable:** `MYVAR="test"` ist nur in der aktuellen Shell-Instanz sichtbar. Ein gestartetes Skript oder Programm (Kindprozess) sieht diese Variable **nicht**.  
+> * **Umgebungsvariable (Environment Variable):** **`export MYVAR`** (oder `export MYVAR="test"`) vererbt die Variable an alle Kindprozesse.  
+> * **`set` vs. `env` / `printenv`:**  
+>   * `set` zeigt alle Variablen (sowohl lokale Shell-Variablen als auch Umgebungsvariablen) und Shell-Funktionen an.  
+>   * `env` / `printenv` zeigen **ausschließlich** exportierte Umgebungsvariablen an.  
+> * **`unset <Variable>`** entfernt eine Variable komplett aus dem Speicher.
+
 ---
 
 ## 🔄 Fortgeschrittene I/O-Umleitung
@@ -110,6 +128,18 @@ Dateien finden und direkt Aktionen darauf ausführen.
 - `find . -name "dat*"`: Findet Dateien, die mit "dat" beginnen.
 - `find / -perm 755 2> /dev/null`: Findet Dateien mit spezifischen Rechten und ignoriert Fehlermeldungen.
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - find & -exec:**  
+> Der Befehl `find` kann direkt auf den gefundenen Dateien Aktionen ausführen, ohne eine Pipe zu verwenden, indem man das Argument **`-exec`** nutzt:  
+> ```bash
+> find /home -user student -type f -exec chmod 644 {} \;
+> ```
+> * **`{}`** dient als Platzhalter für die jeweils gefundene Datei.  
+> * **`\;`** (escapetes Semikolon) schließt den auszuführenden Befehl ab.  
+> * **`-type f`** filtert nach regulären Dateien (während `-type d` nach Ordnern und `-type l` nach symbolischen Links filtert).  
+> * **`-mtime -7`** sucht nach Dateien, die in den letzten 7 Tagen modifiziert wurden.  
+> * **`-size +100M`** sucht nach Dateien, die größer als 100 Megabyte sind.  
+
 ### xargs
 
 Übergibt die Ausgabe eines Befehls als Argumente an einen anderen Befehl.
@@ -117,6 +147,10 @@ Dateien finden und direkt Aktionen darauf ausführen.
 ```bash
 find -name "*.old" | xargs rm     # Löscht alle gefundenen .old Dateien
 ```
+
+> [!TIP]  
+> Falls Dateinamen Leerzeichen enthalten, bricht `xargs` ab. Nutzen Sie dann Null-Byte Trenner:  
+> `find . -name "*.txt" -print0 | xargs -0 rm` (dies trennt Dateinamen durch ein Null-Byte, was sicher gegen Sonderzeichen ist).
 
 ## 🧠 Wissenstest: CUPS, Aliases & I/O-Umleitung
 

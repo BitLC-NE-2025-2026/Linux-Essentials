@@ -49,18 +49,17 @@ Mit `chmod` (change mode) werden diese Rechte angepasst.
 
 **2. Numerischer Modus (Oktal):**
 
-Jedes Recht hat einen Wert: **4 (Read)**, **2 (Write)**, **1 (Execute)**.
-
-| Wert | Rechte (rwx) | Beschreibung |
-| :---: | :---: | :--- |
-| **7** | `rwx` | Vollzugriff (4+2+1) |
-| **6** | `rw-` | Lesen & Schreiben (4+2) |
-| **5** | `r-x` | Lesen & Ausführen (4+1) |
-| **4** | `r--` | Nur Lesen |
-| **0** | `---` | Keine Rechte |
-
 > [!EXAMPLE]
 > `chmod 755 script.sh` setzt `rwxr-xr-x` (Besitzer alles, Rest nur Lesen/Ausführen).
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Rekursive Rechte & chown:**  
+> * **Rekursives Setzen (`-R`):** Um Berechtigungen oder Besitzverhältnisse für einen gesamten Verzeichnisbaum (inkl. aller Unterordner und Dateien) zu ändern, nutzen Sie die Option **`-R`** (großes R!).  
+>   * `chmod -R 755 /ordner`  
+>   * `chown -R student:users /ordner`  
+> * **Besitz ändern:** Der Befehl **`chown`** ändert den Besitzer und optional die Gruppe (`chown besitzer:gruppe datei`). Der Befehl **`chgrp`** ändert ausschließlich die Gruppe einer Datei (`chgrp gruppe datei`).  
+>   > [!WARNING]  
+>   > **Sicherheits-Regel:** Nur der Systemadministrator **root** darf den Besitzer (`chown`) einer Datei ändern! Normale Benutzer können den Besitz ihrer eigenen Dateien nicht auf andere Benutzer übertragen.
 
 ---
 
@@ -80,13 +79,49 @@ Berechtigungen verhalten sich bei Verzeichnissen etwas anders als bei Dateien:
 
 Die `umask` definiert, welche Rechte bei der Erstellung einer neuen Datei **maskiert** (entzogen) werden.
 
-- **Default (Dateien):** `666` minus `umask`.
-- **Default (Ordner):** `777` minus `umask`.
+- **Maximum für Dateien (ohne Execute):** `666` (rw-rw-rw-).
+- **Maximum für Ordner:** `777` (rwxrwxrwx).
 
-| Befehl | Funktion |
-| :--- | :--- |
-| `umask` | Zeigt die aktuelle Maske an (z.B. `0022`). |
-| `umask 002` | Setzt die Maske so, dass die Gruppe Schreibrechte behält. |
+**Berechnungs-Formel:**  
+`Maximal-Rechte` AND-NOT `umask` (oktales Subtrahieren ohne Übertrag).  
+
+| umask | Datei-Rechte (666 - umask) | Ordner-Rechte (777 - umask) | Beschreibung |
+| :---: | :---: | :---: | :--- |
+| `0022` | **644** (`rw-r--r--`) | **755** (`rwxr-xr-x`) | Standard für Root (andere dürfen nur lesen). |
+| `0002` | **664** (`rw-rw-r--`) | **775** (`rwxrwxr-x`) | Standard für normale Benutzer (Gruppe darf schreiben). |
+| `0077` | **600** (`rw-------`) | **700** (`rwx------`) | Hochgradig gesichert (keine Rechte für Gruppe/Andere). |
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - umask & umask -S:**  
+> * **Symbolische Anzeige:** Mit **`umask -S`** wird die Maske symbolisch im Klartext angezeigt (z.B. `u=rwx,g=rx,o=rx`). Dies ist extrem hilfreich, um zu prüfen, was *erlaubt* ist, statt was abgezogen wird.  
+> * **Berechnung im Kopf:** Eine Datei kann durch umask **nie** Ausführrechte (`x`) erhalten, da die Ausgangsbasis für Dateien immer `666` ist!  
+
+### Spezialrechte (SUID, SGID, Sticky Bit)
+
+Den standardmäßigen 3 Oktalstellen wird im numerischen Modus eine 4. Stelle vorangestellt:  
+* **4 (SUID - Set User ID):** `chmod 4755 datei`. Führt die Datei mit Rechten des Dateibesitzers aus (z.B. `/usr/bin/passwd` läuft als `root`). Symbolisch: `rwsr-xr-x`.
+* **2 (SGID - Set Group ID):** `chmod 2755 datei` / `chmod 2775 ordner`. Führt die Datei mit Rechten der Gruppe aus. Auf Ordnern angewendet erben neue Dateien automatisch die Gruppe des Ordners. Symbolisch: `rwxr-sr-x`.
+* **1 (Sticky Bit):** `chmod 1777 /ordner`. In diesem Ordner dürfen Benutzer nur ihre eigenen Dateien löschen. Typisches Beispiel: `/tmp`. Symbolisch: `rwxrwxrwt`.
+
+> [!CAUTION]  
+> **LPIC-Prüfungsschwerpunkt (Groß vs. Kleinschreibung):**  
+> Achten Sie auf die Darstellung in `ls -l`:  
+> * Ein **kleines `s`** (User/Group) bzw. **kleines `t`** (Others) bedeutet, dass das darunterliegende Ausführrecht **`x` gesetzt** ist (z.B. `rws` = SUID + Execute).  
+> * Ein **großes `S`** bzw. **großes `T`** bedeutet, dass das darunterliegende Ausführrecht **`x` NICHT gesetzt** ist (z.B. `rwS` = SUID ohne Execute). Dies ist oft ein Konfigurationsfehler!  
+
+#### 📊 Die 8 Oktal-Kombinationen der Spezialrechte
+Die erste Ziffer der vierstelligen Oktalnotation repräsentiert die Summe der gesetzten Bits: **4 (SUID)** + **2 (SGID)** + **1 (Sticky Bit)**.
+
+| Oktalwert (1. Stelle) | Aktivierte Spezialrechte | Symbolisch (rwx-Bereich) | Auswirkung / Funktion | Typisches Praxisbeispiel |
+| :---: | :--- | :---: | :--- | :--- |
+| **0** | Keine Spezialrechte | `---` | Standardzugriffsrechte gelten. Keine Erhöhung. | Normale Dateien/Verzeichnisse (`chmod 0755` / `0644`) |
+| **1** | **Sticky Bit** | `--t` / `--T` | Löschschutz: Nur Besitzer darf eigene Dateien löschen. | Gemeinsame temporäre Ordner (`chmod 1777 /tmp`) |
+| **2** | **SGID** (Set Group ID) | `-s-` / `-S-` | Ausführung als Gruppe / Gruppenvererbung in Ordnern. | Gemeinsame Projektverzeichnisse (`chmod 2770 /srv/projekte`) |
+| **3** | SGID + Sticky Bit | `-st` / `-ST` | Gruppenvererbung aktiv + Löschschutz für andere User. | Freigaben mit Gruppenrechten und Löschschutz |
+| **4** | **SUID** (Set User ID) | `s--` / `S--` | Ausführung mit Rechten des Dateibesitzers (meist root). | Passwortänderungstool (`chmod 4755 /usr/bin/passwd`) |
+| **5** | SUID + Sticky Bit | `s-t` / `S-T` | Ausführung als Dateibesitzer + Löschschutz im Ordner. | Extrem seltene Spezialkombinationen |
+| **6** | SUID + SGID | `ss-` / `SS-` | Ausführung als Besitzer **und** als Gruppe. | Hochprivilegierte administrative Tools |
+| **7** | SUID + SGID + Sticky Bit | `sst` / `SST` | Alle drei Spezialrechte gleichzeitig aktiv. | Komplexe kollaborative Systemumgebungen |
 
 ### ACL: Access Control Lists
 
@@ -124,13 +159,16 @@ Links sind Verweise auf Dateien im Dateisystem.
 | Feature | Hardlink | Softlink (Symlink) |
 | :--- | :--- | :--- |
 | **Befehl** | `ln <Ziel> <Link>` | `ln -s <Ziel> <Link>` |
-| **Inode** | Identisch mit dem Ziel. | Eigene Inode. |
-| **Dateisystem** | Muss auf derselben Partition liegen. | Kann über Partitionen hinweg zeigen. |
-| **Verhalten bei Löschung** | Datei bleibt erhalten, solange ein Link existiert. | Link wird "tot" (Broken Link). |
-| **Ordner** | Nicht für Verzeichnisse erlaubt. | Funktioniert für Verzeichnisse. |
+| **Inode** | **Identisch** mit dem Original. | Eigene, neue Inode. |
+| **Dateisystem** | **Nein.** Nur innerhalb desselben Dateisystems (gleicher Partition) möglich. | **Ja.** Kann dateisystemübergreifend zeigen. |
+| **Verzeichnis-Link** | **Nein.** Darf nicht für Ordner erstellt werden (Gefahr von Endlosschleifen). | **Ja.** Funktioniert problemlos für Verzeichnisse. |
+| **Löschen des Ziels** | Datei bleibt erhalten, solange noch ein Link auf die Inode zeigt. | Der Symlink wird "tot" (Broken Link, verweist ins Leere). |
 
-> [!TIP]
-> Mit `ls -il` können Sie die Inode-Nummern anzeigen lassen, um Hardlinks zu identifizieren.
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Inodes & Links:**  
+> * **Hardlinks** belegen keinen zusätzlichen Speicherplatz für Daten, da sie direkt auf dieselbe Inode zeigen. Der Inode-Zähler (Link Count in `ls -l` oder `stat`) wird um 1 erhöht. Erst wenn der Zähler auf `0` fällt (alle Hardlinks gelöscht), gibt das System den Speicherplatz frei.  
+> * **Symlinks** sind eigenständige kleine Dateien, die den Pfad zur Zieldatei als Textinhalt speichern. Sie haben eine eigene Inode-Nummer.  
+> * Mit **`ls -il`** können Sie die Inode-Nummern anzeigen lassen, um Hardlinks sofort zu identifizieren (gleiche Nummer = Hardlink).
 
 ---
 

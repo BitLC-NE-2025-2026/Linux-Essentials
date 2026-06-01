@@ -28,13 +28,19 @@ Wildcards (Platzhalter) ermöglichen es, Dateimuster zu beschreiben, statt jede 
 | `[^0-9]` | Ein Zeichen, das **nicht** im Bereich liegt. | `ls tty[^0-4]` |
 | `{a,b}` | **Brace Expansion**: Erzeugt eine Liste von Strings. | `ls /etc/{a*,d*}` |
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Globbing vs. Regex:**  
+> * **Globbing (Wildcards):** Wird von der **Shell selbst** ausgewertet, *bevor* der eigentliche Befehl aufgerufen wird. Wenn Sie `ls *.txt` eingeben, expandiert die Shell dies zu `ls datei1.txt datei2.txt` und führt dann erst `ls` aus.  
+> * **Reguläre Ausdrücke (Regex):** Werden von der **Anwendung selbst** (z.B. `grep`, `sed`, `awk`) interpretiert. Der Befehl `grep '.*\.txt' datei` wertet das Muster intern aus.  
+> * Globbing-Zeichen haben andere Bedeutungen als Regex: Im Globbing bedeutet `?` exakt ein Zeichen; in Regex bedeutet `?` optional (0 oder 1 Wiederholung des vorangegangenen Zeichens).
+
 ---
 
 ## 📝 Textverarbeitung (tr, cut, sort)
 Linux bietet spezialisierte Werkzeuge, um Textströme in Echtzeit zu manipulieren.
 
 ### 🔄 tr (Translate)
-Dient zum Ersetzen oder Löschen von Zeichen.
+Dient zum Ersetzen oder Löschen von Zeichen. Es liest ausschließlich von `stdin` und benötigt eine Umleitung!
 ```bash
 echo "Bärenhöhle" | tr 'a-zäöü' 'A-Z?'   # Ersetzt Klein- durch Großbuchstaben & Umlaute
 echo "Bären--Höhle" | tr -s '-'          # "Squeeze": Mehrfache Bindestriche zu einem
@@ -44,16 +50,32 @@ echo "Bärenhöhle" | tr -d 'äöü'          # Löscht alle Umlaute
 ### ✂️ cut (Spalten extrahieren)
 Extrahiert gezielt Felder aus einer Datei (ideal für CSV-ähnliche Daten wie `/etc/passwd`).
 ```bash
-cut -d: -f1,2 /etc/passwd       # Nutzt ':' als Trenner und gibt Feld 1 & 2 aus
+cut -d: -f1,2 /etc/passwd       # Nutzt ':' als Trenner (-d) und gibt Feld 1 & 2 aus (-f)
 cat data | cut -d ' ' -f1,6     # Nutzt Leerzeichen als Trenner
 ```
 
 ### 📊 sort (Sortieren)
 Sortiert die Eingabe alphabetisch oder numerisch.
 ```bash
-cat /etc/passwd | sort -n       # Numerische Sortierung
-cat /etc/passwd | sort -r       # Reverse (umgekehrte) Sortierung
+cat /etc/passwd | sort -n       # Numerische Sortierung (-n)
+cat /etc/passwd | sort -r       # Reverse (umgekehrte) Sortierung (-r)
+cat /etc/passwd | sort -t: -k3  # Trenner Doppelpunkt (-t), sortiert nach 3. Feld GID/UID (-k)
 ```
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Essenzielle Text-Utilities:**  
+> * **`uniq` (Unique):** Filtert aufeinanderfolgende doppelte Zeilen aus.  
+>   > [!CAUTION]  
+>   > **Kritische LPIC-Falle:** `uniq` erkennt Duplikate nur, wenn sie **direkt hintereinander** stehen! Sie müssen die Datei daher **zwingend vorher sortieren**:  
+>   > `sort datei.txt | uniq` (oder `sort -u datei.txt` als Kurzform).  
+> * **`head` & `tail`:**  
+>   * `head -n 5 datei`: Gibt die ersten 5 Zeilen einer Datei aus (Standard ohne `-n` ist 10).  
+>   * `tail -n 15 datei`: Gibt die letzten 15 Zeilen aus.  
+>   * `tail -f /var/log/messages`: **Follow-Option**; hält die Datei geöffnet und gibt neue Zeilen in Echtzeit aus (Standard für Log-Monitoring!).  
+> * **`od` (Octal Dump):** Wird genutzt, um nicht-textuelle oder binäre Dateien anzuzeigen (in Oktal, Hexadezimal oder ASCII).  
+> * **`split`:** Zerlegt eine Datei in kleinere Teile (standardmäßig nach 1000 Zeilen pro Datei).  
+> * **`paste`:** Fügt Zeilen aus verschiedenen Dateien nebeneinander zusammen (Gegenteil von `cut`).  
+> * **`join`:** Verbindet Zeilen zweier Dateien basierend auf einem gemeinsamen Schlüsselfeld.
 
 ---
 
@@ -90,6 +112,16 @@ Die Verwaltung von Paketen und System-Updates ist eine Kernaufgabe.
 sudo dnf update      # Aktualisiert die Paketdatenbank
 sudo dnf upgrade     # Installiert die neuesten Versionen aller Pakete
 ```
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - DNF Paketverwaltung:**  
+> Auf RHEL/Rocky Linux wird Software über RPM-Pakete verwaltet, die mit `dnf` online aus Repositories bezogen werden:  
+> * **`dnf install <Paket>`**: Installiert ein Paket inklusive aller Abhängigkeiten.  
+> * **`dnf remove <Paket>`**: Deinstalliert ein Paket.  
+> * **`dnf search <Begriff>`**: Sucht in Namen und Beschreibungen nach Begriffen.  
+> * **`dnf info <Paket>`**: Zeigt Detailinformationen zu einem Paket an.  
+> * **`dnf clean all`**: Bereinigt sämtliche zwischengespeicherten Metadaten und Paket-Caches.  
+> * **`dnf history`**: Zeigt eine Liste aller getätigten DNF-Transaktionen (Installationen/Upgrades) mit IDs an. Erlaubt Rollbacks!
 
 ## 🧠 Wissenstest: Wildcards, Textwerkzeuge & Logik
 Hier sind typische Fragen zur Überprüfung Ihres Wissens:

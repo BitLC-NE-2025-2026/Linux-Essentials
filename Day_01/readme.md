@@ -53,8 +53,12 @@ Linux ist weit mehr als nur ein Betriebssystem; es ist das Ergebnis einer jahrze
 - **Entwicklungsmodell (Bazaar vs. Cathedral):** Linux ist das Paradebeispiel für das "Bazaar"-Modell: Offene, dezentrale Entwicklung durch Tausende Freiwillige weltweit, im Gegensatz zum geschlossenen "Cathedral"-Modell klassischer Software.
 - **Unix-Wars & POSIX:** In den 80ern/90ern bekriegten sich Hersteller (Sun, HP, IBM) mit eigenen Unix-Derivaten. Linux bot eine stabile, kostenlose und POSIX-konforme Alternative, die diesen Streit beendete.
 
-> [!IMPORTANT]
-> **POSIX (Portable Operating System Interface)** ist der Grund, warum Ihre Skripte auf fast allen Unix-ähnlichen Systemen laufen. Es standardisiert Befehle, Argumente und Verhalten.
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - POSIX Standards:**  
+> **POSIX (Portable Operating System Interface)** standardisiert Betriebssystemschnittstellen (Systemaufrufe, Shell, Utilities). LPIC-Fragen zielen oft darauf ab, warum POSIX-Konformität wichtig ist: Sie garantiert die **Portabilität** von C-Programmen und Shell-Skripten über verschiedene Unix-Derivate (Linux, BSD, macOS) hinweg.  
+
+> [!NOTE]  
+> Richard Stallmans GPL-Philosophie verlangt das **Copyleft**-Prinzip: Jede veränderte Version einer unter GPL stehenden Software muss ebenfalls unter der GPL (freier Quellcode) veröffentlicht werden. Dies verhindert eine proprietäre Verwertung freier Software.
 
 ### Detaillierte Meilensteine
 
@@ -217,8 +221,17 @@ Linux folgt dem **Filesystem Hierarchy Standard (FHS)**. Jedes Verzeichnis hat e
 | `/usr/local` | Speicherort für lokale Softwareinstallationen durch den Systemadministrator zum Schutz vor Überschreibungen bei Systemupdates. |
 | `/var` | Variable Systemdaten. Umfasst Systemprotokolle, Cache Dateien, Datenbanken und Spool Daten für Drucker. |
 
-> [!NOTE]
-> Details zum FHS finden Sie in den bereitgestellten Dokumenten im [Assets](./assets)-Ordner.
+> [!NOTE]  
+> Details zum FHS finden Sie in den bereitgestellten Dokumenten im [Assets](./assets)-Ordner.  
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Virtuelle und Variable Verzeichnisse:**  
+> 1. **`/proc` und `/sys`** sind virtuelle Dateisysteme (procfs & sysfs). Sie liegen ausschließlich im Arbeitsspeicher (RAM) und belegen keinen Speicherplatz auf der Festplatte. Sie dienen als Schnittstelle zum Kernel und zur Hardware (z.B. `/proc/cpuinfo` oder `/proc/meminfo`).  
+> 2. **`/var`** enthält volatile (variable) Daten wie Logfiles (`/var/log`), Spool-Dienste (`/var/spool`) und Mailboxen. Wenn Sie ein System härten, sollte `/var` oft auf einer separaten Partition liegen, damit überlaufende Logs nicht das `/` (Root-Dateisystem) blockieren.  
+> 3. **`/etc`** ist ausschließlich für statische, systemweite Konfigurationsdateien reserviert (keine ausführbaren Programme!).  
+
+> [!WARNING]  
+> Das Verzeichnis `/tmp` wird auf vielen modernen Distributionen als `tmpfs` (im Arbeitsspeicher) gemountet oder beim Systemstart gelöscht. Speichern Sie hier niemals permanente Daten!
 
 ---
 
@@ -274,8 +287,17 @@ Operatoren ermöglichen es, Befehle abhängig vom Erfolg des vorherigen Befehls 
 
 Manchmal möchte man Ausgaben komplett unterdrücken oder Ströme zusammenführen.
 
-- `2>&1`: Leitet stderr in den stdout-Kanal um (beide landen im selben Terminal/File).
-- `&>`: Kurzform für die Umleitung von stdout und stderr in ein Ziel.
+- `2>&1`: Leitet stderr (File Descriptor 2) in den stdout-Kanal (File Descriptor 1) um (beide landen im selben Terminal/File).
+- `&>`: Moderne Kurzform in der Bash für die Umleitung von stdout und stderr in ein gemeinsames Ziel.
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - I/O Umleitungen:**  
+> * **Standard-Kanäle und FDs:** `0` = stdin, `1` = stdout, `2` = stderr.  
+> * **Reihenfolge der Umleitung:** Die klassische Umleitung `> datei.log 2>&1` funktioniert, weil zuerst stdout in `datei.log` geleitet wird und danach stderr auf denselben Stream wie stdout gelegt wird. Ein `2>&1 > datei.log` funktioniert **nicht** wie gewünscht (stderr landet weiterhin auf dem Terminal!).  
+> * **Das Bit-Loch `/dev/null`:** Ein virtuelles Null-Device. Alles, was dorthin gesendet wird, wird gelöscht. Beispiel: `befehl > /dev/null 2>&1` (unterdrückt jegliche Ausgabe, sowohl Erfolg als auch Fehler).  
+
+> [!TIP]  
+> Nutzen Sie den logischen Operator `&&`, um Befehle nur bei Erfolg auszuführen (z.B. `make && make install`), und `||` für Fehlerbehandlungen (z.B. `ping -c 1 host || echo "Host offline"`). Der Rückgabewert (Exit-Status) eines erfolgreichen Befehls ist immer `0`. Jeder Wert ungleich `0` (1-255) signalisiert einen Fehler.
 - `/dev/null`: Das "schwarze Loch" von Linux. Alles, was hierher geleitet wird, wird gelöscht.
   - Beispiel: `ls /root 2> /dev/null` (Fehlermeldungen werden ignoriert).
 

@@ -35,8 +35,17 @@ Manpages sind in Sektionen unterteilt. Manchmal hat ein Name Einträge in versch
 - `man 2`: Systemaufrufe (Kernel-Funktionen).
 - `man 5`: Dateiformate und Konfigurationen.
 
-> [!TIP]
-> Nutzen Sie `man 2 mount`, um spezifische Informationen zum Systemaufruf statt zum Befehl zu erhalten.
+> [!TIP]  
+> Nutzen Sie `man 2 mount`, um spezifische Informationen zum Systemaufruf statt zum Befehl zu erhalten.  
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Hilfe-Systeme:**  
+> * **Manpage-Suche:** Wenn Sie den genauen Befehl nicht wissen, nutzen Sie **`man -k <Begriff>`** oder **`apropos <Begriff>`**. Beide suchen in den Kurzbeschreibungen der Handbuchseiten. Damit dies funktioniert, muss die Datenbank mit **`mandb`** (bzw. älter `makewhatis`) aktuell sein.  
+> * **Sektionen der Manpages:**  
+>   * **Sektion 1:** Benutzerbefehle (z.B. `passwd`, `ls`).  
+>   * **Sektion 5:** Dateiformate und Konfigurationen (z.B. `/etc/passwd`, `/etc/exports`).  
+>   * **Sektion 8:** Systemverwaltungsbefehle (z.B. `fdisk`, `ifconfig`, `route`).  
+>   * Beispiel: `man 5 passwd` zeigt das Dateiformat von `/etc/passwd`. `man 1 passwd` zeigt die Bedienung des Befehls `passwd`.
 
 ---
 
@@ -44,10 +53,23 @@ Manpages sind in Sektionen unterteilt. Manchmal hat ein Name Einträge in versch
 Bevor man an einem System arbeitet, muss man wissen, womit man es zu tun hat.
 
 ### Hardware & Kernel
-- `uname -a`: Zeigt alle Systeminformationen (Kernel-Version, Architektur).
-- `lscpu`: Detaillierte Informationen zur CPU-Architektur.
+- `uname -a`: Zeigt alle Systeminformationen (Kernel-Version, Hostname, CPU-Architektur).
+- `lscpu`: Detaillierte Informationen zur CPU-Architektur (Kerne, Cache, etc.).
 - `free -h`: Zeigt den freien und belegten Arbeitsspeicher in lesbarem Format (Human-readable).
 - `df -h`: Zeigt die Belegung der Dateisysteme (Festplattenplatz) an.
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Hardware-Erkennung & Kernel-Module:**  
+> * **Hardware-Dateien in `/proc`:**  
+>   * `/proc/cpuinfo` - Detaillierte CPU-Daten (Hersteller, Modell, Takt).  
+>   * `/proc/meminfo` - Detaillierte RAM-Daten (Gesamt, Frei, Cache).  
+>   * `/proc/ioports` & `/proc/dma` - Reservierte I/O-Adressbereiche und Direct-Memory-Access Kanäle.  
+>   * `/proc/pci` / `/proc/bus/pci` - PCI-Bus Informationen.  
+> * **Hardware-Befehle:**  
+>   * **`lspci`**: Listet alle PCI-Geräte auf.  
+>   * **`lsusb`**: Listet alle USB-Geräte auf.  
+>   * **`lsmod`**: Listet alle aktuell geladenen Kernel-Module auf (liest `/proc/modules`).  
+>   * **`modinfo <Modul>`**: Zeigt Informationen über ein Kernel-Modul an (Autor, Lizenz, Abhängigkeiten).
 
 ### Aktive Benutzer
 | Befehl | Funktion |
@@ -67,6 +89,13 @@ Heute haben wir gelernt, wie man effizient mit Verzeichnisstrukturen arbeitet.
 - `cp -r <Quelle> <Ziel>`: Kopiert Verzeichnisse rekursiv.
 - `rm -rf <Pfad>`: Löscht Verzeichnisse rekursiv und ohne Nachfrage (Vorsicht geboten!).
 - `mv <Quelle> <Ziel>`: Verschiebt oder benennt Dateien und Verzeichnisse um.
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - cp & rm Optionen:**  
+> * **`cp -a` (Archive):** Eines der wichtigsten Flags. Es kopiert rekursiv und behält alle Attribute wie Berechtigungen, Besitzer, Gruppe, symbolische Links und Zeitstempel bei. Es entspricht der Kombination **`-dpR`**.  
+> * **`cp -p` (Preserve):** Kopiert die Datei und erhält Eigentümer, Gruppe, Zugriffsrechte und Zeitstempel der Originaldatei.  
+> * **`rm -r` (Recursive):** Löscht ein Verzeichnis und dessen gesamten Inhalt.  
+> * **`rm -f` (Force):** Ignoriert nicht existierende Dateien und fragt niemals nach einer Bestätigung.
 
 > [!CAUTION]
 > `rm -rf` ist ein mächtiges Werkzeug. Nutzen Sie `rm -ri` (interaktiv), wenn Sie unsicher sind, was genau gelöscht wird.
