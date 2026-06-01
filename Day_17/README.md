@@ -109,10 +109,13 @@ clients:
 | **`tools_installer.sh`**| Installation CLI-Tools, legendäre fastfetch & OMZ ZSH | 109.4 | Checklist (FHD) |
 | **`cron_maker.sh`** | Menügeführter, interaktiver Cronjob-Generator | 105.2 | Menü-Assistent |
 | **`desktop_ricing.sh`**| r/unixporn Premium Eyecandy, Wallpaper & Visualizer | - | Checklist (FHD) |
-| **`diagnostics.sh`** | Automatisierter Diagnosebericht & Konnektivitäts-Check | 109.2 | TextBox (Scroll) |
+| **`diagnostics.sh`** | Automatisierter Diagnosebericht & Konnektivitäts-Check / Doctor | 109.2 | TextBox (Scroll) |
+| **`subnet_scanner.sh`**| Paralleler Hochgeschwindigkeits-Subnetz-Scanner (Ping Sweep) | 109.2 | TextBox (Scroll) |
 | **`ntp_setup.sh`** | timedatectl & chronyd/systemd-timesyncd Zeitsynchronisation | 108.1 | Menü-Assistent |
 | **`backup_manager.sh`**| Systemkonfigurations-Backup & Wiederherstellung | 105.2 | Menü-Assistent |
-| **`parse_config.py`** | YAML-Parser ohne Abhängigkeiten zur Systemkopplung | - | CLI-Hilfstool |
+| **`config_editor.sh`**| Interaktiver YAML-Konfigurations-Parameter-Editor | - | Menü-Assistent |
+| **`parse_config.py`** | YAML-Parser ohne Abhängigkeiten zur Systemkopplung (Read) | - | CLI-Hilfstool |
+| **`update_config.py`**| YAML-Updater ohne Abhängigkeiten zur Systemkopplung (Write)| - | CLI-Hilfstool |
 
 ---
 
