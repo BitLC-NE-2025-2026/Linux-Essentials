@@ -84,12 +84,16 @@ if [[ "$CHOICES" =~ "PLUGINS" ]]; then
         if [[ ! -d "$plugin_dir/zsh-completions" ]]; then
             sudo -u "$TARGET_USER" git clone https://github.com/zsh-users/zsh-completions "$plugin_dir/zsh-completions" >/dev/null 2>&1 || true
         fi
+        # History Substring Search
+        if [[ ! -d "$plugin_dir/zsh-history-substring-search" ]]; then
+            sudo -u "$TARGET_USER" git clone https://github.com/zsh-users/zsh-history-substring-search "$plugin_dir/zsh-history-substring-search" >/dev/null 2>&1 || true
+        fi
 
         # In .zshrc eintragen
         zshrc_file="$USER_HOME/.zshrc"
         if [[ -f "$zshrc_file" ]]; then
             # Plugins-Zeile mit reichhaltigen Plugins ersetzen
-            sudo -u "$TARGET_USER" sed -i 's/^plugins=.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions sudo copypath copyfile colored-man-pages)/' "$zshrc_file"
+            sudo -u "$TARGET_USER" sed -i 's/^plugins=.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions zsh-history-substring-search sudo copypath copyfile colored-man-pages extract web-search command-not-found dirhistory systemd)/' "$zshrc_file"
         fi
         log_success "ZSH-Plugins erfolgreich integriert."
     fi
