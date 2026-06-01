@@ -89,6 +89,24 @@ sudo timedatectl set-ntp true
 sudo timedatectl set-timezone Europe/Berlin
 ```
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Hardware- vs. Systemzeit (`hwclock`):**  
+> Linux verwaltet zwei verschiedene Uhren:  
+> 1. **Systemuhr (System Clock / Software Clock):** Wird vom Kernel betrieben und läuft im RAM. Geht verloren bei Stromausfall/Ausschalten.  
+> 2. **Hardwareuhr (Hardware Clock / Real Time Clock / RTC):** Batteriebetriebene Uhr auf dem Mainboard, die auch bei ausgeschaltetem PC weiterläuft.  
+> * **Der Befehl `hwclock`:**  
+>   * **`hwclock --show`** (oder **`-r`**): Zeigt die aktuelle Zeit der Hardwareuhr an.  
+>   * **`hwclock --hctosys`** (oder **`-s`**): Synchronisiert die Systemzeit *aus* der Hardwarezeit (Hardware-to-System). Wird beim Booten ausgeführt.  
+>   * **`hwclock --systohc`** (oder **`-w`**): Schreibt die aktuelle Systemzeit *in* die Hardwareuhr (System-to-Hardware). Wird beim Herunterfahren ausgeführt.  
+>   * **`/etc/adjtime`**: Konfigurationsdatei, in der das System Kalibrierungsdaten und Zeitdrift-Informationen der Hardwareuhr persistent abspeichert.  
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Zeitzonen-Konfiguration:**  
+> * **Speicherort der Zeitzonen:** Sämtliche weltweit verfügbaren Zeitzonen-Dateien liegen unter **`/usr/share/zoneinfo/`** (z.B. `/usr/share/zoneinfo/Europe/Berlin`).  
+> * **Aktive Zeitzone:** Die aktive System-Zeitzone wird durch die Datei **`/etc/localtime`** bestimmt, welche ein **symbolischer Link** auf die entsprechende Datei in `/usr/share/zoneinfo/` sein muss.  
+>   * *Manueller Zeitzonenwechsel:* `ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime`  
+> * **`/etc/timezone`**: Auf Debian-basierten Systemen enthält diese Datei zusätzlich den Namen der aktiven Zeitzone als Text (z.B. `Europe/Berlin`).  
+
 ### 2. chronyd (Rocky/RedHat Standard)
 Der moderne Standard-Zeitsynchronisationsdienst unter RedHat- und Rocky Linux-Systemen ist **`chrony`**.
 * **Konfigurationsdatei:** `/etc/chrony.conf`
@@ -120,6 +138,12 @@ Debian- und Arch-Systeme nutzen häufig den leichtgewichtigen, rein Client-seiti
   ```bash
   timedatectl show-timesync --all
   ```
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Klassisches NTP & Abfrage:**  
+> * Neben `chrony` und `timesyncd` existiert der klassische NTP-Daemon **`ntpd`** (Konfiguration unter `/etc/ntp.conf`).  
+> * Zur Statusüberprüfung des klassischen Daemons wird das Werkzeug **`ntpq`** verwendet:  
+>   * **`ntpq -p`**: Listet alle konfigurierten NTP-Server (Peers) inklusive Status, Verzögerung (delay) und Abweichung (offset) auf.
 
 ---
 

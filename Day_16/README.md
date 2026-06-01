@@ -102,6 +102,14 @@ sudo sysctl -w net.ipv4.ip_forward=1
 echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/99-ip-forward.conf
 ```
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Kernel Tuning mit sysctl:**  
+> Der Befehl **`sysctl`** dient zum Auslesen und Konfigurieren von Kernel-Parametern zur Laufzeit (unter `/proc/sys/`):  
+> * **`sysctl -a`**: Listet alle im laufenden System verfügbaren Kernel-Parameter auf.  
+> * **`sysctl -w parameter=wert`**: Schreibt einen Wert temporär in einen Parameter (z.B. `sysctl -w net.ipv4.ip_forward=1`).  
+> * **`sysctl -p <Datei>`**: Lädt Einstellungen aus einer sysctl-Konfigurationsdatei (standardmäßig `/etc/sysctl.conf` oder `/etc/sysctl.d/*`). Dies macht Änderungen ohne Neustart persistent!  
+> * **Verzeichnis-Entsprechung:** Der Parameter `net.ipv4.ip_forward` entspricht direkt der virtuellen Datei `/proc/sys/net/ipv4/ip_forward`. Ein Ändern via `echo 1 > /proc/sys/net/ipv4/ip_forward` ist funktionsgleich!
+
 ---
 
 ## 💻 3. Client-Konfiguration (Rocky, Debian, CachyOS, Manjaro)
@@ -179,6 +187,20 @@ ip route show
 # Verbindungstest vom Client ins Internet
 ping 1.1.1.1
 ```
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Netzwerkdiagnose & Sockets:**  
+> * **Socket-Analyse mit `ss` (Socket Statistics):**  
+>   `ss` ersetzt das veraltete `netstat` und liest Daten direkt aus dem Kernel-Namensraum:  
+>   * **`-t`** / **`-u`**: Zeigt TCP- / UDP-Sockets an.  
+>   * **`-l`**: Zeigt ausschließlich lauschende Sockets an (Listening Sockets).  
+>   * **`-a`**: Zeigt alle Sockets (sowohl lauschende als auch aufgebaute Verbindungen).  
+>   * **`-p`**: Listet den Namen und die PID des Prozesses auf, der den Port belegt (erfordert root).  
+>   * **`-n`**: Zeigt Adressen und Ports numerisch an (verhindert langsame DNS-Abfragen).  
+>   * *Beispiel:* `ss -tulpen` zeigt alle lauschenden TCP/UDP Sockets mit Prozess-ID, User und Portnummer numerisch an.  
+> * **Routen-Verfolgung (`traceroute` vs. `tracepath`):**  
+>   * **`traceroute <Ziel>`**: Verfolgt den Pfad eines Pakets zum Ziel, indem es Pakete mit aufsteigender TTL (Time To Live) versendet. Jeder Router dekrementiert die TTL und sendet bei Ablauf eine ICMP-Zeitüberschreitung zurück, was den Pfad offenlegt.  
+>   * **`tracepath <Ziel>`**: Ähnlich wie `traceroute`, benötigt aber **keine Root-Rechte** zur Ausführung und ermittelt zusätzlich die MTU (Path MTU Discovery).
 
 ---
 
