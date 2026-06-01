@@ -1,236 +1,137 @@
-# 🖥️ OmniTUI (OmniTUI) - Tag 17
+# 🌐 Netzwerk-Routing & NTP-Zeitsynchronisation — Tag 17
 
 ![Linux Essentials Day 17 Header](./header.png)
 
 > **Entwickler & Administrator:** Tobias Boyke  
-> **Status:** 🚀 Vollständig Einsatzbereit & Getestet  
+> **Status:** 🚀 Kern-Lerninhalte & LPIC-1 Vorbereitung  
 > **Kompatibilität:** ![Rocky Linux](https://img.shields.io/badge/Rocky%20Linux-8%20%7C%209-blue) ![Debian](https://img.shields.io/badge/Debian-12%20%7C%2013-red) ![Arch Linux](https://img.shields.io/badge/Arch%20Linux-Latest-cyan)
 
 ---
 
-## 📖 Einführung & Vision
-
-**OmniTUI** (OmniTUI) ist ein hochgradig modulares, interaktives und professionelles Administrations- und Netzwerkeinrichtungs-System auf Basis von **Whiptail TUI**. Es transformiert die monolithische Automatisierung von Tag 16 in eine zukunftsweisende, benutzerfreundliche und fehlerresistente Suite.
-
-Das System steuert die gesamte Netzwerkarchitektur (Zentrales Gateway, IP-Forwarding, `nftables` NAT-Masquerading, statisches Routing auf Clients) und erlaubt die Zuweisung von Geräten über ihre spezifischen **ENS-Namen** oder **physikalischen MAC-Adressen** direkt aus der YAML-Datei.
-
-Zusätzlich integriert die Suite **fortgeschrittene Kernel-Tweaks** (Google BBR, TCP Window-Size-Scaling), lokale **DNS-Caching-Resolver**, einen **interaktiven Cronjob-Builder**, ein **Konnektivitäts-Diagnosewerkzeug**, einen **Backup & Restore Manager** sowie eine **NTP-Zeitsynchronisation** für absolut zeitsynchronisierte Protokolle und Logfiles im gesamten Subnetz.
-
----
-
 ## 📑 Inhaltsverzeichnis
-- [🏗️ System-Architektur & Modulstruktur](#️-system-architektur--modulstruktur)
-- [⚙️ Zentrale YAML-Konfiguration (config.yaml)](#️-zentrale-yaml-konfiguration-configyaml)
-- [📦 Die Modul-Skripte im Detail](#-die-modul-skripte-im-detail)
-  - [1. Systemprüfung (sys_check.sh)](#1-systemprüfung-sys_checksh)
-  - [2. Dual-DNS Benchmark & Selektor (dns_selector.sh)](#2-dual-dns-benchmark--selektor-dns_selectorsh)
-  - [3. System Tuning & Performance (system_tweaks.sh)](#3-system-tuning--performance-system_tweakssh)
-  - [4. Cronjob Maker TUI (cron_maker.sh)](#4-cronjob-maker-tui-cron_makersh)
-  - [5. Tools & Shell-Branding (tools_installer.sh)](#5-tools--shell-branding-tools_installersh)
-  - [6. Desktop Ricing & Premium Eyecandy (desktop_ricing.sh)](#6-desktop-ricing--premium-eyecandy-desktop_ricingsh)
-  - [7. System- & Netzwerk-Diagnose (diagnostics.sh)](#7-system---netzwerk-diagnose-diagnosticssh)
-  - [8. NTP Zeitsynchronisation & Server (ntp_setup.sh)](#8-ntp-zeitsynchronisation--server-ntp_setupsh)
-  - [9. Backup & Restore Manager (backup_manager.sh)](#9-backup--restore-manager-backup_managersh)
-- [🚀 Ausführung & Live-Betrieb](#-ausführung--live-betrieb)
+- [📖 Einführung & LPIC-Fokus](#-einführung--lpic-fokus)
+- [🛠️ Netzwerk-Routing & Gateway-Aufbau](#️-netzwerk-routing--gateway-aufbau)
+  - [1. IP-Forwarding aktivieren](#1-ip-forwarding-aktivieren)
+  - [2. nftables NAT-Masquerading](#2-nftables-nat-masquerading)
+  - [3. Client statisches Routing](#3-client-statisches-routing)
+- [⏰ NTP-Zeitsynchronisation & Server-Management](#-ntp-zeitsynchronisation--server-management)
+  - [1. timedatectl zur Zeitsteuerung](#1-timedatectl-zur-zeitsteuerung)
+  - [2. chronyd (Rocky/RedHat Standard)](#2-chronyd-rockyredhat-standard)
+  - [3. systemd-timesyncd (Debian Standard)](#3-systemd-timesyncd-debian-standard)
+- [🎮 Das optionale OmniTUI Showcase-Tool](#-das-optionale-omnitui-showcase-tool)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
 ---
 
-## 🏗️ System-Architektur & Modulstruktur
+## 📖 Einführung & LPIC-Fokus
 
-Das System teilt sich in eine zentrale TUI-Hauptsteuerung und dedizierte, modular gekapselte Skripte im Ordner `scripts/` auf:
-
-```mermaid
-graph TD
-    A["OmniTUI.sh (Hauptmenü Loop)"] --> B["config.yaml (Single Source of Truth)"]
-    
-    %% Shared library & helpers
-    A -.-> CO["scripts/common.sh (Shared Constants & Helpers)"]
-    CO -.-> C
-    CO -.-> D
-    CO -.-> E
-    CO -.-> F
-    CO -.-> G
-    CO -.-> H
-    CO -.-> I
-    CO -.-> J
-    CO -.-> K
-    CO -.-> L
-    CO -.-> M
-    CO -.-> N
-    CO -.-> SC
-    CO -.-> CE
-    
-    %% Action Modules
-    A --> C["scripts/sys_check.sh (Dependency & Sudoers)"]
-    A --> D["scripts/dns_selector.sh (Dual-IP Benchmark)"]
-    A --> E["scripts/router_setup.sh (Routing & nftables NAT)"]
-    A --> F["scripts/client_setup.sh (Dynamic IP & nmcli config)"]
-    A --> G["scripts/services_mgmt.sh (SSH Hardening & systemd)"]
-    A --> H["scripts/system_tweaks.sh (BBR, TCP Tuning, Cache, Editor)"]
-    A --> I["scripts/tools_installer.sh (Fastfetch, Terminals, OMZ ZSH)"]
-    A --> J["scripts/cron_maker.sh (Cronjob-TUI Assistant)"]
-    A --> K["scripts/desktop_ricing.sh (GNOME, KDE, Hyprland Rices)"]
-    A --> L["scripts/diagnostics.sh (Auto Self-Healing Doctor)"]
-    A --> SC["scripts/subnet_scanner.sh (High-Speed Sweep)"]
-    A --> M["scripts/ntp_setup.sh (timedatectl & chronyd Sync)"]
-    A --> N["scripts/backup_manager.sh (Config tar.gz Backup/Restore)"]
-    A --> CE["scripts/config_editor.sh (TUI YAML Parameter Modifier)"]
-    
-    %% Parsing layer
-    CE --> UC["scripts/update_config.py (Write YAML)"]
-    D --> UC
-    
-    C --> PY["scripts/parse_config.py (Read YAML)"]
-    E --> PY
-    F --> PY
-    L --> PY
-    CE --> PY
-```
+Am **Tag 17** vertiefen wir die Grundlagen der Netzwerkadministration und Systemzeitsteuerung, die für die **LPIC-1 Zertifizierung** essenziell sind:
+1. **Netzwerk-Routing (LPIC-1 Thema 109):** Aufbau eines Linux-Gateways (Router) zwischen zwei isolierten LAN-Segmenten (Netz A `/27` und Netz B `/27`) und dem Internet (WAN), inklusive IP-Forwarding und Firewall-NAT-Masquerading.
+2. **NTP Zeitsynchronisation (LPIC-1 Thema 108):** Abgleich der Systemuhr gegen weltweite Referenzzeitquellen über das Network Time Protocol. Wir befassen uns mit den modernen Linux-Werkzeugen `timedatectl`, `chronyd` und `systemd-timesyncd`.
 
 ---
 
-## ⚙️ Zentrale YAML-Konfiguration (`config.yaml`)
+## 🛠️ Netzwerk-Routing & Gateway-Aufbau
 
-Die Datei [config.yaml](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_17/config.yaml) dient als Single Source of Truth für die gesamte Netzwerk-Topologie.
+Linux kann als vollwertiger Router arbeiten, um Pakete zwischen Schnittstellen weiterzuleiten und private IP-Adressen (LAN) über Network Address Translation (NAT) im Internet (WAN) zu maskieren.
 
-```yaml
-global:
-  dns_fallback: "1.1.1.1 1.0.0.1"
-  domain: "linux.essentials"
-
-router:
-  hostname: "srv-rocky"
-  interfaces:
-    wan:
-      name: "ens160"
-      mac: "00:0C:29:9E:B3:12"
-    lan_a:
-      name: "ens161"
-      mac: "00:0C:29:9E:B3:26"
-      ip: "172.16.7.33/27"
-    lan_b:
-      name: "ens256"
-      mac: "00:0C:29:9E:B3:1C"
-      ip: "172.16.7.97/27"
-
-clients:
-  - hostname: "srv-deb-01"
-    name: "ens192"
-    mac: "00:0C:29:9E:B3:3A"
-    ip: "172.16.7.42/27"
-    gateway: "172.16.7.33"
-```
-
----
-
-## 📦 Die Modul-Skripte im Detail
-
-| Skriptname | Hauptfunktion | LPIC-1 Bezug | TUI-Typ |
-| :--- | :--- | :--- | :--- |
-| **`OmniTUI.sh`** | Hauptmenü, Navigations-Loop & Config-Viewer | - | Menü (FHD) |
-| **`sys_check.sh`** | Sudoers-Härtung, OS-Erkennung & Dependency-Install | 109.4 | Info-Box |
-| **`dns_selector.sh`** | Dual-Ping Benchmark & sofortige systemweite Aktivierung | 109.1, 109.4 | Menü (Live-Werte) |
-| **`router_setup.sh`** | IP-Forwarding, nmcli Interface-Profile, nftables NAT | 109.1, 110.1 | Status-Box |
-| **`client_setup.sh`** | Dynamic card-mapping (MAC/Name) & statische IPs | 109.1, 109.2 | Status-Box |
-| **`services_mgmt.sh`**| OpenSSH Härtung & systemd Überwachung | 110.1 | Yes/No & Dashboard |
-| **`system_tweaks.sh`**| Google BBR Tuning, TCP/IP Buffer Sizing, DNS-Caching | 109.1, 110.1 | Checklist (FHD) |
-| **`tools_installer.sh`**| Installation CLI-Tools, legendäre fastfetch & OMZ ZSH | 109.4 | Checklist (FHD) |
-| **`cron_maker.sh`** | Menügeführter, interaktiver Cronjob-Generator | 105.2 | Menü-Assistent |
-| **`desktop_ricing.sh`**| r/unixporn Premium Eyecandy, Wallpaper & Visualizer | - | Checklist (FHD) |
-| **`diagnostics.sh`** | Automatisierter Diagnosebericht & Konnektivitäts-Check / Doctor | 109.2 | TextBox (Scroll) |
-| **`subnet_scanner.sh`**| Paralleler Hochgeschwindigkeits-Subnetz-Scanner (Ping Sweep) | 109.2 | TextBox (Scroll) |
-| **`ntp_setup.sh`** | timedatectl & chronyd/systemd-timesyncd Zeitsynchronisation | 108.1 | Menü-Assistent |
-| **`backup_manager.sh`**| Systemkonfigurations-Backup & Wiederherstellung | 105.2 | Menü-Assistent |
-| **`config_editor.sh`**| Interaktiver YAML-Konfigurations-Parameter-Editor | - | Menü-Assistent |
-| **`parse_config.py`** | YAML-Parser ohne Abhängigkeiten zur Systemkopplung (Read) | - | CLI-Hilfstool |
-| **`update_config.py`**| YAML-Updater ohne Abhängigkeiten zur Systemkopplung (Write)| - | CLI-Hilfstool |
-
----
-
-### 1. Systemprüfung (`sys_check.sh`)
-* **Sudoers Hinzufügung:** Ist der aktuelle User nicht berechtigt, fragt das Skript nach dem Root-Passwort und fügt ihn der Administratorengruppe (`wheel` bei RHEL/Arch, `sudo` bei Debian) hinzu.
-* **Uniformer Paket-Resolver:** Erkennt das OS und installiert fehlende TUI-Abhängigkeiten wie `newt` / `whiptail` und `ping`.
-
-### 2. Dual-DNS Benchmark & Selektor (`dns_selector.sh`)
-* **Hintergrund Live-Ping:** Pingt parallel **sowohl die Primary als auch die Secondary IP** von 10 weltbekannten DNS-Providern an (20 Server insgesamt) und berechnet den Mittelwert.
-* **Live Latenzanzeige:** Visualisiert die genauen Reaktionszeiten übersichtlich im TUI-Wahlmenü.
-* **Sofortige Aktivierung (Live-Override):**
-  * Überschreibt sofort das aktive NetworkManager-Schnittstellenprofil (`ipv4.dns`).
-  * Sichert `/etc/resolv.conf` und schreibt die neuen Nameserver direkt als System-Override fest.
-
-### 3. System Tuning & Performance (`system_tweaks.sh`)
-* **Google BBR Congestion Control:** Modernes TCP/IP Congestion Control für extrem schnelle Übertragungsraten und minimalen Paketverlust.
-* **TCP Buffer Tuning:** Skaliert Lese- und Schreib-Buffer des Kernels (`rmem`/`wmem`) auf High-Performance Level.
-* **Default-Editor (EDITOR):** Menügeführte, persistente Konfiguration des Standardeditors (`micro`, `nano`, `vim`, `vi`) in `.bashrc` und `.zshrc`.
-* **Lokaler DNS-Cache:** Richtet systemweiten Cache via `systemd-resolved` (oder `dnsmasq`) ein. DNS-Antworten werden lokal gespeichert, wodurch Latenzen bei wiederholten Anfragen auf **0 ms** sinken!
-
-### 4. Cronjob Maker TUI (`cron_maker.sh`)
-* Nimmt dem Administrator das fehleranfällige manuelle Schreiben von Cron-Zeilen ab.
-* Bietet vorgefertigte Intervalle (stündlich, täglich, wöchentlich) und Aufgaben (Sicherheitsupdates, Log-Cleanup, Backup) sowie Custom-Befehle an.
-* Trägt die Zeilen nach Validierung sicher in die System-Crontab ein.
-
-### 5. Tools & Shell-Branding (`tools_installer.sh`)
-* **Legendäre Fastfetch Config:** Richtet ein schickes, farbkodiertes Terminal-Dashboard mit Unicode-Icons, Hardware-Status und lokalen IP-Adressen unter `~/.config/fastfetch/config.jsonc` ein.
-* **Moderne Terminals:** Selektive Co-Installation von `Ghostty` (Zig/GPU-beschleunigt), `Alacritty` (Rust) und `Kitty` samt vollautomatischer Catppuccin Mocha Themes.
-* **ZSH & Oh My Zsh:** Richtet die Standard-Shell ein und lädt das `agnoster`-Theme sowie Premium-Plugins:
-  * `zsh-autosuggestions` & `zsh-syntax-highlighting`
-  * `zsh-completions` & `zsh-history-substring-search`
-  * `sudo` (Doppel-ESC fügt ein führendes `sudo` ein) sowie `extract` und `web-search`.
-* **Nützliche Aliases:**
-  * `ipbrief` -> `ip -br -4 a` (Interface-IPs).
-  * `fwlist` -> `sudo nft list ruleset` (Firewall).
-  * `ports` -> `sudo ss -tulpen` (Aktive Ports & Sockets).
-
-### 6. Desktop Ricing & Premium Eyecandy (`desktop_ricing.sh`)
-* **r/unixporn Edition:** Richtet detailverliebte Rices für **KDE Plasma** (Sweet Cyberpunk, Candy Icons), **GNOME** (Orchis GTK Theme, Blur my Shell, custom Dock) und **Hyprland** (Catppuccin Mocha, custom Waybar-Glow, Rofi, Dunst) ein.
-* **Wallpaper Downloader:** Zieht hochauflösende, ästhetische Hintergrundbilder und setzt diese live.
-* **Showcase-Tools:** Installiert `cava` (Terminal-Audiospektrum) und `cmatrix` (Matrix Code Rain) für beeindruckende Präsentationen.
-
-### 7. System- & Netzwerk-Diagnose (`diagnostics.sh`)
-* Führt automatisiert lokale Schnittstellenprüfungen und Routing-Analysen durch.
-* Prüft DNS- und HTTPS-Verbindungen ins Internet.
-* Liest die `config.yaml` und führt einen automatisierten Latenz-Sweep zwischen allen Topologie-Hosts durch (Router pingt alle Clients, Clients pingen Gateway).
-
-### 8. NTP Zeitsynchronisation & Server (`ntp_setup.sh`)
-* **LPIC-Fokus:** Konfiguriert den Zeitsynchronisationsdienst auf Basis des verfügbaren Clients (`chronyd` auf RHEL/Rocky, `systemd-timesyncd` auf Debian/Arch).
-* **Zeitserver-Auswahl:** Bietet eine Auswahlliste an regionalen NTP-Servern (Deutschland-Pool, Europa-Pool, Cloudflare-NTS, Google).
-* Richtet die persistente Konfigurationsdatei ein, erzwingt die Synchronisation und gibt Drift- und Zeitstatus aus.
-
-### 9. Backup & Restore Manager (`backup_manager.sh`)
-* Archiviert und komprimiert alle durch OmniTUI modifizierten Konfigurationsdateien in einem datierten `.tar.gz`-Archiv unter `/var/backups/omnitui/`.
-* Das **Wiederherstellungsmenü** listet alle vorhandenen Backups samt Dateigröße auf und erlaubt das Zurückspielen alter Zustände mit anschließendem automatischen Dienst-Neustart.
-
-### 10. Subnetz-Scanner / Host-Discovery (`subnet_scanner.sh`)
-* **Parallele Ping-Sweeps:** Pingt alle IPs im ausgewählten `/27` Subnetz (Netz A oder Netz B) parallel im Hintergrund an.
-* **DNS Reverse Resolution:** Versucht automatisch, Online-Hosts über lokale DNS-Auflösungen (`getent hosts`) einem Rechnernamen zuzuordnen.
-* **Scan-Berichte:** Generiert einen scrollbaren Whiptail-Bericht über alle aktiven (ONLINE) und freien (offline) IP-Adressen zur einfachen Netzübersicht.
-
-### 11. Interaktiver Konfigurations-Editor (`config_editor.sh`)
-* **Live-Parameteranpassung:** Ermöglicht das Bearbeiten wichtiger Parameter aus `config.yaml` direkt aus der Benutzeroberfläche heraus.
-* **Zentraler Schreibzugriff:** Nutzt die Python-Bibliothek `update_config.py`, um Werte sauber und ohne Drittanbieter-Abhängigkeiten in der YAML-Struktur zu aktualisieren.
-
-### 12. Gemeinsame System-Bibliothek (`common.sh`)
-* **DRY-Konformität:** Bündelt alle globalen Variablen (FHD-Größen, Parser-Pfade) und Hilfsfunktionen (Root-Rechteprüfung, Farb-Logging) an einem einzigen, zentralen Ort.
-* **Wartungsfreundlichkeit:** Änderungen an Anzeigegrößen oder Pfaden müssen nur noch in dieser einen Datei vorgenommen werden und vererben sich automatisch auf alle Sub-Module.
-
----
-
-## 🚀 Ausführung & Live-Betrieb
-
-Stellen Sie sicher, dass Sie sich im Verzeichnis `Day_17` befinden. Sie können das Hauptmenü direkt starten:
+### 1. IP-Forwarding aktivieren
+Standardmäßig verwirft Linux Pakete, die nicht für den lokalen Host bestimmt sind. Das Kernel-Routing aktivieren wir über das virtuelle Dateisystem `/proc` oder dauerhaft via `sysctl`:
 
 ```bash
-# Hauptsteuerung starten (Rechte werden automatisch vergeben!)
-bash OmniTUI.sh
+# Temporäre Aktivierung (sofort wirksam)
+sudo sysctl -w net.ipv4.ip_forward=1
+
+# Persistente Aktivierung (nach Systemstart aktiv)
+echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/99-ip-forward.conf
 ```
 
-> [!NOTE]
-> **Automatische Rechtevergabe:** Beim ersten Start vergibt `OmniTUI.sh` automatisch alle nötigen Ausführungsrechte (`chmod +x`) für sämtliche Sub-Skripte und Parser im Hintergrund. Sie müssen keine manuellen Berechtigungsanpassungen vornehmen.
+### 2. nftables NAT-Masquerading
+Um private Subnetze ins Internet zu routen, muss der Router die Absender-IPs maskieren (Source-NAT / Masquerading). Dies geschieht über die moderne **`nftables`** Engine:
+
+```bash
+# /etc/nftables.conf auf dem Router
+flush ruleset
+table ip nat {
+    chain postrouting {
+        type nat hook postrouting priority 100; policy accept;
+        oifname "ens160" masquerade  # ens160 ist die WAN-Schnittstelle
+    }
+}
+```
+
+### 3. Client statisches Routing
+Clients in den isolierten Netzen benötigen eine Zuweisung ihres Standard-Gateways (der IP des Routers im jeweiligen Subnetz), um Anfragen außerhalb ihres Netzes weiterzuleiten:
+
+```bash
+# Beispiel für manuelle statische Route unter Linux
+sudo ip route add default via 172.16.7.33 dev ens192
+```
+
+---
+
+## ⏰ NTP-Zeitsynchronisation & Server-Management
+
+Eine präzise Systemzeit ist entscheidend für sicherheitsrelevante Logfiles, Authentifizierungsprotokolle (Kerberos, TLS) und Datenbanktransaktionen.
+
+### 1. timedatectl zur Zeitsteuerung
+Das `systemd`-Werkzeug **`timedatectl`** dient zur Abfrage und Konfiguration der Systemuhr und Zeitzone:
+
+```bash
+# Systemzeit-Status anzeigen (inkl. NTP-Synchronisationsstatus)
+timedatectl status
+
+# Zeitsynchronisation über systemd aktivieren
+sudo timedatectl set-ntp true
+
+# Zeitzone ändern
+sudo timedatectl set-timezone Europe/Berlin
+```
+
+### 2. chronyd (Rocky/RedHat Standard)
+Der moderne Standard-Zeitsynchronisationsdienst unter RedHat- und Rocky Linux-Systemen ist **`chrony`**.
+* **Konfigurationsdatei:** `/etc/chrony.conf`
+* **Zeitserver eintragen:**
+  ```text
+  server de.pool.ntp.org iburst
+  ```
+  *(Das Flag `iburst` sorgt beim Dienststart für vier schnelle Anfragen zur schnellen Zeitsynchronisation).*
+
+* **Überwachung mit chronyc:**
+  ```bash
+  # NTP-Quellen anzeigen
+  chronyc sources -v
+  
+  # Synchronisations-Qualität und Zeitdrift anzeigen
+  chronyc tracking
+  ```
+
+### 3. systemd-timesyncd (Debian Standard)
+Debian- und Arch-Systeme nutzen häufig den leichtgewichtigen, rein Client-seitigen Dienst **`systemd-timesyncd`**.
+* **Konfigurationsdatei:** `/etc/systemd/timesyncd.conf`
+* **Zeitserver eintragen:**
+  ```text
+  [Time]
+  NTP=de.pool.ntp.org
+  FallbackNTP=pool.ntp.org
+  ```
+* **Status abfragen:**
+  ```bash
+  timedatectl show-timesync --all
+  ```
+
+---
+
+## 🎮 Das optionale OmniTUI Showcase-Tool
+
+Zur Automatisierung aller oben beschriebenen Schritte (und weit darüber hinaus) hat **Tobias Boyke** ein **100% optionales, extrem umfangreiches und grafisch optimiertes Konsolenwerkzeug** namens **OmniTUI** entwickelt.
+
+Das Tool ist ein vollständig menügeführtes Frontend auf Basis von **Whiptail**, das sämtliche Aufgaben von der Systemprüfung, der Einrichtung des Routers, des DNS-Caching-Resolvers, über ZSH-Branding, Desktop-Ricing bis hin zu NTP-Synchronisationen und Backups komfortabel automatisiert.
 
 > [!TIP]
-> **FHD-Modus:** Die TUI wurde gezielt für Auflösungen ab Full HD (1920x1080) optimiert (Fenstergröße 24x95). Sie bietet dadurch ein erstklassiges, übersichtliches Layout auf modernen Monitoren.
+> Die komplette Dokumentation zum TUI-Tool, der System-Architektur sowie eine Beschreibung aller 16 auswählbaren TUI-Funktionen finden Sie im dedizierten Handbuch:  
+> 📖 **[OmniTUI Handbuch (OMNITUI_README.md)](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_17/OMNITUI_README.md)**
 
 ---
 
