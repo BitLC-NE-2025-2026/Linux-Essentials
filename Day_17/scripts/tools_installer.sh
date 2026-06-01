@@ -2,7 +2,7 @@
 # ==============================================================================
 # MNBTUI Module: tools_installer.sh
 # Autor: Tobias Boyke
-# Zweck: Premium Tools-Installer, Legendäres ZSH & Fastfetch-Setup
+# Zweck: Premium Tools-Installer, ZSH-Plugins, Fastfetch & Terminal Emulatoren TUI
 # ==============================================================================
 
 set -euo pipefail
@@ -26,9 +26,10 @@ W_LIST=8
 # 1. TUI-Selektionsmenü für die Installationen
 CHOICES=$(whiptail --title "Zentraler Tools & Shell-Installer" \
                    --checklist "Wählen Sie die Komponenten aus, die Sie einrichten möchten:" $W_HEIGHT $W_WIDTH $W_LIST \
-                   "SYS_TOOLS" "Installiere CLI-Tools (btop, ncdu, micro)" ON \
+                   "SYS_TOOLS" "Installiere CLI-Tools (btop, ncdu, micro, bat, ripgrep, fd, fzf, tldr)" ON \
                    "ZSH_SHELL" "ZSH als Standard-Shell & Oh My Zsh aktivieren" ON \
-                   "PLUGINS"   "Premium Plugins (Suggestions, Highlighting, completions, sudo, colored-man)" ON \
+                   "PLUGINS"   "Premium ZSH-Plugins (Highlighting, Suggestions, completions, search tools)" ON \
+                   "TERMINALS" "Moderne Terminal-Emulatoren installieren & konfigurieren (Ghostty, Alacritty, Kitty)" ON \
                    "ALIASES"   "Legendäre Admin-Aliases & Shortcuts (ipbrief, fwlist, ports...)" ON \
                    "FASTFETCH" "Legendäres Fastfetch-Branding & System-Dashboard" ON 3>&1 1>&2 2>&3)
 
@@ -92,21 +93,92 @@ if [[ "$CHOICES" =~ "PLUGINS" ]]; then
         # In .zshrc eintragen
         zshrc_file="$USER_HOME/.zshrc"
         if [[ -f "$zshrc_file" ]]; then
-            # Plugins-Zeile mit reichhaltigen Plugins ersetzen
             sudo -u "$TARGET_USER" sed -i 's/^plugins=.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions zsh-history-substring-search sudo copypath copyfile colored-man-pages extract web-search command-not-found dirhistory systemd)/' "$zshrc_file"
         fi
         log_success "ZSH-Plugins erfolgreich integriert."
     fi
 fi
 
-# 5. Legendäre Aliases
+# 5. Moderne Terminal-Emulatoren & Auto-Config
+if [[ "$CHOICES" =~ "TERMINALS" ]]; then
+    SELECTED_TERMS=$(whiptail --title "Moderne Terminal-Emulatoren" \
+                              --checklist "Wählen Sie die Terminal-Emulatoren zur Installation & Konfiguration aus:" $W_HEIGHT $W_WIDTH $W_LIST \
+                              "GHOSTTY" "Ghostty (GPU-beschleunigt, Zig, ultra-modern)" ON \
+                              "ALACRITTY" "Alacritty (GPU-beschleunigt, Rust, minimalistisch)" ON \
+                              "KITTY" "Kitty (GPU-beschleunigt, feature-reich, Tabs/Images)" ON 3>&1 1>&2 2>&3)
+                              
+    if [[ -n "$SELECTED_TERMS" ]]; then
+        whiptail --title "Terminals werden eingerichtet" --infobox "Installiere und konfiguriere ausgewählte Terminals..." 8 60
+        
+        # Installationsversuche
+        if [[ "$SELECTED_TERMS" =~ "GHOSTTY" ]]; then
+            log_info "Bereite Ghostty-Setup vor..."
+            if command -v pacman >/dev/null 2>&1; then
+                sudo pacman -S --noconfirm ghostty >/dev/null 2>&1 || true
+            fi
+            
+            # Catppuccin Mocha Konfiguration für Ghostty schreiben
+            sudo -u "$TARGET_USER" mkdir -p "$USER_HOME/.config/ghostty"
+            cat << 'EOF' | sudo -u "$TARGET_USER" tee "$USER_HOME/.config/ghostty/config" >/dev/null
+theme = catppuccin-mocha
+font-family = "JetBrains Mono"
+font-size = 12
+window-padding-x = 8
+window-padding-y = 8
+background-opacity = 0.9
+EOF
+        fi
+        
+        if [[ "$SELECTED_TERMS" =~ "ALACRITTY" ]]; then
+            log_info "Installiere Alacritty..."
+            if command -v apt-get >/dev/null 2>&1; then sudo apt-get install -y alacritty >/dev/null 2>&1 || true;
+            elif command -v dnf >/dev/null 2>&1; then sudo dnf install -y alacritty >/dev/null 2>&1 || true;
+            elif command -v pacman >/dev/null 2>&1; then sudo pacman -S --noconfirm alacritty >/dev/null 2>&1 || true; fi
+            
+            # Catppuccin Mocha Konfiguration für Alacritty (TOML) schreiben
+            sudo -u "$TARGET_USER" mkdir -p "$USER_HOME/.config/alacritty"
+            cat << 'EOF' | sudo -u "$TARGET_USER" tee "$USER_HOME/.config/alacritty/alacritty.toml" >/dev/null
+[window]
+padding = { x = 8, y = 8 }
+opacity = 0.9
+
+[font]
+normal = { family = "JetBrains Mono", style = "Regular" }
+size = 11.0
+
+[colors.primary]
+background = "#1e1e2e" # Catppuccin Mocha Base
+foreground = "#cdd6f4" # Text
+EOF
+        fi
+        
+        if [[ "$SELECTED_TERMS" =~ "KITTY" ]]; then
+            log_info "Installiere Kitty..."
+            if command -v apt-get >/dev/null 2>&1; then sudo apt-get install -y kitty >/dev/null 2>&1 || true;
+            elif command -v dnf >/dev/null 2>&1; then sudo dnf install -y kitty >/dev/null 2>&1 || true;
+            elif command -v pacman >/dev/null 2>&1; then sudo pacman -S --noconfirm kitty >/dev/null 2>&1 || true; fi
+            
+            # Catppuccin Mocha Konfiguration für Kitty schreiben
+            sudo -u "$TARGET_USER" mkdir -p "$USER_HOME/.config/kitty"
+            cat << 'EOF' | sudo -u "$TARGET_USER" tee "$USER_HOME/.config/kitty/kitty.conf" >/dev/null
+background          #1e1e2e
+foreground          #cdd6f4
+background_opacity  0.9
+font_family         JetBrains Mono
+font_size           11.0
+window_padding_width 8
+EOF
+        fi
+        log_success "Terminal-Emulatoren und Ricing-Profile wurden erfolgreich eingerichtet."
+    fi
+fi
+
+# 6. Legendäre Aliases
 if [[ "$CHOICES" =~ "ALIASES" ]]; then
     zshrc_file="$USER_HOME/.zshrc"
     if [[ -f "$zshrc_file" ]]; then
-        # Lösche alten Aliases-Block falls vorhanden
         sudo sed -i '/### MNBTUI ADMIN ALIASES ###/,/fastfetch --logo os/d' "$zshrc_file" || true
         
-        # Schreibe erweiterten Admin-Block
         cat << 'EOF' | sudo -u "$TARGET_USER" tee -a "$zshrc_file" >/dev/null
 
 ### MNBTUI ADMIN ALIASES ###
@@ -145,15 +217,13 @@ EOF
     fi
 fi
 
-# 6. Legendäres Fastfetch-Branding
+# 7. Legendäres Fastfetch-Branding
 if [[ "$CHOICES" =~ "FASTFETCH" ]]; then
     whiptail --title "Fastfetch Branding" --infobox "Erstelle legendäres System-Dashboard..." 8 60
     
-    # Fastfetch-Konfigurationsordner
     FASTFETCH_CONFIG_DIR="$USER_HOME/.config/fastfetch"
     sudo -u "$TARGET_USER" mkdir -p "$FASTFETCH_CONFIG_DIR"
     
-    # Legendäre JSONC Konfiguration schreiben
     cat << 'EOF' | sudo -u "$TARGET_USER" tee "$FASTFETCH_CONFIG_DIR/config.jsonc" >/dev/null
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
