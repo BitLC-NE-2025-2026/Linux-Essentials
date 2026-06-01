@@ -107,6 +107,18 @@ Um im Normalmodus effizient zu navigieren und Text zu bearbeiten, nutzen wir fol
 | `u` | Letzten Schritt rückgängig machen (Undo) |
 | `Strg + r` | Rückgängig gemachten Schritt wiederholen (Redo) |
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Zusätzliche Bearbeitungsbefehle:**  
+> * **`J` (Join):** Verbindet die aktuelle Zeile und die darauf folgende Zeile zu einer einzigen Zeile (entfernt den Zeilenumbruch dazwänger).  
+> * **`r` (Replace single):** Ersetzt das eine Zeichen unter dem Cursor durch ein danach eingegebenes Zeichen (ohne in den Einfügemodus zu wechseln!).  
+> * **`R` (Replace mode):** Wechselt in den Überschreibmodus (Overstrike), bei dem getippte Zeichen den bestehenden Text überschreiben. Verlassen mit `Esc`.  
+> * **`cw` (Change word):** Löscht das Wort ab der Cursorposition und wechselt sofort in den Einfügemodus zum Ersetzen des Wortes.  
+> * **`cc` (Change line):** Löscht die komplette Zeile und wechselt in den Einfügemodus.  
+> * **Zahlenpräfixe (Wiederholungen):** Sie können fast jedem Befehl eine Zahl voranstellen, um ihn mehrfach auszuführen:  
+>   * `3dd` = Löscht 3 Zeilen.  
+>   * `5yy` = Kopiert (yanked) 5 Zeilen.  
+>   * `4w` = Springt 4 Wörter vorwärts.  
+
 ### Wechsel in den Einfügemodus
 
 | Taste | Aktion |
@@ -132,6 +144,18 @@ Der Befehlszeilenmodus ermöglicht mächtige globale Manipulationen.
 | `:q` | Editor beenden (nur wenn keine ungespeicherten Änderungen vorliegen) |
 | `:q!` | Editor sofort beenden und alle Änderungen verwerfen |
 | `:wq` oder `:x` | Speichern und vi beenden |
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Beenden & Wiederherstellung:**  
+> * **Tastatur-Kurzbefehle zum Beenden (Normalmodus):**  
+>   * **`ZZ`**: Speichert und beendet `vi` (entspricht `:wq`).  
+>   * **`ZQ`**: Beendet `vi` ohne zu speichern (entspricht `:q!`).  
+> * **Dateien direkt öffnen:**  
+>   * **`vi +42 datei.txt`**: Öffnet die Datei und springt direkt zur Zeile 42.  
+>   * **`vi +/suchbegriff datei.txt`**: Öffnet die Datei und springt zum ersten Vorkommen des Suchbegriffs.  
+> * **Absturzsicherung & Wiederherstellung:**  
+>   Wenn der PC abstürzt oder die SSH-Verbindung abreißt, legt vi eine verdeckte Auslagerungsdatei `.datei.txt.swp` an.  
+>   * **`vi -r datei.txt`**: Stellt die ungespeicherten Änderungen aus der `.swp`-Datei wieder her (Recover).  
 
 ### Suchen & Ersetzen
 

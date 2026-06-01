@@ -54,6 +54,39 @@ Das Skript `user_provisioning.sh` demonstriert die automatisierte Verarbeitung e
 * **Passwortzuweisung:** Das Werkzeug `pwgen` generiert kryptografisch sichere Zeichenketten. Der Befehl `chpasswd` verarbeitet diese direkt per Standardeingabe.
 * **Sicherheitsarchitektur:** Die gesetzten Optionen `set -e` und `set -o pipefail` erzwingen einen sofortigen Skriptabbruch bei auftretenden Fehlern.
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Die User- & Gruppen-Datenbanken:**  
+> Sie müssen den exakten Aufbau und die Felder der Systemdateien kennen!  
+> * **`/etc/passwd` (7 Felder):**  
+>   `username : x : UID : GID : GECOS/Kommentar : Heimatverzeichnis : Login-Shell`  
+>   *Das `x` im 2. Feld verweist darauf, dass Passwörter schattenverschlüsselt in `/etc/shadow` liegen.*  
+> * **`/etc/shadow` (9 Felder):**  
+>   `username : Passwort-Hash : Letzte Änderung (Tage seit 1.1.1970) : Min. Tage bis Änderung : Max. Tage Gültigkeit : Warnzeit (Tage) : Inaktivitäts-Tage : Ablaufdatum (Tage seit 1970) : Reserviert`  
+> * **`/etc/group` (4 Felder):**  
+>   `gruppenname : gruppenpasswort : GID : durch Kommas getrennte Mitgliederliste`  
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - User- & Gruppenbefehle:**  
+> * **`useradd` (Konto anlegen):**  
+>   * `-m`: Erstellt das Home-Verzeichnis (kopiert Vorlagen aus `/etc/skel/*`).  
+>   * `-s <Shell>`: Definiert die Standard-Shell (z.B. `/bin/bash` oder `/sbin/nologin` für System-Accounts).  
+>   * `-u <UID>`: Weist eine spezifische Benutzer-ID zu.  
+>   * `-g <Gruppe>`: Primäre Gruppe (Name oder GID).  
+>   * `-G <Gruppen>`: Komma-separierte Liste von sekundären Gruppen.  
+> * **`usermod` (Konto modifizieren):**  
+>   * `-d <Pfad> -m`: Ändert das Home-Verzeichnis und **verschiebt (`-m`)** alle vorhandenen Dateien dorthin.  
+>   * `-aG <Gruppen>`: Fügt den User zu weiteren Gruppen hinzu.  
+>     > [!WARNING]  
+>     > **Kritische Prüfungsfalle:** Wenn Sie das **`-a` (append)** vergessen und nur `-G` nutzen, wird der Benutzer aus allen anderen sekundären Gruppen gelöscht!  
+>   * `-L` / `-U`: Sperrt (Lock) oder entsperrt (Unlock) den Account (fügt ein `!` vor dem Passwort-Hash in `/etc/shadow` ein).  
+> * **`userdel` (Konto löschen):**  
+>   * **`-r`**: Löscht den Benutzer **und** entfernt sein Heimatverzeichnis sowie seine E-Mail-Spool-Datei komplett.  
+> * **`chage` (Passwort-Alterung verwalten):**  
+>   * `-l <user>`: Listet alle Alterungsdaten auf.  
+>   * `-M <Tage>`: Maximale Gültigkeit des Passworts.  
+>   * `-m <Tage>`: Mindestalter des Passworts, bevor es erneut geändert werden darf.  
+>   * `-E <Datum>`: Ablaufdatum des Kontos (Format YYYY-MM-DD).
+
 ---
 
 ## ⌨️ 2. Textbasierte Benutzeroberflächen

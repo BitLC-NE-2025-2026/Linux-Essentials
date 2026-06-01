@@ -63,6 +63,15 @@ Eine crontab Zeile besteht aus fünf Zeitfeldern und dem auszuführenden Befehl.
 | 5 | Wochentag | 0 bis 7 | Wochentag, wobei 0 und 7 dem Sonntag entsprechen |
 | 6 | Befehl | Text | Absoluter Pfad zum auszuführenden Kommando oder Skript |
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - System- vs. Benutzer-Crontab:**  
+> Es gibt zwei Arten von Crontabs mit einer **kritischen syntaktischen Abweichung**:  
+> 1. **Benutzer-Crontab (via `crontab -e`):** Hat die obigen 5 Zeitfelder gefolgt direkt vom Befehl. (z.B. `0 12 * * * /usr/bin/backup.sh`).  
+> 2. **System-Crontab (`/etc/crontab` und Dateien in `/etc/cron.d/*`):** Hat **6 Felder vor dem Befehl**! Das 6. Feld definiert den **Benutzer**, unter dessen Rechten der Befehl laufen soll (z.B. `0 12 * * * root /usr/bin/backup.sh`).  
+>   > [!WARNING]  
+>   > **Prüfungsfalle:** Vergessen Sie in `/etc/crontab` niemals das Benutzerfeld, sonst wird der Befehl nicht ausgeführt und wirft Fehler!  
+> * **Periodische Systemordner:** Das System führt Skripte in diesen Ordnern automatisch aus: `/etc/cron.hourly/`, `/etc/cron.daily/`, `/etc/cron.weekly/`, `/etc/cron.monthly/`. Skripte hier müssen ausführbar sein und dürfen **keine** Dateiendungen (wie `.sh`) haben!  
+
 **Sonderzeichen zur Zeitsteuerung:**
 
 | Zeichen | Funktion | Anwendungsbeispiel |
@@ -165,6 +174,26 @@ Befehle:
 * `crontab -e`: Öffnet die crontab zum Bearbeiten.
 * `crontab -l`: Listet alle aktiven cronjobs auf.
 * `crontab -r`: Löscht die aktuelle crontab vollständig.
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Anacron & Berechtigungssteuerung:**  
+> * **`anacron` (der Retter bei Offline-Zeiten):** Normaler `cron` setzt voraus, dass der PC 24/7 läuft. Ist der PC nachts um 03:00 Uhr aus, fällt der tägliche Cronjob aus. **`anacron`** holt verpasste Jobs beim nächsten Systemstart nach.  
+>   * **Konfiguration:** `/etc/anacrontab`.  
+>   * **Format:** `Periode (in Tagen)   Verzögerung (in Min)   Job-ID   Befehl` (z.B. `1   5   cron.daily   nice run-parts /etc/cron.daily`).  
+>   * **Unterschied zu Cron:** Anacron kann keine minutengenauen Intervalle ausführen (kleinste Einheit ist 1 Tag), benötigt keinen Hintergrunddaemon (wird über Systemstart/Cron getriggert) und läuft nur als root.  
+> * **Zugriffsteuerung für cron:**  
+>   * **`/etc/cron.allow`**: Wenn diese Datei existiert, dürfen **nur** die dort eingetragenen Benutzer eigene Crontabs anlegen.  
+>   * **`/etc/cron.deny`**: Wenn `cron.allow` fehlt, dürfen alle Benutzer außer den hier eingetragenen Crontabs nutzen.  
+>   * Sind beide Dateien nicht vorhanden, entscheidet die Distribution (meist darf jeder, oder nur root).  
+> 
+> * **Einmalige Ausführung mit `at` & `batch`:**  
+>   Für einmalige Aufgaben zu einem bestimmten Zeitpunkt nutzen wir **`at`**:  
+>   * **Befehl eingeben:** `at 14:30` oder `at now + 3 days` oder `at teatime`. Die Befehle werden über eine interaktive Shell eingegeben und mit `Strg + D` abgeschlossen.  
+>   * **`atq`** (oder `at -l`): Listet alle anstehenden `at`-Jobs mit IDs auf.  
+>   * **`atrm <ID>`** (oder `at -d`): Löscht den anstehenden Job.  
+>   * **`at -c <ID>`**: Zeigt den genauen Inhalt des Jobs (inklusive aller gesetzten Umgebungsvariablen) an.  
+>   * **`batch`**: Führt einen einmaligen Job aus, sobald die Systemlast (Load Average) unter einen bestimmten Wert (Standard: 1.5 bzw. 0.8) fällt.  
+>   * **Berechtigungen:** Wird exakt wie bei cron über die Dateien `/etc/at.allow` und `/etc/at.deny` gesteuert.
 
 Standardmäßig öffnet `crontab -e` den Editor vi oder vim. Zur Nutzung von nano lässt sich die Umgebungsvariable EDITOR dauerhaft anpassen. Dies ist optional.
 
