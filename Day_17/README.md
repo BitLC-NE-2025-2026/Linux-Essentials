@@ -109,6 +109,11 @@ sudo timedatectl set-timezone Europe/Berlin
 
 ### 2. chronyd (Rocky/RedHat Standard)
 Der moderne Standard-Zeitsynchronisationsdienst unter RedHat- und Rocky Linux-Systemen ist **`chrony`**.
+
+> [!WARNING]  
+> **Große Zeitabweichungen verhindern automatischen NTP-Abgleich:**  
+> Wenn die Systemzeit um mehr als **1000 Sekunden** von der realen Zeit abweicht, weigert sich der `chronyd`-Daemon standardmäßig aus Sicherheitsgründen, die Uhr abrupt zu stellen. In diesem Fall müssen Sie die Zeit einmalig manuell korrigieren oder in der `/etc/chrony.conf` die Direktive `makestep 1.0 3` definieren. Diese erlaubt es chrony in den ersten 3 Updates, die Uhr sprunghaft anzupassen, falls die Abweichung größer als 1 Sekunde ist.
+
 * **Konfigurationsdatei:** `/etc/chrony.conf`
 * **Zeitserver eintragen:**
   ```text

@@ -145,6 +145,10 @@ Der Befehlszeilenmodus ermöglicht mächtige globale Manipulationen.
 | `:q!` | Editor sofort beenden und alle Änderungen verwerfen |
 | `:wq` oder `:x` | Speichern und vi beenden |
 
+> [!CAUTION]  
+> **Unwiderruflicher Datenverlust bei :q! oder ZQ:**  
+> Die Befehle `:q!` (Befehlszeilenmodus) und `ZQ` (Normalmodus) beenden den Editor vi/vim sofort **ohne zu speichern**. Alle seit dem letzten Schreibvorgang (`:w`) vorgenommenen Änderungen gehen dabei **unwiederbringlich verloren**. Nutzen Sie diese Befehle nur, wenn Sie Änderungen explizit verwerfen möchten!
+
 > [!IMPORTANT]  
 > **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Beenden & Wiederherstellung:**  
 > * **Tastatur-Kurzbefehle zum Beenden (Normalmodus):**  

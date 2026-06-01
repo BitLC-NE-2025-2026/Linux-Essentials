@@ -142,6 +142,10 @@ Das Skript `MiniNetzAutoBuilder.sh` deaktiviert standardmäßig `firewalld` auf 
 
 Das im Skript generierte Firewall-Regelwerk (`/etc/nftables.conf`) steuert das Routing und schützt das Netzwerk:
 
+> [!CAUTION]  
+> **SSH-Aussperrungs-Gefahr (SSH Lockout):**  
+> Wenn Sie ein Firewall-Regelwerk mit `nftables` (oder `iptables`) aufbauen und die standardmäßige Eingangsrichtlinie (`chain input policy`) auf **`drop`** setzen, müssen Sie **zwingend** den Port 22 (SSH) akzeptieren (`tcp dport 22 accept`) und Verbindungsverfolgung zulassen (`ct state established,related accept`). Andernfalls bricht Ihre aktive SSH-Sitzung sofort ab und Sie sperren sich unwiderruflich aus Ihrem eigenen Server aus!
+
 ```nftables
 flush ruleset
 
