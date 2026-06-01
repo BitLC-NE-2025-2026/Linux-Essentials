@@ -51,12 +51,19 @@ Skripte können beim Aufruf Daten übernehmen:
 
 | Parameter | Bedeutung |
 | :--- | :--- |
-| `$0` | Name des Skripts. |
+| `$0` | Name des Skripts bzw. der aufrufenden Shell. |
 | `$1` - `$9` | Das erste bis neunte Argument. |
-| `$#` | Anzahl der übergebenen Argumente. |
-| `$*` / `$@` | Alle Argumente als Liste. |
+| `${10}` - `${N}` | Das zehnte bis *n*-te Argument (geschweifte Klammern sind zwingend erforderlich!). |
+| `$#` | Anzahl der übergebenen Argumente (ohne `$0`). |
+| `$*` | Alle Argumente als eine einzige zusammenhängende Zeichenkette. |
+| `$@` | Alle Argumente als Liste von separaten Zeichenketten. |
 | `$$` | PID des aktuellen Skripts. |
-| `$?` | Exit-Status des letzten Befehls (0 = Erfolg). |
+| `$?` | Exit-Status des zuletzt ausgeführten Befehls (0 = Erfolg, >0 = Fehler). |
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Parameter-Verarbeitung:**  
+> * **`shift` (Parameterverschiebung):** Der Befehl **`shift`** verschiebt alle Positionsparameter um eine Stelle nach links: `$1` fällt weg, `$2` wird zu `$1`, `$3` wird zu `$2` usw. Gleichzeitig verringert sich die Anzahl in `$#` um 1. Dies wird häufig in Schleifen zur sequenziellen Abarbeitung einer unbestimmten Anzahl von Argumenten genutzt (z.B. `while [ $# -gt 0 ]; do echo $1; shift; done`).  
+> * **`"$*"` vs. `"$@"`:** Verwenden Sie unter Anführungszeichen fast immer **`"$@"`**. Denn `"$*"` fasst alle Argumente zu einem String `"arg1 arg2 arg3"` zusammen, wodurch Dateinamen mit Leerzeichen zerreißen. `"$@"` expandiert korrekt zu `"arg1"` `"arg2"` `"arg3"`.
 
 ---
 
@@ -120,16 +127,28 @@ done < datei.txt
 
 Manipulation von Variablen ohne externe Tools wie `sed` oder `cut`:
 
-- `${VAR:-default}`: Nutze "default", falls `VAR` leer ist.
-- `${VAR%suffix}`: Entfernt den Suffix von hinten.
-- `${VAR#prefix}`: Entfernt den Präfix von vorne.
+- `${VAR:-default}`: Nutze "default", falls `VAR` leer oder nicht definiert ist.
+- `${VAR%suffix}`: Entfernt den kürzesten Suffix von hinten.
+- `${VAR#prefix}`: Entfernt den kürzesten Präfix von vorne.
+- `${#VAR}`: Zeigt die Anzahl der Zeichen (Länge) des Variableninhalts an.
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Dateitests in Bash:**  
+> Bei Abfragen mit `if [ ... ]` oder `[[ ... ]]` sind diese Dateitests hochgradig relevant:  
+> * **`-f <Pfad>`**: Wahr, wenn der Pfad existiert und eine **reguläre Datei** ist.  
+> * **`-d <Pfad>`**: Wahr, wenn der Pfad ein **Verzeichnis** ist.  
+> * **`-e <Pfad>`**: Wahr, wenn der Pfad **existiert** (egal ob Datei, Ordner, Link oder Device).  
+> * **`-s <Pfad>`**: Wahr, wenn die Datei existiert und eine **Größe > 0 Bytes** hat (nicht leer ist).  
+> * **`-L <Pfad>`** (oder `-h`): Wahr, wenn der Pfad ein **symbolischer Link** (Symlink) ist.  
+> * **`-r` / `-w` / `-x <Pfad>`**: Wahr, wenn der Pfad für den aktuellen Benutzer lesbar / schreibbar / ausführbar ist.  
 
 ### Debugging-Modus
 
 Wenn ein Skript nicht tut, was es soll:
 
-- `set -x`: Gibt jeden Befehl vor der Ausführung aus (Tracing).
-- `set -e`: Bricht das Skript sofort ab, wenn ein Fehler auftritt.
+- `set -x` (oder Aufruf mit `bash -x skript.sh`): Gibt jeden Befehl vor der Ausführung mit einem führenden `+` aus (Tracing).
+- `set -e`: Bricht das Skript sofort ab, wenn ein Fehler auftritt (Exit-Status > 0).
+- `exit <wert>`: Beendet ein Skript manuell und liefert den Wert an den aufrufenden Prozess (Standard-Exitcodes: 0 = Erfolg, 1-255 = Fehlerwert).
 
 ---
 

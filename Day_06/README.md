@@ -32,16 +32,29 @@ Heute lernen wir das Linux-Prozessmodell kennen, wie man Prozesse überwacht, st
 
 ## 🛠 1. Prozess-Monitoring & Identifikation
 
-Linux verwaltet Aufgaben in Form von **Prozessen**. Jeder Prozess hat eine eindeutige **PID** (Process ID).
+Linux verwaltet Aufgaben in Form von **Prozessen**. Jeder Prozess hat eine eindeutige **PID** (Process ID) und eine **PPID** (Parent Process ID).
 
 ### Wichtige Werkzeuge:
 * `ps`: Momentaufnahme der aktuellen Prozesse.
-    * `ps aux`: Umfassende Liste aller Prozesse im System (BSD-Stil).
+    * `ps aux`: Umfassende Liste aller Prozesse im System (BSD-Stil). Zeigt Spalten wie `%CPU`, `%MEM` und `STAT` (Prozess-Status).
     * `ps -ef`: Standard-Format mit PPID (Parent Process ID) (System-V-Stil).
 * `pstree -p`: Visualisiert die Prozess-Hierarchie als Baumstruktur (inkl. PIDs).
 * `top`: Interaktiver Echtzeit-Monitor.
 * `htop`: Moderne, farbige Alternative zu `top`.
 * `btop`: Hochgradig visuelle und informative Monitor-Alternative.
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Prozess-Zustände (STAT Spalte in ps):**  
+> * **`R` (Running/Runnable):** Der Prozess läuft gerade auf der CPU oder wartet in der Run-Queue auf Zuweisung.  
+> * **`S` (Interruptible Sleep):** Der Prozess schläft (wartet auf ein Ereignis oder eine Eingabe) und kann durch Signale geweckt/beendet werden.  
+> * **`D` (Uninterruptible Sleep):** Der Prozess wartet meist auf ein Hardware-Ereignis (z.B. Festplatten-I/O).  
+>   > [!WARNING]  
+>   > **Kritische LPIC-Falle:** Ein Prozess im Zustand `D` kann durch **kein** Signal (selbst `SIGKILL -9`) beendet oder geweckt werden, solange die Hardware-Ressource blockiert!  
+> * **`T` (Stopped):** Der Prozess wurde gestoppt/pausiert (z.B. durch Signal `SIGSTOP` oder `Strg + Z`).  
+> * **`Z` (Zombie):** Der Prozess ist beendet, existiert aber noch in der Prozesstabelle, da der Elternprozess seinen Exit-Status (über den Systemaufruf `wait()`) noch nicht abgefragt hat. Er verbraucht keine CPU oder RAM mehr, belegt aber eine PID.  
+> * **`+` (in STAT):** Der Prozess läuft in der Vordergrund-Prozessgruppe des Terminals (z.B. `S+`).  
+> * **`<` (in STAT):** Der Prozess hat eine hohe Priorität (nicht nett).  
+> * **`N` (in STAT):** Der Prozess hat eine niedrige Priorität (sehr nett).
 
 > [!TIP]
 > In `htop` und `btop` kannst du mit den Pfeiltasten navigieren und Prozesse direkt per Funktionstasten (z.B. F9 für Kill) verwalten.
@@ -66,20 +79,34 @@ Prozesse können im Vordergrund (**Foreground**) oder Hintergrund (**Background*
 
 ### Signale senden mit `kill`
 Mit `kill` werden Signale an Prozesse gesendet (nicht immer zum "Töten").
-* `kill -15 (SIGTERM)`: Freundliche Aufforderung zum Beenden (Standard).
-* `kill -9 (SIGKILL)`: Sofortiges, erzwungenes Beenden (kein Cleanup möglich).
-* `kill -19 (SIGSTOP)`: Prozess pausieren.
-* `kill -18 (SIGCONT)`: Pausierten Prozess fortsetzen.
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Essenzielle Signale & Befehle:**  
+> Sie müssen sowohl die **Signalnummer** als auch den **Signalnamen** auswendig wissen!  
+> 
+> | Nummer | Name | Beschreibung / Verwendung |
+> | :---: | :--- | :--- |
+> | **1** | `SIGHUP` | Hangup. Trennung des Terminals oder **Neuladen von Konfigurationsdateien** (ohne Dienst-Neustart). |
+> | **2** | `SIGINT` | Interrupt. Tastatur-Unterbrechung per **`Strg + C`**. |
+> | **3** | `SIGQUIT` | Quit. Beendet den Prozess und erzeugt einen Core Dump zur Fehleranalyse. |
+> | **9** | `SIGKILL` | Kill. Sofortige, erzwungene Beendigung durch den Kernel. **Kann vom Prozess weder abgefangen noch ignoriert werden.** |
+> | **15** | `SIGTERM` | Terminate. Standard-Terminierungssignal. Ermöglicht dem Prozess sauberes Beenden (Dateien schließen, Temp-Daten löschen). |
+> | **18** | `SIGCONT` | Continue. Setzt einen zuvor gestoppten (pausierten) Prozess fort. |
+> | **19** | `SIGSTOP` | Stop. Pausiert den Prozess sofort. **Kann vom Prozess weder abgefangen noch ignoriert werden** (`Strg + Z`). |
+> 
+> * **Prozess-Such- & Kill-Befehle:**  
+>   * **`pgrep <Muster>`**: Sucht nach Prozessen anhand ihres Namens und gibt deren PIDs aus.  
+>   * **`pkill <Muster>`**: Sendet ein Signal an Prozesse basierend auf deren Namen (z.B. `pkill -9 apache`).  
+>   * **`killall <Name>`**: Sendet ein Signal an alle Prozesse mit dem exakten Prozessnamen.  
 
 ### Prioritäten (`nice` & `renice`)
-Der Kernel entscheidet, wie viel CPU-Zeit ein Prozess erhält. Dies wird über den **Nice-Wert** gesteuert (-20 bis 19).
-* **Niedriger Wert (z.B. -5):** Hohe Priorität (Prozess ist "weniger nett").
-* **Hoher Wert (z.B. 10):** Niedrige Priorität (Prozess ist "sehr nett").
+Der Kernel entscheidet, wie viel CPU-Zeit ein Prozess erhält. Dies wird über den **Nice-Wert** gesteuert.
+* **Bereich:** **`-20`** (höchste Priorität, am wenigsten nett) bis **`19`** (niedrigste Priorität, am nettesten). Der Standardwert für neue Prozesse ist **`0`**.  
+* **`nice`**: Startet einen *neuen* Prozess mit angepasstem Wert. (z.B. `nice -n 10 befehl`).  
+* **`renice`**: Ändert die Priorität eines *bereits laufenden* Prozesses nachträglich über dessen PID (z.B. `renice -n -5 -p 1234`).  
 
-```bash
-nice -n 10 befehl     # Startet Befehl mit niedrigerer Prio
-sudo renice -n -5 1234 # Ändert Prio von PID 1234 auf höher (Root erforderlich)
-```
+> [!WARNING]  
+> **Kritische LPIC-Sicherheitsregel:** Normale Benutzer dürfen den Nice-Wert ihrer eigenen Prozesse **nur erhöhen** (also sich selbst benachteiligen, um netter zu sein). **Nur root** darf negative Werte vergeben oder die Priorität eines Prozesses erhöhen (Nice-Wert senken)!
 
 ---
 

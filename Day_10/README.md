@@ -54,6 +54,25 @@ Wir haben untersucht, wie viele Ports einer bestimmten Ziffernlänge (z. B. exak
 
 Bei der Analyse gibt es einen wesentlichen Unterschied zwischen der Gesamtzahl der Dienst-Einträge und der Anzahl der einzigartigen Ports:
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Komplexe Pipelines & Datenverarbeitung:**  
+> Das Kombinieren mehrerer einfacher Befehle zu einer Pipeline ist das Herzstück von Unix.  
+> * **Standard-Pipeline:** `cat servicesDat | grep -Eo '[0-9]+/tcp' | sort -n | uniq | wc -l`  
+> * **Bedeutung:**  
+>   1. `cat` liest die Daten ein.  
+>   2. `grep -Eo` extrahiert nur den Port und das Protokoll.  
+>   3. `sort -n` sortiert die Ports **numerisch** (wichtig, da alphabetisch sonst `100` vor `2` stünde!).  
+>   4. `uniq` entfernt alle Duplikate (funktioniert nur auf sortierten Daten!).  
+>   5. `wc -l` zählt die Zeilen und liefert das Endergebnis.  
+> * **Vermeidung von redundanten Pipes:** Ein `cat datei | grep muster` ist funktionell richtig, wird in der Prüfung jedoch oft als redundanter Ressourcenverbrauch bemängelt. Bevorzugen Sie `grep muster datei`.  
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Interaktive Einzeiler-Schleifen:**  
+> Schleifen können direkt in der interaktiven Befehlszeile eingegeben werden, um repetitive Suchen abzukürzen:  
+> * Syntax: `for var in liste; do befehl $var; done`  
+> * Beispiel: `for p in tcp udp; do echo "Protokoll: $p"; grep -c "/$p" /etc/services; done`  
+> * Das Semikolon `;` trennt die einzelnen Abschnitte der Schleife, wenn sie in einer einzigen Zeile geschrieben werden.
+
 * **Gesamtzahl der Vorkommen:** Zählt jeden Eintrag, der dem Muster entspricht.
 
   ```bash

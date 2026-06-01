@@ -61,24 +61,47 @@ tar -uf backup.tar ./Dokumente
 tar -N '2026-05-01' -xf backup.tar
 ```
 
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - tar & Kompression:**  
+> `tar` kann Archive direkt bei der Erstellung komprimieren. Merken Sie sich diese Flags gut:  
+> * **`-z` / `--gzip`:** Komprimiert mit **gzip** (Ergebnis: `.tar.gz` oder `.tgz`).  
+> * **`-j` / `--bzip2`:** Komprimiert mit **bzip2** (Ergebnis: `.tar.bz2` oder `.tbz2`).  
+> * **`-J` / `--xz`:** Komprimiert mit **xz** (Ergebnis: `.tar.xz`).  
+> * **`-C <Ordner>`:** Wechselt vor dem Entpacken in das angegebene Verzeichnis (z.B. `tar -xf archiv.tar -C /opt`).  
+> * **Optionen-Reihenfolge:** Das Flag `-f` (File) **muss immer als letztes** direkt vor dem Archiv-Dateinamen stehen (z.B. `tar -czvf backup.tar.gz /home` ist richtig; `tar -czfv backup.tar.gz` schlägt fehl!).  
+
 ### B. Die Alternative: `cpio`
 
-`cpio` liest Dateilisten von `stdin`. Häufig in Kombination mit `find`.
+`cpio` (Copy In/Out) liest Dateilisten von `stdin` (meist geliefert von `find`).
 
-- **Copy-out (Archiv erstellen):** `find . -name "*.txt" | cpio -ov > archiv.cpio`
-- **Copy-in (Entpacken):** `cpio -iv < archiv.cpio`
+- **Copy-out (Archiv erstellen):** `find . -name "*.txt" | cpio -o -H newc > archiv.cpio`
+- **Copy-in (Entpacken):** `cpio -id < archiv.cpio`
+- **Inhalt auflisten:** `cpio -it < archiv.cpio`
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - cpio Flags:**  
+> * **`-o` (output):** Erstellt ein Archiv (Copy-out).  
+> * **`-i` (input):** Extrahiert ein Archiv (Copy-in).  
+> * **`-t` (table of contents):** Zeigt den Inhalt des Archivs an.  
+> * **`-d` (directories):** Erstellt Unterordner bei Bedarf automatisch während des Entpackens.  
+> * **`-H newc`:** Legt das Format fest. `newc` ist das moderne SVR4-Format (mit Header), das für Boot-Images (initramfs) verwendet wird.  
 
 ### C. Bit-für-Bit: `dd` (Data Duplicator)
 
-Wird für Backups ganzer Partitionen oder zum Erstellen von ISOs genutzt.
+Wird für Backups ganzer Partitionen oder zum Erstellen von ISO-Abbildern genutzt.
 
 ```bash
 dd if=/dev/sda of=/pfad/zu/disk.img bs=4M conv=noerror,sync
 ```
 
-- `if`/`of`: Input/Output File.
-- `bs`: Blocksize (beschleunigt den Prozess).
-- `conv=noerror`: Fährt bei Lesefehlern fort.
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - dd Parameter:**  
+> * **`if=`** (input file): Datenquelle (z.B. Partition `/dev/sdb1` oder Zero-Device `/dev/zero`).  
+> * **`of=`** (output file): Ziel (z.B. Image-Datei oder Festplatte).  
+> * **`bs=`** (block size): Blockgröße für den Transfer (z.B. `bs=1k` oder `bs=4M`).  
+> * **`count=`**: Anzahl der zu kopierenden Blöcke.  
+> * **`skip=`**: Überspringt eine Anzahl an Blöcken am Anfang der *Eingabe*.  
+> * **`seek=`**: Überspringt eine Anzahl an Blöcken am Anfang der *Ausgabe*.
 
 ---
 
@@ -117,6 +140,15 @@ ldd /usr/local/bin/glmark2
 
 - Zeigt alle geladenen `.so`-Dateien (Shared Objects).
 - Falls eine fehlt: "not found".
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Shared Libraries & Cache:**  
+> * **`/etc/ld.so.conf`**: Diese Konfigurationsdatei listet alle Verzeichnisse auf, in denen das System nach Shared Libraries suchen soll.  
+> * **`/etc/ld.so.cache`**: Enthält ein vorkompiliertes Binär-Verzeichnis aller gefundenen Bibliotheken für schnellen Zugriff.  
+> * **`ldconfig`**: Aktualisiert die Cache-Datei `/etc/ld.so.cache` auf Basis der Pfade in `/etc/ld.so.conf`. Dies **muss** immer als root ausgeführt werden, wenn neue Bibliotheken installiert oder Pfade hinzugefügt wurden!  
+>   * Option `-v` zeigt alle durchsuchten Verzeichnisse und Bibliotheken an.  
+>   * Option `-p` gibt den Inhalt des aktuellen Caches `/etc/ld.so.cache` aus.  
+> * **`LD_LIBRARY_PATH`**: Eine Umgebungsvariable, in der Benutzer alternative Suchpfade für Bibliotheken eintragen können. Diese Pfade überschreiben temporär die Pfade aus `/etc/ld.so.conf` (z.B. `export LD_LIBRARY_PATH=/home/student/libs`).
 
 ---
 

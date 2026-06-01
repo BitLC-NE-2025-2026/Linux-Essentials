@@ -39,7 +39,30 @@ In der Linux-Welt (und den LPIC-Prüfungen) wird streng zwischen zwei Regex-Dial
 | **Standard-Tools** | `grep`, `sed` | `grep -E` (oder `egrep`), `awk`, `sed -E` |
 | **Metazeichen** | Müssen für Sonderfunktion escaped werden: `\( \)`, `\{ \}`, `\|` | Haben direkt ihre Sonderfunktion: `( )`, `{ }`, `\|` |
 | **Quantifizierer** | `*` (0 oder mehr), `\+` (1 oder mehr), `\?` (0 oder 1) | `*` (0 oder mehr), `+` (1 oder mehr), `?` (0 oder 1) |
-| **Oder-Operator** | `\|` | `\|` |
+| **Oder-Operator** | `\|` | `|` (im ERE unescaped!) |
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - Die drei Grep-Brüder:**  
+> * **`grep`**: Standard-Suchwerkzeug. Nutzt standardmäßig **BRE** (Basic Regular Expressions).  
+> * **`egrep`** (oder **`grep -E`**): Extended Grep. Nutzt **ERE** (Extended Regular Expressions) für sauberere Syntax bei komplexeren Mustern.  
+> * **`fgrep`** (oder **`grep -F`**): Fixed Grep. Interpretiert **keine** Sonderzeichen (keine Regex, keine Wildcards). Alles wird als reiner Textwert behandelt (z.B. sucht `.` nach einem echten Punkt statt nach einem beliebigen Zeichen). Ist extrem schnell und ideal für statische Suchen.  
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - POSIX Zeichenklassen:**  
+> In Regex und Globbing standardisiert POSIX Zeichenmengen. Beachten Sie, dass diese in eckige Klammern gesetzt werden müssen (z.B. `[[:digit:]]`):  
+> * **`[:alnum:]`**: Alphanumerische Zeichen (A-Z, a-z, 0-9).  
+> * **`[:alpha:]`**: Alphabetische Zeichen (A-Z, a-z).  
+> * **`[:digit:]`**: Ziffern (0-9).  
+> * **`[:lower:]`** / **`[:upper:]`**: Kleinbuchstaben / Großbuchstaben.  
+> * **`[:space:]`**: Whitespace (Leerzeichen, Tabs, Wagenrücklauf).  
+
+> [!IMPORTANT]  
+> **LPIC-1 RELEVANTES PRÜFUNGSWISSEN - sed (Stream Editor):**  
+> `sed` manipuliert Datenströme zeilenweise und schreibt standardmäßig auf `stdout`:  
+> * **Suchen & Ersetzen:** `sed 's/alt/neu/g' datei` (das `g` steht für global; ohne `g` wird nur das erste Vorkommen pro Zeile ersetzt).  
+> * **Ausgabe unterdrücken & filtern:** `sed -n '/suchwort/p' datei`. Das Flag **`-n`** verhindert die Standard-Ausgabe aller Zeilen; das Kommando **`p`** (print) gibt nur die passenden Zeilen aus.  
+> * **Zeilen löschen:** `sed '3d' datei` (löscht Zeile 3) oder `sed '/muster/d' datei` (löscht alle Zeilen, die das Muster enthalten).  
+> * **Persistentes Ändern:** Mit der Option **`-i`** (in-place) schreibt `sed` die Änderungen direkt in die Originaldatei zurück (`sed -i 's/a/b/g' datei`).
 
 > [!IMPORTANT]
 > Für mathematisch exakte und komplexe Filterungen (wie IPs oder Port-Längen) ist **ERE (`grep -E` bzw. `sed -E`)** immer die bevorzugte Wahl, da es den Code übersichtlicher hält und Schachtelungen einfacher macht.
