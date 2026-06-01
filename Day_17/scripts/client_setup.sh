@@ -24,6 +24,8 @@ whiptail --title "Client-Konfiguration" --infobox "Lese Netzwerkeinstellungen f�
 # Statische Werte aus YAML parsen
 CLIENT_IP=$(python3 "$PARSER" "$CONFIG_PATH" "client:$CURRENT_HOST:ip")
 CLIENT_GW=$(python3 "$PARSER" "$CONFIG_PATH" "client:$CURRENT_HOST:gateway")
+CLIENT_MAC=$(python3 "$PARSER" "$CONFIG_PATH" "client:$CURRENT_HOST:mac")
+CLIENT_NAME=$(python3 "$PARSER" "$CONFIG_PATH" "client:$CURRENT_HOST:name")
 DNS_SERVER=$(python3 "$PARSER" "$CONFIG_PATH" "global:dns_fallback")
 
 # Fallback falls temporär DNS ausgewählt wurde
@@ -36,8 +38,28 @@ if [[ -z "$CLIENT_IP" || -z "$CLIENT_GW" ]]; then
     exit 1
 fi
 
-# Erste aktive physische Schnittstelle ermitteln (außer lo)
-INTERFACE=$(ip -br link | grep -v 'lo' | awk '{print $1}' | head -n 1)
+# Dynamische Schnittstellen-Ermittlung auf Basis von MAC, Name oder Fallback
+INTERFACE=""
+
+# 1. Option: Suche nach Interface mit passender MAC-Adresse
+if [[ -n "$CLIENT_MAC" ]]; then
+    clean_mac=$(echo "$CLIENT_MAC" | tr -d '"' | tr '[:upper:]' '[:lower:]')
+    # Suche in ip link nach der MAC-Adresse
+    INTERFACE=$(ip -br link | tr '[:upper:]' '[:lower:]' | grep "$clean_mac" | awk '{print $1}' | head -n 1 || true)
+fi
+
+# 2. Option: Suche nach Interface mit passendem Namen falls MAC nicht gefunden wurde
+if [[ -z "$INTERFACE" && -n "$CLIENT_NAME" ]]; then
+    clean_name=$(echo "$CLIENT_NAME" | tr -d '"')
+    if ip link show "$clean_name" >/dev/null 2>&1; then
+        INTERFACE="$clean_name"
+    fi
+fi
+
+# 3. Option: Fallback - Erste aktive physische Schnittstelle ermitteln
+if [[ -z "$INTERFACE" ]]; then
+    INTERFACE=$(ip -br link | grep -v 'lo' | awk '{print $1}' | head -n 1)
+fi
 
 if [[ -z "$INTERFACE" ]]; then
     whiptail --title "Fehler: Hardware" --msgbox "Es wurde keine aktive Netzwerkschnittstelle im System gefunden!" 10 55
@@ -76,4 +98,4 @@ EOF
 
 sudo systemctl enable nftables --now >/dev/null 2>&1 || true
 
-whiptail --title "Client-Erfolg" --msgbox "Der Client $CURRENT_HOST wurde erfolgreich eingerichtet!\n\n- Interface: $INTERFACE\n- IP-Adresse: $CLIENT_IP\n- Standard-Gateway: $CLIENT_GW\n- DNS-Server: $DNS_SERVER\n- nftables-Schutz aktiv" 14 55
+whiptail --title "Client-Erfolg" --msgbox "Der Client $CURRENT_HOST wurde erfolgreich eingerichtet!\n\n- Schnittstelle: $INTERFACE\n- IP-Adresse: $CLIENT_IP\n- Standard-Gateway: $CLIENT_GW\n- DNS-Server: $DNS_SERVER\n- nftables-Schutz aktiv" 14 55
