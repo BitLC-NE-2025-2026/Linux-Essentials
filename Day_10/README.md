@@ -143,6 +143,7 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 * [Fachbuch Linux & Programmierung (PDF)](./assets/10.1515_9781683923114.pdf)
 * [Linux RegEx Leitfaden (PDF)](./assets/Linux_RegEx.pdf)
 * [Historie Tag 10 (TXT)](./assets/rockyHis20260519-1601.txt)
+* [Praxis-Historie (sed & bobStory) (TXT)](./assets/semus-admin-bobStory-202605290925)
 
 ---
 
