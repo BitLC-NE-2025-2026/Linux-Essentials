@@ -66,13 +66,16 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 
 ### 📅 Woche 4-6: Fortgeschrittene Themen (WIP)
 
-| Modul | Status | Link |
-| :--- | :---: | :--- |
+| Modul | Status | Fokus-Themen | Link |
+| :--- | :---: | :--- | :--- |
 | **Tag 16** | ✅ | Netzwerk-Routing & Forwarding (VMware, nftables, NAT) | [📖 README](./Day_16/README.md) |
 | **Tag 17** | ✅ | Netzwerk-Routing & NTP-Zeitsynchronisation (chrony, timedatectl) | [📖 README](./Day_17/README.md) |
-| **Tag 18 - 20** | ⏳ | [In Planung](./Day_18/README.md) |
-| **Tag 21 - 25** | ⏳ | [In Planung](./Day_21/README.md) |
-| **Tag 26 - 30** | ⏳ | [In Planung](./Day_26/README.md) |
+| **Tag 18** | ✅ | System-Hardware & Kernel-Module (lspci, lsblk, modprobe, lsof) | [📖 README](./Day_18/README.md) |
+| **Tag 19** | ✅ | Partitionierung (MBR/GPT), Dateisysteme (mkfs) & Mounten | [📖 README](./Day_19/README.md) |
+| **Tag 20** | ✅ | LVM (Logical Volume Manager) - PV, VG, LV & Resizing | [📖 README](./Day_20/README.md) |
+| **Tag 21** | ✅ | Kryptographie, SSH (Keys/Agent) & Rsync über SSH | [📖 README](./Day_21/README.md) |
+| **Tag 22 - 25** | ⏳ | In Planung | [📖 README](./Day_22/README.md) |
+| **Tag 26 - 30** | ⏳ | In Planung | [📖 README](./Day_26/README.md) |
 
 ---
 
@@ -282,7 +285,7 @@ Zieht Berechtigungen bei der Dateierstellung ab. Maximale Standard-Ausgangsbasis
 
 * **Aktuelle Umgebung:** Rocky Linux 9.x (Router) & Debian/Cachy/Manjaro (Clients)
 * **Shell:** Bash / ZSH + Oh My Zsh & Whiptail TUIs
-* **Fortschritt:** 57% (17 von 30 Modulen abgeschlossen)
+* **Fortschritt:** 70% (21 von 30 Modulen abgeschlossen)
 
 ---
 
