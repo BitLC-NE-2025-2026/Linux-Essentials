@@ -191,6 +191,16 @@ done < datei.csv
 
 </details>
 
+## 📚 Ressourcen & Dokumente
+Im [Assets](./assets)-Verzeichnis finden Sie die Unterlagen zu diesem Tag:
+
+- [Benutzerverwaltung Leitfaden (PDF)](./assets/SkriptBenutzererwaltung.pdf)
+- [Kurs-Historie Tag 13 (TXT)](./assets/rockyHis20260522-1600.txt)
+- [Praxis-Aufgabe (User-Massenanlage) (TXT)](./assets/userAnlegen-admin-debian-mint)
+- [Praxis-Historie (Root-User-Verwaltung) (TXT)](./assets/history-root-admin-userVerwaltung-202606091643)
+
+---
+
 ## 🔗 6. Zurück zur Übersicht
 
 [⬅ Zurück zur Übersicht](../README.md)
