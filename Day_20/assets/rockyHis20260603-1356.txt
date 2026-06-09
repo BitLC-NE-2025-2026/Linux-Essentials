@@ -1,0 +1,55 @@
+ 1729  history 150 | less
+ 1730  history 110 > rockyHis$(date +%Y%m%d-%H%M).txt
+ 1731  clear
+ 1732  sudo cat /etc/fstab
+ 1733  lsblk --fs
+ 1734  pvdisplay
+ 1735  sudo pvdisplay
+ 1736  sudo lvmdiskscan
+ 1737  sudo gdisk /dev/sda
+ 1738  sudo cgdisk /dev/sda
+ 1739  sudo pvcreate /dev/sda /dev/sdb /dev/sdc
+ 1740  sudo cgdisk /dev/sda
+ 1741  sudo pvcreate /dev/sda
+ 1742  sudo pvdisplay
+ 1743  sudo vgcreate vg_matz /dev/sda /dev/sdb /dev/sdc
+ 1744  sudo lvcreate -L 50G -n lv_sp1 vg_matz
+ 1745  sudo lvdisplay
+ 1746  sudo lvcreate -L 10G -n lv_sp2 vg_matz
+ 1747  lsblk --fs
+ 1748  sudo mkfs.ext4 /dev/vg_matz/lv_sp1
+ 1749  lsblk -fs
+ 1750  sudo mkfs.ext3 /dev/vg_matz/lv_sp2
+ 1751  lsblk --fs
+ 1752  sudo ls /mnt
+ 1753  sudo mount /dev/vg_matz/lv_sp1 /mnt/platte1
+ 1754  sudo cp ~/Dokumente /mnt/platte1
+ 1755  sudo cp -r ~/Dokumente /mnt/platte1
+ 1756  df -h
+ 1757  sudo ls /mnt/platte1/
+ 1758  sudo ls /mnt/platte1/Dokumente
+ 1759  sudo umount /dev/vg_matz/lv_sp1 
+ 1760  sudo ls /mnt/platte1/
+ 1761  sudo mount /dev/vg_matz/lv_sp1 /mnt/platte2
+ 1762  sudo ls /mnt/platte2/
+ 1763  lvdisplay
+ 1764  sudo lvdisplay
+ 1765  sudo vgdisplay
+ 1766  sudo pvdisplay
+ 1767  sudo umount /dev/vg_matz/lv_sp1 
+ 1768  sudo fsck -t ext4 -f /dev/vg_matz/lv_sp1
+ 1769  sudo resize2fd -p /dev//vg_matz/lv_sp1 40G
+ 1770  sudo resize2fs -p /dev//vg_matz/lv_sp1 40G
+ 1771  sudo lvresize -L 40G vg_matz/lv_sp1
+ 1772  sudo fsck -t ext4 -f /dev/vg_matz/lv_sp1
+ 1773  sudo mount /dev/vg_matz/lv_sp1 /mnt/platte2
+ 1774  sudo ls -al /mnt/platte2
+ 1775  sudo pvmove /dev/sdc
+ 1776  sudo resize2fd -p /dev//vg_matz/lv_sp2 5G
+ 1777  sudo resize2fs -p /dev//vg_matz/lv_sp2 5G
+ 1778  sudo lvresize -L 5G vg_matz/lv_sp2
+ 1779  sudo vgreduce vg_matz /dev/sdc
+ 1780  sudo pvremove /dev/sdc
+ 1781  lsblk --fs
+ 1782  history 100 | less
+ 1783  history 55 > rockyHis$(date +%Y%m%d-%H%M).txt
