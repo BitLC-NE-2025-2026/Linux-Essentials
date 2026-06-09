@@ -79,6 +79,34 @@ DAY_THEMES = {
     15: ("VLAN-Konfiguration & Automatisierung", "VLAN Tagging, IP-Bereiche & nmcli-Skripte", "NETWORK"),
     16: ("Netzwerk-Routing & Forwarding", "NAT-Masquerading, IP-Forwarding & nftables", "NETWORK"),
     17: ("Firewall & Netzwerksicherheit", "nftables-Regeln, Port-Sperrung & Härtung", "SECURITY"),
+    18: ("System-Hardware & Kernel-Module", "lspci, lsblk, modprobe, Kernel Objects & lsof", "SYSADMIN"),
+    19: ("Partitionierung, Dateisysteme & Mounten", "MBR vs GPT, mkfs, mount/umount, /etc/fstab & Swap", "SYSADMIN"),
+    20: ("LVM (Logical Volume Manager)", "Physical Volumes, Volume Groups, Logical Volumes & Resizing", "SYSADMIN"),
+    21: ("Kryptographie, SSH & Rsync", "Symmetrische/Asymmetrische Krypto, SSH-Keys & Delta-Sync", "SECURITY"),
+}
+
+DAY_TAGS = {
+    1: ["LPIC-1", "FOUNDATION", "SETUP"],
+    2: ["LPIC-1", "FHS", "SHELL"],
+    3: ["LPIC-1", "FILES", "NAVIGATION"],
+    4: ["LPIC-1", "GREP", "REGEX"],
+    5: ["LPIC-1", "PERMISSIONS", "CHMOD"],
+    6: ["LPIC-1", "PROCESSES", "SUID"],
+    7: ["LPIC-1", "ARCHIVE", "COMPILING"],
+    8: ["LPIC-1", "BASH", "SCRIPTING"],
+    9: ["LPIC-1", "REGEX", "SED/AWK"],
+    10: ["LPIC-1", "MONITORING", "LOGS"],
+    11: ["LPIC-1", "VIM", "EDITORS"],
+    12: ["LPIC-1", "PACKAGES", "REPOS"],
+    13: ["LPIC-1", "ADMIN", "WHIPTAIL TUI"],
+    14: ["LPIC-1", "NETWORK", "NMCLI"],
+    15: ["LPIC-1", "VLAN", "AUTOMATION"],
+    16: ["LPIC-1", "ROUTING", "FORWARDING"],
+    17: ["LPIC-1", "FIREWALL", "IPTABLES"],
+    18: ["LPIC-1", "HARDWARE", "MODULES"],
+    19: ["LPIC-1", "PARTITIONS", "MOUNT"],
+    20: ["LPIC-1", "LVM", "VIRTUAL STORAGE"],
+    21: ["LPIC-1", "SECURITY", "SSH/RSYNC"],
 }
 
 def determine_category(day_num, title):
@@ -96,7 +124,7 @@ def determine_category(day_num, title):
         return "SCRIPTING"
     if any(k in t for k in ["grep", "sed", "awk", "regex", "vi", "vim", "text", "filter"]):
         return "TEXT"
-    if any(k in t for k in ["paket", "install", "dnf", "apt", "pacman", "service", "systemd", "log", "prozess", "process", "tar", "backup"]):
+    if any(k in t for k in ["paket", "install", "dnf", "apt", "pacman", "service", "systemd", "log", "prozess", "process", "tar", "backup", "lvm", "mount", "partition"]):
         return "SYSADMIN"
     if any(k in t for k in ["einführung", "fhs", "filesystem", "philosophie", "basis", "navigation", "ls"]):
         return "BASICS"
@@ -106,11 +134,11 @@ def determine_category(day_num, title):
         return "BASICS"
     elif day_num in [4, 9, 11]:
         return "TEXT"
-    elif day_num in [5, 6, 17]:
+    elif day_num in [5, 6, 17, 21]:
         return "SECURITY"
     elif day_num in [8, 13]:
         return "SCRIPTING"
-    elif day_num in [7, 10, 12]:
+    elif day_num in [7, 10, 12, 18, 19, 20]:
         return "SYSADMIN"
     elif day_num in [14, 15, 16]:
         return "NETWORK"
@@ -149,7 +177,8 @@ def draw_cyber_grid(draw, width, height, spacing=60):
 
 def draw_category_graphics(draw, category, x_base, y_base):
     """Draw premium category-specific vector artwork in the right corner."""
-    draw_color = (255, 255, 255, 25) # Soft white vector color
+    draw_color = (255, 255, 255, 35) # Soft white vector color
+    accent_color = (255, 255, 255, 80)
     
     if category == "NETWORK":
         # Draw Network Node Topology
@@ -158,64 +187,91 @@ def draw_category_graphics(draw, category, x_base, y_base):
         # Connections
         draw.line([nodes[0], nodes[1]], fill=draw_color, width=2)
         draw.line([nodes[0], nodes[2]], fill=draw_color, width=2)
+        draw.line([nodes[1], nodes[2]], fill=draw_color, width=1)
         draw.line([nodes[1], nodes[3]], fill=draw_color, width=2)
         draw.line([nodes[1], nodes[4]], fill=draw_color, width=2)
         draw.line([nodes[2], nodes[5]], fill=draw_color, width=2)
+        draw.line([nodes[4], nodes[5]], fill=draw_color, width=1)
         
         # Nodes circles
         for n in nodes:
-            draw.ellipse((n[0]-10, n[1]-10, n[0]+10, n[1]+10), fill=(9, 11, 20), outline=draw_color, width=2)
-        draw.ellipse((nodes[0][0]-5, nodes[0][1]-5, nodes[0][0]+5, nodes[0][1]+5), fill=(6, 182, 212, 100))
+            draw.ellipse((n[0]-12, n[1]-12, n[0]+12, n[1]+12), fill=(9, 11, 20), outline=draw_color, width=2)
+        draw.ellipse((nodes[0][0]-6, nodes[0][1]-6, nodes[0][0]+6, nodes[0][1]+6), fill=(6, 182, 212, 150))
+        draw.ellipse((nodes[4][0]-6, nodes[4][1]-6, nodes[4][0]+6, nodes[4][1]+6), fill=(13, 148, 136, 150))
         
     elif category == "SECURITY":
-        # Draw Padlock/Shield outline
-        draw.rectangle((x_base + 40, y_base + 80, x_base + 120, y_base + 150), fill=None, outline=draw_color, width=3)
-        draw.arc((x_base + 55, y_base + 40, x_base + 105, y_base + 90), start=180, end=0, fill=draw_color, width=3)
-        draw.ellipse((x_base + 75, y_base + 105, x_base + 85, y_base + 115), fill=draw_color)
-        draw.line([(x_base + 80, y_base + 115), (x_base + 80, y_base + 130)], fill=draw_color, width=3)
+        # Draw Shield and Lock outline
+        # Shield base
+        draw.polygon([
+            (x_base + 80, y_base + 30),
+            (x_base + 140, y_base + 50),
+            (x_base + 130, y_base + 130),
+            (x_base + 80, y_base + 170),
+            (x_base + 30, y_base + 130),
+            (x_base + 20, y_base + 50)
+        ], fill=None, outline=draw_color, width=3)
+        # Lock inside shield
+        draw.rectangle((x_base + 60, y_base + 85, x_base + 100, y_base + 125), fill=None, outline=accent_color, width=2)
+        draw.arc((x_base + 68, y_base + 65, x_base + 92, y_base + 88), start=180, end=0, fill=accent_color, width=2)
+        draw.ellipse((x_base + 77, y_base + 97, x_base + 83, y_base + 103), fill=accent_color)
+        draw.line([(x_base + 80, y_base + 103), (x_base + 80, y_base + 115)], fill=accent_color, width=2)
         
     elif category == "SCRIPTING":
         # Draw Terminal Window
-        draw.rounded_rectangle([(x_base + 20, y_base + 40), (x_base + 140, y_base + 140)], radius=8, fill=None, outline=draw_color, width=2)
-        draw.line([(x_base + 20, y_base + 65), (x_base + 140, y_base + 65)], fill=draw_color, width=2)
+        draw.rounded_rectangle([(x_base + 10, y_base + 35), (x_base + 150, y_base + 145)], radius=8, fill=None, outline=draw_color, width=2)
+        draw.line([(x_base + 10, y_base + 65), (x_base + 150, y_base + 65)], fill=draw_color, width=2)
         # Terminal Prompts
-        draw.line([(x_base + 35, y_base + 85), (x_base + 45, y_base + 95)], fill=draw_color, width=2)
-        draw.line([(x_base + 45, y_base + 95), (x_base + 35, y_base + 105)], fill=draw_color, width=2)
-        draw.line([(x_base + 55, y_base + 103), (x_base + 75, y_base + 103)], fill=draw_color, width=2)
+        draw.line([(x_base + 25, y_base + 85), (x_base + 35, y_base + 95)], fill=accent_color, width=2)
+        draw.line([(x_base + 35, y_base + 95), (x_base + 25, y_base + 105)], fill=accent_color, width=2)
+        draw.line([(x_base + 42, y_base + 103), (x_base + 62, y_base + 103)], fill=accent_color, width=2)
+        
+        # Gear behind terminal
+        draw.ellipse((x_base + 110, y_base + 105, x_base + 130, y_base + 125), fill=None, outline=draw_color, width=2)
+        
         # Windows dots
-        draw.ellipse((x_base + 35, y_base + 50, x_base + 41, y_base + 56), fill=draw_color)
-        draw.ellipse((x_base + 47, y_base + 50, x_base + 53, y_base + 56), fill=draw_color)
-        draw.ellipse((x_base + 59, y_base + 50, x_base + 65, y_base + 56), fill=draw_color)
+        draw.ellipse((x_base + 25, y_base + 50, x_base + 31, y_base + 56), fill=draw_color)
+        draw.ellipse((x_base + 37, y_base + 50, x_base + 43, y_base + 56), fill=draw_color)
+        draw.ellipse((x_base + 49, y_base + 50, x_base + 55, y_base + 56), fill=draw_color)
         
     elif category == "TEXT":
         # Draw Text / Edit document lines
-        draw.rounded_rectangle([(x_base + 30, y_base + 30), (x_base + 130, y_base + 150)], radius=4, fill=None, outline=draw_color, width=2)
+        draw.rounded_rectangle([(x_base + 25, y_base + 25), (x_base + 115, y_base + 145)], radius=4, fill=None, outline=draw_color, width=2)
         # Lines in document
-        draw.line([(x_base + 45, y_base + 55), (x_base + 115, y_base + 55)], fill=draw_color, width=2)
-        draw.line([(x_base + 45, y_base + 75), (x_base + 115, y_base + 75)], fill=draw_color, width=2)
-        draw.line([(x_base + 45, y_base + 95), (x_base + 95, y_base + 95)], fill=draw_color, width=2)
-        draw.line([(x_base + 45, y_base + 115), (x_base + 105, y_base + 115)], fill=draw_color, width=2)
+        draw.line([(x_base + 40, y_base + 50), (x_base + 100, y_base + 50)], fill=draw_color, width=2)
+        draw.line([(x_base + 40, y_base + 70), (x_base + 100, y_base + 70)], fill=draw_color, width=2)
+        draw.line([(x_base + 40, y_base + 90), (x_base + 85, y_base + 90)], fill=draw_color, width=2)
+        draw.line([(x_base + 40, y_base + 110), (x_base + 95, y_base + 110)], fill=draw_color, width=2)
+        # Pencil crossing document
+        draw.line([(x_base + 95, y_base + 125), (x_base + 145, y_base + 75)], fill=accent_color, width=4)
+        draw.polygon([(x_base + 90, y_base + 130), (x_base + 98, y_base + 128), (x_base + 93, y_base + 120)], fill=accent_color)
         
     elif category == "SYSADMIN":
-        # Draw stack servers
-        for offset in [40, 80, 120]:
+        # Draw stack servers with networking lines
+        for offset in [35, 75, 115]:
             draw.rounded_rectangle([(x_base + 20, y_base + offset), (x_base + 140, y_base + offset + 25)], radius=3, fill=None, outline=draw_color, width=2)
             # Status dots
-            draw.ellipse((x_base + 30, y_base + offset + 10, x_base + 36, y_base + offset + 16), fill=(16, 185, 129, 200))
-            draw.ellipse((x_base + 42, y_base + offset + 10, x_base + 48, y_base + offset + 16), fill=draw_color)
+            draw.ellipse((x_base + 32, y_base + offset + 10, x_base + 38, y_base + offset + 16), fill=(16, 185, 129, 200))
+            draw.ellipse((x_base + 44, y_base + offset + 10, x_base + 50, y_base + offset + 16), fill=accent_color)
+            # Disk lines inside server
+            draw.line([(x_base + 70, y_base + offset + 13), (x_base + 130, y_base + offset + 13)], fill=draw_color, width=1)
             
+        # Vertical connection line
+        draw.line([(x_base + 15, y_base + 47), (x_base + 15, y_base + 127)], fill=draw_color, width=1)
+        
     else: # BASICS or GENERIC
-        # Draw Gear/Engine
+        # Draw Gear/Engine + Terminal Prompt
         cx, cy = x_base + 80, y_base + 90
-        draw.ellipse((cx-30, cy-30, cx+30, cy+30), fill=None, outline=draw_color, width=3)
-        draw.ellipse((cx-10, cy-10, cx+10, cy+10), fill=None, outline=draw_color, width=2)
+        draw.ellipse((cx-35, cy-35, cx+35, cy+35), fill=None, outline=draw_color, width=3)
+        draw.ellipse((cx-15, cy-15, cx+15, cy+15), fill=None, outline=draw_color, width=2)
         for angle in range(0, 360, 45):
             rad = math.radians(angle)
-            x1 = cx + 25 * math.cos(rad)
-            y1 = cy + 25 * math.sin(rad)
-            x2 = cx + 42 * math.cos(rad)
-            y2 = cy + 42 * math.sin(rad)
+            x1 = cx + 30 * math.cos(rad)
+            y1 = cy + 30 * math.sin(rad)
+            x2 = cx + 47 * math.cos(rad)
+            y2 = cy + 47 * math.sin(rad)
             draw.line([(x1, y1), (x2, y2)], fill=draw_color, width=4)
+        # Accent dot
+        draw.ellipse((cx-5, cy-5, cx+5, cy+5), fill=accent_color)
 
 def generate_header(day_num, title, subtitle, output_path):
     width, height = 1200, 500
@@ -324,21 +380,38 @@ def generate_header(day_num, title, subtitle, output_path):
     # Draw Subtitle
     draw.text((60, 370), subtitle, fill=cat["accent"], font=subtitle_font)
     
+    # Draw tags below subtitle
+    tags = DAY_TAGS.get(day_num, ["LPIC-1", cat["tag"].split()[0], "LINUX"])
+    tag_x = 60
+    tag_y = 420
+    for tag in tags:
+        tag_w = len(tag) * 11 + 20
+        badge_draw.rounded_rectangle(
+            [(tag_x, tag_y), (tag_x + tag_w, tag_y + 30)],
+            radius=4,
+            fill=(15, 23, 42, 120),
+            outline=cat["accent"] + (90,),
+            width=1
+        )
+        badge_draw.text((tag_x + 10, tag_y + 5), tag, fill=cat["accent"] + (220,), font=badge_font)
+        tag_x += tag_w + 15
+        
     # Draw Technical Vector Artwork based on Category in right-bottom corner
     art_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     art_draw = ImageDraw.Draw(art_layer)
     draw_category_graphics(art_draw, category_key, 950, 240)
     
-    # Top-right tiny hardware design
-    art_draw.rounded_rectangle([(970, 70), (1140, 170)], radius=8, fill=(15, 23, 42, 110), outline=cat["accent"] + (40,), width=1)
-    art_draw.text((985, 85), "SYSTEM STATUS", fill=(130, 145, 165, 200), font=series_font)
-    # Drawing tiny graphical signal bars
-    art_draw.rectangle((985, 125, 995, 145), fill=cat["start_color"] + (180,))
-    art_draw.rectangle((1000, 115, 1010, 145), fill=cat["start_color"] + (180,))
-    art_draw.rectangle((1015, 105, 1025, 145), fill=cat["accent"] + (180,))
-    art_draw.rectangle((1030, 130, 1040, 145), fill=(255, 255, 255, 30))
+    # Top-right tiny hardware design (Futuristic HUD)
+    art_draw.rounded_rectangle([(830, 70), (1140, 170)], radius=8, fill=(15, 23, 42, 160), outline=cat["accent"] + (90,), width=1)
+    art_draw.text((850, 85), "SYSTEM STATUS", fill=(130, 145, 165, 220), font=series_font)
     
-    art_draw.text((1055, 118), f"CAT: {category_key[:6]}", fill=cat["accent"], font=badge_font)
+    # Drawing tiny graphical signal bars
+    art_draw.rectangle((850, 125, 860, 145), fill=cat["start_color"] + (180,))
+    art_draw.rectangle((865, 115, 875, 145), fill=cat["start_color"] + (180,))
+    art_draw.rectangle((880, 105, 890, 145), fill=cat["accent"] + (180,))
+    art_draw.rectangle((895, 130, 905, 145), fill=(255, 255, 255, 30))
+    
+    art_draw.text((920, 118), f"CAT: {category_key}", fill=cat["accent"], font=badge_font)
     
     image = Image.alpha_composite(image, art_layer)
     
