@@ -1,0 +1,110 @@
+ 1621  sudo systemctl stop chronyd
+ 1622  sudo systemctl start chronyd
+ 1623  sysctl net.ipv4.ip_forward
+ 1624  sysctl -w net.ipv4.ip_forward=1
+ 1625  sudo sysctl -w net.ipv4.ip_forward=1
+ 1626  sudo iptables -t nat -L -n
+ 1627  clear
+ 1628  sudo tcpdump -i ens256 udp port 123
+ 1629  clear
+ 1630  sudo tcpdump -i ens256 udp port 123
+ 1631  clear
+ 1632  lsblk
+ 1633  lsusb
+ 1634  ls /run/media/simus/dat
+ 1635  clear
+ 1636  lsblk -f
+ 1637  ls /run/media/simus/dat | less
+ 1638  sudo /etc/fstab | less
+ 1639  cd /etc
+ 1640  ls
+ 1641  sudo cat fstab | less
+ 1642  fstab
+ 1643  sudo cat /etc/fstab | less
+ 1644  clear
+ 1645  cd ~
+ 1646  ls /
+ 1647  cd mnt
+ 1648  cd /mnt
+ 1649  ls
+ 1650  cd hgfs
+ 1651  ls
+ 1652  ls -al
+ 1653  cd ..
+ 1654  mkdir usb_stick
+ 1655  sudo mkdir usb_stick
+ 1656  ls -al
+ 1657  lsblk -f
+ 1658  sudo mount --bind /run/media/simus/dat /mnt/usb_stick
+ 1659  sudo ls -al /mnt/usb_stick
+ 1660  sudo umount /mnt/usb_stick
+ 1661  sudo ls -al /mnt/usb_stick
+ 1662  sudo cat /etc/mtab | less
+ 1663  sudo cat /proc/mounts | less
+ 1664  mounts
+ 1665  mount |less
+ 1666  swapon
+ 1667  swapoff
+ 1668  sudo swapoff
+ 1669  clear
+ 1670  sudo cat /etc/fstab
+ 1671  clear
+ 1672  cd ~
+ 1673  lsblk
+ 1674  lsblk -f
+ 1675  df -h
+ 1676  sudo fdisk -l
+ 1677  df -h
+ 1678  sudo fdisk -l
+ 1679  sudo fdisk /dev/sda
+ 1680  df -h
+ 1681  sudo fdisk -l
+ 1682  sudo mkfs /dev/sda1
+ 1683  sudo fdisk -l
+ 1684  df -h
+ 1685  lsblk --fs
+ 1686  sudo fdisk /dev/sda
+ 1687  lsblk --fs
+ 1688  df -h
+ 1689  lsblk -f
+ 1690  lsblk
+ 1691  sudo mkfs.ext4 /dev/sda3 /dev/sda5 /dev/sda6 /dev/sda7
+ 1692  lsblk --fs
+ 1693  sudo mkfs.ext4 /dev/sda3
+ 1694  sudo mkfs.ext4 /dev/sda5 /dev/sda6 /dev/sda7
+ 1695  lsblk --fs
+ 1696  sudo mkfs.ext4 /dev/sda5
+ 1697  sudo mkfs.ext4 /dev/sda6
+ 1698  sudo mkfs.ext4 /dev/sda7
+ 1699  lsblk --fs
+ 1700  sudo cfdisk /dev/sda
+ 1701  sudo gdisk /dev/sda
+ 1702  lsblk --fs
+ 1703  sudo mkfs.ext4 /dev/sda1
+ 1704  lsblk --fs
+ 1705  sudo cgdisk /dev/sda
+ 1706  lsblk --fs
+ 1707  sudo blkid
+ 1708  sudo mkfs.ext4 /dev/sda1
+ 1709  lsblk --fs
+ 1710  sudo gparted /dev/sda
+ 1711  sudo parted -l
+ 1712  sudo parted /dev/sda
+ 1713  sudo dnf install gparted
+ 1714  gparted
+ 1715  sudo mkdir -p /mnt/platte1
+ 1716  sudo mkdir -p /mnt/platte2
+ 1717  sudo mount /dev/sda1 /mnt/platte1
+ 1718  sudo mount -a
+ 1719  sudo ls -al /mnt/platte1
+ 1720  touch neuDat
+ 1721  touch /mnt/platte1/neuDat
+ 1722  sudo touch /mnt/platte1/neuDat
+ 1723  sudo ls -al /mnt/platte1
+ 1724  sudo umount /dev/sda1
+ 1725  sudo ls -al /mnt/platte1
+ 1726  history 150 | less
+ 1727  ls
+ 1728  cat rockyHis20260602-1535.txt 
+ 1729  history 150 | less
+ 1730  history 110 > rockyHis$(date +%Y%m%d-%H%M).txt
