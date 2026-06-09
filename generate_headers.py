@@ -420,6 +420,117 @@ def generate_header(day_num, title, subtitle, output_path):
     final_image.save(output_path, "PNG")
     print(f"Generated beautifully coded header for Category {category_key} [Day {day_num:02d}]: {output_path}")
 
+def generate_banner(output_path):
+    width, height = 1200, 500
+    
+    # Create RGBA Image Canvas
+    image = Image.new("RGBA", (width, height), DARK_BG + (255,))
+    
+    # Multi-colored organic aurora glow (representing all categories)
+    glow_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    glow_draw = ImageDraw.Draw(glow_layer)
+    glow_draw.ellipse((-150, -100, 450, 550), fill=(16, 185, 129, 35)) # Emerald (Basics)
+    glow_draw.ellipse((400, -150, 950, 450), fill=(99, 102, 241, 35))   # Indigo (Scripting)
+    glow_draw.ellipse((750, -50, 1350, 550), fill=(6, 182, 212, 35))    # Cyan (Network)
+    glow_draw.ellipse((200, 200, 700, 600), fill=(244, 63, 94, 25))      # Rose (Text)
+    
+    # Apply deep blur
+    glow_layer = glow_layer.filter(ImageFilter.GaussianBlur(130))
+    image = Image.alpha_composite(image, glow_layer)
+    
+    # Draw technology grid
+    grid_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    grid_draw = ImageDraw.Draw(grid_layer)
+    draw_cyber_grid(grid_draw, width, height, spacing=60)
+    image = Image.alpha_composite(image, grid_layer)
+    
+    # Draw Left vertical multi-color gradient border bar
+    accent_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    accent_draw = ImageDraw.Draw(accent_layer)
+    accent_draw.rectangle((20, 40, 26, height - 40), fill=(59, 130, 246, 200)) # Blue base
+    accent_draw.ellipse((17, 30, 29, 42), fill=(16, 185, 129, 255)) # Emerald top
+    accent_draw.ellipse((17, 150, 29, 162), fill=(244, 63, 94, 255)) # Rose
+    accent_draw.ellipse((17, 270, 29, 282), fill=(99, 102, 241, 255)) # Indigo
+    accent_draw.ellipse((17, height - 42, 29, height - 30), fill=(6, 182, 212, 255)) # Cyan bottom
+    image = Image.alpha_composite(image, accent_layer)
+    
+    # Fonts
+    title_font = get_font("segoeuib", 58)      # Large Bold
+    subtitle_font = get_font("segoeui", 26)     # Regular
+    badge_font = get_font("consolab", 20)       # Consolas Bold
+    series_font = get_font("segoeui", 16)      # Regular Series
+    
+    # Draw "MASTER-HUB" badge
+    badge_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    badge_draw = ImageDraw.Draw(badge_layer)
+    badge_draw.rounded_rectangle(
+        [(60, 80), (220, 120)],
+        radius=6,
+        fill=(15, 23, 42, 195),
+        outline=(59, 130, 246, 180),
+        width=2
+    )
+    badge_draw.text((82, 89), "MASTER-HUB", fill=(147, 197, 253), font=badge_font)
+    
+    # Series Name
+    badge_draw.text((240, 90), "LINUX ESSENTIALS MASTERCLASS", fill=(255, 255, 255), font=subtitle_font)
+    
+    # Repository path text
+    badge_draw.text((60, 140), "REPOSITORY  //  BitLC-NE-2025-2026 / Linux-Essentials", fill=(130, 145, 165), font=series_font)
+    
+    image = Image.alpha_composite(image, badge_layer)
+    
+    # Main Title
+    draw = ImageDraw.Draw(image)
+    draw.text((62, 197), "Linux Essentials", fill=(9, 11, 20, 180), font=title_font)
+    draw.text((60, 195), "Linux Essentials", fill=(255, 255, 255), font=title_font)
+    
+    draw.text((62, 269), "Das Master-Repository", fill=(9, 11, 20, 180), font=title_font)
+    draw.text((60, 267), "Das Master-Repository", fill=(59, 130, 246), font=title_font)
+    
+    # Subtitle
+    draw.text((60, 360), "Vom Fundament über Administration zum LPIC-1 Profi", fill=(147, 197, 253), font=subtitle_font)
+    
+    # Draw tags
+    tags = ["LPIC-1", "BASH", "NETWORK", "SECURITY", "LVM", "ADMIN"]
+    tag_x = 60
+    tag_y = 420
+    for tag in tags:
+        tag_w = len(tag) * 11 + 20
+        badge_draw.rounded_rectangle(
+            [(tag_x, tag_y), (tag_x + tag_w, tag_y + 30)],
+            radius=4,
+            fill=(15, 23, 42, 120),
+            outline=(59, 130, 246, 90),
+            width=1
+        )
+        badge_draw.text((tag_x + 10, tag_y + 5), tag, fill=(147, 197, 253, 220), font=badge_font)
+        tag_x += tag_w + 15
+        
+    # Draw multi-category graphics overlay on the right
+    art_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    art_draw = ImageDraw.Draw(art_layer)
+    
+    # Draw stacked servers
+    draw_category_graphics(art_draw, "SYSADMIN", 950, 240)
+    
+    # Top-right futuristic HUD
+    art_draw.rounded_rectangle([(810, 70), (1140, 170)], radius=8, fill=(15, 23, 42, 160), outline=(59, 130, 246, 90), width=1)
+    art_draw.text((830, 85), "REPOSITORY STATUS", fill=(130, 145, 165, 220), font=series_font)
+    
+    # Draw loading bar representing 70% progress
+    art_draw.rounded_rectangle([(830, 125), (1120, 135)], radius=3, fill=(15, 23, 42, 200), outline=(255, 255, 255, 20), width=1)
+    art_draw.rounded_rectangle([(830, 125), (830 + int(290 * 0.7), 135)], radius=3, fill=(16, 185, 129, 220), outline=None)
+    
+    art_draw.text((830, 145), "PROGRESS: 70%", fill=(16, 185, 129), font=series_font)
+    art_draw.text((980, 145), "DAYS COMPLETED: 21/30", fill=(147, 197, 253), font=series_font)
+    
+    image = Image.alpha_composite(image, art_layer)
+    
+    final_image = image.convert("RGB")
+    final_image.save(output_path, "PNG")
+    print(f"Generated masterfully designed Repository Banner: {output_path}")
+
 def parse_readme_title(day_dir):
     readme_path = os.path.join(day_dir, "README.md")
     if not os.path.exists(readme_path):
@@ -454,11 +565,15 @@ def main():
     parser.add_argument("--subtitle", type=str, help="Subtitle text")
     parser.add_argument("--output", type=str, help="Output file path")
     parser.add_argument("--all", action="store_true", help="Generate all headers with category color coding")
+    parser.add_argument("--banner", action="store_true", help="Generate the main repository banner banner.png")
     
     args = parser.parse_args()
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
-    if args.all:
+    if args.banner:
+        banner_path = os.path.join(base_dir, "banner.png")
+        generate_banner(banner_path)
+    elif args.all:
         print("Starting unified category-coded beautiful headers build...")
         for item in sorted(os.listdir(base_dir)):
             match = re.match(r'^Day_(\d+)$', item)
@@ -500,3 +615,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
