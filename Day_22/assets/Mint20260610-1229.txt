@@ -1,0 +1,181 @@
+    1  su -
+    2  sudo passwd root
+    3  ip a
+    4  cd Dokumente/
+    5  vi netconfig.sh 
+    6  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33 1.1.1.3 
+    7  vi netconfig.sh 
+    8  ip route show default | awk 'print{5}'
+    9  vi netconfig.sh 
+   10  ip route show default | awk 'print{$5}'
+   11  vi netconfig.sh 
+   12  ip route show default | awk '{print$5}'
+   13  vi netconfig.sh 
+   14  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33 1.1.1.3 
+   15  ip a
+   16  clear
+   17  vi netconfig.sh 
+   18  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33 1.1.1.3 
+   19  nmcli connection show
+   20  nmcli connection modify ens160 ipv4.addresses 172.16.7.42/27
+   21  ip a
+   22  vi netconfig.sh 
+   23  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33 1.1.1.3 
+   24  ls -al
+   25  vi netconfig.sh 
+   26  echo$0
+   27  echo $0
+   28  vi netconfig.sh 
+   29  clear
+   30  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33 1.1.1.3 
+   31  vi netconfig.sh 
+   32  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33
+   33  echo $1
+   34  vi netconfig.sh 
+   35  nano netconfig.sh 
+   36  vi netconfig.sh 
+   37  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33
+   38  nmcli connection show
+   39  ip r | awk '{print $5}'
+   40  ip r
+   41  ip r | awk '{print $3}'
+   42  vi netconfig.sh 
+   43  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33
+   44  ip route default show | awk '{print $3}'
+   45  vi netconfig.sh 
+   46  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33
+   47  vi netconfig.sh 
+   48  ./netconfig.sh 172.16.7.42/27 manual 172.16.7.33 1.1.1.3
+   49  nmcli general hostname
+   50  nmcli general status
+   51  nmcli
+   52  nmcli device show
+   53  ping -c3 www.google.com
+   54  cd ~
+   55  clear
+   56  cd /etc/chron
+   57  cd /etc/chrony
+   58  cd /etc
+   59  ls
+   60  systemctl status chronyd
+   61  sudo apt install chrony
+   62  sudo systemctl enable chronyd
+   63  sudo systemctl start chronyd
+   64  sudo systemctl status chronyd
+   65  clear
+   66  ls
+   67  cat /chrony/chrony.conf | less
+   68  cat ./chrony/chrony.conf | less
+   69  chronyc sources
+   70  sudo tcpdump -i any udp -p 123
+   71  sudo tcpdump -i any udp port 123
+   72  clear
+   73  cd ~
+   74  ping -c3 www.google.com
+   75  sudo vi /etc/chrony/chrony.conf
+   76  sudo systemctl stop chronyd
+   77  systemctl status chronyd
+   78  sudo systemctl start chronyd
+   79  sudo vi /etc/chrony/chrony.conf
+   80  sudo systemctl stop chronyd
+   81  chronyc sources
+   82  sudo vi /etc/chrony/chrony.conf
+   83  sudo nano /etc/chrony/chrony.conf
+   84  sudo systemctl stop chronyd
+   85  sudo systemctl start chronyd
+   86  systemctl status ssh
+   87  systemctl status sshd
+   88  sudo apt install openssh
+   89  apt-cache search openssh
+   90  sudo apt install openssh-client
+   91  ping -c3 172.16.7.37
+   92  ping -c3 172.16.7.33
+   93  clear
+   94  ssh simus@172.16.7.33
+   95  ls -al
+   96  cat ~/.ssh/kown_hosts
+   97  cd ~/.ssh
+   98  ls .al
+   99  ls -al
+  100  cat ~/.ssh/known_hosts
+  101  cd ..
+  102  clear
+  103  ssh-keygen -t rsa -b 2048
+  104  cd .ssh
+  105  ls -al
+  106  cat id_rsa
+  107  clear
+  108  cat id_rsa.pub
+  109  ssh-copy-id simus@172.16.7.33
+  110  ssh simus@172.16.7.33
+  111  sudo ssh-keygen -l -f /etc/ssh/ssh_host_rsa_key
+  112  cd ..
+  113  nc -zv 172.16.7.33 22
+  114* 
+  115  apt-cache search openssh | grep openssh
+  116  dpkg -l oppenssh
+  117  dpkg -l openssh
+  118  clear
+  119  cd .ssh
+  120  ls
+  121  ssh-add -l
+  122  ssh semus@172.16.7.33
+  123  ssh simus@172.16.7.33
+  124  ssh-add ~/.ssh/id_rsa
+  125  ssh-add -l
+  126  ssh simus@172.16.7.33
+  127  clear
+  128  ssh simus@172.16.7.33
+  129  ssh-add -D
+  130  ssh simus@172.16.7.33
+  131  cd .ssh
+  132  cd ./.ssh
+  133  ls
+  134  cd /etc/ssh
+  135  ls
+  136  cat ssh_config | less
+  137  sudo vi ssh_config
+  138* 
+  139  cd ~
+  140  ssh-add -l
+  141  ssh-add -D
+  142  ssh-add -l
+  143  ssh-add ~/.ssh/id_rsa
+  144  ssh-add -l
+  145  sudo ssh-add ~/.ssh/id_rsa
+  146  sudo apt update
+  147  ping -c3 www.google.com
+  148  ping -c3 172.16.7.33
+  149  sudo cat /etc/resolv.conf
+  150  ip a
+  151  nmcli connection modify ens160 ipv4.dns "1.1.1.3 8.8.8.8"
+  152  ping -c3 www.google.com
+  153  nmcli connection down ens160
+  154  nmcli connection up ens160
+  155  ping -c3 www.google.com
+  156  ping -c3 1.1.1.3
+  157  ping -c3 www.google.com
+  158  sudo apt update
+  159  sudo apt install openssh-server
+  160  clear
+  161  sudo ssh-add ~/.ssh/id_rsa
+  162  sudo systemctl status sshd
+  163  sudo systemctl status ssh
+  164  sudo systemctl restart ssh
+  165  sudo systemctl status ssh
+  166  sudo systemctl enable ssh
+  167  sudo systemctl status ssh
+  168  sudo ssh-add ~/.ssh/id_rsa
+  169  ssh-add ~/.ssh/id_rsa
+  170  ssh -A simus@172.16.7.33
+  171  sudo vi ssh_config
+  172  sudo vi /etc/ssh/ssh_config
+  173  ssh -A simus@172.16.7.33
+  174  ssh-add -D
+  175  ssh -A simus@172.16.7.33
+  176  ssh simus@172.16.7.33
+  177  ssh-add ~/.ssh/id_rsa
+  178  ssh simus@172.16.7.33
+  179  ssh -A simus@172.16.7.33
+  180  ls
+  181  history > Mint$(date +%Y%m%d-%H%M).txt
