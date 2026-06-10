@@ -176,7 +176,7 @@ rsync -avz -e ssh /local/dir/ user@remotehost:/remote/dir/
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 20 (LVM-Speicherverwaltung):** [⬅️ LVM (Logical Volume Manager)](../Day_20/README.md)
-* **Tag 22 (In Planung):** [➡️ Tag 22](../Day_22/README.md)
+* **Tag 22 (SSH-Agent, ProxyJump & Rsync):** [➡️ Tag 22](../Day_22/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---

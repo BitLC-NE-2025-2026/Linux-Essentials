@@ -74,7 +74,8 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | **Tag 19** | ✅ | Partitionierung (MBR/GPT), Dateisysteme (mkfs) & Mounten | [📖 README](./Day_19/README.md) |
 | **Tag 20** | ✅ | LVM (Logical Volume Manager) - PV, VG, LV & Resizing | [📖 README](./Day_20/README.md) |
 | **Tag 21** | ✅ | Kryptographie, SSH (Keys/Agent) & Rsync über SSH | [📖 README](./Day_21/README.md) |
-| **Tag 22 - 25** | ⏳ | In Planung | [📖 README](./Day_22/README.md) |
+| **Tag 22** | ✅ | SSH-Agent, ProxyJump & Rsync-Synchronisation (lsyncd/inotify) | [📖 README](./Day_22/README.md) |
+| **Tag 23 - 25** | ⏳ | In Planung | [📖 README](./Day_23/README.md) |
 | **Tag 26 - 30** | ⏳ | In Planung | [📖 README](./Day_26/README.md) |
 
 ---
@@ -285,7 +286,7 @@ Zieht Berechtigungen bei der Dateierstellung ab. Maximale Standard-Ausgangsbasis
 
 * **Aktuelle Umgebung:** Rocky Linux 9.x (Router) & Debian/Cachy/Manjaro (Clients)
 * **Shell:** Bash / ZSH + Oh My Zsh & Whiptail TUIs
-* **Fortschritt:** 70% (21 von 30 Modulen abgeschlossen)
+* **Fortschritt:** 73% (22 von 30 Modulen abgeschlossen)
 
 ---
 
