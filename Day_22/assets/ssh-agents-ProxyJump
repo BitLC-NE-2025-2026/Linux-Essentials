@@ -1,0 +1,48 @@
+Für eine moderne und sichere passwortlose Verbindung nach Best Practices wird ProxyJump anstelle des klassischen Agent-Forwardings genutzt. Dies verhindert das Offenlegen des privaten Schlüssels auf dem Jump-Host und entspricht dem aktuellen Stand der Technik.
+
+1. SSH-Schlüsselpaar auf srv-deb-01 erstellen
+Ein sicheres ed25519 Schlüsselpaar generieren.
+
+Bash
+# Erstellt einen modernen kryptografisch sicheren SSH-Schlüssel ohne Passwort
+ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_ed25519 -N ""
+2. SSH-Agent starten und Schlüssel hinzufügen
+Den generierten Schlüssel in den lokalen SSH-Agenten laden.
+
+Bash
+# Startet den SSH-Agenten und lädt die Umgebungsvariablen
+eval `ssh-agent -s`
+
+# Fügt den privaten Schlüssel dem Agenten hinzu
+ssh-add ~/.ssh/id_ed25519
+3. Öffentlichen Schlüssel verteilen
+Der Schlüssel muss auf beiden remote Systemen hinterlegt werden.
+
+Bash
+# Überträgt den Schlüssel auf den Rocky Linux Jump-Host
+ssh-copy-id benutzer@srv-rocky
+
+# Überträgt den Schlüssel transparent über den Jump-Host auf das Debian Zielsystem
+ssh-copy-id -J benutzer@srv-rocky benutzer@srv-deb-02
+4. SSH-Client konfigurieren
+Die Datei ~/.ssh/config auf srv-deb-01 erstellen oder bearbeiten.
+
+Plaintext
+# Definiert den Jump-Host
+Host srv-rocky
+    HostName <IP_oder_Domain_von_srv_rocky>
+    User <Benutzername_auf_rocky>
+    IdentityFile ~/.ssh/id_ed25519
+
+# Definiert das Zielsystem und den Weg dorthin über ProxyJump
+Host srv-deb-02
+    HostName <IP_oder_Domain_von_srv_deb_02>
+    User <Benutzername_auf_deb_02>
+    IdentityFile ~/.ssh/id_ed25519
+    ProxyJump srv-rocky
+5. Verbindung herstellen
+Der Zugriff erfolgt nun direkt und passwortlos.
+
+Bash
+# Verbindet sich nahtlos über srv-rocky auf das Zielsystem srv-deb-02
+ssh srv-deb-02
