@@ -173,6 +173,17 @@ rsync -avz -e ssh /local/dir/ user@remotehost:/remote/dir/
 
 ---
 
+## 📚 Ressourcen & Dokumente
+Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
+
+- [Kryptographie Grundlagen (PDF)](./assets/FullstackAckermann17-2Kryptographie.pdf)
+- [IT-Schutzziele & Kryptographie (PDF)](./assets/IT-SchutzzieleKryptographie.pdf)
+- [SSH-Grundlagen (PDF)](./assets/Linux_ssh.pdf)
+- [Rsync über SSH Kopieranleitung (PDF)](./assets/How%20To%20Copy%20Files%20With%20Rsync%20Over%20SSH%20DigitalOcean.pdf)
+- [Rsync Synchronisationsanleitung (PDF)](./assets/Verwenden%20von%20Rsync%20zum%20Synchronisieren%20von%20lokalen%20und%20entfernten%20Verzeichnissen%20DigitalOcean.pdf)
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 20 (LVM-Speicherverwaltung):** [⬅️ LVM (Logical Volume Manager)](../Day_20/README.md)
