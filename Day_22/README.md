@@ -60,8 +60,8 @@ Wenn ein Zielsystem nur über einen dazwischengeschalteten Server (Jump-Host ode
 ### A. Agent Forwarding (Klassisch / Sicherheitsrisiko)
 Beim Agent-Forwarding (`ssh -A`) wird der Zugriff auf den lokalen SSH-Agenten an den Jump-Host durchgereicht.
 * **Ablauf:** `ssh -A benutzer@jump-host` -> `ssh benutzer@ziel-host`
-* > [!WARNING]  
-  > **Sicherheitsrisiko:** Besitzt ein Angreifer Root-Rechte auf dem Jump-Host, kann er das weitergeleitete Socket des SSH-Agenten unter `/tmp/ssh-*` entführen und die Identität des Clients annehmen, um sich auf nachgelagerte Systeme zu verbinden.
+> [!WARNING]  
+> **Sicherheitsrisiko:** Besitzt ein Angreifer Root-Rechte auf dem Jump-Host, kann er das weitergeleitete Socket des SSH-Agenten unter `/tmp/ssh-*` entführen und die Identität des Clients annehmen, um sich auf nachgelagerte Systeme zu verbinden.
 
 ### B. ProxyJump (Modern / Best Practice)
 `ProxyJump` ist die moderne, sichere Alternative (ab OpenSSH 7.3). 
