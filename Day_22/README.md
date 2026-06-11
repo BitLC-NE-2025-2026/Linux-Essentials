@@ -202,10 +202,21 @@ sudo systemctl status lsyncd
 
 ---
 
+## 📚 Ressourcen & Dokumente
+Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
+
+- [SSH-Agent & Multi-Hop Guide (PDF)](./assets/Linux_ssh-agent.pdf)
+- [ProxyJump & SSH-Agents Setup (TXT)](./assets/ssh-agents-ProxyJump)
+- [Rsync & Lsyncd Synchronisation (PDF)](./assets/Linux_Remote_Sync_rsync_lsync.pdf)
+- [Syslog & Systemd Logging Basics (PDF)](./assets/Syslog-logging.pdf)
+- [Mint Terminal-Historie (TXT)](./assets/Mint20260610-1229.txt)
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 21 (Kryptographie, SSH & Rsync):** [⬅️ Kryptographie, SSH & Rsync](../Day_21/README.md)
-* **Tag 23 (In Planung):** [➡️ Tag 23](../Day_23/README.md)
+* **Tag 23 (Paketverwaltung & VM-Gast):** [➡️ Tag 23](../Day_23/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
