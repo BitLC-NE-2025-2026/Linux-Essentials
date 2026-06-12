@@ -1,0 +1,44 @@
+202606091159 antonius ehlen
+
+    Aufgabe: Viele User anlegen
+    Zeit bis: 16:00 Uhr (20260609)
+    Teil 1:
+       Dateien 'vornamen' und 'nachnamen' sollen
+        genutzt werden!
+       auf 'admin' 100 User anlegen:
+       - die ersten 10 aus 'vornamen' kombiniert
+         mit den letzten 10 aus 'nachnamen' getrennt durch einen '.' in Kleinbuchstaben als Usernamen verwenden:
+           Format: vorname.nachname
+       - diese 100 User anlegen und jeden
+         Namen mit einem Passwort wie:
+            vorname.nachnamePW!1
+            (vorname.nachname wie der Username)
+         versehen.
+
+    Teil 2:
+       Dateien 'vornamen' und 'nachnamen' sollen
+        genutzt werden!
+       auf 'debian' 144 User anlegen:
+       - die letzten 12 aus 'vornamen' kombiniert
+         mit den ersten 12 aus 'nachnamen' getrennt durch einen '.' in Kleinbuchstaben als Usernamen verwenden:
+           Format: vorname.nachname
+       - diese 144 User anlegen und jeden
+         Namen mit einem Passwort wie:
+            vorname.nachnamePW!1
+            (vorname.nachname wie der Username)
+         versehen.
+
+    Teil 3:
+       Dateien 'vornamen' und 'nachnamen' sollen
+        genutzt werden!
+       auf 'mint' 256 User anlegen:
+       - die letzten 16 aus 'vornamen' kombiniert
+         mit den letzten 16 aus 'nachnamen' getrennt durch einen '.' in Kleinbuchstaben als Usernamen verwenden:
+           Format: vorname.nachname
+       - diese 144 User anlegen und jeden
+         Namen mit einem Passwort wie:
+            vorname.nachnamePW!1
+            (vorname.nachname wie der Username)
+         versehen.
+
+# end
