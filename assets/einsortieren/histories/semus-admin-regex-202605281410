@@ -1,0 +1,1000 @@
+  137  ls
+  138  mkdir alfHome
+  139  ls
+  140  cp -r alfi alfHome/
+  141  find alfHome/
+  142  cp -r alf alfHome/alfifi
+  143  find alfHome/
+  144  ls
+  145  mkdir catzi catzi2
+  146  ls
+  147  mkdir alfiCatziHome
+  148  cp -r alf alfi catzi catzi2 alfiCatzi
+  149  cp -r alf alfi catzi catzi2 alfiCatziHome/
+  150  find alfiCatziHome/
+  151  ls
+  152  mv catzi catzi1
+  153  ls
+  154  mv catzi2 catzi1
+  155  l
+  156  sls
+  157  ls
+  158  find catzi1/
+  159  mv alf catzi1/alfFrisstCatzi
+  160  find catzi1/
+  161  ls
+  162  mv catzi1/ hundi1
+  163  ls
+  164  mkdir alfMelmac
+  165  ls
+  166  mv alfi alfHome/ alfiCatziHome/ alfMelmac/
+  167  find alfMelmac/
+  168  ls alfMelmac/
+  169  history ../histories/history-semus-$(date "+%Y%m%d-%H%M")
+  170  history ../histories/history-semus-$(date "+%Y%m%d-%H%M")
+  171  history ../histories/history-semus-$(date '+%Y%m%d-%H%M')
+  172  ls ../histories/
+  173  history > ../histories/history-semus-$(date '+%Y%m%d-%H%M')
+  174  ls ..
+  175  pwd
+  176  ls ..
+  177  history > ../histories/history-semus-$(date '+%Y%m%d-%H%M')
+  178  ls ../histories/
+  179  man date 
+  180  less ../histories/history-semus-20260512-0941 
+  181  man ls
+  182  man date
+  183  man mkdir
+  184  man man
+  185  man passwd
+  186  man 5 passwd
+  187  man 2 passwd
+  188  ls /usr/share/man
+  189  ls /usr/share/man/man2
+  190  ls /usr/share/man/man1
+  191  man man 
+  192  man -f passwd
+  193  man -f mkdir
+  194  man -f mkdi
+  195  man -k mkdi
+  196  man -k security
+  197  man -k security | wc -l
+  198  man -k find | wc -l
+  199  man -k find | less
+  200  man -k abc| wc -l
+  201  man -k alf | wc -l
+  202  man -k alf 
+  203  history 13
+  204  man man
+  205  mkdir --help
+  206  cp --help | less
+  207  mv --help | less
+  208  find --help | less
+  209  info
+  210  info cp
+  211  info passwd
+  212  info fstab
+  213  info --help
+  214  help
+  215  cd
+  216  pwd
+  217  id
+  218  sudo ls /root
+  219  ls /root
+  220  whoami
+  221  who am  i
+  222  who bist du
+  223  who frisst catzies
+  224  who a
+  225  who a b
+  226  who
+  227  whoami
+  228  who fristst catzies
+  229  history | wc -l
+  230  history -a
+  231  who am i
+  232  history | wc -l
+  233  history -a
+  234  who am i 
+  235  who
+  236  w
+  237  who
+  238  w
+  239  [200~   2026-05-12 11:21 (:0)
+  240  history | wc -l
+  241  history -a
+  242  whoami
+  243  free
+  244  df .
+  245  whoami
+  246  free
+  247  df .
+  248  ip route
+  249  inxi
+  250  sudo dnf install -y inxi
+  251  inxi
+  252  inxi -P
+  253  inxi -C
+  254  inxi -M
+  255  inxi -m
+  256  su -
+  257  clear
+  258  echo clear = CTRL-L (STRG-L)
+  259  echo 'clear = CTRL-L (STRG-L)'
+  260  dnf install -y inxi
+  261  man dnf
+  262  man man
+  263  history 
+  264  ip route
+  265  ping -c1 -w1 172.25.77.74 | grep 'ttl'
+  266  ping -c1 -w1 172.21.0.9 | grep 'ttl'
+  267  ping -c1 -w1 www.google.com | grep 'ttl'
+  268  ls
+  269  mkdir linux
+  270  ls
+  271  rsync -av linux/ cl907@172.21.1.2:/bitlcsrv/bitlcrw/aehlen2026ne1ne2/linux-ae/
+  272  rsync -av cl907@172.21.1.2:/bitlcsrv/bitlcrw/aehlen2026ne1ne2/linux-ae   ~/ 
+  273  ls
+  274  rsync -av cl907@172.21.1.2:/bitlcsrv/bitlcrw/aehlen2026ne1ne2/linux-ae   ~/ 
+  275  sudo dnf install -y ~/linux-ae/Software/drawioDebRpm/drawio-x86_64-29.0.3.rpm 
+  276  su -
+  277  rsync -av cl907@172.21.1.2:/bitlcsrv/bitlcrw/software/Foxit*  ~/Downloads/
+  278  ls ~/Downloads/
+  279  ~/Downloads/FoxitReader.enu.setup.2.4.4.0911-r057d814.x64.run 
+  280  history | tail -4
+  281  cd Downloads/
+  282  ./FoxitReader.enu.setup.2.4.4.0911-r057d814.x64.run 
+  283  killall FoxitReader
+  284  cd
+  285  ls
+  286  ls linux
+  287  ls linux-ae/
+  288  pwd
+  289  nmcli device 
+  290  ls 
+  291  ls linux-ae/
+  292  rsync -av cl907@172.21.1.2:/bitlcsrv/bitlcrw/aehlen2026ne1ne2/linux-ae   ~/ 
+  293  find . | grep -i grundlagen | grep pdf
+  294  history -a; history -r
+  295  man man
+  296  man ip
+  297  man clear
+  298  man free
+  299  man df
+  300  man su
+  301  man sudo
+  302  man echo
+  303  history -a; history -r
+  304  history -a
+  305  history -a; history -r
+  306  history | wc -l
+  307  history -a
+  308  history | wc -l
+  309  history | wc -l
+  310  lpq
+  311  lpstat -t
+  312  ping -c1 -w1 172.21.0.13|grep ttl
+  313  lpstat -t
+  314  history -a
+  315  uname -r
+  316  su -
+  317  history -l
+  318  history | wc -l
+  319  id
+  320  whoami
+  321  who
+  322  w
+  323  exit
+  324  users
+  325  w
+  326  head services
+  327  who
+  328  ip r
+  329  w
+  330  whoami
+  331  id
+  332  w
+  333  users
+  334  uname -r
+  335  uname 
+  336  uname -a
+  337  uptime
+  338  top
+  339  sudo dnf install -y htop
+  340  htop
+  341  sudo dnf install -y btop
+  342  btop
+  343  free
+  344  free -h
+  345  df
+  346  man df
+  347  df
+  348  df -h
+  349  pwd
+  350  df -h .
+  351  which mkdir
+  352  ls -l /
+  353  which mkdir
+  354  which cp 
+  355  which sudo
+  356  which rmdir
+  357  which rm
+  358  which man
+  359  ls /usr/bin | wc -l
+  360  ls /usr/bin/a* | wc -l
+  361  ls /usr/bin/a* 
+  362  cd /usr/bin
+  363  ls a*
+  364  ls l* | wc -l
+  365  ls l* 
+  366  lsscsi
+  367  lsblk
+  368  lscpu 
+  369  lscpu | less
+  370  cd
+  371  pwd
+  372  ls
+  373  ls /home/semus/bin/
+  374  cd /home/semus/bin/
+  375  cd
+  376  cd bin
+  377  pwd
+  378  echo -e '#! /usr/env bash \necho "Hallo Duda: $USER"\n' > hai
+  379  chmod u+x hai
+  380  hai
+  381  cat hai 
+  382  echo -e '#! /usr/bin/env bash \necho "Hallo Duda: $USER"\n' > hai
+  383  chmod u+x hai
+  384  hai
+  385  pwd
+  386  cd
+  387  hai
+  388  echo $PATH
+  389  which mkdir
+  390  whereis mkdir
+  391  which cp
+  392  whereis cp
+  393  which mv
+  394  whereis mv
+  395  which passwd
+  396  whereis passwd
+  397  cd
+  398  ip link
+  399  ip addr
+  400  ip route
+  401  nmcli
+  402  nmcli device 
+  403  nmcli connection 
+  404  nmcli connection show 
+  405  nmcli connection 
+  406  nmcli connection ens160
+  407  nmcli connection device ens160
+  408  nmcli connection show device ens160
+  409  nmcli connection show ens160.conf  
+  410  nmcli connection 
+  411  nmcli connection show ens160.conf | less
+  412  nmcli c s ens160.conf | less
+  413  nmcli | grep -A 1 servers
+  414  nmcli | grep servers
+  415  ifconfig 
+  416  ifconfig ens160
+  417  ifconfig ens160 | grep -A1
+  418  ifconfig ens160 | grep -A 1 ens160
+  419  ifconfig ens160
+  420  netstat -rn
+  421  ip route
+  422  netstat -r
+  423  netstat -tln
+  424  netstat -uln
+  425  netstat -ulnp
+  426  sudo netstat -ulnp
+  427  man avahi-daemon
+  428  cd
+  429  pwd
+  430  ls
+  431  stat Downloads
+  432  LANG=en stat Downloads
+  433  man man
+  434  LANG=en man man
+  435  LANG=jp man man
+  436  man man
+  437  echo $LANG
+  438  stat Downloads/
+  439  ls -ld -Z Downloads/
+  440  ls -ld Downloads/
+  441  ls Downloads/
+  442  stat Downloads/  | grep Zugriff
+  443  date
+  444  ls -ld Downloads/
+  445  date '+%H:%M'
+  446  date '+%H:%M:%S'
+  447  stat Downloads/ | grep 'Zugriff'
+  448  ls Downloads/
+  449  stat Downloads/ | grep 'Zugriff'
+  450  touch Downloads/alfi
+  451  stat Downloads/ | grep 'Zugriff'
+  452  ls Downloads/
+  453  stat Downloads/ | grep 'Zugriff'
+  454  touch Downloads/CurryWurstPommes
+  455  ls Downloads/
+  456  type ls
+  457  /usr/bin/ls
+  458  /usr/bin/ls --color=auto
+  459  alias ls='ls --color=auto'
+  460  alias ls='echo bald Urlaub!'
+  461  ls
+  462  alias ls='ls --color=auto'
+  463  alias
+  464  l.
+  465  type ls
+  466  type /usr/bin/ls
+  467  file /usr/bin/ls
+  468  type cd
+  469  LANG=en type cd
+  470  LANG=en
+  471  type cd
+  472  export LANG=en
+  473  type cd
+  474  LANG=de_DE.UTF-8
+  475  help
+  476  type history
+  477  LANG=en_US.UTF-8 type cd
+  478  LANG=en_US.UTF-8 type history
+  479  LANG=en_US type history
+  480  LANG=en type history
+  481  LANG=en_EN type history
+  482  LANG=us type history
+  483  LANG=en_us type history
+  484  LANG=en_US type history
+  485  type mkdir 
+  486  which mkdir 
+  487  typeset -f | wc -l
+  488  typeset -f | less
+  489  typeset -f __expand_tilde_by_ref 
+  490  hai
+  491  haihai () { echo 'Hai hai!'}
+  492  haihai () { echo 'Hai hai!';}
+  493  haihai
+  494  type hai
+  495  type hahai
+  496  type haihai
+  497  cat /home/semus/bin/hai
+  498  cd
+  499  pwd
+  500  cd linux
+  501  pwd
+  502  ls
+  503  mkdir arbeitenMitDateien
+  504  cd arbeitenMitDateien/
+  505  cp /etc/passwd ./
+  506  ls
+  507  cp /etc/services ./
+  508  ls
+  509  cp /usr/bin/find ./
+  510  ls
+  511  wc -l 
+  512  wc -l *
+  513  wc -lh *
+  514  wc -l -h *
+  515  wc -l *
+  516  history 11
+  517  wc -l *
+  518  history 33
+  519  wc *
+  520  cat passwd 
+  521  cat services 
+  522  history 33
+  523  wc *
+  524  man wc 
+  525  file *
+  526  man ascii
+  527  ls
+  528  cat find
+  529  ls
+  530  head passwd
+  531  head passwd | wc -l
+  532  head -3 passwd 
+  533  tail passwd 
+  534  tail -3 passwd 
+  535  head services 
+  536  echo $LANG
+  537  export LANG=de_DE.UTF-8
+  538  head services 
+  539  history -a
+  540  echo $0
+  541  exit
+  542  echo $0
+  543  logout
+  544  exit
+  545  echo $0
+  546  bash
+  547  echo $0
+  548  ksh
+  549  echo $0
+  550  pstree | grep 'bash---sh'
+  551  exit
+  552  echo $0
+  553  exit
+  554  pstree | grep 'bash---'
+  555  pstree | grep 'bash---b'
+  556  date
+  557  pstree | grep 'bash---b'
+  558  echo $$
+  559  pstree -p | grep 'bash---b'
+  560  pstree -p | grep 'grep'
+  561  pstree -p | grep 'bash'
+  562  pstree -p | grep 'bash' | grep $(echo $$)
+  563  echo $$
+  564  pstree -p | grep 'bash' | grep 269372
+  565  pstree -p | grep 'bash' | grep '269372'
+  566  echo $$
+  567  pstree -p | grep '269372'
+  568  exit
+  569  bash
+  570  echo $$
+  571  pstree -p | grep 269296
+  572  exit
+  573  bash
+  574  echo $0
+  575  echo $$
+  576  exit
+  577  tail -3 ~/.bashrc
+  578  tail -7 ~/.bashrc
+  579  vi ~/.bashrc
+  580  echo $0
+  581  echo $$
+  582  pstree -p | grep 284708
+  583  pstree -p | grep '284708'
+  584  cd linux
+  585  ls
+  586  mkdir entwertungszeichen
+  587  cd entwertungszeichen/
+  588  pwd
+  589  touch \ 
+  590  ls
+  591  touch \ \ \ 
+  592  ls
+  593  ls -l
+  594  pwd
+  595  rm -f *
+  596  ls
+  597  ls -a
+  598  touch    ahllo ddua ls
+  599  ls
+  600  ls -l
+  601  ls
+  602  rm *
+  603  ls
+  604  touch \
+  605  touch \ 
+  606  ls
+  607  rm *
+  608  ls
+  609  touch \ /
+  610  ls
+  611  touch \ 
+  612  ls
+  613  touch \ \ \ 
+  614  ls
+  615  touch '     '
+  616  ls
+  617  ls -l
+  618  touch '[abc]'
+  619  ls
+  620  touch '$(date +"%H%M")'
+  621  ls
+  622  ls -l
+  623  echo "Helo Duda \"
+  624  echo "Helo Duda \ "
+  625  echo "Helo Duda \\"
+  626  echo "Helo Duda \$USER"
+  627  echo "Helo Duda $USER"
+  628  echo 'Helo Duda $USER'
+  629  echo 'Helo Duda \$USER'
+  630  echo 'fred $USER'
+  631  echo "fred $USER"
+  632  whoami
+  633  echo "fred $USER $(whoami)"
+  634  echo "fred ${USER} $(whoami)"
+  635  echo "fred ${USER} $(whoami) \$$"
+  636  echo "fred ${USER} $(whoami) \$HOME"
+  637  echo 'fred ${USER} $(whoami) \$HOME'
+  638  echo $USERname
+  639  echo ${USER}name
+  640  echo $(whoami; date; echo $HOME)
+  641  whoami
+  642  date
+  643  echo $HOME
+  644  (whoami; date; echo $HOME)
+  645  (whoami; date; echo $HOME) > wde
+  646  cat wde 
+  647  ls
+  648  cp /etc/{a*,b*,z*} ./
+  649  ls
+  650  cp /etc/{a*,b*,z*} ./ 2>/dev/null
+  651  cp /etc/a* ./ 2>/dev/null
+  652  cp /etc/b* ./ 2>/dev/null
+  653  cp /etc/z* ./ 2>/dev/null
+  654  (NE1NE8=18; echo $NE1NE8)
+  655  echo $NE1NE8
+  656  { NE1NE8=18; echo $NE1NE8;}
+  657  echo $NE1NE8
+  658  pwd
+  659  mkdir /home/semus/linux/ioops
+  660  cd /home/semus/linux/ioops
+  661  pwd
+  662  ls
+  663  touch laila bella
+  664  ls
+  665  who am i 
+  666  echo $$
+  667  ls -l /proc/284708/fd/
+  668  ls
+  669  ls abcdefg
+  670  ls 
+  671  ls > lsout
+  672  cat lsout 
+  673  ls abcdefg
+  674  ls abcdefg 2> lserr
+  675  cat lserr 
+  676  ls
+  677  ls abcdefg 2> /dev/null
+  678  ls 2> /dev/null
+  679  ls 2> /dev/null > lsout2
+  680  ls > lsout2 2> /dev/null
+  681  ls >lsout2 2>/dev/null
+  682  cat lsout
+  683  sort -r lsout
+  684  sort -r < lsout
+  685  sort -r < lsout > lsout-sort
+  686  ls
+  687  rm ls*
+  688  ls
+  689  ls >lsout
+  690  ls
+  691  cat lsout 
+  692  ls >>lsout
+  693  cat lsout 
+  694  cat -n lsout 
+  695  ls abc
+  696  ls abc 2> lserr
+  697  cat lserr 
+  698  ls abc 2>> lserr
+  699  cat lserr 
+  700  ls xyz 2>>lserr
+  701  cat lserr 
+  702  ls fataneh 2>>lserr
+  703  cat lserr 
+  704  ichDuErSieEs 2>>lserr
+  705  cat lserr 
+  706  cat << ENDE
+  707  Hallo Duda!
+  708    heute ist leider keine Sonne sichtbar!
+  709  Username: $USER
+  710  Aktuelles Verzeichnis: $(pwd)
+  711  ENDE
+  712  cat << NE1NE8 > ne1ne8
+  713  Hallo Ente
+  714    User: $USER
+  715    Home: $HOME
+  716    Date: $(date +'%H:%M')
+  717  NE1NE8
+  718  ls
+  719  cat ne1ne8
+  720  cat << EOF > ne1ne8-2
+  721  ne2 ne1 nr2
+  722  EOF
+  723  cat ne1ne8-2 
+  724  ls
+  725  ls | sort
+  726  ls | sort -r
+  727  ls /
+  728  echo /
+  729  echo / | ls
+  730  echo mkdir | cat
+  731  echo mkdir | man 
+  732  echo mkdir | sort
+  733  echo mkdir | grep 'm'
+  734  echo mkdir | vim 'm'
+  735  echo mkdir | vim 
+  736  ls -l
+  737  ls -l | cut -d ':' -f2
+  738  ls -l | cut -d '1' -f1
+  739  ls -l | cut -d '1' -f2
+  740  ls -l
+  741  ls -l | tr -d ' '
+  742  ls -l | tr -s ' '
+  743  ls -l
+  744  ls -l | tr -s ' '
+  745  ls -l | tr -s ' ' | cut -d ' ' -f2,6,7,9
+  746  ls -l | tr -s ' ' | cut -d ' ' -f2,6,7,9 > ls-tr-cut-out
+  747  sleep 99
+  748  sleep 99 | sleep 111 | sleep 222 | sleep 333
+  749  sleep 999 | sleep 1111 | sleep 2222 | sleep 3333
+  750  ls
+  751  cat ne1ne8
+  752  tac ne1ne8
+  753  cat ne1ne8
+  754  cat -n ne1ne8
+  755  nl ne1ne8
+  756  vi ne1ne8
+  757  cat -n ne1ne8
+  758  nl ne1ne8
+  759  vi tabsInfo
+  760  vi manhil
+  761  rm manhil 
+  762  vi manhil
+  763  rm manhil 
+  764  ls
+  765  cat tabsInfo 
+  766  wc tabsInfo 
+  767  cat tabsInfo | expand 
+  768  cat tabsInfo | expand >tabsInfo-expand
+  769  wc tabsInfo tabsInfo-expand 
+  770  vi tabsInfo-expand
+  771  cat tabsInfo-expand | unexpand 
+  772  cat tabsInfo-expand | unexpand > tabsInfo-expand-unexpand
+  773  wc tabsInfo*
+  774  vi tabsInfo-expand-unexpand 
+  775  man unexpand 
+  776  cat tabsInfo-expand | unexpand --all > tabsInfo-expand-unexpand-all
+  777  wc tabsInfo*
+  778  man unexpand 
+  779  vi zahlen
+  780  cat zahlen
+  781  sort zahlen 
+  782  sort -r zahlen 
+  783  uniq zahlen 
+  784  cat zahlen 
+  785  uniq zahlen 
+  786  sort zahlen 
+  787  sort zahlen | uniq 
+  788  sort zahlen | uniq -d
+  789  sort zahlen | uniq -u
+  790  ls
+  791  ls l* > lsStern
+  792  cat lsStern 
+  793  ls l* >> lsStern
+  794  cat lsStern 
+  795  cat lsStern | sort | uniq
+  796  ls /
+  797  echo '/' | ls
+  798  echo '/' | xargs ls
+  799  #### echo '/ /home /boot/grub2' | xargs ls
+  800  ls
+  801  mv tabsInfo 'tabs Info'
+  802  mv tabsInfo-expand 'tabsInfo expand'
+  803  ls tab*
+  804  rm tabsInfo-expand-unexpand tabsInfo-expand-unexpand-all
+  805  ls
+  806  find . -name 'tabs*'
+  807  find . -name 'tabs*' | wc 
+  808  find . -name 'tabs*' | xargs wc 
+  809  find . -name 'tabs*' -print0 | xargs -0 wc 
+  810  find . -name 'tabs*' 
+  811  find . -name 'tabs*' -print0
+  812  ls ; pwd ; date; who am i
+  813  ls & pwd & date & who am i
+  814  sleep 5 & sleep 50 & sleep 550 &
+  815  jobs
+  816  sleep 5 | sleep 50 | sleep 550 &
+  817  jobs
+  818  #
+  819  ls
+  820  cat zahlen >/dev/null
+  821  echo $?
+  822  cat zahlen99 >/dev/null 2>/dev/null
+  823  echo $?
+  824  cat zahlen >/dev/null && echo 'Datei zahlen ist da!'
+  825  cat 99 >/dev/null 2>/dev/null || echo 'Datei 99 ist nicht da!'
+  826  cat zahlen >/dev/null && echo 'Datei zahlen ist da!' || echo 'zahlen fehlt!'
+  827  cat zahlen99 >/dev/null && echo 'Datei zahlen ist da!' || echo 'zahlen fehlt!'
+  828  cat zahlen99 >/dev/null 2>/dev/null && echo 'Datei zahlen ist da!' || echo 'zahlen fehlt!'
+  829  ls -l
+  830  ls -Z laila
+  831  ls -l /
+  832  ll
+  833  ls -l ~
+  834  ls -l /
+  835  ls -l / | head
+  836  ls -l /dev | less
+  837  ls -l /dev/input 
+  838  ls -l /dev/input/by-id/
+  839  ls -l /run
+  840  ls -l /run | less
+  841  pwd
+  842  mkdir ../permissions
+  843  cd ../permissions
+  844  pwd
+  845  mkdir /home/semus/linux/permissions
+  846  pwd
+  847  ll /dev | less
+  848  mknod --help
+  849  q
+  850  mknod mypipe p
+  851  ls -l
+  852  date > mypipe 
+  853  ls -l
+  854  echo 'Hallo Laila & Fataneh' > mypipe 
+  855  echo 'Hallo Laila & Fataneh ****' > mypipe 
+  856  echo 'Hallo Laila & Fataneh ****' | cat
+  857  ll
+  858  rm mypipe 
+  859  ll
+  860  ls -l /tmp | grep '^s'
+  861  l
+  862  touch datei
+  863  mkdir directory
+  864  ls -l
+  865  pwd
+  866  ls -ld /home/
+  867  ls -l /home/
+  868  ls -l /home/semus/ | less
+  869  ls -l / | less
+  870  ls
+  871  ln -s datei dateiSoftLink
+  872  ls -l dat*
+  873  chmod 600 dateiSoftLink 
+  874  ls -l dat*
+  875  ll
+  876  touch mittwoch
+  877  ls -l mit*
+  878  chmod 000 mittwoch 
+  879  ls -l mit*
+  880  whoami
+  881  cat mittwoch 
+  882  echo 'ich' > mittwoch 
+  883  chmod 777 mittwoch 
+  884  ls -l mit*
+  885  chmod 666 mittwoch 
+  886  ls -l mit*
+  887  chmod 444 mittwoch 
+  888  ls -l mit*
+  889  chmod 111 mittwoch 
+  890  ls -l mit*
+  891  chmod 640 mittwoch 
+  892  ls -l mit*
+  893  chmod 123 mittwoch 
+  894  ls -l mit*
+  895  chmod 531 mittwoch 
+  896  ls -l mit*
+  897  mkdir Mittwoch
+  898  ls -ld Mit*
+  899  chmod 550 Mittwoch
+  900  ls -ld Mit*
+  901  chmod 744 Mittwoch
+  902  ls -ld Mit*
+  903  ll
+  904  chmod u=r mittwoch 
+  905  ls -l mit*
+  906  chmod u+w,g=w,o= mittwoch 
+  907  ls -l mit*
+  908  chmod a=rw mittwoch 
+  909  ls -l mit*
+  910  chmod og-w mittwoch 
+  911  ls -l mit*
+  912  chmod u+x,go= mittwoch 
+  913  ls -l mit*
+  914  man chmod
+  915  ls
+  916  rm -rf *
+  917  ls
+  918  touch mittwoch
+  919  mkdir Mittwoch
+  920  ls -l 
+  921  umask
+  922  echo '777 - 022' | wc -l
+  923  echo '777 - 022' | bc -l
+  924  umask
+  925  echo '777 - 022' | bc -l
+  926  ls -l
+  927  umask
+  928  umask 000
+  929  umask
+  930  mkdir dir000
+  931  ls -ld dir000/
+  932  touch dat000
+  933  ls -l dat000 
+  934  umask 111
+  935  umask
+  936  mkdir dir111
+  937  ls -ld dir111/
+  938  touch dat111
+  939  ls dat111 
+  940  ls -l dat111 
+  941  umask
+  942  ls
+  943  rm -r *
+  944  ls
+  945  umask 022
+  946  umask
+  947  umask 022
+  948  umask
+  949  touch dat022
+  950  mkdir dir022
+  951  ls -ld *022
+  952  umask 031
+  953  umask
+  954  touch dat031
+  955  mkdir dir031
+  956  ls -ld *031
+  957  clear ; echo 'kleine umask aufgabe:';for uma in 031 035 057 077 024 046 013 026 135 357 246; do umask $uma; echo 'UMASK ist: '$(umask); touch dat$uma; mkdir dir$uma ; ls -ld *$uma; done
+  958  ls
+  959  rm -rf d*
+  960  ls
+  961  clear ; echo 'kleine umask aufgabe:';for uma in 031 035 057 077 024 046 013 026 135 357 246; do umask $uma; echo 'UMASK ist: '$(umask); touch dat$uma; mkdir dir$uma ; ls -ld *$uma; done
+  962  rm -r d*
+  963  rm -rf d*
+  964  ls
+  965  clear ; echo 'kleine umask aufgabe:';for uma in 031 035 057 077 024 046 013 026 135 357 246; do umask $uma; echo 'UMASK ist: '$(umask); touch dat$uma; mkdir dir$uma ; ls -ld *$uma; done
+  966  ll
+  967  rm -r *
+  968  rm -rf *
+  969  ls
+  970  clear ; echo 'kleine umask aufgabe:';for uma in 031 035 057 077 024 046 013 026 135 357 246; do umask $uma; echo 'UMASK ist: '$(umask); touch dat$uma; mkdir dir$uma ; ls -ld *$uma; done
+  971  umask
+  972  umask 022
+  973  ls
+  974  rm -rf *
+  975  ls
+  976  cd
+  977  which passwd
+  978  man passwd
+  979  ls -l /etc/shadow
+  980  whoami
+  981  ls -l /usr/bin/passwd
+  982  passwd
+  983  ls -ld /tmp
+  984  ls  /tmp
+  985  ls -l /tmp
+  986  ls -l /usr/bin/passwd
+  987  #
+  988  ip route
+  989  pwd
+  990  ls
+  991  ps
+  992  echo $$
+  993  echo $0
+  994  history | wc -l
+  995  history > ~/linux/histories/history-semus-$(date '+%Y%m%d%H%M')
+  996  exit
+  997  ssh semus@172.21.55.210
+  998  ls
+  999  cd
+ 1000  pwd
+ 1001  ls
+ 1002  cd linux
+ 1003  pwd
+ 1004  ls
+ 1005  mkdir regex
+ 1006  cd regex/
+ 1007  pwd
+ 1008  ls
+ 1009  ls -l ~/
+ 1010  ls -l ~/ |
+ 1011  ls -l ~/ | grep 'h$' 
+ 1012  ls -l ~/ | grep '^-' 
+ 1013  ls -l ~/ | grep 'tisch' 
+ 1014  ip route
+ 1015  ip route | grep '172'
+ 1016  ip route | grep '172.'
+ 1017  ip route | grep '74.'
+ 1018  ip route
+ 1019  ip route | grep '64.'
+ 1020  ip route | grep '64...'
+ 1021  ip route ; ip route | grep '[12345]'
+ 1022  ip route ; echo ' - - - - '; ip route | grep '[12345]'
+ 1023  ip route ; echo ' - - - - '; ip route | grep '[123][345][678]'
+ 1024  ip route ; echo ' - - - - '; ip route | grep '[123][3457][2678]'
+ 1025  ip route ; echo ' - - - - '; ip route | grep '[123][3457]'
+ 1026  ip route ; echo ' - - - - '; ip route | grep '<[123][3457]>'
+ 1027  ip route ; echo ' - - - - '; ip route | grep '\<[123][3457]\>'
+ 1028  ip route ; echo ' - - - - '; ip route | grep '\[<123][3457>]'
+ 1029  ip route ; echo ' - - - - '; ip route | grep '[<123][3457>]'
+ 1030  ip route ; echo ' - - - - '; ip route | grep '\<[123][3457]\>'
+ 1031  ip route ; echo ' - - - - '; ip route | grep '\<[.][.]\>'
+ 1032  ip route ; echo ' - - - - '; ip route | grep '\<[0123456789][0-9]\>'
+ 1033  ip route ; echo ' - - - - '; ip route | grep '\<[0123456789][0-9][0-9]\>'
+ 1034  ip route ; echo ' - - - - '; ip route | grep '\<[0-9][0-9][0-9]\>'
+ 1035  ip route ; echo ' - - - - '; ip route | grep '\<[0-9]{3}\>'
+ 1036  ip route ; echo ' - - - - '; ip route | grep '\<[0-9]\{3\}\>'
+ 1037  ip route
+ 1038  ip route | grep '\<[0-9]\{3\}\>'
+ 1039* ip route | grep '\<[0-9]\{1,3\}\<[0-9]\{1,3\}\>\<[0-9]\{1,3\}\>\<[0-9]\{1,3\}\>}\>'
+ 1040  ip route | grep '\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>'
+ 1041  ip '172.21_3_7' | grep '\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>'
+ 1042  echo '172.21_3_7' | grep '\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>'
+ 1043  echo '172.21_3_7' | grep '\<[0-9]\{1,3\}\>.\<[0-9]\{1,3\}\>.\<[0-9]\{1,3\}\>.\<[0-9]\{1,3\}\>'
+ 1044  echo ' 172.21_3_7 ' | grep '\<[0-9]\{1,3\}\>.\<[0-9]\{1,3\}\>.\<[0-9]\{1,3\}\>.\<[0-9]\{1,3\}\>'
+ 1045  ip '172.21_3_7' | grep '\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>'
+ 1046  ip route | grep '\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>'
+ 1047  ip route
+ 1048  ip route | grep '\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>'
+ 1049  ip route | grep -E '\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>\.\<[0-9]\{1,3\}\>'
+ 1050  ip route | grep -E '<[0-9]{1,3}>\.<[0-9]{1,3}>\.<[0-9]{1,3}>\.<[0-9]{1,3}>'
+ 1051  ip route | grep -E '<[0-9]{1,3}>'
+ 1052  ip route | grep -E '\<[0-9]{1,3}\>'
+ 1053  ip route | grep -E '\<[0-9]{1,3}\>\.\<[0-9]{1,3}\>\.\<[0-9]{1,3}\>\.\<[0-9]{1,3}\>'
+ 1054  echo 172.25.77.74 | grep '.'
+ 1055  echo 172.25.77.74 | grep '\<[0-9]{1,3}\>\.'
+ 1056  echo 172.25.77.74 | grep -E '\<[0-9]{1,3}\>\.'
+ 1057  echo 172.25.77.74 | grep -E '\(\<[0-9]{1,3}\>\.\){3}'
+ 1058  echo 172.25.77.74 | grep -E '(\<[0-9]{1,3}\>\.){3}'
+ 1059  echo 172.25.77.74 | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1060  ip route | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1061  echo 172.25.77.74 | grep -E '(\<[0-9]{1,3}\>\.){4}'
+ 1062  ssh semus@172.21.55.210 'ip route' | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1063  ssh semus@172.25.99.72 'ip route' | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1064  ssh semus@172.25.99.105 'ip route' | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1065  ssh cl907@172.21.1.2 'ip route' | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1066  ssh semus@172.25.77.105 'ip route' | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1067  ssh semus@172.25.77.72 'ip route' | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1068  ip link | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1069  ip addr | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1070  ssh semus@172.25.77.72 'ip addr' | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1071  ssh cl907@172.21.1.2 'ip addr' | grep -E '(\<[0-9]{1,3}\>\.){3}\<[0-9]{1,3}\>'
+ 1072  cp /etc/passwd .
+ 1073  cp /etc/services .
+ 1074  cp /etc/protocols .
+ 1075  ls
+ 1076  grep semus passwd 
+ 1077  grep semus passwd | cut -d ':' -f1
+ 1078  grep semus passwd | grep '^[a-z]'
+ 1079  grep semus passwd | grep '^[a-z][a-z]$'
+ 1080  grep semus passwd | grep '^[a-z]{5}'
+ 1081  grep semus passwd | grep '^[a-z]\{5\}'
+ 1082  grep semus passwd | grep '^[a-z]\{6\}'
+ 1083  grep semus passwd | grep '^[a-z]\{4\}'
+ 1084  grep semus passwd | grep '^[a-z]*'
+ 1085  grep semus passwd | grep -o '^[a-z]*'
+ 1086  grep semus passwd | grep '[a-z]*'
+ 1087  grep semus passwd | grep '^[a-z]*'
+ 1088  grep semus passwd | grep '<[a-z]*>'
+ 1089  grep semus passwd | grep '\<[a-z]*\>'
+ 1090  grep semus passwd | grep -o '\<[a-z]*\>'
+ 1091  grep semus passwd | grep -o '\<[a-z]*\>' | head -3
+ 1092  grep semus passwd | grep -o '\<[a-z]*\>' | head -3 | tail -1
+ 1093  grep semus passwd | grep -o '\<[a-z]*\>' | head -4 | tail -1
+ 1094  grep semus passwd | grep -o '\<[a-z]*\>' | head -4 
+ 1095  grep semus passwd | grep -o '\<[a-z]*\>' | head -3
+ 1096  grep semus passwd | grep -o '\<[a-z]*\>' 
+ 1097  grep semus passwd | grep -o '\<[a-z]*\>' | head -3
+ 1098  grep semus passwd | grep -o '\<[a-z]*\>' | head -3 | tail -1
+ 1099  grep semus passwd | grep -o '\<[a-z]*\>'
+ 1100  grep semus passwd | grep '^[a-z]*'
+ 1101  grep semus passwd | grep '/'
+ 1102  grep semus passwd | grep '/[a-z]+'
+ 1103  grep semus passwd | grep -E '/[a-z]+'
+ 1104  grep semus passwd | grep -E -o '/[a-z]+'
+ 1105  grep semus passwd | grep -E -o '/[a-z]+/[a-z]+'
+ 1106  echo /etc/var/usr/kali | grep -E -o '/[a-z]+/[a-z]+'
+ 1107  grep semus passwd | grep -E '(/[a-z]+)+'
+ 1108  grep semus passwd | grep -E -o '(/[a-z]+)+'
+ 1109  echo '/a/b/c' | grep -E -o '(/[a-z]+)+'
+ 1110  echo '/a/b/c/h/i/k/l' | grep -E -o '(/[a-z]+)+'
+ 1111  echo '/a' | grep -E -o '(/[a-z]+)+'
+ 1112  echo '/a/bggg/cggg/hgg/ggig/kgg/lgggg' | grep -E -o '(/[a-z]+)+'
+ 1113  ls ../bashprog/* | grep -E -o '(/[a-z]+)+'
+ 1114  find ../bashprog/* | grep -E -o '(/[a-z]+)+'
+ 1115  find ../bashprog/* | grep -E -o '(/[a-z.0-9]+)+'
+ 1116  ls ../bashprog/
+ 1117  find ../bashprog/* | grep -E -o '(/[a-z0-9]+)+'
+ 1118  ls
+ 1119  touch 0alpha
+ 1120  find . | grep -E -o '(/[a-z0-9]+)+'
+ 1121  touch 0alpha-beta
+ 1122  find . | grep -E -o '(/[a-z0-9]+)+'
+ 1123  find . | grep -E -o '(/[a-z0-9-]+)+'
+ 1124  find . | grep -E -o '(/[a-z0-9[:punct:]]+)+'
+ 1125  touch a_b-c
+ 1126  find . | grep -E -o '(/[a-z0-9[:punct:]]+)+'
+ 1127  history > ~/linux/histories/semus-admin-regex-$(date +'%Y%m%d%H%M')
+ 1128  grep semus passwd | grep -E '(/[a-z]+)+'
+ 1129  less passwd 
+ 1130  cat passwd | grep '\<[0-9]{3}\>'
+ 1131  cat passwd | grep -E '\<[0-9]{3}\>'
+ 1132  cat passwd | grep -E -o '\<[0-9]{3}\>'
+ 1133  cat passwd | grep -E -o '\<[0-9]{4}\>'
+ 1134  cat passwd | grep -E -o '\<[0-9]{5}\>'
+ 1135  cat passwd | grep -E -o '\<[0-9]{6}\>'
+ 1136  history > ~/linux/histories/semus-admin-regex-$(date +'%Y%m%d%H%M')

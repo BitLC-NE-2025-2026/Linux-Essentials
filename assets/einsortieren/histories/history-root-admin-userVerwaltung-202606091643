@@ -1,0 +1,75 @@
+  169  dnf remove btop
+  170  dnf install btop
+  171  dnf update
+  172  dnf clean
+  173  dnf clean metadata
+  174  dnf update
+  175  ls -l /etc/yum.repos.d/
+  176  dnf update
+  177  dnf search ncat
+  178  dnf search nmap
+  179  vi /etc/hosts
+  180  ls -l /etc/skel
+  181  ls -la /etc/skel
+  182  vi /etc/default/useradd 
+  183  vi /etc/login.defs 
+  184  vi /etc/shadow
+  185  vi /etc/login.defs 
+  186  ls /home/
+  187  useradd gemus
+  188  ls /home/
+  189  grep gemus /etc/{passwd,group,shadow}
+  190  passwd gemus
+  191  grep gemus /etc/{passwd,group,shadow}
+  192  useradd -m xemus
+  193  passwd xemus
+  194  ls /home/
+  195  grep xemus /etc/{passwd,group,shadow}
+  196  ls /home/
+  197  userdel -r gemus
+  198  ls /home/
+  199  userdel xemus
+  200  ls /home/
+  201  ls -l /home/
+  202  grep xemus /etc/{passwd,group,shadow}
+  203  alias rm
+  204  rm --force -r /home/xemus/
+  205  ls /home/
+  206  useradd -m remus
+  207  ls /home/
+  208  grep remus /etc/{passwd,group,shadow}
+  209  grep whell /etc/group
+  210  grep wheel /etc/group
+  211  usermod -aG wheel remus
+  212  grep wheel /etc/group
+  213  grep remus /etc/{passwd,group,shadow}
+  214  passwd remus
+  215  ls /home/
+  216  grep remus /etc/shadow
+  217  passwd -l remus
+  218  grep remus /etc/shadow
+  219  usermod -U remus
+  220  grep remus /etc/shadow
+  221  man chage
+  222  ls /home/
+  223  chage remus 
+  224  grep remus /etc/passwd
+  225  grep remus /etc/shadow
+  226  chage remus 
+  227  echo "$(head -1 vornamen)"
+  228  pwd
+  229  ls
+  230  mkdir userAddDel
+  231  cd userAddDel/
+  232  cp /home/semus/linux-ae/linuxSysNetAdmin/vornamen .
+  233  cp /home/semus/linux/linuxSysNetAdmin/vornamen .
+  234  cp /home/semus/linux/linuxSysNetAdmin/nachnamen .
+  235  ls
+  236  echo "$(head -1 vornamen)"
+  237  echo "$(head -1 vornamen).$(head -1 nachnamen)"
+  238  echo "$(head -3 vornamen).$(head -3 nachnamen)"
+  239  for vor in $(head -3 vornamen); do echo $vor ; done
+  240  for nach in $(head -3 nachnamen) ; do for vor in $(head -3 vornamen); do echo $vor ; done; done
+  241  for nach in $(head -3 nachnamen) ; do for vor in $(head -3 vornamen); do echo $vor.$nach ; done; done
+  242  history | less
+  243  history 75 > history-root-admin-userVerwaltung-$(date '+%Y%m%d%H%M')

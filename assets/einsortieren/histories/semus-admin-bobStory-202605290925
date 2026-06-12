@@ -1,0 +1,14 @@
+ 1214  head -3 passwd | sed 's/:/","/'
+ 1215  head -3 passwd | sed 's/:/","/g'
+ 1216  head -3 passwd | sed 's/:/","/g' | sed 's/^/"/'
+ 1217  head -3 passwd | sed 's/:/","/g' | sed 's/^/"/' | sed 's/$/"/'
+ 1218  cat passwd | sed 's/:/","/g' | sed 's/^/"/' | sed 's/$/"/' > passwd.csv
+ 1219  head -3 passwd | sed 's/:/","/g' | sed 's/^/"/' | sed 's/$/"/' > passwd-3.csv
+ 1220  vi bobStory
+ 1221  cat bobStory
+ 1222  cp bobStory bobStory-copy
+ 1223  sed 's/bob/Bob/g' bobStory
+ 1224  cat bobStory
+ 1225  sed -i 's/bob/Bob/g' bobStory
+ 1226  cat bobStory
+ 1227  history 14 > ~/linux/histories/semus-admin-bobStory-$(date +'%Y%m%d%H%M')

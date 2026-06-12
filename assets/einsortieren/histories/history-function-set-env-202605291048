@@ -1,0 +1,25 @@
+ 1007  abc () {  echo 'Name abc ist eine Funktion'; }
+ 1008  abc 
+ 1009  set | less
+ 1010  env | less
+ 1011  man builtins
+ 1012  abc
+ 1013  type abc
+ 1014  unset abc
+ 1015  abc
+ 1016  var1='myvar'
+ 1017  set | grep var1
+ 1018  env | grep var1
+ 1019  export var1
+ 1020  env | grep var1
+ 1021  bash
+ 1022  unset var1
+ 1023  set | grep var1
+ 1024  env | grep var1
+ 1025  bash
+ 1026  set | grep var1
+ 1027  export var1=abcdef
+ 1028  echo $abcdef
+ 1029  echo $var1
+ 1030  env | grep var1
+ 1031  history 25  > ~/linux/histories/history-function-set-env-$(date '+%Y%m%d%H%M')

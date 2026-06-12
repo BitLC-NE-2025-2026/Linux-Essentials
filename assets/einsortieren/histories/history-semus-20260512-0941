@@ -1,0 +1,189 @@
+    1  ls -l 
+    2  nmtui
+    3  ls /boot/vmlinu*
+    4  ls -l /boot/vmlinu*
+    5  uname -r
+    6  pwd
+    7  ls
+    8  ls -a
+    9  find . | wc -l
+   10  pwd
+   11  ls
+   12  ls -F
+   13  alias ls
+   14  /bin/ls -F
+   15  pwd
+   16  cd /var/tmp
+   17  pwd
+   18  ls
+   19  ls -l
+   20  ls dnf-semus-uphtxx4i/
+   21  pwd
+   22  cd ..
+   23  pwd
+   24  cd ..
+   25  pwd
+   26  ls
+   27  ls -l
+   28  ls
+   29  pwd
+   30  ls
+   31  cd usr
+   32  pwd
+   33  cd ..
+   34  pwd
+   35  cd opt
+   36  pwd
+   37  ls
+   38  cd /usr/games
+   39  pwd
+   40  ls
+   41  cd
+   42  pwd
+   43  ex
+   44  echo 'pwd, ls , cd , find - bewegen Sie sich frei im Filesysteme!'
+   45  cd linux
+   46  cd
+   47  ls
+   48  mkdir linux
+   49  cd 
+   50  cd linux
+   51  pwd
+   52  ls
+   53  mkdir arbeitenMitVerz
+   54  cd arbeitenMitVerz/
+   55  pwd
+   56  ls
+   57  mkdir Tick Trick Track
+   58  ls
+   59  mkdir Donald
+   60  ls
+   61  mv Tick Trick Track Donald
+   62  ls
+   63  ls Donald/
+   64  find .
+   65  mkdir Tresor Dagobert Gold vielGold
+   66  ls
+   67  mv Gold vielGold/ Tresor/
+   68  ls
+   69  ls Tresor/
+   70  mkdir Entenhausen
+   71  ls
+   72  mv Dagobert/ Donald/ Tresor/ Entenhausen/
+   73  ls
+   74  ls Entenhausen/
+   75  find Entenhausen/
+   76  cp Entenhausen/ Entenhausen2
+   77  cp -r Entenhausen/ Entenhausen2
+   78  ls
+   79  find Entenhausen2
+   80  rm Entenhausen
+   81  rmdir Entenhausen
+   82  rmdir Entenhausen/Dagobert
+   83  rm -r Entenhausen
+   84  ls
+   85  mv Entenhausen2 Entenhausen
+   86  ls
+   87  cp -r Entenhausen/ Entenhausen77
+   88  ls
+   89  mkdir Entenhausen77/77
+   90  ls Entenhausen77/
+   91  ls Entenhausen
+   92  mv Entenhausen77 Entenhausen
+   93  ls
+   94  ls Entenhausen/
+   95  ls
+   96  ls Entenhausen/
+   97  mkdir VillaDagobert
+   98  ls
+   99  mv Entenhausen/Dagobert/ Entenhausen/Tresor/  VillaDagobert/
+  100  ls Entenhausen/
+  101  ls VillaDagobert/
+  102  find .
+  103  ll
+  104  alias ll
+  105  ls -l
+  106  ll
+  107  mkdir meineFilmBibliothek
+  108  cd meineFilmBibliothek/
+  109  mkdir 12 Uhr Mittag
+  110  ls
+  111  ls -l
+  112  mkdir 12UhrMittag 12_Uhr_Mittag
+  113  mkdir 12.Uhr.Mittag 12-Uhr-Mittag
+  114  ll
+  115  pwd
+  116  cd ..
+  117  ll
+  118  find Entenhausen/
+  119  pwd
+  120  ls
+  121  mkdir a/bb/ccc/dddd/1/2/3 
+  122  mkdir -p a/bb/ccc/dddd/1/2/3 
+  123  find a
+  124  rm a
+  125  ls
+  126  rm -r a
+  127  ls
+  128  mkdir -p a/bb/ccc/dddd/1/2/3 
+  129  ls
+  130  rm -r -i a
+  131  ls
+  132  find a
+  133  rm -r -i a
+  134  find a
+  135  rm -r -i a
+  136  rm -r -i -f a
+  137  ls
+  138  mkdir -p a/bb/ccc/dddd/1/2/3 
+  139  rm -r a
+  140  ls
+  141  mkdir -p a/bb/ccc/dddd/1/2/3 
+  142  ls
+  143  rm -r -i -f -i a
+  144  rm -rifi a
+  145  mkdir alf
+  146  ls
+  147  cp -r alf alfi
+  148  ls
+  149  mkdir alfHome
+  150  ls
+  151  cp -r alfi alfHome/
+  152  find alfHome/
+  153  cp -r alf alfHome/alfifi
+  154  find alfHome/
+  155  ls
+  156  mkdir catzi catzi2
+  157  ls
+  158  mkdir alfiCatziHome
+  159  cp -r alf alfi catzi catzi2 alfiCatzi
+  160  cp -r alf alfi catzi catzi2 alfiCatziHome/
+  161  find alfiCatziHome/
+  162  ls
+  163  mv catzi catzi1
+  164  ls
+  165  mv catzi2 catzi1
+  166  l
+  167  sls
+  168  ls
+  169  find catzi1/
+  170  mv alf catzi1/alfFrisstCatzi
+  171  find catzi1/
+  172  ls
+  173  mv catzi1/ hundi1
+  174  ls
+  175  mkdir alfMelmac
+  176  ls
+  177  mv alfi alfHome/ alfiCatziHome/ alfMelmac/
+  178  find alfMelmac/
+  179  ls alfMelmac/
+  180  history ../histories/history-semus-$(date "+%Y%m%d-%H%M")
+  181* 
+  182  history ../histories/history-semus-$(date "+%Y%m%d-%H%M")
+  183  history ../histories/history-semus-$(date '+%Y%m%d-%H%M')
+  184  ls ../histories/
+  185  history > ../histories/history-semus-$(date '+%Y%m%d-%H%M')
+  186  ls ..
+  187  pwd
+  188  ls ..
+  189  history > ../histories/history-semus-$(date '+%Y%m%d-%H%M')
