@@ -121,9 +121,91 @@ Damit Protokolldateien über die Zeit nicht die Festplatte füllen, werden sie m
 
 ## 🎓 4. LPI-Zertifizierung & Pearson VUE
 
-Für eine erfolgreiche Zertifizierung zum **LPIC-1** (Exams 101 & 102) müssen Prüfungen über den offiziellen LPI-Partner **Pearson VUE** gebucht werden.
+Das **Linux Professional Institute (LPI)** bietet eine weltweit anerkannte, herstellerunabhängige Zertifizierungs-Roadmap für Open-Source-Profis. Die Prüfungen werden in Zusammenarbeit mit **Pearson VUE** durchgeführt (entweder in einem Testzentrum vor Ort oder online per OnVUE).
 
-> [!NOTE]  
+### 🗺️ Der LPI-Zertifizierungspfad im Überblick
+
+```mermaid
+graph TD
+    LE[Linux Essentials<br><i>Einsteigerstufe</i>] --> LPIC1[LPIC-1: System Administrator<br><i>Exams 101 & 102</i>]
+    LPIC1 --> LPIC2[LPIC-2: Linux Engineer<br><i>Exams 201 & 202</i>]
+    
+    LPIC2 --> LPIC3_300[LPIC-3: Mixed Environments<br><i>Exam 300</i>]
+    LPIC2 --> LPIC3_303[LPIC-3: Security<br><i>Exam 303</i>]
+    LPIC2 --> LPIC3_304[LPIC-3: Virtualization & HA<br><i>Exam 305/306</i>]
+    
+    subgraph "Spezialisten & Essentials-Erweiterungen"
+        DEVOPS[DevOps Tools Engineer<br><i>Exam 701</i>]
+        BSD[BSD Specialist<br><i>Exam 201-500</i>]
+        WE[Web Development Essentials<br><i>Exam 030</i>]
+    end
+    
+    classDef essentials fill:#d4edda,stroke:#28a745,stroke-width:2px,color:#155724;
+    classDef lpic fill:#cce5ff,stroke:#004085,stroke-width:2px,color:#004085;
+    classDef specialty fill:#fff3cd,stroke:#856404,stroke-width:2px,color:#856404;
+    
+    class LE,WE essentials;
+    class LPIC1,LPIC2,LPIC3_300,LPIC3_303,LPIC3_304 lpic;
+    class DEVOPS,BSD specialty;
+```
+
+---
+
+### 🔍 Detaillierte Betrachtung der LPI-Zertifizierungen
+
+#### 🟢 1. Essentials-Level (Einstieg & Grundlagen)
+Die Essentials-Zertifizierungen richten sich an Einsteiger, Schüler, Studierende oder Quereinsteiger und dienen als Nachweis über grundlegendes IT-Verständnis.
+*   **LPI Linux Essentials (Exam 010):**
+    *   **Zielgruppe:** IT-Einsteiger und Systemnutzer.
+    *   **Inhalt:** Grundlagen von Open-Source, Linux-Distributionen, Navigation im Dateisystem, grundlegende Befehlszeilenwerkzeuge, Shell-Skript-Ansätze, Sicherheit und Benutzerrechte.
+    *   **Voraussetzungen:** Keine. Die Zertifizierung ist lebenslang gültig.
+*   **Web Development Essentials (Exam 030):**
+    *   **Zielgruppe:** Software-Entwicklungseinsteiger.
+    *   **Inhalt:** Grundlagen der Webentwicklung, darunter HTML5, CSS3, JavaScript (clientseitig), Node.js (serverseitig) und SQL-Datenbankgrundlagen.
+
+#### 🔵 2. Professional-Level (LPIC-Serie)
+Die LPIC-Zertifizierungen bauen aufeinander auf und verlangen jeweils das Bestehen der vorherigen Stufe zur Aktivierung des Zertifikats. Sie sind jeweils **5 Jahre** lang gültig.
+
+*   **LPIC-1: System Administrator (Exams 101-500 & 102-500):**
+    *   **Zielgruppe:** Junior-Systemadministratoren.
+    *   **Inhalt:**
+        *   **Exam 101:** Systemarchitektur, Linux-Installation und Paketverwaltung (Debian/RPM), GNU- und Unix-Befehle, Dateisysteme und FHS.
+        *   **Exam 102:** Shells und Shell-Skripte, Benutzeroberflächen & Desktops, administrative Aufgaben (Benutzer, Cronjobs), grundlegende Systemdienste (Zeit, Logging, Mail) und Netzwerkgrundlagen inklusive Absicherung.
+    *   **Voraussetzungen:** Beide Prüfungen müssen innerhalb von 18 Monaten bestanden werden.
+*   **LPIC-2: Linux Engineer (Exams 201-500 & 202-500):**
+    *   **Zielgruppe:** Administratoren mittlerer bis fortgeschrittener Stufe.
+    *   **Inhalt:**
+        *   **Exam 201:** Kapazitätsplanung, Linux-Kernel-Anpassungen, Systemstart-Konfiguration (SysV, systemd), Storage-Verwaltung (LVM, RAID) und erweiterte Netzwerk-Konfiguration.
+        *   **Exam 202:** Konfiguration von Netzwerkdiensten (DNS/Bind, Apache/Nginx, Samba, NFS, DHCP, OpenVPN, Mailserver).
+    *   **Voraussetzungen:** Aktiver LPIC-1-Status.
+*   **LPIC-3: Enterprise Professional (Spezialisierungsstufe):**
+    *   Die höchste Stufe der LPI-Zertifizierung. Hier wählt man eine Spezialisierung. Es wird jeweils nur ein Exam benötigt.
+    *   **Voraussetzungen:** Aktiver LPIC-2-Status.
+    *   **Verfügbare Pfade:**
+        *   **Exam 300: Mixed Environments:** Samba-Integration, Active Directory Domaincontroller-Rollen, Benutzerauthentifizierung über LDAP und Windows-Interoperabilität.
+        *   **Exam 303: Security:** Härtung von Linux-Systemen, Verschlüsselung, Zugriffskontrollen (SELinux/AppArmor), Intrusion Detection und Netzwerksicherheit.
+        *   **Exam 305: Virtualization and Containerization** oder **Exam 306: High Availability and Storage Clusters** (vormals Exam 304). Deckt Virtualisierung (KVM, Xen), Container (Docker, LXC) sowie Hochverfügbarkeits-Cluster (Pacemaker, Corosync, DRBD) ab.
+
+#### 🟡 3. Open Technology-Level (Spezialthemen)
+Eigenständige Zertifizierungen für angrenzende Open-Source-Technologien, die keine LPIC-Voraussetzungen haben.
+*   **LPI DevOps Tools Engineer (Exam 701):**
+    *   **Zielgruppe:** Softwareentwickler und Systemadministratoren im DevOps-Umfeld.
+    *   **Inhalt:** Versionsverwaltung (Git), Continuous Integration & Delivery (CI/CD), Konfigurationsmanagement (Ansible, Puppet), Container-Orchestrierung (Docker, Kubernetes) und Cloud-Infrastruktur-Konzepte.
+*   **BSD Specialist (Exam 201-500):**
+    *   **Zielgruppe:** BSD-Administratoren.
+    *   **Inhalt:** Administration von FreeBSD, NetBSD und OpenBSD. Installation, Paketverwaltung, Systemkonfiguration, Dateisysteme (ZFS) und Systemsicherheit in der BSD-Welt.
+
+---
+
+### 📝 Ablauf & Buchung über Pearson VUE
+
+1.  **LPI ID erstellen:** Registriere dich zuerst unter [lpi.org](https://www.lpi.org) um eine eindeutige LPI-Identifikationsnummer (LPI ID) zu erhalten.
+2.  **Prüfung buchen:** Über [pearsonvue.com/lpi](https://www.pearsonvue.com/lpi) die gewünschte Prüfung mit der LPI ID auswählen.
+3.  **Zwei Optionen zur Durchführung:**
+    *   **Testzentrum:** Physische Prüfung an einem zertifizierten Testcenter an dedizierten PCs.
+    *   **OnVUE Online Proctored:** Durchführung von zu Hause oder aus dem Büro mit Webcam, Mikrofon und einem gesperrten Browser. Erfordert einen sauberen Arbeitsplatz und strikte Einhaltung der Prüfungsregeln.
+
+> [!IMPORTANT]  
 > Detaillierte administrative Leitfäden zu Prüfungszentren, On-Screen-Prüfungen (OnVUE), ID-Anforderungen und dem Ablauf am Prüfungstag findest du in der beigefügten PDF-Dokumentation:  
 > [📖 Pearson VUE LPI Zertifizierung (PDF)](./assets/Linux_lpi_Zert_PearsV.pdf)
 
