@@ -361,8 +361,6 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
----
-
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 <details>
@@ -384,9 +382,12 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
    <details><summary>Antwort</summary>In `/proc/cpuinfo`.</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 02 (Die Linux-Philosophie & FHS):** [➡️ Tag 02](../Day_02/README.md)
+* **Tag 02 (Die Linux-Philosophie & FHS):** [➡️ Tag 02](../Day_02/readme.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
