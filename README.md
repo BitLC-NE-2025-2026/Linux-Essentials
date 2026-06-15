@@ -39,7 +39,7 @@ In dieser ersten Woche wurden die essenziellen Grundlagen der Unix-Philosophie v
 
 | Modul | Status | Fokus-Themen | Ausführliche Details | Link |
 | :--- | :---: | :--- | :--- | :--- |
-| **Tag 01** | ✅ | Shell-Einführung, FHS, Historie | Geschichte von UNIX/Linux, interaktive Shells (Bash, ZSH), virtueller Aufbau von Linux, Dateitypen (Standard, Directory, Block, Character, Socket, Link) und Navigation. | [📖 README](./Day_01/readme.md) |
+| **Tag 01** | ✅ | Shell-Einführung, FHS, Historie | Geschichte von UNIX/Linux, interaktive Shells (Bash, ZSH), virtueller Aufbau von Linux, Dateitypen (Standard, Directory, Block, Character, Socket, Link) und Navigation. | [📖 README](./Day_01/README.md) |
 | **Tag 02** | ✅ | Hilfe-Systeme, Hardware, Fortg. Datei-OPs | Nutzung von `man` (Sections 1-8), `info`, `--help`, System-Hardware auslesen (`lspci`, `lsusb`, `lsmod`), Dateisuche (`find`, `locate`) und fortgeschrittene Kopieroperationen. | [📖 README](./Day_02/README.md) |
 | **Tag 03** | ✅ | CUPS, Shell-Konfig, Aliases, Redirects | Drucker-System (CUPS, `lpr`, `lpq`), Konfigurationsdateien (`.bashrc`, `.bash_profile`), Erstellung von persistenten Aliases, Standardströme (stdin, stdout, stderr) und deren Umlenkungen. | [📖 README](./Day_03/README.md) |
 | **Tag 04** | ✅ | Wildcards, Text-Tools (tr, cut), Logik | Shell-Erweiterungen (Globbing, Wildcards `*`, `?`, `[]`), Strom-Editierung mit `tr` (Translate/Delete) und Ausschneiden strukturierter Spalten mittels `cut`. | [📖 README](./Day_04/README.md) |

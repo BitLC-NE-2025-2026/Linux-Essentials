@@ -382,6 +382,9 @@ Hier sind typische Fragen rund um zeitgesteuerte Jobs unter Linux:
    <details><summary>Antwort</summary>Unter Debian-basierten Systemen (z. B. Ubuntu) heißt der Dienst **`cron`**. Unter Red-Hat-basierten Systemen (z. B. Rocky Linux, RHEL) heißt der Dienst **`crond`**.</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 11 (Der Texteditor vi/vim):** [⬅️ Tag 11](../Day_11/README.md)

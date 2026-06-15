@@ -256,6 +256,7 @@ Hier sind Prüfungsfragen zur Vorbereitung auf LPIC-1 und zur Festigung des Wiss
 </details>
 
 ---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 15 (VLAN-Konfiguration & Automatisierung):** [⬅️ Tag 15](../Day_15/README.md)

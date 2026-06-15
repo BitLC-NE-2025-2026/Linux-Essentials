@@ -147,6 +147,7 @@ Die komplette Shell-Historie dieses Kurstags inklusive Kommentaren und Befehlsab
 </details>
 
 ---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 24 (System-Logging & Audit):** [⬅️ Tag 24](../Day_24/README.md)

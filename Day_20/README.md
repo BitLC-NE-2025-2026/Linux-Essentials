@@ -212,6 +212,7 @@ sudo pvremove /dev/sdc
 </details>
 
 ---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 19 (Partitionierung, Dateisysteme & Mounten):** [⬅️ Tag 19](../Day_19/README.md)

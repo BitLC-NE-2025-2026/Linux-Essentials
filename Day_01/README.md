@@ -387,7 +387,7 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 02 (Die Linux-Philosophie & FHS):** [➡️ Tag 02](../Day_02/readme.md)
+* **Tag 02 (Die Linux-Philosophie & FHS):** [➡️ Tag 02](../Day_02/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---

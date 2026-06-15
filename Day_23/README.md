@@ -163,6 +163,7 @@ Ein Linux-System kann feststellen, ob es auf physischer Hardware (Bare-Metal) od
 </details>
 
 ---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 22 (SSH-Agent, ProxyJump & Rsync):** [⬅️ Tag 22](../Day_22/README.md)

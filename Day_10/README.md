@@ -170,6 +170,9 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
    <details><summary>Antwort</summary>Zur mustergesteuerten, spaltenorientierten Text- und Datenverarbeitung.</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 09 (Reguläre Ausdrücke (Regex)):** [⬅️ Tag 09](../Day_09/README.md)

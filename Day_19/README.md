@@ -211,6 +211,7 @@ sudo swapoff /dev/sda2
 </details>
 
 ---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 18 (System-Hardware & Kernel-Module):** [⬅️ Tag 18](../Day_18/README.md)

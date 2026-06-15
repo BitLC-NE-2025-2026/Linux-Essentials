@@ -303,6 +303,9 @@ Somit ergibt sich 640.
    <details><summary>Antwort</summary>Mit dem Befehl `lspci`.</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 13 (Benutzerverwaltung & TUI-Erstellung):** [⬅️ Tag 13](../Day_13/README.md)

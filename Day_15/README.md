@@ -189,6 +189,7 @@ Prüfen Sie Ihr Wissen mit diesen typischen LPIC-1 Prüfungsfragen:
 </details>
 
 ---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 14 (Netzwerk-Grundlagen & Schnittstellen):** [⬅️ Tag 14](../Day_14/README.md)

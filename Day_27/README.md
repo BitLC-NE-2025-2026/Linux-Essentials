@@ -56,6 +56,9 @@ Ressourcenlimits verhindern DoS-Angriffe durch übermäßige Speicher- oder Proz
    <details><summary>Antwort</summary>Über die Konfigurationsdateien `/etc/hosts.allow` (Erlaubte Hosts) und `/etc/hosts.deny` (Gesperrte Hosts).</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 26 (Docker, Kubernetes & Containerd):** [⬅️ Tag 26](../Day_26/README.md)

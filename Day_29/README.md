@@ -51,6 +51,9 @@ Die LPIC-1 Prüfung 101-500 deckt die Systemarchitektur, die Linux-Installation,
    <details><summary>Antwort</summary>**Access Time** (atime - letzter Lesezugriff), **Modification Time** (mtime - letzte Inhaltsänderung) und **Change Time** (ctime - letzte Metadatenänderung wie Rechte/Besitzer).</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 28 (Kryptographie & MTAs):** [⬅️ Tag 28](../Day_28/README.md)

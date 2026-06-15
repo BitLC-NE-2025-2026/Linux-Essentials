@@ -49,6 +49,9 @@ Die LPIC-1 Prüfung 102-500 deckt Shell-Scripting, Benutzeroberflächen, adminis
    <details><summary>Antwort</summary>Entweder durch das Sperren des Accounts mit `usermod -L [user]` oder durch das Setzen der Shell auf `/sbin/nologin` in der `/etc/passwd`.</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 29 (LPIC-1 Simulation 101):** [⬅️ Tag 29](../Day_29/README.md)

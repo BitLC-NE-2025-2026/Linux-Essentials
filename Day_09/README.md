@@ -259,6 +259,9 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
    <details><summary>Antwort</summary>Mit der Option `-v` (Invert Match).</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 08 (Shell Scripting & Automatisierung):** [⬅️ Tag 08](../Day_08/README.md)

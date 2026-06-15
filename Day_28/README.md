@@ -57,6 +57,9 @@ Linux nutzt Mail Transfer Agents (MTA) zur E-Mail-Übertragung.
    <details><summary>Antwort</summary>Mit der Option `-L`: `ssh -L [lokaler_port]:[ziel_host]:[ziel_port] [user]@[ssh_server]`.</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 27 (SSH Härtung & Limits):** [⬅️ Tag 27](../Day_27/README.md)

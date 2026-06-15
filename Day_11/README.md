@@ -215,6 +215,9 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
    <details><summary>Antwort</summary>Durch Drücken der Taste `u` (undo) im Befehlsmodus.</details>
 
 </details>
+
+---
+
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 10 (System-Monitoring & Logs):** [⬅️ Tag 10](../Day_10/README.md)
