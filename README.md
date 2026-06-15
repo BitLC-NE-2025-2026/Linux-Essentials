@@ -34,52 +34,93 @@ graph TD
 
 Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 
-### 📅 Woche 1: Grundlagen
+### 📅 Woche 1: Linux-Fundament & CLI-Werkzeuge
+In dieser ersten Woche wurden die essenziellen Grundlagen der Unix-Philosophie vermittelt. Der Fokus lag auf der Beherrschung der Kommandozeile, dem Verständnis der Dateisystem-Hierarchie (FHS) und den ersten Filtermechanismen für Textströme.
 
-| Modul | Status | Fokus-Themen | Link |
-| :--- | :---: | :--- | :--- |
-| **Tag 01** | ✅ | Shell-Einführung, FHS, Historie | [📖 README](./Day_01/readme.md) |
-| **Tag 02** | ✅ | Hilfe-Systeme, Hardware, Fortg. Datei-OPs | [📖 README](./Day_02/README.md) |
-| **Tag 03** | ✅ | CUPS, Shell-Konfig, Aliases, Redirects | [📖 README](./Day_03/README.md) |
-| **Tag 04** | ✅ | Wildcards, Text-Tools (tr, cut), Logik | [📖 README](./Day_04/README.md) |
-| **Tag 05** | ✅ | Rechte (chmod), Links, umask, Shell-History | [📖 README](./Day_05/README.md) |
+| Modul | Status | Fokus-Themen | Ausführliche Details | Link |
+| :--- | :---: | :--- | :--- | :--- |
+| **Tag 01** | ✅ | Shell-Einführung, FHS, Historie | Geschichte von UNIX/Linux, interaktive Shells (Bash, ZSH), virtueller Aufbau von Linux, Dateitypen (Standard, Directory, Block, Character, Socket, Link) und Navigation. | [📖 README](./Day_01/readme.md) |
+| **Tag 02** | ✅ | Hilfe-Systeme, Hardware, Fortg. Datei-OPs | Nutzung von `man` (Sections 1-8), `info`, `--help`, System-Hardware auslesen (`lspci`, `lsusb`, `lsmod`), Dateisuche (`find`, `locate`) und fortgeschrittene Kopieroperationen. | [📖 README](./Day_02/README.md) |
+| **Tag 03** | ✅ | CUPS, Shell-Konfig, Aliases, Redirects | Drucker-System (CUPS, `lpr`, `lpq`), Konfigurationsdateien (`.bashrc`, `.bash_profile`), Erstellung von persistenten Aliases, Standardströme (stdin, stdout, stderr) und deren Umlenkungen. | [📖 README](./Day_03/README.md) |
+| **Tag 04** | ✅ | Wildcards, Text-Tools (tr, cut), Logik | Shell-Erweiterungen (Globbing, Wildcards `*`, `?`, `[]`), Strom-Editierung mit `tr` (Translate/Delete) und Ausschneiden strukturierter Spalten mittels `cut`. | [📖 README](./Day_04/README.md) |
+| **Tag 05** | ✅ | Rechte (chmod), Links, umask, Shell-History | UGO-Berechtigungsstruktur (symbolisch/oktal), harte und symbolische Links (`ln`), Maskierung neuer Dateien (`umask`), Manipulation und Durchsuchen der Shell-Historie. | [📖 README](./Day_05/README.md) |
 
-### 📅 Woche 2: Administration
+> [!NOTE]  
+> Die Grundlagen aus Woche 1 bilden das absolute Fundament für sämtliche LPI-Prüfungen. Insbesondere das Verständnis der Datenumlenkungen (Pipes und Redirects) wird in fast jeder Fragestellung vorausgesetzt.
 
-| Modul | Status | Fokus-Themen | Link |
-| :--- | :---: | :--- | :--- |
-| **Tag 06** | ✅ | Administration, Prozesse, Spezialrechte | [📖 README](./Day_06/README.md) |
-| **Tag 07** | ✅ | Archive (tar), Kompression, Meson Compile | [📖 README](./Day_07/README.md) |
-| **Tag 08** | ✅ | Shell Scripting & Automatisierung | [📖 README](./Day_08/README.md) |
-| **Tag 09** | ✅ | Reguläre Ausdrücke (Regex) I - BRE vs. ERE, IPv4/IPv6, TUI-Automatisierung | [📖 README](./Day_09/README.md) |
-| **Tag 10** | ✅ | Reguläre Ausdrücke (Regex) II - Dienste-Auswertung & Bash-Loops | [📖 README](./Day_10/README.md) |
+---
 
-### 📅 Woche 3: Speicher & Dateisysteme
+### 📅 Woche 2: Administration, Scripting & Regex
+Die zweite Woche führte in das Prozess- und Taskmanagement ein und legte den Grundstein für die Systemautomatisierung. Zudem wurde die Macht regulärer Ausdrücke zur Analyse komplexer Datenstrukturen erschlossen.
 
-| Modul | Status | Fokus-Themen | Link |
-| :--- | :---: | :--- | :--- |
-| **Tag 11** | ✅ | Text-Editoren (vi / vim) - Modi, Navigation & Last-Line-Befehle | [📖 README](./Day_11/README.md) |
-| **Tag 12** | ✅ | Zeitgesteuerte Ausführung (cron, crontab, wall, at) | [📖 README](./Day_12/README.md) |
-| **Tag 13** | ✅ | Fortg. Shell Scripting (Massen-User, Whiptail TUI) | [📖 README](./Day_13/README.md) |
-| **Tag 14** | ✅ | LPIC-1 Leistungsabfrage & Multi-OS VM Setups | [📖 README](./Day_14/README.md) |
-| **Tag 15** | ✅ | Netzwerk-Grundlagen (IP-Adressierung, Subnetze & VLANs) | [📖 README](./Day_15/README.md) |
+| Modul | Status | Fokus-Themen | Ausführliche Details | Link |
+| :--- | :---: | :--- | :--- | :--- |
+| **Tag 06** | ✅ | Administration, Prozesse, Spezialrechte | Prozesszustände, Signale (`kill`), Job Control (`bg`, `fg`, `jobs`), Spezialrechte (SUID, SGID, Sticky Bit) und deren tiefgreifende Auswirkung auf Systemprozesse. | [📖 README](./Day_06/README.md) |
+| **Tag 07** | ✅ | Archive (tar), Kompression, Meson Compile | Archivierung mit `tar`, Kompressionsverfahren (gzip, bzip2, xz) im Performance-Vergleich, Kompilieren von Quellcode aus Source-Tarballs (`make`, `meson`). | [📖 README](./Day_07/README.md) |
+| **Tag 08** | ✅ | Shell Scripting & Automatisierung | Schreiben erster Bash-Skripte, Variablen-Deklaration, Kontrollstrukturen (`if`, `case`), Schleifen (`for`, `while`) und sauberes Error-Handling. | [📖 README](./Day_08/README.md) |
+| **Tag 09** | ✅ | Reguläre Ausdrücke (Regex) I | Grundlagen von Basic (BRE) und Extended (ERE) Regular Expressions, IPv4/IPv6 Adressvalidierung mit Regex und TUI-Prototyping. | [📖 README](./Day_09/README.md) |
+| **Tag 10** | ✅ | Reguläre Ausdrücke (Regex) II | Praktische Anwendung zur Log-Analyse, String-Slicing, fortgeschrittenes Pattern-Matching und Log-Parsing über Bash-Schleifen. | [📖 README](./Day_10/README.md) |
 
-### 📅 Woche 4-6: Fortgeschrittene Themen (WIP)
+> [!IMPORTANT]  
+> Spezialrechte (SUID/SGID) stellen ein hohes Sicherheitsrisiko dar, wenn sie auf schreibbare Binärdateien angewendet werden. Die regelmäßige Überprüfung des Systems mittels `find / -perm /6000 -type f` gehört zu den wichtigsten Härtungsmaßnahmen.
 
-| Modul | Status | Fokus-Themen | Link |
-| :--- | :---: | :--- | :--- |
-| **Tag 16** | ✅ | Netzwerk-Routing & Forwarding (VMware, nftables, NAT) | [📖 README](./Day_16/README.md) |
-| **Tag 17** | ✅ | Netzwerk-Routing & NTP-Zeitsynchronisation (chrony, timedatectl) | [📖 README](./Day_17/README.md) |
-| **Tag 18** | ✅ | System-Hardware & Kernel-Module (lspci, lsblk, modprobe, lsof) | [📖 README](./Day_18/README.md) |
-| **Tag 19** | ✅ | Partitionierung (MBR/GPT), Dateisysteme (mkfs) & Mounten | [📖 README](./Day_19/README.md) |
-| **Tag 20** | ✅ | LVM (Logical Volume Manager) - PV, VG, LV & Resizing | [📖 README](./Day_20/README.md) |
-| **Tag 21** | ✅ | Kryptographie, SSH (Keys/Agent) & Rsync über SSH | [📖 README](./Day_21/README.md) |
-| **Tag 22** | ✅ | SSH-Agent, ProxyJump & Rsync-Synchronisation (lsyncd/inotify) | [📖 README](./Day_22/README.md) |
-| **Tag 23** | ✅ | Paketverwaltung (dpkg, apt, rpm, dnf) & VM-Gast-Erkennung | [📖 README](./Day_23/README.md) |
-| **Tag 24** | ✅ | System-Logging (Rsyslog, Journald), Logrotate & LPI/Pearson VUE | [📖 README](./Day_24/README.md) |
-| **Tag 25** | ✅ | Boot-Prozess (BIOS/UEFI, GRUB2) & Docker-Container-Virtualisierung | [📖 README](./Day_25/README.md) |
-| **Tag 26** | ✅ | Container-Grundlagen (Docker, Containerd & Kubernetes) | [📖 README](./Day_26/README.md) |
-| **Tag 27 - 30** | ⏳ | In Planung | [📖 README](./Day_27/README.md) |
+---
+
+### 📅 Woche 3: Editoren, Zeitsteuerung & Netzwerke
+In dieser Woche wurde die Administration durch den Standard-Editor `vi` ergänzt und die periodische Automatisierung etabliert. Zudem startete der Einstieg in die Netzwerkarchitektur.
+
+| Modul | Status | Fokus-Themen | Ausführliche Details | Link |
+| :--- | :---: | :--- | :--- | :--- |
+| **Tag 11** | ✅ | Text-Editoren (vi / vim) | Effiziente Nutzung des Standard-Linux-Editors. Navigation, Editiermodi (Command, Insert, Visual, Last-Line), Suchen und Ersetzen im gesamten Dokument. | [📖 README](./Day_11/README.md) |
+| **Tag 12** | ✅ | Zeitgesteuerte Ausführung | Konfiguration periodischer Cronjobs (`crontab`, `/etc/cron.*`), einmalige zeitversetzte Aufgaben mit `at` und Systemnachrichten an alle Nutzer (`wall`). | [📖 README](./Day_12/README.md) |
+| **Tag 13** | ✅ | Fortg. Shell Scripting & TUIs | Massenhafte automatisierte Anlage von Systembenutzern aus CSV-Dateien, interaktive Menüführung in Terminals mit `whiptail` Dialog-TUIS. | [📖 README](./Day_13/README.md) |
+| **Tag 14** | ✅ | LPIC-1 Leistungsabfrage & Multi-OS | Umfangreiche Zwischenprüfung auf LPIC-1 Niveau und Aufbau heterogener Labor-Setups mit mehreren vernetzten virtuellen Maschinen. | [📖 README](./Day_14/README.md) |
+| **Tag 15** | ✅ | Netzwerk-Grundlagen | IP-Adressierung, Netzklassen, CIDR-Notation, Subnetzberechnungen (Subnetmask, Network ID, Broadcast ID) und VLAN Tagging (802.1Q). | [📖 README](./Day_15/README.md) |
+
+> [!WARNING]  
+> Beachte bei der Einrichtung von `cron`-Jobs, dass diese in einer minimalistischen Umgebung ohne geladene Profil-Variablen laufen. Nutze in Crontabs stets **absolute Pfade** für Befehle und Skripte (z. B. `/usr/bin/tar` statt `tar`).
+
+---
+
+### 📅 Woche 4: Netzwerke, Routing & Kernel-Tuning
+Der Fokus dieser Woche lag auf der Implementierung fortgeschrittener Netzwerkfunktionen und der Schnittstelle zwischen Hardware und Kernel.
+
+| Modul | Status | Fokus-Themen | Ausführliche Details | Link |
+| :--- | :---: | :--- | :--- | :--- |
+| **Tag 16** | ✅ | Netzwerk-Routing & Forwarding | Implementierung von Linux als IPv4-Router, Aktivierung von IP Forwarding im Kernel, NAT/Masquerading mittels moderner `nftables`-Regelwerke. | [📖 README](./Day_16/README.md) |
+| **Tag 17** | ✅ | NTP-Zeitsynchronisation & Härtung | Zeitsynchronisation mit `chrony`, Zeitzonen-Management (`timedatectl`), System-Härtung über temporäre und dauerhafte Kernel-Parameter (`sysctl.conf`). | [📖 README](./Day_17/README.md) |
+| **Tag 18** | ✅ | System-Hardware & Kernel-Module | Verwaltung von Kernel-Modulen (`lsmod`, `modprobe`, `modinfo`, `depmod`), Überprüfung geöffneter Dateien (`lsof`) und Hardware-Interrupts. | [📖 README](./Day_18/README.md) |
+
+> [!TIP]
+> Die Kernel-Laufzeitparameter unter `/proc/sys/` können direkt zur Fehleranalyse manipuliert werden. Um Änderungen jedoch neustartsicher zu machen, müssen sie zwingend in `/etc/sysctl.conf` eingepflegt werden.
+
+---
+
+### 📅 Woche 5: Storage-Virtualisierung, SSH & Synchronisation
+Im Mittelpunkt standen die Speicherplatzverwaltung (Partitionierung und LVM) sowie die sichere Datenübertragung über verschlüsselte Verbindungen.
+
+| Modul | Status | Fokus-Themen | Ausführliche Details | Link |
+| :--- | :---: | :--- | :--- | :--- |
+| **Tag 19** | ✅ | Partitionierung & Mounten | Partitionstabellen (MBR vs. GPT), Partitionswerkzeuge (`fdisk`, `gparted`), Dateisystemerstellung (`mkfs`), Mount-Optionen und persistentes Einhängen in `/etc/fstab`. | [📖 README](./Day_19/README.md) |
+| **Tag 20** | ✅ | Logical Volume Manager (LVM) | Schichtenarchitektur von LVM (Physical Volumes, Volume Groups, Logical Volumes), dynamische Online-Erweiterung und Reduzierung von Dateisystemen. | [📖 README](./Day_20/README.md) |
+| **Tag 21** | ✅ | Kryptographie & SSH-Absicherung | Asymmetrische Kryptographie, SSH-Schlüsselgenerierung, sicherer Dateitransfer mittels `rsync` über verschlüsselte Tunnel. | [📖 README](./Day_21/README.md) |
+| **Tag 22** | ✅ | Multi-Hop SSH & Lsyncd | SSH-Agent-Forwarding, Jump-Hosts (`ProxyJump`), automatisierte Echtzeit-Dateisynchronisation mit `lsyncd` auf Basis von Kernel-`inotify`-Events. | [📖 README](./Day_22/README.md) |
+
+> [!CAUTION]  
+> Ein Fehler in der Datei `/etc/fstab` (z.B. falsche UUID oder Syntaxfehler) kann dazu führen, dass das System beim nächsten Booten im Emergency Mode hängen bleibt. Teste Mounts nach einer Änderung immer mit `mount -a`, bevor du das System neu startest!
+
+---
+
+### 📅 Woche 6: Systemd-Dienste, Logging & Container-Virtualisierung
+Die aktuelle Woche behandelt fortgeschrittene Boot- und Logging-Systeme sowie die Grundlagen moderner Cloud-Native Infrastrukturen.
+
+| Modul | Status | Fokus-Themen | Ausführliche Details | Link |
+| :--- | :---: | :--- | :--- | :--- |
+| **Tag 23** | ✅ | Paketverwaltung & VM-Gast | Paket-Pipelines (Debian `apt`/`dpkg`, RedHat `dnf`/`rpm`), Verwaltung lokaler Repositories und automatisierte Erkennung von Virtualisierungsumgebungen (Hypervisor-Check). | [📖 README](./Day_23/README.md) |
+| **Tag 24** | ✅ | System-Logging & Audit | Klassisches Logging über `rsyslog` (Facilities/Priorities), binäres Logging mit `systemd-journald` und Log-Rotation zur Festplattenentlastung (`logrotate`). | [📖 README](./Day_24/README.md) |
+| **Tag 25** | ✅ | Boot-Prozess & Docker-Einstieg | BIOS vs. UEFI Bootvorgang, GRUB2-Konfiguration, Einstieg in Container-Virtualisierung auf Basis von Linux-Namespaces und `cgroups`. | [📖 README](./Day_25/README.md) |
+| **Tag 26** | ✅ | Container, Containerd & K8s | Container-Runtimes im Vergleich, Architektur von Kubernetes (Control Plane, Worker Nodes) und Container-Orchestrierung. | [📖 README](./Day_26/README.md) |
+| **Tag 27 - 30** | ⏳ | LPIC-1 Simulationen & Abschluss | Abschließende System-Härtung (Limits), Mail Transfer Agents (MTA) und umfassende Testprüfungen zur Vorbereitung auf die LPIC-1 Exams 101/102. | [📖 README](./Day_27/README.md) |
 
 ---
 
