@@ -187,8 +187,8 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 ---
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 01 (Einführung & Installation):** [⬅️ Tag 01](../Day_01/README.md)
-* **Tag 03 (Navigation & Dateiverwaltung):** [➡️ Tag 03](../Day_03/README.md)
+* **Tag 01 (Einführung & Installation):** [⬅️ Tag 01](../Day_01/readme.md)
+* **Tag 03 (Navigation & Dateiverwaltung):** [➡️ Tag 03](../Day_03/readme.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
