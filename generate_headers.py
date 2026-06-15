@@ -52,12 +52,26 @@ CATEGORIES = {
         "end_color": (13, 148, 136),    # Teal
         "accent": (103, 232, 249),      # Light Cyan Accent
     },
-    "GENERIC": {
-        "name": "LINUX ADVANCED",
-        "tag": "ADVANCED ADMINISTRATION",
+    "STORAGE": {
+        "name": "PARTITIONIERUNG & STORAGE",
+        "tag": "LVM & STORAGE CLUSTERS",
+        "start_color": (236, 72, 153),  # Pink
+        "end_color": (190, 24, 93),     # Deep Pink
+        "accent": (247, 164, 204),      # Light Pink Accent
+    },
+    "VIRTUALIZATION": {
+        "name": "CONTAINER & VIRTUALISIERUNG",
+        "tag": "DOCKER, K8S & CLOUD NATIVE",
         "start_color": (59, 130, 246),  # Blue
         "end_color": (29, 78, 216),     # Dark Blue
         "accent": (147, 197, 253),      # Light Blue Accent
+    },
+    "GENERIC": {
+        "name": "LINUX ADVANCED",
+        "tag": "ADVANCED ADMINISTRATION",
+        "start_color": (107, 114, 128), # Gray
+        "end_color": (55, 65, 81),      # Dark Gray
+        "accent": (209, 213, 219),      # Light Gray Accent
     }
 }
 
@@ -80,14 +94,14 @@ DAY_THEMES = {
     16: ("Netzwerk-Routing & Forwarding", "NAT-Masquerading, IP-Forwarding & nftables", "NETWORK"),
     17: ("Firewall & Netzwerksicherheit", "nftables-Regeln, Port-Sperrung & Härtung", "SECURITY"),
     18: ("System-Hardware & Kernel-Module", "lspci, lsblk, modprobe, Kernel Objects & lsof", "SYSADMIN"),
-    19: ("Partitionierung, Dateisysteme & Mounten", "MBR vs GPT, mkfs, mount/umount, /etc/fstab & Swap", "SYSADMIN"),
-    20: ("LVM (Logical Volume Manager)", "Physical Volumes, Volume Groups, Logical Volumes & Resizing", "SYSADMIN"),
+    19: ("Partitionierung, Dateisysteme & Mounten", "MBR vs GPT, mkfs, mount/umount, /etc/fstab & Swap", "STORAGE"),
+    20: ("LVM (Logical Volume Manager)", "Physical Volumes, Volume Groups, Logical Volumes & Resizing", "STORAGE"),
     21: ("Kryptographie, SSH & Rsync", "Symmetrische/Asymmetrische Krypto, SSH-Keys & Delta-Sync", "SECURITY"),
     22: ("SSH-Agent, ProxyJump & Rsync", "Multi-Hop SSH-Verbindungen & Lsyncd-Synchronisation", "SECURITY"),
     23: ("Paketverwaltung & VM-Gast", "dpkg, apt, rpm, dnf, Repositories & VM-Erkennung", "SYSADMIN"),
     24: ("System-Logging & Audit", "Rsyslog, Journald, Logrotate & LPI-Prüfungsvorbereitung", "SYSADMIN"),
-    25: ("Boot-Prozess & Container", "BIOS/UEFI, GRUB2-Bootloader & Docker-Virtualisierung", "SYSADMIN"),
-    26: ("Docker, Kubernetes & Containerd", "Container-Runtimes, Orchestrierung & Cloud-Native", "SYSADMIN"),
+    25: ("Boot-Prozess & Container", "BIOS/UEFI, GRUB2-Bootloader & Docker-Virtualisierung", "VIRTUALIZATION"),
+    26: ("Docker, Kubernetes & Containerd", "Container-Runtimes, Orchestrierung & Cloud-Native", "VIRTUALIZATION"),
     27: ("SSH Härtung & Limits", "sshd_config, TCP-Wrapper & ulimit Ressourcenbeschränkung", "SECURITY"),
     28: ("Kryptographie & MTAs", "GPG-Verschlüsselung, SSH-Tunnel & Mail Transfer Agents", "SECURITY"),
     29: ("LPIC-1 Simulation 101", "Prüfungssimulation 101-500 mit 60 Fragen & Analyse", "GENERIC"),
@@ -129,11 +143,14 @@ DAY_TAGS = {
 
 def determine_category(day_num, title):
     """Determine category based on Day number or Title keywords."""
-    # Check if Day has predefined category
     if day_num in DAY_THEMES:
         return DAY_THEMES[day_num][2]
         
     t = title.lower()
+    if any(k in t for k in ["k8s", "docker", "kubernetes", "container", "virtual", "podman"]):
+        return "VIRTUALIZATION"
+    if any(k in t for k in ["lvm", "mount", "partition", "fstab", "gpt", "mbr", "disk", "storage", "swap"]):
+        return "STORAGE"
     if any(k in t for k in ["netzwerk", "network", "route", "vlan", "ip", "dns", "gateway", "dhcp"]):
         return "NETWORK"
     if any(k in t for k in ["sicherheit", "security", "firewall", "nftables", "rechte", "chmod", "crypt", "ssh", "härtung"]):
@@ -142,24 +159,11 @@ def determine_category(day_num, title):
         return "SCRIPTING"
     if any(k in t for k in ["grep", "sed", "awk", "regex", "vi", "vim", "text", "filter"]):
         return "TEXT"
-    if any(k in t for k in ["paket", "install", "dnf", "apt", "pacman", "service", "systemd", "log", "prozess", "process", "tar", "backup", "lvm", "mount", "partition"]):
+    if any(k in t for k in ["paket", "install", "dnf", "apt", "pacman", "service", "systemd", "log", "prozess", "process", "tar", "backup"]):
         return "SYSADMIN"
     if any(k in t for k in ["einführung", "fhs", "filesystem", "philosophie", "basis", "navigation", "ls"]):
         return "BASICS"
         
-    # Fallback by Day ranges
-    if day_num <= 3:
-        return "BASICS"
-    elif day_num in [4, 9, 11]:
-        return "TEXT"
-    elif day_num in [5, 6, 17, 21]:
-        return "SECURITY"
-    elif day_num in [8, 13]:
-        return "SCRIPTING"
-    elif day_num in [7, 10, 12, 18, 19, 20]:
-        return "SYSADMIN"
-    elif day_num in [14, 15, 16]:
-        return "NETWORK"
     return "GENERIC"
 
 def get_font(font_name, size):
@@ -202,7 +206,6 @@ def draw_category_graphics(draw, category, x_base, y_base):
         # Draw Network Node Topology
         nodes = [(x_base + 80, y_base + 30), (x_base + 30, y_base + 90), (x_base + 130, y_base + 90), 
                  (x_base + 30, y_base + 160), (x_base + 80, y_base + 160), (x_base + 130, y_base + 160)]
-        # Connections
         draw.line([nodes[0], nodes[1]], fill=draw_color, width=2)
         draw.line([nodes[0], nodes[2]], fill=draw_color, width=2)
         draw.line([nodes[1], nodes[2]], fill=draw_color, width=1)
@@ -211,15 +214,12 @@ def draw_category_graphics(draw, category, x_base, y_base):
         draw.line([nodes[2], nodes[5]], fill=draw_color, width=2)
         draw.line([nodes[4], nodes[5]], fill=draw_color, width=1)
         
-        # Nodes circles
         for n in nodes:
             draw.ellipse((n[0]-12, n[1]-12, n[0]+12, n[1]+12), fill=(9, 11, 20), outline=draw_color, width=2)
         draw.ellipse((nodes[0][0]-6, nodes[0][1]-6, nodes[0][0]+6, nodes[0][1]+6), fill=(6, 182, 212, 150))
         draw.ellipse((nodes[4][0]-6, nodes[4][1]-6, nodes[4][0]+6, nodes[4][1]+6), fill=(13, 148, 136, 150))
         
     elif category == "SECURITY":
-        # Draw Shield and Lock outline
-        # Shield base
         draw.polygon([
             (x_base + 80, y_base + 30),
             (x_base + 140, y_base + 50),
@@ -228,56 +228,62 @@ def draw_category_graphics(draw, category, x_base, y_base):
             (x_base + 30, y_base + 130),
             (x_base + 20, y_base + 50)
         ], fill=None, outline=draw_color, width=3)
-        # Lock inside shield
         draw.rectangle((x_base + 60, y_base + 85, x_base + 100, y_base + 125), fill=None, outline=accent_color, width=2)
         draw.arc((x_base + 68, y_base + 65, x_base + 92, y_base + 88), start=180, end=0, fill=accent_color, width=2)
         draw.ellipse((x_base + 77, y_base + 97, x_base + 83, y_base + 103), fill=accent_color)
         draw.line([(x_base + 80, y_base + 103), (x_base + 80, y_base + 115)], fill=accent_color, width=2)
         
     elif category == "SCRIPTING":
-        # Draw Terminal Window
         draw.rounded_rectangle([(x_base + 10, y_base + 35), (x_base + 150, y_base + 145)], radius=8, fill=None, outline=draw_color, width=2)
         draw.line([(x_base + 10, y_base + 65), (x_base + 150, y_base + 65)], fill=draw_color, width=2)
-        # Terminal Prompts
         draw.line([(x_base + 25, y_base + 85), (x_base + 35, y_base + 95)], fill=accent_color, width=2)
         draw.line([(x_base + 35, y_base + 95), (x_base + 25, y_base + 105)], fill=accent_color, width=2)
         draw.line([(x_base + 42, y_base + 103), (x_base + 62, y_base + 103)], fill=accent_color, width=2)
-        
-        # Gear behind terminal
         draw.ellipse((x_base + 110, y_base + 105, x_base + 130, y_base + 125), fill=None, outline=draw_color, width=2)
-        
-        # Windows dots
         draw.ellipse((x_base + 25, y_base + 50, x_base + 31, y_base + 56), fill=draw_color)
         draw.ellipse((x_base + 37, y_base + 50, x_base + 43, y_base + 56), fill=draw_color)
         draw.ellipse((x_base + 49, y_base + 50, x_base + 55, y_base + 56), fill=draw_color)
         
     elif category == "TEXT":
-        # Draw Text / Edit document lines
         draw.rounded_rectangle([(x_base + 25, y_base + 25), (x_base + 115, y_base + 145)], radius=4, fill=None, outline=draw_color, width=2)
-        # Lines in document
         draw.line([(x_base + 40, y_base + 50), (x_base + 100, y_base + 50)], fill=draw_color, width=2)
         draw.line([(x_base + 40, y_base + 70), (x_base + 100, y_base + 70)], fill=draw_color, width=2)
         draw.line([(x_base + 40, y_base + 90), (x_base + 85, y_base + 90)], fill=draw_color, width=2)
         draw.line([(x_base + 40, y_base + 110), (x_base + 95, y_base + 110)], fill=draw_color, width=2)
-        # Pencil crossing document
         draw.line([(x_base + 95, y_base + 125), (x_base + 145, y_base + 75)], fill=accent_color, width=4)
         draw.polygon([(x_base + 90, y_base + 130), (x_base + 98, y_base + 128), (x_base + 93, y_base + 120)], fill=accent_color)
         
     elif category == "SYSADMIN":
-        # Draw stack servers with networking lines
         for offset in [35, 75, 115]:
             draw.rounded_rectangle([(x_base + 20, y_base + offset), (x_base + 140, y_base + offset + 25)], radius=3, fill=None, outline=draw_color, width=2)
-            # Status dots
             draw.ellipse((x_base + 32, y_base + offset + 10, x_base + 38, y_base + offset + 16), fill=(16, 185, 129, 200))
             draw.ellipse((x_base + 44, y_base + offset + 10, x_base + 50, y_base + offset + 16), fill=accent_color)
-            # Disk lines inside server
             draw.line([(x_base + 70, y_base + offset + 13), (x_base + 130, y_base + offset + 13)], fill=draw_color, width=1)
-            
-        # Vertical connection line
         draw.line([(x_base + 15, y_base + 47), (x_base + 15, y_base + 127)], fill=draw_color, width=1)
         
+    elif category == "STORAGE":
+        # Draw dynamic disk partitions and LVM logical layouts
+        draw.rounded_rectangle([(x_base + 20, y_base + 30), (x_base + 140, y_base + 150)], radius=6, fill=None, outline=draw_color, width=2)
+        draw.line([(x_base + 20, y_base + 70), (x_base + 140, y_base + 70)], fill=draw_color, width=2)
+        draw.line([(x_base + 20, y_base + 110), (x_base + 140, y_base + 110)], fill=draw_color, width=2)
+        # Draw partition split visualizer
+        draw.line([(x_base + 60, y_base + 70), (x_base + 60, y_base + 110)], fill=accent_color, width=2)
+        draw.line([(x_base + 100, y_base + 110), (x_base + 100, y_base + 150)], fill=accent_color, width=2)
+        draw.text((x_base + 30, y_base + 45), "sda1", fill=draw_color, font=ImageFont.load_default())
+        draw.text((x_base + 25, y_base + 85), "LVM:pv0", fill=accent_color, font=ImageFont.load_default())
+        draw.text((x_base + 110, y_base + 125), "swap", fill=draw_color, font=ImageFont.load_default())
+        
+    elif category == "VIRTUALIZATION":
+        # Draw floating kubernetes-style pods or docker shipping containers
+        draw.rectangle((x_base + 30, y_base + 40, x_base + 80, y_base + 90), fill=None, outline=draw_color, width=2)
+        draw.rectangle((x_base + 90, y_base + 60, x_base + 140, y_base + 110), fill=None, outline=draw_color, width=2)
+        draw.rectangle((x_base + 45, y_base + 110, x_base + 95, y_base + 160), fill=None, outline=accent_color, width=2)
+        # Isometric connectors
+        draw.line([(x_base + 55, y_base + 40), (x_base + 55, y_base + 25)], fill=draw_color, width=1)
+        draw.line([(x_base + 115, y_base + 60), (x_base + 115, y_base + 45)], fill=draw_color, width=1)
+        draw.line([(x_base + 70, y_base + 110), (x_base + 70, y_base + 95)], fill=accent_color, width=1)
+        
     else: # BASICS or GENERIC
-        # Draw Gear/Engine + Terminal Prompt
         cx, cy = x_base + 80, y_base + 90
         draw.ellipse((cx-35, cy-35, cx+35, cy+35), fill=None, outline=draw_color, width=3)
         draw.ellipse((cx-15, cy-15, cx+15, cy+15), fill=None, outline=draw_color, width=2)
@@ -288,7 +294,6 @@ def draw_category_graphics(draw, category, x_base, y_base):
             x2 = cx + 47 * math.cos(rad)
             y2 = cy + 47 * math.sin(rad)
             draw.line([(x1, y1), (x2, y2)], fill=draw_color, width=4)
-        # Accent dot
         draw.ellipse((cx-5, cy-5, cx+5, cy+5), fill=accent_color)
 
 def generate_header(day_num, title, subtitle, output_path):
@@ -420,16 +425,17 @@ def generate_header(day_num, title, subtitle, output_path):
     draw_category_graphics(art_draw, category_key, 950, 240)
     
     # Top-right tiny hardware design (Futuristic HUD)
-    art_draw.rounded_rectangle([(810, 70), (1150, 170)], radius=8, fill=(15, 23, 42, 160), outline=cat["accent"] + (90,), width=1)
-    art_draw.text((830, 85), "SYSTEM STATUS", fill=(130, 145, 165, 220), font=series_font)
+    art_draw.rounded_rectangle([(790, 70), (1170, 170)], radius=8, fill=(15, 23, 42, 160), outline=cat["accent"] + (90,), width=1)
+    art_draw.text((810, 85), "SYSTEM STATUS", fill=(130, 145, 165, 220), font=series_font)
     
     # Drawing tiny graphical signal bars
-    art_draw.rectangle((830, 125, 840, 145), fill=cat["start_color"] + (180,))
-    art_draw.rectangle((845, 115, 855, 145), fill=cat["start_color"] + (180,))
-    art_draw.rectangle((860, 105, 870, 145), fill=cat["accent"] + (180,))
-    art_draw.rectangle((875, 130, 885, 145), fill=(255, 255, 255, 30))
+    art_draw.rectangle((810, 125, 820, 145), fill=cat["start_color"] + (180,))
+    art_draw.rectangle((825, 115, 835, 145), fill=cat["start_color"] + (180,))
+    art_draw.rectangle((840, 105, 850, 145), fill=cat["accent"] + (180,))
+    art_draw.rectangle((855, 130, 865, 145), fill=(255, 255, 255, 30))
     
-    art_draw.text((900, 118), f"CAT: {category_key}", fill=cat["accent"], font=badge_font)
+    # Render CAT text with safety offset
+    art_draw.text((880, 118), f"CAT: {category_key}", fill=cat["accent"], font=badge_font)
     
     image = Image.alpha_composite(image, art_layer)
     
