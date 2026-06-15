@@ -75,8 +75,11 @@ Hier findest du die detaillierten Unterlagen zu den einzelnen Schulungstagen:
 | **Tag 20** | ✅ | LVM (Logical Volume Manager) - PV, VG, LV & Resizing | [📖 README](./Day_20/README.md) |
 | **Tag 21** | ✅ | Kryptographie, SSH (Keys/Agent) & Rsync über SSH | [📖 README](./Day_21/README.md) |
 | **Tag 22** | ✅ | SSH-Agent, ProxyJump & Rsync-Synchronisation (lsyncd/inotify) | [📖 README](./Day_22/README.md) |
-| **Tag 23 - 25** | ⏳ | In Planung | [📖 README](./Day_23/README.md) |
-| **Tag 26 - 30** | ⏳ | In Planung | [📖 README](./Day_26/README.md) |
+| **Tag 23** | ✅ | Paketverwaltung (dpkg, apt, rpm, dnf) & VM-Gast-Erkennung | [📖 README](./Day_23/README.md) |
+| **Tag 24** | ✅ | System-Logging (Rsyslog, Journald), Logrotate & LPI/Pearson VUE | [📖 README](./Day_24/README.md) |
+| **Tag 25** | ✅ | Boot-Prozess (BIOS/UEFI, GRUB2) & Docker-Container-Virtualisierung | [📖 README](./Day_25/README.md) |
+| **Tag 26** | ✅ | Container-Grundlagen (Docker, Containerd & Kubernetes) | [📖 README](./Day_26/README.md) |
+| **Tag 27 - 30** | ⏳ | In Planung | [📖 README](./Day_27/README.md) |
 
 ---
 
@@ -236,7 +239,7 @@ Zieht Berechtigungen bei der Dateierstellung ab. Maximale Standard-Ausgangsbasis
 * **`cut`** (Spalten schneiden): Extrahiert Spalten aus Texten.
   * `cut -d: -f1,3 /etc/passwd` = Nutzt Doppelpunkt als Trenner (`-d`) und gibt Spalte 1 und 3 aus (`-f`).
 * **`sort`**: Sortiert Textzeilen.
-  * `sort -n` = Sortiert numerisch (z.B. für Ports/Zahlen).
+  * `sort -n` = Sortiert numerisch (z.B. für Ports/ Zahlen).
   * `sort -r` = Sortiert rückwärts (reverse).
   * `sort -t: -k3` = Definiert Doppelpunkt als Trenner (`-t`) und sortiert nach der 3. Spalte (`-k`).
 * **`uniq`**: Filtert aufeinanderfolgende doppelte Zeilen heraus.
@@ -286,7 +289,7 @@ Zieht Berechtigungen bei der Dateierstellung ab. Maximale Standard-Ausgangsbasis
 
 * **Aktuelle Umgebung:** Rocky Linux 9.x (Router) & Debian/Cachy/Manjaro (Clients)
 * **Shell:** Bash / ZSH + Oh My Zsh & Whiptail TUIs
-* **Fortschritt:** 73% (22 von 30 Modulen abgeschlossen)
+* **Fortschritt:** 86% (26 von 30 Modulen abgeschlossen)
 
 ---
 

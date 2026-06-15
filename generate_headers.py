@@ -83,6 +83,15 @@ DAY_THEMES = {
     19: ("Partitionierung, Dateisysteme & Mounten", "MBR vs GPT, mkfs, mount/umount, /etc/fstab & Swap", "SYSADMIN"),
     20: ("LVM (Logical Volume Manager)", "Physical Volumes, Volume Groups, Logical Volumes & Resizing", "SYSADMIN"),
     21: ("Kryptographie, SSH & Rsync", "Symmetrische/Asymmetrische Krypto, SSH-Keys & Delta-Sync", "SECURITY"),
+    22: ("SSH-Agent, ProxyJump & Rsync", "Multi-Hop SSH-Verbindungen & Lsyncd-Synchronisation", "SECURITY"),
+    23: ("Paketverwaltung & VM-Gast", "dpkg, apt, rpm, dnf, Repositories & VM-Erkennung", "SYSADMIN"),
+    24: ("System-Logging & Audit", "Rsyslog, Journald, Logrotate & LPI-Prüfungsvorbereitung", "SYSADMIN"),
+    25: ("Boot-Prozess & Container", "BIOS/UEFI, GRUB2-Bootloader & Docker-Virtualisierung", "SYSADMIN"),
+    26: ("Docker, Kubernetes & Containerd", "Container-Runtimes, Orchestrierung & Cloud-Native", "SYSADMIN"),
+    27: ("SSH Härtung & Limits", "sshd_config, TCP-Wrapper & ulimit Ressourcenbeschränkung", "SECURITY"),
+    28: ("Kryptographie & MTAs", "GPG-Verschlüsselung, SSH-Tunnel & Mail Transfer Agents", "SECURITY"),
+    29: ("LPIC-1 Simulation 101", "Prüfungssimulation 101-500 mit 60 Fragen & Analyse", "GENERIC"),
+    30: ("LPIC-1 Simulation 102", "Prüfungssimulation 102-500 mit 60 Fragen & Analyse", "GENERIC"),
 }
 
 DAY_TAGS = {
@@ -107,6 +116,15 @@ DAY_TAGS = {
     19: ["LPIC-1", "PARTITIONS", "MOUNT"],
     20: ["LPIC-1", "LVM", "VIRTUAL STORAGE"],
     21: ["LPIC-1", "SECURITY", "SSH/RSYNC"],
+    22: ["LPIC-1", "SSH-AGENT", "LSYNCD"],
+    23: ["LPIC-1", "PACKAGES", "REPOSITORIES"],
+    24: ["LPIC-1", "LOGGING", "JOURNALD"],
+    25: ["LPIC-1", "GRUB2", "DOCKER"],
+    26: ["LPIC-1", "CONTAINERS", "KUBERNETES"],
+    27: ["LPIC-1", "SSH-HARDENING", "LIMITS"],
+    28: ["LPIC-1", "GPG", "MTA-MAIL"],
+    29: ["LPIC-1", "EXAM-101", "SIMULATION"],
+    30: ["LPIC-1", "EXAM-102", "SIMULATION"],
 }
 
 def determine_category(day_num, title):
@@ -402,16 +420,16 @@ def generate_header(day_num, title, subtitle, output_path):
     draw_category_graphics(art_draw, category_key, 950, 240)
     
     # Top-right tiny hardware design (Futuristic HUD)
-    art_draw.rounded_rectangle([(830, 70), (1140, 170)], radius=8, fill=(15, 23, 42, 160), outline=cat["accent"] + (90,), width=1)
-    art_draw.text((850, 85), "SYSTEM STATUS", fill=(130, 145, 165, 220), font=series_font)
+    art_draw.rounded_rectangle([(810, 70), (1150, 170)], radius=8, fill=(15, 23, 42, 160), outline=cat["accent"] + (90,), width=1)
+    art_draw.text((830, 85), "SYSTEM STATUS", fill=(130, 145, 165, 220), font=series_font)
     
     # Drawing tiny graphical signal bars
-    art_draw.rectangle((850, 125, 860, 145), fill=cat["start_color"] + (180,))
-    art_draw.rectangle((865, 115, 875, 145), fill=cat["start_color"] + (180,))
-    art_draw.rectangle((880, 105, 890, 145), fill=cat["accent"] + (180,))
-    art_draw.rectangle((895, 130, 905, 145), fill=(255, 255, 255, 30))
+    art_draw.rectangle((830, 125, 840, 145), fill=cat["start_color"] + (180,))
+    art_draw.rectangle((845, 115, 855, 145), fill=cat["start_color"] + (180,))
+    art_draw.rectangle((860, 105, 870, 145), fill=cat["accent"] + (180,))
+    art_draw.rectangle((875, 130, 885, 145), fill=(255, 255, 255, 30))
     
-    art_draw.text((920, 118), f"CAT: {category_key}", fill=cat["accent"], font=badge_font)
+    art_draw.text((900, 118), f"CAT: {category_key}", fill=cat["accent"], font=badge_font)
     
     image = Image.alpha_composite(image, art_layer)
     
@@ -515,15 +533,15 @@ def generate_banner(output_path):
     draw_category_graphics(art_draw, "SYSADMIN", 950, 240)
     
     # Top-right futuristic HUD
-    art_draw.rounded_rectangle([(810, 70), (1140, 170)], radius=8, fill=(15, 23, 42, 160), outline=(59, 130, 246, 90), width=1)
-    art_draw.text((830, 85), "REPOSITORY STATUS", fill=(130, 145, 165, 220), font=series_font)
+    art_draw.rounded_rectangle([(770, 65), (1160, 175)], radius=8, fill=(15, 23, 42, 160), outline=(59, 130, 246, 90), width=1)
+    art_draw.text((790, 80), "REPOSITORY STATUS", fill=(130, 145, 165, 220), font=series_font)
     
-    # Draw loading bar representing 70% progress
-    art_draw.rounded_rectangle([(830, 125), (1120, 135)], radius=3, fill=(15, 23, 42, 200), outline=(255, 255, 255, 20), width=1)
-    art_draw.rounded_rectangle([(830, 125), (830 + int(290 * 0.7), 135)], radius=3, fill=(16, 185, 129, 220), outline=None)
+    # Draw loading bar representing 83.3% progress (25 of 30 days)
+    art_draw.rounded_rectangle([(790, 120), (1140, 132)], radius=3, fill=(15, 23, 42, 200), outline=(255, 255, 255, 20), width=1)
+    art_draw.rounded_rectangle([(790, 120), (790 + int(350 * 0.833), 132)], radius=3, fill=(16, 185, 129, 220), outline=None)
     
-    art_draw.text((830, 145), "PROGRESS: 70%", fill=(16, 185, 129), font=series_font)
-    art_draw.text((980, 145), "DAYS COMPLETED: 21/30", fill=(147, 197, 253), font=series_font)
+    art_draw.text((790, 142), "PROGRESS: 83%", fill=(16, 185, 129), font=series_font)
+    art_draw.text((960, 142), "DAYS COMPLETED: 25/30", fill=(147, 197, 253), font=series_font)
     
     image = Image.alpha_composite(image, art_layer)
     

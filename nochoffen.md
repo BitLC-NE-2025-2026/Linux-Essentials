@@ -1,22 +1,22 @@
-# 📋 LPIC-1 Lückenanalyse & Offene Themen (Stand Tag 17)
+# 📋 LPIC-1 Lückenanalyse & Offene Themen (Stand Tag 25)
 
 ![Master Banner](./banner.png)
 
 > **Erstellt von:** Tobias Boyke / Antigravity AI
-> **Status:** 🔍 Tiefenanalyse abgeschlossen
-> **Fokus:** Abgleich des aktuellen Stands (Tag 01 - 17) mit den offiziellen LPI-Prüfungszielen (Syllabus v5.0) für die Prüfungen **101-500** und **102-500**.
-> **Ziel:** Dokumentation aller abgedeckten, teilweise abgedeckten und offenen Themen sowie ein exakter, modularer Fahrplan für die verbleibenden Tage 18 bis 30.
+> **Status:** 🔍 Tiefenanalyse & Fortschritts-Abgleich abgeschlossen
+> **Fokus:** Abgleich des aktuellen Stands (Tag 01 - 25) mit den offiziellen LPI-Prüfungszielen (Syllabus v5.0) für die Prüfungen **101-500** und **102-500**.
+> **Ziel:** Dokumentation aller abgedeckten, teilweise abgedeckten und offenen Themen sowie ein exakter, modularer Fahrplan für die verbleibenden Tage 26 bis 30.
 
 ---
 
 ## 🗺️ 1. Gesamt-Status & Prüfungsbereitschaft
 
-Bis einschließlich **Tag 17** wurden die essenziellen administrativen Grundlagen, Unix-Core-Utilities, Shell-Scripting-Basics und Netzwerk-Zeit-Konfigurationen intensiv vermittelt.
+Bis einschließlich **Tag 25** wurden die essenziellen administrativen Grundlagen, Unix-Core-Utilities, Shell-Scripting-Basics, Netzwerk-Zeit-Konfigurationen, Dateisysteme (LVM), Kryptographie/SSH, Paketverwaltung (Debian/RPM), System-Logging (Rsyslog/Journald) sowie Bootloader (GRUB2) und Container-Virtualisierung (Docker) intensiv vermittelt.
 
 ### 📊 Statistische LPIC-1 Abdeckung
-* **LPIC-1 Prüfung 101 (LPI-101-500):** ca. **70%** abgedeckt.
-* **LPIC-1 Prüfung 102 (LPI-102-500):** ca. **45%** abgedeckt.
-* **Gesamtabdeckung (Soll-Ist-Abgleich):** ca. **57%**.
+* **LPIC-1 Prüfung 101 (LPI-101-500):** ca. **85%** abgedeckt.
+* **LPIC-1 Prüfung 102 (LPI-102-500):** ca. **70%** abgedeckt.
+* **Gesamtabdeckung (Soll-Ist-Abgleich):** ca. **78%**.
 
 > [!NOTE]
 > Die prozentuale Abdeckung bezieht sich auf die Anzahl der LPIC-1-Prüfungsziele (Objectives) und deren Gewichtung (Weight). Themen wie GNU/Unix-Befehle (Thema 103) besitzen eine sehr hohe Gewichtung und sind bereits vollständig abgedeckt.
@@ -344,8 +344,8 @@ gantt
     Tag 24: Rsyslog & Journald                 : 24, 25
     Tag 25: MTA (Mail) & Lokalisierung         : 25, 26
     
-    section Modul D: Desktop & Sicherheit (T26 - T28)
-    Tag 26: X11, Wayland & Barrierefreiheit    : 26, 27
+    section Modul D: Container & Sicherheit (T26 - T28)
+    Tag 26: Docker, Kubernetes & Containerd    : 26, 27
     Tag 27: SSH Hardening & Limits (ulimit)    : 27, 28
     Tag 28: GPG Verschlüsselung & SSH-Tunnel   : 28, 29
     
@@ -378,9 +378,9 @@ gantt
 * **Tag 25: Mail Transfer Agents & Lokalisierung**
   * *Fokus:* Mail-Dienste verstehen (Postfix, Sendmail, Exim). Weiterleitungen in `/etc/aliases` konfigurieren und Testmails senden mit `mail`. Systemsprachen und Zeitzonen dauerhaft anpassen (`localectl`, `locale`, `LANG`, `LC_*`, `/usr/share/zoneinfo/`, `/etc/localtime`).
 
-#### 🔒 Modul D: Desktop-Schnittstellen & Systemhärtung (Tag 26 – 28)
-* **Tag 26: X11-Architektur, Wayland & Barrierefreiheit**
-  * *Fokus:* Die grafische Oberfläche verstehen. X-Server, Display-Manager (GDM, LightDM, `/etc/X11/xorg.conf`) und Barrierefreiheit (a11y-Tastatureinstellungen wie Sticky Keys, Slow Keys).
+#### 🐳 Modul D: Container & Systemhärtung (Tag 26 – 28)
+* **Tag 26: Docker, Kubernetes & Containerd Grundlagen**
+  * *Fokus:* OCI-Standards, runc, Containerd Core Engine, Integration in Kubernetes (CRI), Control Plane & Worker Node Architektur, Pods, Deployments & Service Discovery.
 * **Tag 27: OpenSSH Server Hardening & Key-basierte Authentifizierung**
   * *Fokus:* Absicherung des SSH-Daemons (`/etc/ssh/sshd_config` - Root-Login verbieten, Ports ändern). Generieren von SSH-Keys (`ssh-keygen`), Key-Verteilung (`ssh-copy-id`). Zugriffsbeschränkung über TCP-Wrapper (`/etc/hosts.allow`, `/etc/hosts.deny`). Festlegen von Benutzer-Ressourcenlimits (`ulimit` und `/etc/security/limits.conf`).
 * **Tag 28: GnuPG Verschlüsselung & SSH-Tunneling**
