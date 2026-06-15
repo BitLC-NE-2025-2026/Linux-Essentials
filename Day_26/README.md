@@ -9,12 +9,16 @@
 ---
 
 ## 📑 Inhaltsverzeichnis
-- [🏗️ 1. Container-Runtimes & OCI-Standards](#-1-container-runtimes--oci-standards)
+- [📦 1. Virtualisierung vs. Containerisierung](#-1-virtualisierung-vs-containerisierung)
+  - [A. Container vs. Virtuelle Maschinen (VMs)](#a-container-vs-virtuelle-maschinen-vms)
+  - [B. Wie funktionieren Container unter der Haube?](#b-wie-funktionieren-container-unter-der-haube)
+  - [C. Docker vs. Containerd vs. Kubernetes](#c-docker-vs-containerd-vs-kubernetes)
+- [🏗️ 2. Container-Runtimes & OCI-Standards](#-2-container-runtimes--oci-standards)
   - [A. OCI (Open Container Initiative)](#a-oci-open-container-initiative)
   - [B. Containerd: Die Core Engine](#b-containerd-die-core-engine)
   - [C. runc: Der Low-Level Executor](#c-runc-der-low-level-executor)
-- [🐳 2. Die Docker-Architektur](#-2-die-docker-architektur)
-- [⚓ 3. Container-Orchestrierung mit Kubernetes (K8s)](#-3-container-orchestrierung-mit-kubernetes-k8s)
+- [🐳 3. Die Docker-Architektur](#-3-die-docker-architektur)
+- [⚓ 4. Container-Orchestrierung mit Kubernetes (K8s)](#-4-container-orchestrierung-mit-kubernetes-k8s)
   - [A. Kubernetes Architektur (Control Plane vs. Worker Nodes)](#a-kubernetes-architektur-control-plane-vs-worker-nodes)
   - [B. Deklaratives Modell: Pods, Deployments & Services](#b-deklaratives-modell-pods-deployments--services)
 - [🧠 LPIC-1/Cloud-Native Relevanz & Wissenstest](#-lpic-1cloud-native-relevanz--wissenstest)
@@ -23,7 +27,53 @@
 
 ---
 
-## 🏗️ 1. Container-Runtimes & OCI-Standards
+## 📦 1. Virtualisierung vs. Containerisierung
+
+### A. Container vs. Virtuelle Maschinen (VMs)
+Virtuelle Maschinen und Container bieten unterschiedliche Isolationsebenen:
+* **Virtuelle Maschinen (VMs):**
+  * Isolieren auf **Hardware-Ebene**.
+  * Jede VM enthält ein vollständiges Gast-Betriebssystem (Guest OS) inklusive eigenem Kernel, virtuellen Treibern und Anwendungen.
+  * Ein Hypervisor (z.B. KVM, VMware, VirtualBox) übersetzt die Aufrufe an die physische Hardware.
+  * **Vorteil:** Maximale Sicherheit und Isolation.
+  * **Nachteil:** Hoher Ressourcen-Overhead (RAM/Disk für das Gast-OS) und langsame Bootzeiten.
+* **Container:**
+  * Isolieren auf **Betriebssystem-Ebene (OS-level virtualization)**.
+  * Container teilen sich den Kernel des Wirts-Betriebssystems (Host OS).
+  * Sie enthalten nur die Anwendung und ihre direkten Abhängigkeiten (Bibliotheken, Binaries).
+  * **Vorteil:** Extrem leichtgewichtig, starten in Millisekunden, minimale CPU- und RAM-Auslastung.
+  * **Nachteil:** Geringere Isolationstiefe (Sicherheitsrisiko bei Kernel-Sicherheitslücken des Hosts).
+
+### B. Wie funktionieren Container unter der Haube?
+Container sind keine "echten" physischen Objekte, sondern isolierte Linux-Prozesse. Sie werden durch zwei Hauptmechanismen des Linux-Kernels realisiert:
+1. **Namespaces (Isolation):**
+   Namespaces isolieren, was ein Prozess **sehen** kann. Sie schneiden den Prozess von anderen Systembereichen ab:
+   * `pid` (Process ID): Eigene Prozess-Hierarchie (der Hauptprozess im Container hat die PID 1).
+   * `net` (Network): Eigene Netzwerkgeräte, IP-Adressen und Routingtabellen.
+   * `mnt` (Mount): Separates Dateisystem (mittels `chroot` oder `pivot_root`).
+   * `ipc` (Interprocess Communication): Isolierter Shared Memory.
+   * `uts` (Unix Sharing Time): Eigener Hostname und Domainname.
+   * `user`: Eigene Benutzer- und Gruppen-IDs (ermöglicht root-Rechte im Container, ohne root auf dem Host zu sein).
+2. **Control Groups (cgroups - Ressourcenkontrolle):**
+   cgroups begrenzen, was ein Prozess **nutzen** kann (Ressourcenkontrolle):
+   * Begrenzung von CPU-Zeit, RAM-Nutzung, I/O-Bandbreite und Netzwerk-Prioritäten.
+   * Verhindert DoS-Angriffe auf den Host durch Amok laufende Container ("Noisy Neighbor"-Problem).
+
+### C. Docker vs. Containerd vs. Kubernetes
+Um den Unterschied zwischen Container, Engine und Orchestrator zu verdeutlichen, zeigt folgende Vergleichstabelle die Aufgabenverteilung:
+
+| Feature/Aspekt | Docker | containerd | Kubernetes (K8s) |
+| :--- | :--- | :--- | :--- |
+| **Rolle** | Benutzerfreundliche Komplettlösung (Developer Tooling) | Core Container Engine (High-Level Runtime) | Container-Orchestrator (Cluster-Management) |
+| **Fokus** | Lokale Entwicklung, Image-Builds (`dockerfile`), Ausführung | Effiziente Verwaltung des Container-Lebenszyklus auf einem Host | Skalierung, Hochverfügbarkeit, Load Balancing über viele Server |
+| **Image-Builds** | Ja (`docker build`) | Nein | Nein (nutzt bestehende Registry-Images) |
+| **Zielgruppe** | Softwareentwickler | Systemintegratoren / Kubernetes-Kubelet | Plattform-Ingenieure / System-Administratoren |
+| **API / Schnittstelle** | Docker CLI, REST API | gRPC API | REST API (`kubectl`, YAML-Manifeste) |
+| **Clustering** | Docker Swarm (integriert, selten genutzt) | Nein | Standard (vollständiges Cluster-Management) |
+
+---
+
+## 🏗️ 2. Container-Runtimes & OCI-Standards
 
 In modernen Cloud-Native-Umgebungen sind Container nicht mehr fest an Docker gebunden. Sie basieren auf standardisierten Spezifikationen und modularen Runtimes.
 
@@ -47,7 +97,7 @@ Die OCI wurde 2015 von Docker und anderen Branchenführern gegründet, um offene
 
 ---
 
-## 🐳 2. Die Docker-Architektur
+## 🐳 3. Die Docker-Architektur
 
 Docker vereint all diese Komponenten unter einer benutzerfreundlichen Oberfläche.
 
@@ -64,7 +114,7 @@ graph TD
 
 ---
 
-## ⚓ 3. Container-Orchestrierung mit Kubernetes (K8s)
+## ⚓ 4. Container-Orchestrierung mit Kubernetes (K8s)
 
 Kubernetes ist die De-facto-Standard-Plattform zur automatisierten Bereitstellung, Skalierung und Verwaltung von containerisierten Anwendungen über Server-Cluster hinweg.
 
