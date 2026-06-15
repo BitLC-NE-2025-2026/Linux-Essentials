@@ -234,7 +234,6 @@ Eigenständige Zertifizierungen für angrenzende Open-Source-Technologien, die k
 </details>
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
 * **Tag 23 (Paketverwaltung & VM-Gast):** [⬅️ Tag 23](../Day_23/README.md)

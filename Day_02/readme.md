@@ -146,7 +146,7 @@ Wenden Sie die Änderungen mit `source ~/.zshrc` an.
 > [!IMPORTANT]
 > Für das Agnoster-Theme müssen Powerline-Fonts (z.B. "Noto Mono Powerline") im Terminal eingestellt sein.
 
-## 🧠 Wissenstest: Hilfe, Hardware & Dateisystem
+## 🧠 LPIC-1 Relevanz & Wissenstest
 Hier sind typische Kontrollfragen zu den Themen des zweiten Tages:
 
 <details>
@@ -185,6 +185,11 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 - [Praxis-Historie (Navigation & FHS 2) (TXT)](./assets/history-semus-20260512-0941)
 
 ---
+## 🔗 Zurück zur Übersicht
 
-*Erstellt am 06. Mai 2026 für den Linux-Essentials Kurs.*
+* **Tag 01 (Einführung & Installation):** [⬅️ Tag 01](../Day_01/README.md)
+* **Tag 03 (Navigation & Dateiverwaltung):** [➡️ Tag 03](../Day_03/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
+---
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

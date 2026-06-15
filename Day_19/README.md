@@ -211,11 +211,10 @@ sudo swapoff /dev/sda2
 </details>
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 18 (System-Hardware):** [⬅️ System-Hardware & Kernel-Module](../Day_18/README.md)
-* **Tag 20 (LVM-Speicherverwaltung):** [➡️ LVM (Logical Volume Manager)](../Day_20/README.md)
+* **Tag 18 (System-Hardware & Kernel-Module):** [⬅️ Tag 18](../Day_18/README.md)
+* **Tag 20 (LVM (Logical Volume Manager)):** [➡️ Tag 20](../Day_20/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---

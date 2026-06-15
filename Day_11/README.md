@@ -192,10 +192,34 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
-## 🔗 Zurück zur Übersicht
-
-[⬅ Zurück zur Übersicht](../README.md)
-
 ---
 
-*Erstellt am 20. Mai 2026 für den Linux-Essentials Kurs.*
+## 🧠 LPIC-1 Relevanz & Wissenstest
+
+<details>
+<summary><b>Fragen zu Der Texteditor vi/vim (Klicken zum Ausklappen)</b></summary>
+
+1. **In welchem Modus startet `vi` standardmäßig?**
+   <details><summary>Antwort</summary>Im **Befehlsmodus** (Command Mode).</details>
+
+2. **Wie wechselt man vom Befehlsmodus in den Einfügemodus?**
+   <details><summary>Antwort</summary>Durch Drücken der Tasten `i` (insert), `a` (append) oder `o` (neue Zeile unter der aktuellen öffnen).</details>
+
+3. **Mit welchem Befehl speichert und verlässt man den vi im Last-Line-Modus?**
+   <details><summary>Antwort</summary>Mit `:wq` (write and quit) oder `:x`. Alternativ `ZZ` im Befehlsmodus.</details>
+
+4. **Wie löscht man eine ganze Zeile im Befehlsmodus?**
+   <details><summary>Antwort</summary>Durch die Tastenkombination `dd`.</details>
+
+5. **Mit welchem Befehl macht man die letzte Änderung rückgängig?**
+   <details><summary>Antwort</summary>Durch Drücken der Taste `u` (undo) im Befehlsmodus.</details>
+
+</details>
+## 🔗 Zurück zur Übersicht
+
+* **Tag 10 (System-Monitoring & Logs):** [⬅️ Tag 10](../Day_10/README.md)
+* **Tag 12 (Fortgeschrittene Paketverwaltung):** [➡️ Tag 12](../Day_12/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
+
+---
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

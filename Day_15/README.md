@@ -144,7 +144,7 @@ Unter Linux werden Netzwerkkonfigurationen in systemspezifischen Textdateien ges
 
 ---
 
-## 🧠 6. Wissenstest: Netzwerke & Subnetting
+## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Prüfen Sie Ihr Wissen mit diesen typischen LPIC-1 Prüfungsfragen:
 
@@ -189,11 +189,10 @@ Prüfen Sie Ihr Wissen mit diesen typischen LPIC-1 Prüfungsfragen:
 </details>
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 14 (Leistungsabfrage):** [⬅️ LPIC-1 Master-Studienführer](../Day_14/README.md)
-* **Tag 16 (Routing & NAT):** [➡️ Netzwerk-Routing & Forwarding](../Day_16/README.md)
+* **Tag 14 (Netzwerk-Grundlagen & Schnittstellen):** [⬅️ Tag 14](../Day_14/README.md)
+* **Tag 16 (Netzwerk-Routing & Forwarding):** [➡️ Tag 16](../Day_16/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---

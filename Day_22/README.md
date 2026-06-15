@@ -212,10 +212,9 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 - [Mint Terminal-Historie (TXT)](./assets/Mint20260610-1229.txt)
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 21 (Kryptographie, SSH & Rsync):** [⬅️ Kryptographie, SSH & Rsync](../Day_21/README.md)
+* **Tag 21 (Kryptographie, SSH & Rsync):** [⬅️ Tag 21](../Day_21/README.md)
 * **Tag 23 (Paketverwaltung & VM-Gast):** [➡️ Tag 23](../Day_23/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 

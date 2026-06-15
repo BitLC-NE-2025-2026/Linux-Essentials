@@ -183,10 +183,9 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 - [Rsync Synchronisationsanleitung (PDF)](./assets/Verwenden%20von%20Rsync%20zum%20Synchronisieren%20von%20lokalen%20und%20entfernten%20Verzeichnissen%20DigitalOcean.pdf)
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 20 (LVM-Speicherverwaltung):** [⬅️ LVM (Logical Volume Manager)](../Day_20/README.md)
+* **Tag 20 (LVM (Logical Volume Manager)):** [⬅️ Tag 20](../Day_20/README.md)
 * **Tag 22 (SSH-Agent, ProxyJump & Rsync):** [➡️ Tag 22](../Day_22/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 

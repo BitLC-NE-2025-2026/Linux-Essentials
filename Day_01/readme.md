@@ -361,4 +361,33 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
-*Erstellt am 06. Mai 2026 für den Linux-Essentials Kurs.*
+---
+
+## 🧠 LPIC-1 Relevanz & Wissenstest
+
+<details>
+<summary><b>Fragen zu Einführung & Installation (Klicken zum Ausklappen)</b></summary>
+
+1. **Wer startete das GNU-Projekt und wofür steht GNU?**
+   <details><summary>Antwort</summary>Richard Stallman startete das GNU-Projekt 1983. GNU steht rekursiv für "GNU's Not Unix".</details>
+
+2. **Welches Lizenzprinzip schützt GPL-Software vor proprietärer Verwertung?**
+   <details><summary>Antwort</summary>Das **Copyleft**-Prinzip. Es verlangt, dass abgeänderte Versionen der Software unter denselben freien Lizenzbedingungen stehen.</details>
+
+3. **Was ist der Unterschied zwischen einem LTS- und einem Rolling-Release-Modell?**
+   <details><summary>Antwort</summary>**LTS (Long Term Support)** setzt auf Langzeitstabilität mit stabilen Paketversionen und rückportierten Sicherheitsfixes. **Rolling Release** aktualisiert Pakete kontinuierlich und bietet stets die neueste Software.</details>
+
+4. **Was besagt die POSIX-Konformität?**
+   <details><summary>Antwort</summary>Sie definiert eine standardisierte Schnittstelle zwischen Betriebssystem und Anwendungssoftware. Dies garantiert die Portabilität von Programmen und Shell-Skripten über verschiedene Unix-Derivate hinweg.</details>
+
+5. **In welchem virtuellen Verzeichnis im RAM liegen Informationen zur CPU?**
+   <details><summary>Antwort</summary>In `/proc/cpuinfo`.</details>
+
+</details>
+## 🔗 Zurück zur Übersicht
+
+* **Tag 02 (Die Linux-Philosophie & FHS):** [➡️ Tag 02](../Day_02/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
+
+---
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

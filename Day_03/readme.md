@@ -152,7 +152,7 @@ find -name "*.old" | xargs rm     # Löscht alle gefundenen .old Dateien
 > Falls Dateinamen Leerzeichen enthalten, bricht `xargs` ab. Nutzen Sie dann Null-Byte Trenner:  
 > `find . -name "*.txt" -print0 | xargs -0 rm` (dies trennt Dateinamen durch ein Null-Byte, was sicher gegen Sonderzeichen ist).
 
-## 🧠 Wissenstest: CUPS, Aliases & I/O-Umleitung
+## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Fragen zur Vertiefung des heutigen Stoffs:
 
@@ -191,11 +191,11 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 - [Historie Tag 03 (TXT)](./assets/rockyHis20260506-1548.txt)
 
 ---
+## 🔗 Zurück zur Übersicht
 
-## 🔗 Zurück zum Hauptmenü
-
-[⬅ Zurück zur Übersicht](../README.md)
+* **Tag 02 (Die Linux-Philosophie & FHS):** [⬅️ Tag 02](../Day_02/README.md)
+* **Tag 04 (Textmanipulation & Filter):** [➡️ Tag 04](../Day_04/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
-
-*Erstellt am 06. Mai 2026 für den Linux-Essentials Kurs.*
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

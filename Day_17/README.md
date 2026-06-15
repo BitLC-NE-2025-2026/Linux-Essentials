@@ -297,10 +297,10 @@ Zur vollautomatischen und interaktiven Einrichtung all dieser Netzwerk-, Routing
 </details>
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 16 (Routing & NAT):** [⬅️ Netzwerk-Routing & Forwarding](../Day_16/README.md)
+* **Tag 16 (Netzwerk-Routing & Forwarding):** [⬅️ Tag 16](../Day_16/README.md)
+* **Tag 18 (System-Hardware & Kernel-Module):** [➡️ Tag 18](../Day_18/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---

@@ -147,10 +147,34 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
-## 🔗 Zurück zur Übersicht
-
-[⬅ Zurück zur Übersicht](../README.md)
-
 ---
 
-*Erstellt am 19. Mai 2026 für den Linux-Essentials Kurs.*
+## 🧠 LPIC-1 Relevanz & Wissenstest
+
+<details>
+<summary><b>Fragen zu System-Monitoring & Logs (Klicken zum Ausklappen)</b></summary>
+
+1. **Wozu dient das Kommando `sed` hauptsächlich?**
+   <details><summary>Antwort</summary>Als nicht-interaktiver **Stream Editor** zur automatisierten Textfilterung, -ersetzung und -manipulation in Datenströmen oder Dateien.</details>
+
+2. **Wie ersetzt man mit `sed` alle Vorkommen von "Alt" durch "Neu" in einer Zeile?**
+   <details><summary>Antwort</summary>Mit dem Substitutions-Befehl und dem globalen Flag: `sed 's/Alt/Neu/g'`.</details>
+
+3. **Wie lautet die sed-Option, um Änderungen direkt in der Datei (in-place) zu speichern?**
+   <details><summary>Antwort</summary>Die Option `-i` (oder `--in-place`).</details>
+
+4. **Wie liest man Zeile für Zeile in einer Bash-Schleife ein?**
+   <details><summary>Antwort</summary>Mit einer `while read` Schleife: `while read -r line; do ... done < datei.txt`.</details>
+
+5. **Wozu dient das Werkzeug `awk`?**
+   <details><summary>Antwort</summary>Zur mustergesteuerten, spaltenorientierten Text- und Datenverarbeitung.</details>
+
+</details>
+## 🔗 Zurück zur Übersicht
+
+* **Tag 09 (Reguläre Ausdrücke (Regex)):** [⬅️ Tag 09](../Day_09/README.md)
+* **Tag 11 (Der Texteditor vi/vim):** [➡️ Tag 11](../Day_11/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
+
+---
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

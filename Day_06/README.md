@@ -148,7 +148,7 @@ Zusätzlich zu `rwx` gibt es drei Spezialbits, die für die Systemsicherheit kri
 
 ---
 
-## 🧠 Wissenstest: Administration & Prozesse
+## 🧠 LPIC-1 Relevanz & Wissenstest
 Hier sind Kontrollfragen zum Selbststudium:
 
 <details>
@@ -182,3 +182,11 @@ Hier sind Kontrollfragen zum Selbststudium:
 ---
 
 *Letztes Update: 26. Mai 2026 für den Linux-Essentials Kurs.*
+## 🔗 Zurück zur Übersicht
+
+* **Tag 05 (Berechtigungen & Eigentümer):** [⬅️ Tag 05](../Day_05/README.md)
+* **Tag 07 (Archivierung & Software-Builds):** [➡️ Tag 07](../Day_07/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
+
+---
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

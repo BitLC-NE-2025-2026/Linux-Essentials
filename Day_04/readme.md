@@ -123,7 +123,7 @@ sudo dnf upgrade     # Installiert die neuesten Versionen aller Pakete
 > * **`dnf clean all`**: Bereinigt sämtliche zwischengespeicherten Metadaten und Paket-Caches.  
 > * **`dnf history`**: Zeigt eine Liste aller getätigten DNF-Transaktionen (Installationen/Upgrades) mit IDs an. Erlaubt Rollbacks!
 
-## 🧠 Wissenstest: Wildcards, Textwerkzeuge & Logik
+## 🧠 LPIC-1 Relevanz & Wissenstest
 Hier sind typische Fragen zur Überprüfung Ihres Wissens:
 
 <details>
@@ -160,12 +160,11 @@ Im [Assets](./assets)-Verzeichnis finden Sie die Mitschriften und Unterlagen zu 
 - [Shell-Historie Tag 04 (TXT)](./assets/rockyHis20260507-1447.txt)
 
 ---
+## 🔗 Zurück zur Übersicht
 
-## 🔗 Zurück zum Hauptmenü
-[⬅ Zurück zur Übersicht](../README.md)
+* **Tag 03 (Navigation & Dateiverwaltung):** [⬅️ Tag 03](../Day_03/README.md)
+* **Tag 05 (Berechtigungen & Eigentümer):** [➡️ Tag 05](../Day_05/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
-
-*Erstellt am 07. Mai 2026 für den Linux-Essentials Kurs.*
-
-
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

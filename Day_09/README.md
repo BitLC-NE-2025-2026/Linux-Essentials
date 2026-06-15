@@ -236,10 +236,34 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
-## 🔗 Zurück zur Übersicht
-
-[⬅ Zurück zur Übersicht](../README.md)
-
 ---
 
-*Erstellt am 18. Mai 2026 für den Linux-Essentials Kurs.*
+## 🧠 LPIC-1 Relevanz & Wissenstest
+
+<details>
+<summary><b>Fragen zu Reguläre Ausdrücke (Regex) (Klicken zum Ausklappen)</b></summary>
+
+1. **Was ist der Unterschied zwischen BRE und ERE?**
+   <details><summary>Antwort</summary>In **BRE** (Basic Regular Expressions) müssen Metazeichen wie `(`, `)`, `{`, `}`, `?`, `+` und `|` mit einem Backslash `\` maskiert werden, um ihre Sonderfunktion zu entfalten. In **ERE** (Extended Regular Expressions) sind diese Metazeichen direkt aktiv.</details>
+
+2. **Wie durchsucht man eine Datei mit ERE-Unterstützung auf der Kommandozeile?**
+   <details><summary>Antwort</summary>Mit `grep -E` oder dem Alias `egrep`.</details>
+
+3. **Mit welchen Regex-Metazeichen sucht man nach Zeilenanfang und Zeilenende?**
+   <details><summary>Antwort</summary>`^` steht für den Zeilenanfang, `$` für das Zeilenende.</details>
+
+4. **Welcher Ausdruck sucht nach einer beliebigen einstelligen Ziffer?**
+   <details><summary>Antwort</summary>`[0-9]` oder die POSIX-Klasse `[[:digit:]]`.</details>
+
+5. **Mit welcher grep-Option filtert man nicht-treffende Zeilen aus?**
+   <details><summary>Antwort</summary>Mit der Option `-v` (Invert Match).</details>
+
+</details>
+## 🔗 Zurück zur Übersicht
+
+* **Tag 08 (Shell Scripting & Automatisierung):** [⬅️ Tag 08](../Day_08/README.md)
+* **Tag 10 (System-Monitoring & Logs):** [➡️ Tag 10](../Day_10/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
+
+---
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

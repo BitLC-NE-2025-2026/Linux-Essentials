@@ -348,7 +348,7 @@ Cronjob hinzufügen:
 30 15 * * 1-5 /home/scripts/historyscript.sh
 ```
 
-## 🧠 Wissenstest: Cron & Zeitsteuerung
+## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Fragen rund um zeitgesteuerte Jobs unter Linux:
 
@@ -382,11 +382,11 @@ Hier sind typische Fragen rund um zeitgesteuerte Jobs unter Linux:
    <details><summary>Antwort</summary>Unter Debian-basierten Systemen (z. B. Ubuntu) heißt der Dienst **`cron`**. Unter Red-Hat-basierten Systemen (z. B. Rocky Linux, RHEL) heißt der Dienst **`crond`**.</details>
 
 </details>
+## 🔗 Zurück zur Übersicht
 
-## 🔗 8. Zurück zur Übersicht
-
-[⬅ Zurück zur Übersicht](../README.md)
+* **Tag 11 (Der Texteditor vi/vim):** [⬅️ Tag 11](../Day_11/README.md)
+* **Tag 13 (Benutzerverwaltung & TUI-Erstellung):** [➡️ Tag 13](../Day_13/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
-
-*Erstellt am 20. Mai 2026 für den Linux-Essentials Kurs.*
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

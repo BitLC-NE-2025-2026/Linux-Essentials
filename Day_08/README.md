@@ -161,7 +161,7 @@ Wenn ein Skript nicht tut, was es soll:
 
 ---
 
-## 🧠 Wissenstest: Bash & Scripting
+## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Fragen rund um Shell Scripting:
 
@@ -199,3 +199,11 @@ Im [Assets](./assets)-Verzeichnis finden Sie die Unterlagen zu diesem Tag:
 ---
 
 *Letztes Update: 26. Mai 2026 für den Linux-Essentials Kurs.*
+## 🔗 Zurück zur Übersicht
+
+* **Tag 07 (Archivierung & Software-Builds):** [⬅️ Tag 07](../Day_07/README.md)
+* **Tag 09 (Reguläre Ausdrücke (Regex)):** [➡️ Tag 09](../Day_09/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
+
+---
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

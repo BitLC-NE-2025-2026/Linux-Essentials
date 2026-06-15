@@ -183,11 +183,10 @@ sudo lsof -iTCP -sTCP:LISTEN
 </details>
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 17 (Zeitverwaltung & iptables):** [⬅️ Zeitverwaltung & Port-Weiterleitung](../Day_17/README.md)
-* **Tag 19 (Dateisysteme & Partitionierung):** [➡️ Partitionierung, Dateisysteme & Mounten](../Day_19/README.md)
+* **Tag 17 (Firewall & Netzwerksicherheit):** [⬅️ Tag 17](../Day_17/README.md)
+* **Tag 19 (Partitionierung, Dateisysteme & Mounten):** [➡️ Tag 19](../Day_19/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---

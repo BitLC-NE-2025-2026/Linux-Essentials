@@ -183,7 +183,7 @@ Ein Zombie entsteht, wenn der Parent das Signal `SIGCHLD` nicht korrekt verarbei
 
 ---
 
-## 🧠 Wissenstest: Archivierung, Kompression & Builds
+## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Prüfungsfragen und Szenarien zum LPIC-1 Fokus:
 
@@ -217,3 +217,11 @@ Hier sind typische Prüfungsfragen und Szenarien zum LPIC-1 Fokus:
 ---
 
 *Letztes Update: 26. Mai 2026 für den Linux-Essentials Kurs.*
+## 🔗 Zurück zur Übersicht
+
+* **Tag 06 (Prozessmanagement & Spezialrechte):** [⬅️ Tag 06](../Day_06/README.md)
+* **Tag 08 (Shell Scripting & Automatisierung):** [➡️ Tag 08](../Day_08/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
+
+---
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

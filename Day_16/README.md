@@ -223,7 +223,7 @@ Das Skript `MiniNetzAutoBuilder.sh` führt all diese Schritte vollautomatisch un
 
 ---
 
-## 🧠 Wissenstest: Routing & Netzwerksicherheit
+## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind Prüfungsfragen zur Vorbereitung auf LPIC-1 und zur Festigung des Wissens:
 
@@ -256,12 +256,11 @@ Hier sind Prüfungsfragen zur Vorbereitung auf LPIC-1 und zur Festigung des Wiss
 </details>
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
-* **Day 14 & 15:** [⬅️ Netzwerk-Grundlagen & Schnittstellen](../Day_15/README.md)
-* **Day 17:** [➡️ Firewall & Netzwerksicherheit](../Day_17/README.md)
-* **Master-Repository:** [🌌 Zurück zur Übersicht](../README.md)
+* **Tag 15 (VLAN-Konfiguration & Automatisierung):** [⬅️ Tag 15](../Day_15/README.md)
+* **Tag 17 (Firewall & Netzwerksicherheit):** [➡️ Tag 17](../Day_17/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
-*Letztes Update: 29. Mai 2026 für den Linux-Essentials Kurs.*
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

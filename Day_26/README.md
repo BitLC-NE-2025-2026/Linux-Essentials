@@ -163,11 +163,10 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 - [Gitkeep Platzhalter](./assets/.gitkeep)
 
 ---
-
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 25 (Bootprozess & Container):** [⬅️ Tag 25](../Day_25/README.md)
-* **Tag 27 (SSH-Härtung & Limits):** [➡️ Tag 27](../Day_27/README.md)
+* **Tag 25 (Boot-Prozess & Container):** [⬅️ Tag 25](../Day_25/README.md)
+* **Tag 27 (SSH Härtung & Limits):** [➡️ Tag 27](../Day_27/README.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---

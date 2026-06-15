@@ -156,7 +156,7 @@ Das Skript `whiptail_manager.sh` integriert LPIC-1 relevante Druckfunktionen dir
 
 ---
 
-## 🧠 Wissenstest: Fortgeschrittenes Scripting & TUI
+## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Fragen rund um TUI-Erstellung, Massenverwaltung und Drucksysteme:
 
@@ -200,11 +200,11 @@ Im [Assets](./assets)-Verzeichnis finden Sie die Unterlagen zu diesem Tag:
 - [Praxis-Historie (Root-User-Verwaltung) (TXT)](./assets/history-root-admin-userVerwaltung-202606091643)
 
 ---
+## 🔗 Zurück zur Übersicht
 
-## 🔗 6. Zurück zur Übersicht
-
-[⬅ Zurück zur Übersicht](../README.md)
+* **Tag 12 (Fortgeschrittene Paketverwaltung):** [⬅️ Tag 12](../Day_12/README.md)
+* **Tag 14 (Netzwerk-Grundlagen & Schnittstellen):** [➡️ Tag 14](../Day_14/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
-
-*Erstellt am 22. Mai 2026 für den Linux Essentials Kurs.*
+*Erstellt & gepflegt von Tobias Boyke, Juni 2026.*

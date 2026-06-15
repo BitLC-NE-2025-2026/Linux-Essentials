@@ -280,11 +280,34 @@ Somit ergibt sich 640.
 
 ---
 
+---
+
+## 🧠 LPIC-1 Relevanz & Wissenstest
+
+<details>
+<summary><b>Fragen zu Netzwerk-Grundlagen & Schnittstellen (Klicken zum Ausklappen)</b></summary>
+
+1. **Welcher Runlevel steht traditionell für das Herunterfahren (Shutdown) des Systems?**
+   <details><summary>Antwort</summary>Runlevel 0.</details>
+
+2. **Welche systemd-Unit entspricht dem klassischen Runlevel 3 (Multi-User-Modus ohne GUI)?**
+   <details><summary>Antwort</summary>`multi-user.target`.</details>
+
+3. **Mit welchem Befehl liest man den aktuellen Kernel-Ringpuffer aus?**
+   <details><summary>Antwort</summary>`dmesg`.</details>
+
+4. **In welcher Datei werden statische Informationen zu einhängbaren Dateisystemen konfiguriert?**
+   <details><summary>Antwort</summary>In `/etc/fstab`.</details>
+
+5. **Wie prüft man die ID der aktuell geladenen Hardware-Geräte auf dem PCI-Bus?**
+   <details><summary>Antwort</summary>Mit dem Befehl `lspci`.</details>
+
+</details>
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 13 (Shell Scripting):** [⬅️ Fortg. Shell Scripting](../Day_13/README.md)
-* **Tag 15 (Netzwerk-Grundlagen):** [➡️ Netzwerk-Grundlagen](../Day_15/README.md)
-* **Master-Repository:** [🌌 Zurück zur Übersicht](../README.md)
+* **Tag 13 (Benutzerverwaltung & TUI-Erstellung):** [⬅️ Tag 13](../Day_13/README.md)
+* **Tag 15 (VLAN-Konfiguration & Automatisierung):** [➡️ Tag 15](../Day_15/README.md)
+* **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
 *Erstellt & gepflegt von Tobias Boyke, Juni 2026.*
