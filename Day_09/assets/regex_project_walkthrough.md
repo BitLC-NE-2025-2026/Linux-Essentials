@@ -28,21 +28,21 @@ graph TD
     L -->|Eingabe für| K
 ```
 
-### Dateistruktur in [Day_09](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09)
+### Dateistruktur in [Day_09](..)
 
-* [StartEx.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/StartEx.sh) — *Zentrales TUI-Skript mit interaktivem Konsolenmenü.*
-* [README.md](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/README.md) — *LPIC-1 ausgerichteter Lernleitfaden.*
+* [StartEx.sh](../StartEx.sh) — *Zentrales TUI-Skript mit interaktivem Konsolenmenü.*
+* [README.md](../README.md) — *LPIC-1 ausgerichteter Lernleitfaden.*
 * `scripts/` — *Verzeichnis für die modularen Einzellösungen.*
-  * [task_1_ipv4.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_1_ipv4.sh) — *Extrahiert valide IPv4-Adressen.*
-  * [task_1b_ipv6.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_1b_ipv6.sh) — *Extrahiert valide IPv6-Adressen.*
-  * [task_2_interfaces.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_2_interfaces.sh) — *Extrahiert Schnittstellennamen.*
-  * [task_3_passwd_users.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_3_passwd_users.sh) — *Sucht Usernamen mit UID >= 1000.*
-  * [task_4_group_names.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_4_group_names.sh) — *Sucht Gruppennamen mit GID >= 1000.*
-  * [task_5_extract_services.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_5_extract_services.sh) — *Filtert und extrahiert die 2. Spalte von /etc/services.*
-  * [task_6_count_3digit_tcp.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_6_count_3digit_tcp.sh) — *Filtert & zählt 3-stellige TCP-Ports.*
-  * [task_7_count_2_5digit_tcp.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_7_count_2_5digit_tcp.sh) — *Filtert & zählt 2- & 5-stellige TCP-Ports.*
-  * [task_8_unique_protocols.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_8_unique_protocols.sh) — *Zählt einzigartige Transportprotokolle.*
-  * [task_9_count_udp.sh](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_09/scripts/task_9_count_udp.sh) — *Zählt UDP-Ports analog zu 6 & 7.*
+  * [task_1_ipv4.sh](../scripts/task_1_ipv4.sh) — *Extrahiert valide IPv4-Adressen.*
+  * [task_1b_ipv6.sh](../scripts/task_1b_ipv6.sh) — *Extrahiert valide IPv6-Adressen.*
+  * [task_2_interfaces.sh](../scripts/task_2_interfaces.sh) — *Extrahiert Schnittstellennamen.*
+  * [task_3_passwd_users.sh](../scripts/task_3_passwd_users.sh) — *Sucht Usernamen mit UID >= 1000.*
+  * [task_4_group_names.sh](../scripts/task_4_group_names.sh) — *Sucht Gruppennamen mit GID >= 1000.*
+  * [task_5_extract_services.sh](../scripts/task_5_extract_services.sh) — *Filtert und extrahiert die 2. Spalte von /etc/services.*
+  * [task_6_count_3digit_tcp.sh](../scripts/task_6_count_3digit_tcp.sh) — *Filtert & zählt 3-stellige TCP-Ports.*
+  * [task_7_count_2_5digit_tcp.sh](../scripts/task_7_count_2_5digit_tcp.sh) — *Filtert & zählt 2- & 5-stellige TCP-Ports.*
+  * [task_8_unique_protocols.sh](../scripts/task_8_unique_protocols.sh) — *Zählt einzigartige Transportprotokolle.*
+  * [task_9_count_udp.sh](../scripts/task_9_count_udp.sh) — *Zählt UDP-Ports analog zu 6 & 7.*
 
 ---
 

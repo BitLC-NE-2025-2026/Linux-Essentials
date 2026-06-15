@@ -256,7 +256,7 @@ Zur vollautomatischen und interaktiven Einrichtung all dieser Netzwerk-, Routing
 
 > [!TIP]  
 > Ausführliche Details zu Architektur und Funktionsumfang des Tools finden Sie im Handbuch:  
-> 📖 **[OmniTUI Handbuch (OMNITUI_README.md)](file:///c:/Users/Tobia/Desktop/cSharpRepo/Linux-Essentials/Day_17/OMNITUI_README.md)**
+> 📖 **[OmniTUI Handbuch (OMNITUI_README.md)](OMNITUI_README.md)**
 
 ---
 
