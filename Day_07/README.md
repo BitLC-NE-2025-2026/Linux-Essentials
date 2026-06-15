@@ -183,6 +183,18 @@ Ein Zombie entsteht, wenn der Parent das Signal `SIGCHLD` nicht korrekt verarbei
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `tar` | Tape Archiver: Fasst mehrere Dateien und Verzeichnisse in ein einzelnes Archiv (*.tar) zusammen. |
+| `gzip` | Standard-GNU-Kompressionswerkzeug; komprimiert schnell mit mäßiger Dateigrößenreduktion. |
+| `xz` | Hochleistungskompressionswerkzeug (LZMA-Algorithmus) für minimale Dateigrößen bei längerer Laufzeit. |
+| `make` | Kompiliert Quellcode automatisch auf Basis von Anweisungen in einer Datei namens Makefile. |
+| `ldd` | Listet alle dynamischen Bibliotheken (Shared Libraries, *.so) auf, die ein Programm benötigt. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Prüfungsfragen und Szenarien zum LPIC-1 Fokus:

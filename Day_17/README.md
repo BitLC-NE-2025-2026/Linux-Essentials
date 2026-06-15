@@ -20,6 +20,7 @@
 - [🔌 3. Port-Weiterleitung mit iptables](#-3-port-weiterleitung-mit-iptables)
   - [Schritt-für-Schritt-Workflow](#schritt-für-schritt-workflow)
 - [🎮 Das optionale OmniTUI Showcase-Tool](#-das-optionale-omnitui-showcase-tool)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -257,6 +258,18 @@ Zur vollautomatischen und interaktiven Einrichtung all dieser Netzwerk-, Routing
 > [!TIP]  
 > Ausführliche Details zu Architektur und Funktionsumfang des Tools finden Sie im Handbuch:  
 > 📖 **[OmniTUI Handbuch (OMNITUI_README.md)](OMNITUI_README.md)**
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `chronyd` | NTP-Daemon zur schnellen und präzisen Synchronisation der Systemuhr über das Netzwerk. |
+| `timedatectl` | Zentrales systemd-Tool zum Einstellen der Systemzeit, der Zeitzone und des NTP-Status. |
+| `sysctl` | Ermöglicht das Anzeigen und Ändern von Kernel-Parametern zur Laufzeit (z. B. Härtung oder IP-Forwarding). |
+| `ntpdate` | Klassischer Befehl zum einmaligen, abrupten Abgleich der Uhrzeit mit einem NTP-Server (veraltet). |
+| `/etc/adjtime` | Hält die systematische Drift-Rate der Hardware-Uhr fest, um Gangungenauigkeiten auszugleichen. |
 
 ---
 

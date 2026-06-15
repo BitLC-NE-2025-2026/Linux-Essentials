@@ -21,6 +21,7 @@
   - [B. Pull- & Push-Verfahren über SSH](#b-pull---push-verfahren-über-ssh)
   - [C. Automatisierung über Cronjobs](#c-automatisierung-über-cronjobs)
   - [D. Echtzeit-Synchronisation mit Lsyncd (Inotify & Lua-Config)](#d-echtzeit-synchronisation-mit-lsyncd-inotify--lua-config)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -175,6 +176,18 @@ sync {
 sudo systemctl enable --now lsyncd
 sudo systemctl status lsyncd
 ```
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `ssh-agent` | Hintergrunddienst, der SSH-Schlüssel entschlüsselt im RAM hält, um Passphrase-Eingaben zu vermeiden. |
+| `ssh-add` | Fügt einen privaten SSH-Schlüssel dem laufenden ssh-agent hinzu. |
+| `ProxyJump` | SSH-Verbindungsoption zum Tunneln über ein transitives System (Jump Host) in geschützte Netze. |
+| `lsyncd` | Live Syncing Daemon: Überwacht Verzeichnisse und synchronisiert sie bei Änderungen sofort via rsync. |
+| `inotifywait` | Kernel-basiertes Tool zur Überwachung von Dateisystem-Ereignissen (Erstellung, Löschung, Änderung). |
 
 ---
 

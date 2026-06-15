@@ -10,6 +10,7 @@
 
 ## 📑 Inhaltsverzeichnis
 - [📖 Themenübersicht](#-themenübersicht)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -32,6 +33,18 @@ TCP-Wrapper ermöglichen eine einfache, IP-basierte Zugriffskontrolle auf Netzwe
 Ressourcenlimits verhindern DoS-Angriffe durch übermäßige Speicher- oder Prozessbelegung.
 * `ulimit -a`: Zeigt alle aktuellen Limits an.
 * `/etc/security/limits.conf`: Hier werden Limits persistent pro Benutzer oder Gruppe definiert (z. B. maximale Dateianzahl `nofile` oder maximale Prozesse `nproc`).
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `sshd_config` | Zentrale Konfigurationsdatei des SSH-Servers zur Steuerung von Ports, Root-Logins und Sicherheit. |
+| `ulimit` | Setzt und zeigt Ressourcenbeschränkungen (wie maximale Dateianzahl oder Speichergröße) für Prozesse. |
+| `hosts.allow` | Zentrale Textdatei für TCP-Wrapper zur Definition explizit erlaubter IP-Verbindungen. |
+| `limits.conf` | Konfigurationsdatei zur persistenten, benutzerbezogenen Zuweisung von Systemgrenzen. |
+| `hosts.deny` | Zentrale Textdatei für TCP-Wrapper zur Sperrung unerwünschter IP-Verbindungen. |
 
 ---
 

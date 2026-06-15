@@ -149,6 +149,18 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `sed` | Stream Editor: Textwerkzeug zur automatisierten Ersetzung, Löschung und Bearbeitung in Datenströmen. |
+| `awk` | Mächtige Skriptsprache zur zeilenweisen Bearbeitung und Analyse von Textdaten in Spaltenform. |
+| `while read` | Bash-Schleife, die Eingabeströme Zeile für Zeile abarbeitet. |
+| `tail -f` | Follow-Modus: Hält eine Datei geöffnet und gibt neue Zeilen (z. B. wachsende Logs) sofort live aus. |
+| `/var/log` | Der standardmäßige, systemweite Speicherort für Log-Dateien von Diensten und dem Kernel. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 <details>

@@ -148,6 +148,18 @@ Zusätzlich zu `rwx` gibt es drei Spezialbits, die für die Systemsicherheit kri
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `ps aux` | Listet alle laufenden Prozesse im System mit CPU-, RAM-Nutzung und Status (STAT) auf. |
+| `kill` | Sendet ein definiertes Signal (z. B. SIGTERM=15 oder SIGKILL=9) an eine Prozess-ID (PID). |
+| `nice` | Startet ein neues Programm mit einer definierten Prioritätsstufe (Nice-Wert von -20 bis 19). |
+| `renice` | Ändert die Prioritätsstufe eines bereits laufenden Prozesses zur Laufzeit. |
+| `jobs` | Zeigt alle im Hintergrund oder pausiert laufenden Prozesse der aktuellen Shell-Sitzung an. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 Hier sind Kontrollfragen zum Selbststudium:
 

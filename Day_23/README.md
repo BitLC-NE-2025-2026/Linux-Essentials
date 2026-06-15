@@ -17,6 +17,7 @@
   - [B. DNF (Dandified YUM)](#b-dnf-dandified-yum)
 - [🌐 3. Repository-Verwaltung & Spiegelserver](#-3-repository-verwaltung--spiegelserver)
 - [🖥️ 4. Linux als Virtualisierungs-Gast betreiben](#-4-linux-als-virtualisierungs-gast-betreiben)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -137,6 +138,18 @@ Ein Linux-System kann feststellen, ob es auf physischer Hardware (Bare-Metal) od
 ### Cloud-init Grundlagen
 * `cloud-init` ist der Industriestandard zur automatischen Initialisierung von Cloud-Instanzen (z.B. AWS, OpenStack).
 * Ermöglicht die automatische Konfiguration von Netzwerken, SSH-Keys, Hostnames und Benutzern beim ersten Systemstart über Metadaten-Dienste.
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `dpkg` | Low-Level-Paketmanager für Debian-basierte Linux-Systeme; verarbeitet lokale .deb-Pakete. |
+| `rpm` | Low-Level-Paketmanager für RedHat-basierte Systeme; verarbeitet lokale .rpm-Pakete. |
+| `apt` | High-Level-Paketmanager für Debian/Ubuntu, der Abhängigkeiten automatisch über Online-Repositorys auflöst. |
+| `dnf` | Moderner High-Level-Paketmanager für RedHat/Rocky Linux (Nachfolger von YUM). |
+| `systemd-detect-virt` | Ermittelt, ob das Betriebssystem nativ auf Hardware oder in einer VM/einem Container ausgeführt wird. |
 
 ---
 

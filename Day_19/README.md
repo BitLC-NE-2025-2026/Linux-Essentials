@@ -24,6 +24,7 @@
 - [🧠 4. Swapspace verwalten](#-4-swapspace-verwalten)
   - [A. Was ist Swap?](#a-was-sind-swap)
   - [B. Swapon & Swapoff](#b-swapon--swapoff)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -185,6 +186,18 @@ sudo swapon /dev/sda2
 # Swap-Bereich deaktivieren
 sudo swapoff /dev/sda2
 ```
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `fdisk` | Klassisches Partitionierungswerkzeug zur Erstellung und Verwaltung von MBR- und GPT-Partitionstabellen. |
+| `mkfs.ext4` | Erstellt ein ext4-Dateisystem (Formatierung) auf einer Partition oder Festplatte. |
+| `mount` | Hängt ein Dateisystem oder eine Partition in ein beliebiges Verzeichnis der Verzeichnisstruktur ein. |
+| `UUID` | Universally Unique Identifier: Eindeutige Kennung für Partitionen zur stabilen Zuordnung in /etc/fstab. |
+| `umount` | Hängt ein eingehängtes Dateisystem sicher aus dem Verzeichnisbaum aus. |
 
 ---
 

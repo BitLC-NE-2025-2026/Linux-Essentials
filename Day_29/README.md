@@ -10,6 +10,7 @@
 
 ## 📑 Inhaltsverzeichnis
 - [📖 Themenübersicht](#-themenübersicht)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -27,6 +28,18 @@ Die LPIC-1 Prüfung 101-500 deckt die Systemarchitektur, die Linux-Installation,
 * **Systemarchitektur:** Kernel-Module, Bootloader-Interaktionsmöglichkeiten und systemd-Initialisierung.
 * **Paketverwaltung:** Detaillierte Kenntnis der Befehle für `dpkg`, `apt`, `rpm` und `dnf`.
 * **Dateisysteme & FHS:** Mount-Optionen, `/etc/fstab` Syntax und LVM-Verwaltung.
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `updatedb` | Aktualisiert die Dateisystem-Datenbank, die vom Suchbefehl `locate` verwendet wird. |
+| `atime` | Access Time: Zeitstempel, der den letzten Lesezugriff auf eine Datei protokolliert. |
+| `mtime` | Modification Time: Zeitstempel, der die letzte Inhaltsänderung einer Datei protokolliert. |
+| `ctime` | Change Time: Zeitstempel, der die letzte Metadatenänderung (Rechte, Inode, etc.) einer Datei protokolliert. |
+| `locate` | Findet Dateien extrem schnell über eine vorindizierte Systemdatenbank. |
 
 ---
 

@@ -17,6 +17,7 @@
   - [A. Installation von Docker-CE (CentOS/Rocky Linux)](#a-installation-von-docker-ce-centosrocky-linux)
   - [B. Container ausführen & absichern](#b-container-ausführen--absichern)
 - [📜 4. Shell-History & Kurs-Dateien](#-4-shell-history--kurs-dateien)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -121,6 +122,18 @@ docker run --rm -d -p 127.0.0.1:3000:3000 bkimminich/juice-shop
 
 Die komplette Shell-Historie dieses Kurstags inklusive Kommentaren und Befehlsabfolgen ist im folgenden Asset dokumentiert:
 * **Shell-History:** [rockyHisGrubDocker20260612-1345.txt](./assets/rockyHisGrubDocker20260612-1345.txt)
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `grub2-mkconfig` | Generiert die GRUB2-Bootloader-Konfigurationsdatei (`grub.cfg`) basierend auf Vorlagen neu. |
+| `uefi` | Unified Extensible Firmware Interface: Moderner BIOS-Nachfolger für den Hardware-Bootvorgang. |
+| `initramfs` | Initial RAM Filesystem: Temporäres Dateisystem im RAM, das Treiber zum Booten des eigentlichen Kernels bereitstellt. |
+| `grub.cfg` | Die zentrale GRUB2-Konfigurationsdatei; darf nicht direkt manuell bearbeitet werden. |
+| `docker run` | Startet eine isolierte Anwendungsinstanz (Container) auf Basis eines Images. |
 
 ---
 

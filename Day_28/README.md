@@ -10,6 +10,7 @@
 
 ## 📑 Inhaltsverzeichnis
 - [📖 Themenübersicht](#-themenübersicht)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -33,6 +34,18 @@ SSH ermöglicht das Tunneln anderer Netzwerkprotokolle durch verschlüsselte Ver
 Linux nutzt Mail Transfer Agents (MTA) zur E-Mail-Übertragung.
 * **Postfix / Sendmail:** Standard-MTAs unter Linux.
 * `/etc/aliases`: Leitet E-Mails an andere Benutzer weiter. Nach Änderungen muss `newaliases` ausgeführt werden.
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `gpg` | GNU Privacy Guard: Standardwerkzeug zur Verschlüsselung, Entschlüsselung und Signierung von Daten. |
+| `Postfix` | Moderner, modularer Mail Transfer Agent (MTA) zur E-Mail-Übertragung via SMTP. |
+| `newaliases` | Baut die Alias-Datenbank des Mailservers nach Änderungen an der Datei /etc/aliases neu auf. |
+| `/etc/aliases` | Systemweite Konfigurationsdatei zur Weiterleitung oder Umleitung lokaler Mail-Postfächer. |
+| `~/.forward` | Benutzerspezifische Textdatei im Home-Verzeichnis zur automatischen Weiterleitung von E-Mails. |
 
 ---
 

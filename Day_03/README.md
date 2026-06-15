@@ -152,6 +152,18 @@ find -name "*.old" | xargs rm     # Löscht alle gefundenen .old Dateien
 > Falls Dateinamen Leerzeichen enthalten, bricht `xargs` ab. Nutzen Sie dann Null-Byte Trenner:  
 > `find . -name "*.txt" -print0 | xargs -0 rm` (dies trennt Dateinamen durch ein Null-Byte, was sicher gegen Sonderzeichen ist).
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `pwd` | Print Working Directory: Zeigt den absoluten Pfad des aktuellen Standorts an. |
+| `cd` | Change Directory: Wechselt das aktuelle Arbeitsverzeichnis in der Shell. |
+| `cp -a` | Archiv-Modus beim Kopieren: Kopiert rekursiv unter Beibehaltung aller Rechte, Besitzer und Links. |
+| `rm -rf` | Löscht Dateien und Verzeichnisse rekursiv, ohne Nachfragen und unumgänglich. |
+| `ln -s` | Erstellt einen symbolischen Link (Softlink), der als Pfad-Referenz auf eine Datei oder einen Ordner zeigt. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Fragen zur Vertiefung des heutigen Stoffs:

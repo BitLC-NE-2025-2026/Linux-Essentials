@@ -361,6 +361,18 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `sh` | Bourne Shell: Die klassische Unix-Shell. Schnell, aber mit geringem Komfort. |
+| `bash` | Bourne Again Shell: Der Standard-Kommandozeileninterpreter unter fast allen Linux-Systemen. |
+| `zsh` | Z-Shell: Sehr mächtige Shell mit weitreichenden Erweiterungsmöglichkeiten (z.B. Oh My Zsh). |
+| `POSIX` | Portable Operating System Interface: Standardisierungs-Richtlinie für die Portabilität von Software über Unix-Systeme. |
+| `Copyleft` | GPL-Lizenzprinzip, das verlangt, dass modifizierter Code freier Software ebenfalls Open Source bleiben muss. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 <details>

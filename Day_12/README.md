@@ -348,6 +348,18 @@ Cronjob hinzufügen:
 30 15 * * 1-5 /home/scripts/historyscript.sh
 ```
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `crontab -e` | Öffnet den Editor zur Einrichtung periodischer, zeitgesteuerter Aufgaben (Cronjobs). |
+| `at` | Plant eine einmalige Ausführung eines Kommandos zu einem exakten zukünftigen Zeitpunkt. |
+| `atq` | Listet alle anstehenden, noch nicht ausgeführten Einmaljobs der at-Warteschlange auf. |
+| `wall` | Sendet eine Textnachricht (Broadcast) direkt an die Terminals aller aktuell angemeldeten Benutzer. |
+| `/etc/cron.d` | Systemweites Verzeichnis zur Ablage modularer, strukturierter Cron-Konfigurationen. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Fragen rund um zeitgesteuerte Jobs unter Linux:

@@ -10,6 +10,7 @@
 
 ## 📑 Inhaltsverzeichnis
 - [📖 Themenübersicht](#-themenübersicht)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -25,6 +26,18 @@ Die LPIC-1 Prüfung 102-500 deckt Shell-Scripting, Benutzeroberflächen, adminis
 * **Netzwerk-Konfiguration:** IP-Adressierung, Routing, DNS, `nmcli`, `ip` und Socket-Statistiken (`ss`).
 * **Sicherheit:** SSH-Härtung, TCP-Wrapper, ulimits und Dateiberechtigungen.
 * **SQL-Grundlagen:** Einfache SELECT-Abfragen, Tabellen-Joins und Datenmanipulation.
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `tcpdump` | Leistungsfähiger Kommandozeilen-Sniffer zur Aufzeichnung und Analyse von Netzwerkpaketen. |
+| `nsswitch.conf` | Name Service Switch: Definiert die Priorität und Reihenfolge der Abfragequellen für Systemdaten (z.B. hosts, passwd). |
+| `/sbin/nologin` | Spezielle Shell, die interaktive Anmeldungen von Systembenutzern blockiert. |
+| `usermod -L` | Sperrt (Locks) das Kennwort eines Benutzers, indem ein Ausrufezeichen vor den Hash gesetzt wird. |
+| `resolv.conf` | Definiert die IP-Adressen der Nameserver, die für die DNS-Namensauflösung genutzt werden. |
 
 ---
 

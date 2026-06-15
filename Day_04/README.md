@@ -123,6 +123,18 @@ sudo dnf upgrade     # Installiert die neuesten Versionen aller Pakete
 > * **`dnf clean all`**: Bereinigt sämtliche zwischengespeicherten Metadaten und Paket-Caches.  
 > * **`dnf history`**: Zeigt eine Liste aller getätigten DNF-Transaktionen (Installationen/Upgrades) mit IDs an. Erlaubt Rollbacks!
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `grep` | Filtert Zeilen aus Textströmen oder Dateien anhand definierter Suchmuster. |
+| `tr` | Translate: Ersetzt oder löscht einzelne Zeichen aus der Standardeingabe (stdin). |
+| `cut` | Schneidet definierte Spalten oder Felder aus strukturierten Textzeilen aus. |
+| `sort -n` | Sortiert Eingabezeilen in numerischer (statt rein alphabetischer) Reihenfolge. |
+| `uniq` | Entfernt aufeinanderfolgende doppelte Zeilen (erfordert vorheriges Sortieren). |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 Hier sind typische Fragen zur Überprüfung Ihres Wissens:
 

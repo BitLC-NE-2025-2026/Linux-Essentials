@@ -223,6 +223,18 @@ Das Skript `MiniNetzAutoBuilder.sh` führt all diese Schritte vollautomatisch un
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `ip route` | Verwaltet und zeigt die Routing-Tabelle des Kernels an. |
+| `ip_forward` | Kernel-Schalter unter /proc, der das Weiterleiten von Paketen zwischen Netzwerkkarten aktiviert. |
+| `nftables` | Moderner Nachfolger von iptables; Framework zur Filterung von Netzwerkpaketen und NAT. |
+| `MASQUERADE` | Spezielle Form von Source NAT (SNAT); maskiert interne IPs mit der dynamischen IP der WAN-Schnittstelle. |
+| `route -n` | Zeigt die Kernel-Routingtabelle ohne langsame DNS-Namensauflösung an (rein numerisch). |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind Prüfungsfragen zur Vorbereitung auf LPIC-1 und zur Festigung des Wissens:

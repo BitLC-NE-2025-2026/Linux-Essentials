@@ -20,6 +20,7 @@
 - [📂 3. Offene Dateien & Netzwerk-Sockets (lsof)](#-3-offene-dateien--netzwerk-sockets-lsof)
   - [A. Dateien auflisten](#a-dateien-auflisten)
   - [B. Netzwerk-Verbindungen überwachen](#b-netzwerk-verbindungen-überwachen)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -157,6 +158,18 @@ sudo lsof -i :22
 # Nur TCP-Verbindungen anzeigen, die im Status LISTEN sind
 sudo lsof -iTCP -sTCP:LISTEN
 ```
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `lsmod` | Listet alle aktuell im Linux-Kernel geladenen Kernel-Module (*.ko) auf. |
+| `modprobe` | Lädt oder entlädt Kernel-Module inklusive aller benötigten Modulabhängigkeiten automatisch. |
+| `depmod` | Analysiert alle installierten Kernel-Module und generiert die Abhängigkeitsdatei modules.dep. |
+| `lsof` | Listet alle aktuell geöffneten Dateien im System sowie die zugreifenden Prozesse auf. |
+| `modinfo` | Zeigt detaillierte Metadaten (Autor, Lizenz, Parameter) eines spezifischen Kernel-Moduls an. |
 
 ---
 

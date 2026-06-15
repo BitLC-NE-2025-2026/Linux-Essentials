@@ -161,6 +161,18 @@ Wenn ein Skript nicht tut, was es soll:
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `#!/bin/bash` | Shebang: Erste Zeile im Skript, die dem Kernel mitteilt, mit welchem Interpreter das Skript auszuführen ist. |
+| `read -r` | Liest eine Tastatureingabe des Benutzers zeilenweise ein; verhindert die Interpretation von Backslashes. |
+| `if [ ... ]` | Kontrollstruktur zur bedingten Ausführung von Codeblöcken basierend auf Testergebnissen. |
+| `$1, $2` | Positionsparameter: Repräsentieren das erste, zweite usw. Argument, das dem Skript übergeben wurde. |
+| `exit` | Beendet ein Shell-Skript sofort und gibt einen numerischen Statuscode (0 = Erfolg, 1-255 = Fehler) an den Aufrufer zurück. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Fragen rund um Shell Scripting:

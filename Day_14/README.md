@@ -282,6 +282,18 @@ Somit ergibt sich 640.
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `systemctl isolate` | Wechselt zur Laufzeit in ein anderes systemd-Target (z.B. multi-user.target oder graphical.target). |
+| `dmesg` | Liest den Kernel-Ringpuffer aus; zeigt Hardware- und Systemereignisse seit dem Booten an. |
+| `/etc/fstab` | Zentrale Konfigurationsdatei für statische, beim Systemstart automatisch einzuhängende Dateisysteme. |
+| `lspci` | Listet alle PCI-Bus-Geräte und integrierten Hardware-Controller des Mainboards auf. |
+| `/etc/inittab` | Klassische SysV-Init-Konfigurationsdatei zur Definition des Standard-Runlevels (in modernen Systemen durch systemd ersetzt). |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 <details>

@@ -146,6 +146,18 @@ Wenden Sie die Änderungen mit `source ~/.zshrc` an.
 > [!IMPORTANT]
 > Für das Agnoster-Theme müssen Powerline-Fonts (z.B. "Noto Mono Powerline") im Terminal eingestellt sein.
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `man` | Manual Pages: Das standardmäßige, integrierte Offline-Hilfesystem von Linux. |
+| `lscpu` | Zeigt detaillierte CPU-Architekturinformationen des Prozessors an. |
+| `free` | Gibt Auskunft über den genutzten und freien Arbeitsspeicher (RAM) sowie Swap. |
+| `mkdir -p` | Erstellt einen vollständigen Verzeichnispfad inklusive aller fehlenden Elternverzeichnisse. |
+| `/proc` | Virtuelles Dateisystem im RAM, das System- und Kernel-Informationen bereitstellt. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 Hier sind typische Kontrollfragen zu den Themen des zweiten Tages:
 

@@ -156,6 +156,18 @@ Das Skript `whiptail_manager.sh` integriert LPIC-1 relevante Druckfunktionen dir
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `useradd` | Erstellt einen neuen Systembenutzer inklusive Standardeinstellungen und optionalem Home-Verzeichnis. |
+| `chpasswd` | Aktualisiert die Passwörter für viele Benutzer gleichzeitig über die Standardeingabe (Batch-Verarbeitung). |
+| `whiptail` | Erzeugt interaktive, farbige TUI-Dialogboxen (Menüs, Eingabemasken) in Shell-Skripten. |
+| `groupadd` | Erstellt eine neue Benutzergruppe im System. |
+| `usermod -L` | Lock-Option: Sperrt einen Benutzeraccount durch Deaktivierung des Passwort-Hashes. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Hier sind typische Fragen rund um TUI-Erstellung, Massenverwaltung und Drucksysteme:

@@ -144,6 +144,18 @@ Unter Linux werden Netzwerkkonfigurationen in systemspezifischen Textdateien ges
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `ip addr` | Zeigt Netzwerk-Schnittstellen, IP-Adressen (IPv4/IPv6) und Status-Flags an. |
+| `nmcli` | Kommandozeilenwerkzeug zur Steuerung und Konfiguration des NetworkManagers. |
+| `VLAN` | Virtual Local Area Network: Logische Unterteilung physischer Netzwerke auf Layer 2 des OSI-Modells. |
+| `802.1Q` | Ethernet-Standard für VLAN-Tagging; fügt IDs in Datenrahmen ein, um Netze zu trennen. |
+| `CIDR` | Classless Inter-Domain Routing: Methode zur flexiblen Zuweisung von IP-Adressbereichen mittels Subnetzmasken. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 Prüfen Sie Ihr Wissen mit diesen typischen LPIC-1 Prüfungsfragen:

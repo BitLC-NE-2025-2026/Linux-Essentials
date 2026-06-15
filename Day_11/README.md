@@ -194,6 +194,18 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `i` | Wechselt im Texteditor vi/vim vom Befehlsmodus in den Einfügemodus (Insert Mode) an der Cursorposition. |
+| `ESC` | Wechselt in vi/vim aus jedem Modus zurück in den Standard-Befehlsmodus. |
+| `:wq` | Last-Line-Befehl in vi/vim: Speichert alle Änderungen (write) und beendet den Editor (quit). |
+| `dd` | Löscht (schneidet aus) die aktuelle Zeile, in der sich der Cursor befindet. |
+| `u` | Undo: Macht die letzte Änderung im Dokument rückgängig. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 <details>

@@ -22,6 +22,7 @@
   - [A. Kubernetes Architektur (Control Plane vs. Worker Nodes)](#a-kubernetes-architektur-control-plane-vs-worker-nodes)
   - [B. Deklaratives Modell: Pods, Deployments & Services](#b-deklaratives-modell-pods-deployments--services)
 - [🧠 LPIC-1/Cloud-Native Relevanz & Wissenstest](#-lpic-1cloud-native-relevanz--wissenstest)
+- [🔑 Keywords](#-keywords)
 - [📚 Ressourcen & Dokumente](#-ressourcen--dokumente)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -180,6 +181,19 @@ In Kubernetes wird Infrastruktur **deklarativ** über YAML-Dateien beschrieben:
 
 > [!TIP]  
 > Um mit dem Kubernetes-Cluster zu interagieren, verwendet man das Kommandozeilen-Tool **`kubectl`** (z.B. `kubectl get pods` oder `kubectl apply -f deployment.yaml`).
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `OCI` | Open Container Initiative: Standardisierungsgremium für offene Container-Spezifikationen (Images und Runtimes). |
+| `containerd` | Modulare High-Level Container-Runtime zur Verwaltung des vollständigen Container-Lebenszyklus auf einem Host. |
+| `runc` | Leichtgewichtige Low-Level OCI-Runtime, die direkt Kernel-Features (Namespaces, cgroups) nutzt, um Container auszuführen. |
+| `Pod` | Kleinste Bereitstellungs-Einheit in Kubernetes; gruppiert einen oder mehrere Container mit gemeinsamer IP und Volumes. |
+| `Kubelet` | Der primäre Node-Agent auf jedem Kubernetes-Worker, der den Zustand der lokalen Pods überwacht. |
+| `etcd` | Hochverfügbarer Key-Value-Store der Control Plane; speichert die Konfiguration und den Zustand des gesamten K8s-Clusters. |
 
 ---
 

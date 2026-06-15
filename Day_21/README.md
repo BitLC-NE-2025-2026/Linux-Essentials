@@ -21,6 +21,7 @@
   - [A. Lokale & entfernte Synchronisation](#a-lokale--entfernte-synchronisation)
   - [B. Wichtige Rsync-Optionen](#b-wichtige-rsync-optionen)
   - [C. Rsync über SSH](#c-rsync-über-ssh)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -146,6 +147,18 @@ Um Daten sicher über Netzwerke hinweg zu synchronisieren, nutzt Rsync SSH als T
 # Synchronisiert ein lokales Verzeichnis verschlüsselt mit einem Remote-Server
 rsync -avz -e ssh /local/dir/ user@remotehost:/remote/dir/
 ```
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `ssh-keygen` | Erzeugt asymmetrische RSA-, ECDSA- oder Ed25519-Schlüsselpaare für die SSH-Authentifizierung. |
+| `rsync` | Hocheffizientes Synchronisationswerkzeug; überträgt nur die geänderten Teile von Dateien (Delta-Transfer). |
+| `ssh-copy-id` | Kopiert den öffentlichen SSH-Schlüssel eines Benutzers in die authorized_keys des Zielservers. |
+| `authorized_keys` | Datei auf dem Server (`~/.ssh/authorized_keys`), die alle autorisierten öffentlichen Keys speichert. |
+| `sftp` | Secure File Transfer Protocol: Verschlüsselter Dateiaustausch über SSH-Verbindungen. |
 
 ---
 

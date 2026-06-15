@@ -238,6 +238,18 @@ Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
 ---
 
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `grep -E` | Aktiviert die erweiterten regulären Ausdrücke (Extended Regular Expressions, ERE) beim Filtern. |
+| `^` | Regex-Anker: Matcht ausschließlich den Beginn einer Textzeile. |
+| `$` | Regex-Anker: Matcht ausschließlich das Ende einer Textzeile. |
+| `[0-9]` | Regex-Zeichenklasse: Matcht genau eine Ziffer zwischen 0 und 9. |
+| `\b` | Regex-Metazeichen: Definiert eine Wortgrenze zur präzisen Eingrenzung von Wortlängen. |
+
+---
+
 ## 🧠 LPIC-1 Relevanz & Wissenstest
 
 <details>

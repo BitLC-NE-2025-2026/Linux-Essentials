@@ -17,6 +17,7 @@
   - [B. Persistenz des Journals konfigurieren](#b-persistenz-des-journals-konfigurieren)
 - [🔄 3. Log-Rotation mit Logrotate](#-3-log-rotation-mit-logrotate)
 - [🎓 4. LPI-Zertifizierung & Pearson VUE](#-4-lpi-zertifizierung--pearson-vue)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -208,6 +209,18 @@ Eigenständige Zertifizierungen für angrenzende Open-Source-Technologien, die k
 > [!IMPORTANT]  
 > Detaillierte administrative Leitfäden zu Prüfungszentren, On-Screen-Prüfungen (OnVUE), ID-Anforderungen und dem Ablauf am Prüfungstag findest du in der beigefügten PDF-Dokumentation:  
 > [📖 Pearson VUE LPI Zertifizierung (PDF)](./assets/Linux_lpi_Zert_PearsV.pdf)
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `rsyslogd` | System-Logging-Daemon, der Log-Meldungen filtert, klassifiziert und in Textdateien schreibt. |
+| `journalctl` | Kommandozeilenwerkzeug zur Abfrage und Filterung der binären Protokolldateien des systemd-journals. |
+| `logrotate` | Automatisiert das periodische Rotieren, Komprimieren und Löschen von System-Logdateien. |
+| `syslog-Facility` | Einteilungskategorie von Log-Meldungen nach Herkunft (z.B. auth, cron, daemon, mail). |
+| `syslog-Priority` | Dringlichkeitsstufe von Log-Meldungen von debug (7) bis emerg (0). |
 
 ---
 

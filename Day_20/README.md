@@ -20,6 +20,7 @@
   - [B. Logical Volume & Dateisystem verkleinern](#b-logical-volume--dateisystem-verkleinern)
 - [🧹 4. Datenträger entfernen & LVM aufräumen](#-4-datenträger-entfernen--lvm-aufräumen)
   - [Schritt-für-Schritt-Workflow](#schritt-für-schritt-workflow)
+- [🔑 Keywords](#-keywords)
 - [🧠 LPIC-1 Relevanz & Wissenstest](#-lpic-1-relevanz--wissenstest)
 - [🔗 Zurück zur Übersicht](#-zurück-zur-übersicht)
 
@@ -182,6 +183,18 @@ sudo vgreduce vg_matz /dev/sdc
 # 3. Das Gerät aus der LVM-Verwaltung löschen
 sudo pvremove /dev/sdc
 ```
+
+---
+
+## 🔑 Keywords
+
+| Keyword / Befehl | Erklärung |
+| :--- | :--- |
+| `pvcreate` | Initialisiert eine physische Partition oder Festplatte als Physical Volume für LVM. |
+| `vgcreate` | Fasst ein oder mehrere Physical Volumes (PV) zu einer Volume Group (VG) zusammen. |
+| `lvcreate` | Erstellt ein Logical Volume (LV) innerhalb einer Volume Group; fungiert wie eine dynamische Partition. |
+| `lvextend` | Erweitert den Speicherplatz eines Logical Volumes zur Laufzeit ohne Datenverlust. |
+| `resize2fs` | Vergrößert oder verkleinert ext2/3/4 Dateisysteme online, um sie an die Volume-Größe anzupassen. |
 
 ---
 
