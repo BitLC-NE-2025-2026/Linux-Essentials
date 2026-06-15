@@ -1,0 +1,47 @@
+ 1880  clear
+ 1881  history 100 | less
+ 1882  history 40 > rockyHis$(date +%Y%m%d-%H%M).txt
+ 1883  cd /
+ 1884  ls
+ 1885  cd boot
+ 1886  ls
+ 1887  cd ~
+ 1888  clear
+ 1889  ls -al /boot
+ 1890  ls -al /boot/grub2
+ 1891  sudo ls -al /boot/grub2
+ 1892  clear
+ 1893  sudo vi /etc/default/grub
+ 1894  sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+ 1895  sudo vi /etc/default/grub
+ 1896  sudo nano /etc/default/grub
+ 1897  sudo iptables -t nat -A POSTROUTING -o ens160 -j MASQUERDE
+ 1898  sudo iptables -t nat -A POSTROUTING -o ens160 -j MASQUERADE
+ 1899  sudo sysctl -w net.ipv4.ip_forward=1
+
+1. System update um alle Repos (Archive) auf den neusten Stand zu bringen
+ 1900  sudo dnf update -y
+2. Eventuell störende Programme entfernen
+ 1901  sudo dnf remove -y podman buildah runc
+Um das Packet docker-ce über den Paketmanager finden zu können wird der plugins-core installiert 
+1902  sudo dnf install -y dnf-plugins-core
+Das Paket docker-ce hinzufügen 
+1903  sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+Jetzt kenn der Paketmanager die Quelle und kann die Laufzeitumgebung (containerd.io) und das Docker-Compose Plugin installieren 
+1904  sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+Docker Daemon starten, einschalten und Status prüfen 
+1905  sudo systemctl start docker
+ 1906  sudo systemctl enable docker
+ 1907  sudo systemctl status docker
+Den User zur Gruppe docker hinzufügen, um kein sudo bei docker eingeben zu müssen 
+1908  sudo usermod -aG docker $USER
+Glüchwunsch, der erste Docker Container 
+1909  docker run hello-world
+ 1910  sudo docker run hello-world
+Einrichten des Juice-Shops
+ 1911  sudo docker pull bkimminich/juice-shop
+ 1912  sudo docker run --rm -p 127.0.0.1:3000:3000 bkimminich/juice-shop
+ 1913  history 100 | less
+
+
+ 1914  history 35 > rockyHisGrubDocker$(date +%Y%m%d-%H%M).txt
