@@ -162,8 +162,8 @@ Im [Assets](./assets)-Verzeichnis finden Sie die Mitschriften und Unterlagen zu 
 ---
 ## 🔗 Zurück zur Übersicht
 
-* **Tag 03 (Navigation & Dateiverwaltung):** [⬅️ Tag 03](../Day_03/README.md)
-* **Tag 05 (Berechtigungen & Eigentümer):** [➡️ Tag 05](../Day_05/README.md)
+* **Tag 03 (Navigation & Dateiverwaltung):** [⬅️ Tag 03](../Day_03/readme.md)
+* **Tag 05 (Berechtigungen & Eigentümer):** [➡️ Tag 05](../Day_05/readme.md)
 * **Master-Repository:** [🌌 Zurück zum Master-Repository](../README.md)
 
 ---
