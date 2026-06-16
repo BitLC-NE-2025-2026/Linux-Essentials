@@ -120,7 +120,8 @@ Die aktuelle Woche behandelt fortgeschrittene Boot- und Logging-Systeme sowie di
 | **Tag 24** | ✅ | System-Logging & Audit | Klassisches Logging über `rsyslog` (Facilities/Priorities), binäres Logging mit `systemd-journald` und Log-Rotation zur Festplattenentlastung (`logrotate`). | [📖 README](./Day_24/README.md) |
 | **Tag 25** | ✅ | Boot-Prozess & Docker-Einstieg | BIOS vs. UEFI Bootvorgang, GRUB2-Konfiguration, Einstieg in Container-Virtualisierung auf Basis von Linux-Namespaces und `cgroups`. | [📖 README](./Day_25/README.md) |
 | **Tag 26** | ✅ | Container, Containerd & K8s | Container-Runtimes im Vergleich, Architektur von Kubernetes (Control Plane, Worker Nodes) und Container-Orchestrierung. | [📖 README](./Day_26/README.md) |
-| **Tag 27 - 30** | ⏳ | LPIC-1 Simulationen & Abschluss | Abschließende System-Härtung (Limits), Mail Transfer Agents (MTA) und umfassende Testprüfungen zur Vorbereitung auf die LPIC-1 Exams 101/102. | [📖 README](./Day_27/README.md) |
+| **Tag 27** | ✅ | Docker Multi-Host-Networking | Container-Kommunikation über getrennte Subnetze mittels Overlay-Netzwerk (VXLAN) und Swarm-Modus. | [📖 README](./Day_27/README.md) |
+| **Tag 28 - 30** | ⏳ | LPIC-1 Simulationen & Abschluss | Abschließende System-Härtung (Limits), Mail Transfer Agents (MTA) und umfassende Testprüfungen zur Vorbereitung auf die LPIC-1 Exams 101/102. | [📖 README](./Day_28/README.md) |
 
 ---
 
@@ -330,7 +331,7 @@ Zieht Berechtigungen bei der Dateierstellung ab. Maximale Standard-Ausgangsbasis
 
 * **Aktuelle Umgebung:** Rocky Linux 9.x (Router) & Debian/Cachy/Manjaro (Clients)
 * **Shell:** Bash / ZSH + Oh My Zsh & Whiptail TUIs
-* **Fortschritt:** 86% (26 von 30 Modulen abgeschlossen)
+* **Fortschritt:** 90% (27 von 30 Modulen abgeschlossen)
 
 ---
 
