@@ -23,9 +23,9 @@
   - [A. Kubernetes Architektur (Control Plane vs. Worker Nodes)](#a-kubernetes-architektur-control-plane-vs-worker-nodes)
   - [B. Deklaratives Modell: Pods, Deployments & Services](#b-deklaratives-modell-pods-deployments--services)
 - [🧩 5. Schlüsselkomponenten des Container-Ökosystems](#-5-schlüsselkomponenten-des-container-ökosystems)
-  - [A. Service Discovery (Wie finden sich Container?)](#a-service-discovery-wie-finden-sich-container)
-  - [B. Container-Netzwerke (Brücken bauen)](#b-container-netzwerke-brücken-bauen)
-  - [C. Scheduler & Orchestratoren (Der Dirigent)](#c-scheduler--orchestratoren-der-dirigent)
+  - [A. Service Discovery & Key-Value Stores (Das Echtzeit-Telefonbuch)](#a-service-discovery--key-value-stores-das-echtzeit-telefonbuch)
+  - [B. Container-Netzwerke (Brücken bauen & isolieren)](#b-container-netzwerke-brücken-bauen--isolieren)
+  - [C. Scheduler & Orchestratoren (Die Dirigenten)](#c-scheduler--orchestratoren-die-dirigenten)
   - [D. Zusammenfassung: Das Zusammenspiel im Ökosystem](#d-zusammenfassung-das-zusammenspiel-im-ökosystem)
 - [🧠 LPIC-1/Cloud-Native Relevanz & Wissenstest](#-lpic-1cloud-native-relevanz--wissenstest)
 - [🔑 Keywords](#-keywords)
@@ -213,32 +213,183 @@ In Kubernetes wird Infrastruktur **deklarativ** über YAML-Dateien beschrieben:
 
 ## 🧩 5. Schlüsselkomponenten des Container-Ökosystems
 
-Docker ist nicht nur ein eigenständiges Werkzeug, sondern Teil eines modularen, verteilten Ökosystems, das verschiedene Aufgaben auf spezialisierte Komponenten aufteilt.
+Docker ist nicht nur ein eigenständiges Werkzeug, sondern Teil eines modularen, verteilten Ökosystems, das verschiedene Aufgaben auf spezialisierte Komponenten aufteilt. Die folgenden Abschnitte beschreiben diese Kernkomponenten im Detail, basierend auf den Unterrichtsmaterialien.
 
-### A. Service Discovery (Wie finden sich Container?)
-* **Das Problem:** In dynamischen Cloud-Umgebungen ändern Container durch automatische Skalierung, Ausfälle oder Neustarts ständig ihre IP-Adressen.
-* **Die Lösung:** Ein zentrales System ("Telefonbuch"), das als Registry dient.
-* **Funktionsweise:** Neue Container registrieren sich beim Start automatisch. Andere Container fragen diesen zentralen Dienst ab, um die aktuellen Verbindungsdaten der benötigten Services zu ermitteln.
-* **Bekannte Tools:** `etcd` (in Kubernetes integriert), `Consul`, `ZooKeeper`.
+---
 
-### B. Container-Netzwerke (Brücken bauen)
-* **Aufgabe:** Ermöglicht die nahtlose Kommunikation zwischen Containern, selbst wenn diese auf physisch getrennten Servern laufen.
-* **Overlay-Netzwerke:** Erstellen ein logisches, flaches Netz über alle beteiligten Server hinweg. Für die Container verhält es sich so, als wären sie alle am selben lokalen Switch angeschlossen.
-* **Sicherheit:** Ermöglicht die Isolation auf Netzwerk-Ebene. Beispielsweise kann ein Datenbank-Container so konfiguriert werden, dass er nur mit dem Backend-Container kommunizieren darf, jedoch keinerlei direkten Zugriff aus dem Internet erlaubt.
+### A. Service Discovery & Key-Value Stores (Das Echtzeit-Telefonbuch)
 
-### C. Scheduler & Orchestratoren (Der Dirigent)
-* **Aufgabe:** Automatisierte Lastverteilung und Ressourcenverwaltung über einen gesamten Server-Cluster hinweg.
-* **Funktionsweise:** Der Administrator definiert deklarativ den Sollzustand (z. B. *"Starte 3 Instanzen der Web-App"*). Der Scheduler analysiert CPU/RAM-Auslastung der Server und startet die Container auf den am besten geeigneten Nodes.
-* **Features:**
-  * **Self-Healing:** Erkennt abgestürzte Container oder Server-Ausfälle und startet diese automatisch neu oder verschiebt sie.
-  * **Skalierung:** Passt die Instanzanzahl dynamisch an die Last an.
-* **Bekannte Tools:** `Kubernetes` (K8s), `Docker Swarm`, `Nomad`.
+#### 1. Das Problem dynamischer IP-Adressen in der Cloud
+In einer klassischen Server-Umgebung haben Systeme meist feste IP-Adressen (z. B. `192.168.1.50` für einen dedizierten Datenbankserver). In Cloud-Native- und Microservice-Umgebungen sind IP-Adressen jedoch **ephemer (flüchtig)**. Container werden ständig neu gestartet, hoch- oder herunterskaliert oder stürzen ab. Bei jedem dieser Vorgänge erhält der Container eine neue, zufällige IP-Adresse. **Hardcoding von IP-Adressen im Quellcode ist somit unmöglich.**
+
+#### 2. Das Prinzip von Service Discovery
+Service Discovery löst dieses Problem durch ein automatisches, hochverfügbares Erkennungssystem, das als Echtzeit-Telefonbuch fungiert. Es läuft in zwei Schritten ab:
+* **Service Registration (Anmeldung):** Sobald ein neuer Container startet, trägt er sich (oder ein Hilfswerkzeug) selbst mit seinem logischen Namen, seiner IP-Adresse und seinem Port in ein zentrales Verzeichnis ein.
+* **Service Discovery (Abfrage):** Wenn Container A (z. B. das Backend) mit Container B (z. B. der Datenbank) kommunizieren möchte, fragt Container A das Verzeichnis nach dem logischen Namen (z. B. `noten-service`) ab und erhält die aktuell gültige IP-Adresse.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client as Client / Service B
+    participant Registry as Service Registry (K/V Store)
+    actor ServiceA as Service A (z.B. Datenbank)
+
+    Note over ServiceA, Registry: Phase 1: Service Registration
+    ServiceA->>Registry: Registriere Service A (Name: database, IP: 10.0.1.5, Port: 5432)
+    Note over Registry: Registry speichert Pfad:<br/>/services/database -> 10.0.1.5:5432
+
+    Note over Client, Registry: Phase 2: Service Lookup & Call
+    Client->>Registry: Wo finde ich "database"? (Lookup)
+    Registry-->>Client: database ist unter 10.0.1.5:5432 erreichbar
+    Client->>ServiceA: Direkte Verbindung & Service-Call (TCP/HTTP)
+```
+
+#### 3. Eigenschaften der verteilten Konfigurationsspeicher (Key-Value Stores)
+Service-Discovery-Tools speichern diese Daten in verteilten Schlüssel-Wert-Datenbanken (Distributed Key-Value Stores). Diese zeichnen sich aus durch:
+* **Einfache Pfad-Struktur:** Keine komplexen relationalen Tabellen (SQL), sondern eine hierarchische Pfad-Struktur (z. B. `/services/database -> 10.0.1.5:5432`).
+* **Verteilte Hochverfügbarkeit (Distributed):** Sie laufen als Cluster auf mehreren Servern parallel. Fällt ein Server aus, bleiben die Daten erhalten (Ausfallsicherheit).
+* **Strikte Konsistenz:** Sie garantieren über Konsensus-Algorithmen (z. B. Raft), dass alle Knoten im Cluster exakt denselben Zustand des Telefonbuchs kennen.
+
+#### 4. Wichtige Zusatzfunktion: Health Checking
+Um das Telefonbuch aktuell zu halten, führt das Service-Discovery-System kontinuierlich Gesundheitsprüfungen (Health Checks) durch. Es pingt Container in regelmäßigen Abständen an oder ruft eine vordefinierte Test-URL auf. Antwortet ein Container nicht mehr (z. B. wegen eines Absturzes), wird er **sofort aus dem Telefonbuch gelöscht**, um Fehlverbindungen durch andere Microservices zu verhindern.
+
+#### 5. Bekannte Service-Discovery-Tools im Vergleich
+* 🟢 **etcd:** Extrem schlank, in Go geschrieben. Fokussiert auf hohe Sicherheit und Konsistenz. Dient als zentrales Konfigurations- und Zustandsarchiv (Control Plane) von Kubernetes.
+* 🔴 **Consul (HashiCorp):** Eine All-in-One-Lösung. Bringt integrierte Service-Discovery, ein ausgereiftes Web-Interface für Administratoren und ein hochentwickeltes Health Checking direkt mit.
+* 🟡 **ZooKeeper (Apache):** Der klassische, sehr robuste Veteran aus dem Big-Data- bzw. Hadoop-Umfeld. Benötigt jedoch eine Java-Laufzeitumgebung (JRE) und gilt im modernen Docker-Umfeld als relativ schwerfällig.
+
+---
+
+### B. Container-Netzwerke (Brücken bauen & isolieren)
+
+Das Netzwerk-Management unterscheidet sich grundlegend, je nachdem, ob Container auf einem einzelnen Host oder über mehrere Hosts hinweg kommunizieren müssen.
+
+#### 1. Single-Host-Netzwerke (Standard-Infrastruktur)
+Wird Docker auf einem einzelnen Server (z. B. Rocky Linux) installiert, baut es automatisch eine virtuelle Netzwerkinfrastruktur auf:
+* **Docker-Bridge (`docker0`):** Ein virtueller Switch innerhalb des Wirts-Systems. Jeder neue Container wird standardmäßig an diese Bridge angeschlossen.
+* **Virtuelle Interfaces (`veth`):** Virtuelle Ethernet-Paare, die wie ein unsichtbares Netzwerkkabel funktionieren. Ein Ende ist im Container (`eth0`), das andere Ende ist in der `docker0`-Bridge auf dem Host eingesteckt.
+* **IP-Zuweisung:** Jeder Container erhält eine private IP-Adresse (standardmäßig im Bereich `172.17.x.x`). Container auf demselben Host können sich direkt über diese IPs anpingen und kommunizieren.
+* **Weg nach draußen: Port-Mapping & NAT (Network Address Translation):** Die internen IPs (`172.17.x.x`) sind von außen komplett unsichtbar. Um einen Container im physischen Netzwerk erreichbar zu machen, nutzt Docker die Linux-Firewall (`iptables`) für ein Port-Mapping.  
+  * *Beispiel:* Ein Frontend-Container lauscht auf Port `80` und wird auf den Host-Port `8080` gemappt. Externe Anfragen an `http://host-ip:8080` werden per NAT blitzschnell an Port `80` des Containers weitergeleitet.
+
+```mermaid
+graph TD
+    subgraph Host["Host System (z.B. Rocky Linux)"]
+        subgraph Container1["Container 1"]
+            eth0_c1["eth0 (172.17.0.2)"]
+        end
+        subgraph Container2["Container 2"]
+            eth0_c2["eth0 (172.17.0.3)"]
+        end
+        
+        veth1["veth1 (Virtual Interface)"]
+        veth2["veth2 (Virtual Interface)"]
+        
+        subgraph Bridge["Docker Bridge (docker0)"]
+            switch["Virtueller Switch (172.17.0.1)"]
+        end
+        
+        iptables["iptables / NAT (Port-Mapping: 8080 -> 80)"]
+        physical_eth["Physikalisches Interface (eth0)"]
+    end
+    
+    Internet["Internet / Externes Netz"]
+    
+    %% Verbindungen
+    eth0_c1 <-->|veth pair| veth1
+    eth0_c2 <-->|veth pair| veth2
+    veth1 <--> switch
+    veth2 <--> switch
+    switch <--> iptables
+    iptables <--> physical_eth
+    physical_eth <--> Internet
+```
+
+#### 2. Die Multi-Host-Herausforderung & Overlay-Netzwerke
+Wenn Anwendungen wachsen und sich auf mehrere Server verteilen (z. B. User-Service auf Host A und Noten-Service auf Host B), stößt das Single-Host-Netzwerk an seine Grenzen:
+* **Das Problem:** Beide Server besitzen eine eigene `docker0`-Bridge und vergeben unabhängig voneinander IP-Adressen. Es kommt zu **IP-Kollisionen** (beide Hosts vergeben z. B. `172.17.0.2`), und die Container können sich nicht direkt erreichen, da die Switches nichts voneinander wissen.
+* **Die Lösung: Overlay-Netzwerke (Virtuelle Tunnel):** Ein Overlay-Netzwerk spannt ein logisches, flaches Netz über alle physischen Hosts hinweg. Für die Container sieht es so aus, als wären sie alle am selben lokalen Switch angeschlossen, unabhängig davon, auf welchem Server sie laufen.
+* **Funktionsweise (Kapselung / Encapsulation):** Sendet Container A (Host 1) ein Paket an Container B (Host 2), verpackt das Overlay-Netzwerktool dieses in ein ganz normales Datenpaket des physischen Netzes. Dieses wandert durch das reale Firmennetzwerk zum Ziel-Host, wird dort entpackt und an den Ziel-Container übergeben. Ein weit verbreitetes Standard-Protokoll hierfür ist **VXLAN**.
+
+```mermaid
+graph TB
+    subgraph Host1["Host 1 (192.168.205.10)"]
+        subgraph Cont1["Container 1"]
+            eth1_c1["eth1 (172.18.0.2)"]
+        end
+        demo1["Overlay Interface (demo)"]
+        phys_eth1["Physisches Interface (eth0)"]
+    end
+    
+    subgraph Host2["Host 2 (192.168.205.11)"]
+        subgraph Cont2["Container 2"]
+            eth1_c2["eth1 (172.18.0.2)"]
+        end
+        demo2["Overlay Interface (demo)"]
+        phys_eth2["Physisches Interface (eth0)"]
+    end
+
+    %% Verbindungen
+    eth1_c1 <--> demo1
+    eth1_c2 <--> demo2
+    demo1 <-.->|VXLAN Tunnel / Kapselung| demo2
+    demo1 <--> phys_eth1
+    demo2 <--> phys_eth2
+    phys_eth1 <-->|Physikalisches Netzwerk / Routing| phys_eth2
+```
+
+#### 3. Bekannte Networking-Tools im Vergleich
+* **docker-overlay:** Die integrierte, native Overlay-Netzwerklösung von Docker, wenn man den *Docker Swarm Mode* verwendet. Sehr einfach einzurichten.
+* **Flannel (CoreOS):** Ein sehr schlankes und populäres Overlay-Netzwerk, das häufig in Einsteiger-Kubernetes-Clustern verwendet wird und meist auf UDP oder VXLAN zur Kapselung setzt.
+* **Calico:** Das Hochleistungs-Tool für Produktionsumgebungen. Neben dem Tunneling bietet es mächtige **Network Policies** (Sicherheitsregeln auf Layer-3/4-Ebene). Damit kann granular verboten werden, dass z. B. ein Frontend-Container direkt mit der Datenbank spricht, selbst wenn sich beide im selben logischen Overlay-Netzwerk befinden.
+
+---
+
+### C. Scheduler & Orchestratoren (Die Dirigenten)
+
+Bei großen Microservice-Architekturen (z. B. 50 verschiedene Services, teilweise repliziert, mit unterschiedlichen Ressourcen-Anforderungen) ist eine manuelle Verwaltung via SSH und `docker run` unmöglich. Hier übernehmen Orchestratoren die Kontrolle.
+
+#### 1. Was macht ein Scheduler? (Der Logistik-Manager)
+Der Scheduler ist der Logistik-Manager des Clusters. Er entscheidet autonom, auf welchem konkreten physischen Worker-Node ein neuer Container gestartet wird. Seine Entscheidung basiert auf folgenden Kriterien:
+* **Ressourcen-Anforderungen:** Benötigt ein Container z. B. 4 GB RAM, platziert der Scheduler ihn nur auf einem Server, der diese Kapazität aktuell frei hat.
+* **Data Locality (Daten-Nähe):** Platziert Container möglichst nah an den Datenquellen (z. B. auf demselben Host wie die Datenbank) für minimale Latenzen.
+* **Anti-Affinität:** Sorgt aktiv dafür, dass z. B. drei Kopien eines Web-Services auf drei *verschiedenen* Servern laufen. Fällt ein Server aus, bleibt die Anwendung über die verbleibenden zwei Knoten hochverfügbar.
+
+#### 2. Kernfeatures moderner Orchestratoren
+Ein Orchestrator steuert den gesamten Lebenszyklus der Container über einen Verbund von Servern (Cluster):
+* **Self-Healing (Selbstheilung):** Stürzt ein Container oder ein ganzer physischer Server ab, bemerkt dies der Orchestrator sofort. Er startet die betroffenen Container automatisch auf einem gesunden Server neu.
+* **Declarative State (Deklarativer Soll-Zustand):** Der Administrator definiert den gewünschten Zustand in einer Datei (z. B. *"Halte 5 Instanzen des Frontends aktiv"*). Der Orchestrator gleicht in einer permanenten **Kontrollschleife (Control Loop)** den Ist-Zustand (Actual State) an diesen Soll-Zustand (Desired State) an (Observe ➡️ Analyze ➡️ Act).
+* **Automated Rollouts & Rollbacks:** Updates werden schrittweise eingespielt (Rolling Update, z. B. ein Container nach dem anderen). Tritt ein Fehler auf, bricht der Orchestrator ab und führt ein automatisches Rollback zur stabilen Vorgängerversion durch.
+
+```mermaid
+graph TD
+    desired["Desired State (Soll-Zustand)<br/>z.B. replicas: 5"] --> controlLoop
+    actual["Actual State (Ist-Zustand)<br/>z.B. replicas: 3"] --> controlLoop
+    
+    subgraph controlLoop["Control Loop (Kontrollschleife)"]
+        observe["Observe (Beobachten)<br/>Soll- und Ist-Zustand prüfen"] --> analyze["Analyze (Analysieren)<br/>Abweichung feststellen"]
+        analyze --> act["Act (Handeln)<br/>Abweichung korrigieren (2 Pods starten)"]
+        act --> observe
+    end
+    
+    act -->|Statusupdate| actual
+```
+
+#### 3. Die bekanntesten Orchestratoren im Vergleich
+* 🐳 **Kubernetes (K8s):** Der unangefochtene Industriestandard, ursprünglich von Google entwickelt. Extrem mächtig, hochgradig flexibel und für jede Skalierung geeignet, allerdings für Einsteiger sehr komplex zu erlernen.
+* 🐝 **Docker Swarm:** Die native, direkt in Docker integrierte Orchestrierungslösung. Sie nutzt dieselbe Syntax wie `docker-compose` und ist ideal für kleinere bis mittlere Setups mit minimalem Konfigurationsaufwand.
+* 🐎 **Nomad (HashiCorp):** Eine schlanke und flexible Alternative. Der Vorteil von Nomad liegt darin, dass es nicht nur Container, sondern auch klassische Java-Anwendungen oder reine Binärdateien direkt auf Servern orchestrieren kann.
+
+---
 
 ### D. Zusammenfassung: Das Zusammenspiel im Ökosystem
-* **Docker CE:** Baut Images und führt einzelne Container auf einem Host aus.
-* **Networking Tools:** Verbinden Container sicher über Servergrenzen hinweg.
-* **Service Discovery:** Ermöglicht es den Containern, sich gegenseitig dynamisch zu finden.
-* **Scheduler (Kubernetes):** Verwaltet die Platzierung, Skalierung und Ausfallsicherheit im Cluster.
+
+Das Zusammenspiel der Komponenten im Cloud-Native-Ökosystem lässt sich wie folgt zusammenfassen:
+1. **Container Runtime (z. B. containerd, runc):** Führt die Container physisch auf einem einzelnen Host aus.
+2. **Docker CE:** Bietet das Tooling für Entwickler, um Images zu bauen und lokal zu testen.
+3. **Networking Tools (z. B. Calico, Flannel):** Verbinden die Container sicher und isoliert über physische Servergrenzen hinweg.
+4. **Service Discovery (z. B. etcd, Consul):** Ermöglicht es den Containern, sich gegenseitig dynamisch im Netzwerk zu finden (Echtzeit-Telefonbuch).
+5. **Scheduler & Orchestrator (z. B. Kubernetes):** Fungiert als Dirigent, der die Platzierung, Skalierung, Updates und Ausfallsicherheit (Self-Healing) im gesamten Serververbund autonom verwaltet.
 
 ---
 
@@ -289,9 +440,20 @@ Docker ist nicht nur ein eigenständiges Werkzeug, sondern Teil eines modularen,
 ---
 
 ## 📚 Ressourcen & Dokumente
-Im [Assets](./assets)-Verzeichnis finden Sie weiterführende Informationen:
 
-- [Unterrichtsfolgen: Container-Virtualisierung mit Docker, Schlüsselkomponenten (PDF)](./assets/Linux_Grdl_DockerKomp.pdf)
+Im Ordner [assets](./assets) finden Sie weiterführende Unterrichtsunterlagen, Foliensätze und Referenzen zu diesem Thema:
+
+### 📔 PDF-Präsentationen
+* 📄 **[Unterrichtsfolgen: Container-Virtualisierung mit Docker, Schlüsselkomponenten & docker-compose](./assets/Linux_Grdl_DockerKomp.pdf)**
+* 📄 **[Unterrichtsfolgen: Service Discovery, Networking, Scheduling & Orchestration](./assets/Linux_Docker_ServDiscov_Netw_Sched_Orches.pdf)**
+
+### 🔗 Externe Quellen & Dokumente (DigitalOcean & Docker)
+* 🌐 **[DigitalOcean: The Docker Ecosystem - An Introduction to Common Components](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-introduction-to-common-components)**
+* 🌐 **[DigitalOcean: The Docker Ecosystem - An Overview of Containerization](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-overview-of-containerization)**
+* 🌐 **[DigitalOcean: The Docker Ecosystem - Service Discovery and Distributed Configuration Stores](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-service-discovery-and-distributed-configuration-stores)**
+* 🌐 **[DigitalOcean: The Docker Ecosystem - Networking and Communication](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-networking-and-communication)**
+* 🌐 **[DigitalOcean: The Docker Ecosystem - Scheduling and Orchestration](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-scheduling-and-orchestration)**
+* 🐳 **[Offizielle Docker-Dokumentation](https://docs.docker.com/)**
 
 ---
 ## 🔗 Zurück zur Übersicht
