@@ -124,6 +124,27 @@ flowchart LR
 ---
 
 ## 🛠️ 3. Step-by-Step Tutorial: Overlay-Netzwerk realisieren
+### Schritt 0: dependencies
+Installation Debian 12
+
+```Bash
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+Installation Rocky Linux 9
+```
+
+```Bash
+sudo dnf install -y dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install docker-ce docker-ce-cli containerd.io -y
+Dienst aktivieren
+```
 
 ### Schritt 1: Firewall-Anpassung auf dem Router (`srv-rocky`)
 Da unser Gateway standardmäßig den Datenverkehr zwischen den Schnittstellen blockiert (falls restriktive Regeln aktiv sind), müssen wir die Swarm- und VXLAN-Ports explizit in `nftables` freigeben.
