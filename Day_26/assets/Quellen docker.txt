@@ -1,0 +1,15 @@
+Quellen docker:
+
+https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-introduction-to-common-components
+
+https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-an-overview-of-containerization
+
+https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-service-discovery-and-distributed-configuration-stores
+
+https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-networking-and-communication
+
+https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-scheduling-and-orchestration
+
+Und natürlich die Docker-Dokus:
+
+https://docs.docker.com/
