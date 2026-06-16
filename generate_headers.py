@@ -102,7 +102,7 @@ DAY_THEMES = {
     24: ("System-Logging & Audit", "Rsyslog, Journald, Logrotate & LPI-Prüfungsvorbereitung", "SYSADMIN"),
     25: ("Boot-Prozess & Container", "BIOS/UEFI, GRUB2-Bootloader & Docker-Virtualisierung", "VIRTUALIZATION"),
     26: ("Docker, Kubernetes & Containerd", "Container-Runtimes, Orchestrierung & Cloud-Native", "VIRTUALIZATION"),
-    27: ("SSH Härtung & Limits", "sshd_config, TCP-Wrapper & ulimit Ressourcenbeschränkung", "SECURITY"),
+    27: ("Docker Multi-Host-Networking", "Overlay-Netzwerke & Swarm-Modus in Subnetzen", "VIRTUALIZATION"),
     28: ("Kryptographie & MTAs", "GPG-Verschlüsselung, SSH-Tunnel & Mail Transfer Agents", "SECURITY"),
     29: ("LPIC-1 Simulation 101", "Prüfungssimulation 101-500 mit 60 Fragen & Analyse", "GENERIC"),
     30: ("LPIC-1 Simulation 102", "Prüfungssimulation 102-500 mit 60 Fragen & Analyse", "GENERIC"),
@@ -135,7 +135,7 @@ DAY_TAGS = {
     24: ["LPIC-1", "LOGGING", "JOURNALD"],
     25: ["LPIC-1", "GRUB2", "DOCKER"],
     26: ["LPIC-1", "CONTAINERS", "KUBERNETES"],
-    27: ["LPIC-1", "SSH-HARDENING", "LIMITS"],
+    27: ["LPIC-1", "DOCKER", "OVERLAY-NET"],
     28: ["LPIC-1", "GPG", "MTA-MAIL"],
     29: ["LPIC-1", "EXAM-101", "SIMULATION"],
     30: ["LPIC-1", "EXAM-102", "SIMULATION"],
@@ -542,12 +542,12 @@ def generate_banner(output_path):
     art_draw.rounded_rectangle([(770, 65), (1160, 175)], radius=8, fill=(15, 23, 42, 160), outline=(59, 130, 246, 90), width=1)
     art_draw.text((790, 80), "REPOSITORY STATUS", fill=(130, 145, 165, 220), font=series_font)
     
-    # Draw loading bar representing 83.3% progress (25 of 30 days)
+    # Draw loading bar representing 90.0% progress (27 of 30 days)
     art_draw.rounded_rectangle([(790, 120), (1140, 132)], radius=3, fill=(15, 23, 42, 200), outline=(255, 255, 255, 20), width=1)
-    art_draw.rounded_rectangle([(790, 120), (790 + int(350 * 0.833), 132)], radius=3, fill=(16, 185, 129, 220), outline=None)
+    art_draw.rounded_rectangle([(790, 120), (790 + int(350 * 0.90), 132)], radius=3, fill=(16, 185, 129, 220), outline=None)
     
-    art_draw.text((790, 142), "PROGRESS: 83%", fill=(16, 185, 129), font=series_font)
-    art_draw.text((960, 142), "DAYS COMPLETED: 25/30", fill=(147, 197, 253), font=series_font)
+    art_draw.text((790, 142), "PROGRESS: 90%", fill=(16, 185, 129), font=series_font)
+    art_draw.text((960, 142), "DAYS COMPLETED: 27/30", fill=(147, 197, 253), font=series_font)
     
     image = Image.alpha_composite(image, art_layer)
     
