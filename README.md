@@ -9,23 +9,67 @@ Willkommen im zentralen Hub für die Linux-Essentials-Serie. Dieses Repository d
 ## 🗺 Kurs-Roadmap & Lernpfad
 
 ```mermaid
-graph TD
-    A[Tag 01: Das Fundament] --> B[Tag 02: Die Werkzeuge]
-    B --> C[Tag 03: Rechte & Sicherheit]
-    C --> D[Tag 04: Shell-Logik & Text]
-    D --> E[Tag 05: Dateisicherheit & Links]
-    E --> F[Tag 06: Prozesse & Signale]
-    F --> G[Tag 07: Archive & Kompression]
-    G -.-> H[Tag 08: Software-Management & Repos]
-    
-    style A fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
-    style B fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
-    style C fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
-    style D fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
-    style E fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
-    style F fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
-    style G fill:#0d47a1,stroke:#fff,stroke-width:2px,color:#fff
-    style H fill:#90caf9,stroke:#fff,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+flowchart TD
+    subgraph W1["📅 Woche 1: Linux-Fundament & CLI-Werkzeuge"]
+        D01["Tag 01: Shell & FHS"] --> D02["Tag 02: Hilfe & Hardware"]
+        D02 --> D03["Tag 03: Config & Redirects"]
+        D03 --> D04["Tag 04: Text-Tools"]
+        D04 --> D05["Tag 05: Rechte & Links"]
+    end
+
+    subgraph W2["📅 Woche 2: Administration, Scripting & Regex"]
+        D06["Tag 06: Prozesse & Spezialrechte"] --> D07["Tag 07: Archive & Kompression"]
+        D07 --> D08["Tag 08: Shell Scripting"]
+        D08 --> D09["Tag 09: Regex I"]
+        D09 --> D10["Tag 10: Regex II"]
+    end
+
+    subgraph W3["📅 Woche 3: Editoren, Zeitsteuerung & Netzwerke"]
+        D11["Tag 11: Text-Editoren (vi)"] --> D12["Tag 12: Zeitsteuerung"]
+        D12 --> D13["Tag 13: Fortg. Scripting & TUIs"]
+        D13 --> D14["Tag 14: Zwischenprüfung"]
+        D14 --> D15["Tag 15: Netzwerk-Basics"]
+    end
+
+    subgraph W4["📅 Woche 4: Netzwerke, Routing & Kernel-Tuning"]
+        D16["Tag 16: Routing & Forwarding"] --> D17["Tag 17: NTP & Härtung"]
+        D17 --> D18["Tag 18: Kernel-Module & HW"]
+    end
+
+    subgraph W5["📅 Woche 5: Storage-Virtualisierung, SSH & Sync"]
+        D19["Tag 19: Partitionen & Mounts"] --> D20["Tag 20: LVM-Speicher"]
+        D20 --> D21["Tag 21: SSH & Härtung"]
+        D21 --> D22["Tag 22: Multi-Hop & Lsyncd"]
+    end
+
+    subgraph W6["📅 Woche 6: Systemd, Logs & Container"]
+        D23["Tag 23: Paketverwaltung"] --> D24["Tag 24: Logging & Audit"]
+        D24 --> D25["Tag 25: Boot-Prozess & Docker"]
+        D25 --> D26["Tag 26: Container & K8s"]
+        D26 --> D27["Tag 27: Multi-Host Net"]
+        D27 -.-> D28_30["Tag 28-30: LPIC-1 Simulationen (⏳)"]
+    end
+
+    D05 --> D06
+    D10 --> D11
+    D15 --> D16
+    D18 --> D19
+    D22 --> D23
+
+    %% Style classes
+    classDef completed fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
+    classDef pending fill:#1e293b,stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5,color:#94a3b8;
+
+    class D01,D02,D03,D04,D05,D06,D07,D08,D09,D10,D11,D12,D13,D14,D15,D16,D17,D18,D19,D20,D21,D22,D23,D24,D25,D26,D27 completed;
+    class D28_30 pending;
+
+    %% Subgraph Styles
+    style W1 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
+    style W2 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
+    style W3 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
+    style W4 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
+    style W5 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
+    style W6 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
 ```
 
 ---
