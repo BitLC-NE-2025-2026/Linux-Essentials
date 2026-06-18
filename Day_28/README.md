@@ -200,14 +200,14 @@ scrape_configs:
   - job_name: 'cadvisor'
     dns_sd_configs:
       - names:
-          - 'tasks.cadvisor'
+          - 'tasks.monitoring_cadvisor'
         type: 'A'
         port: 8080
 
   - job_name: 'node-exporter'
     dns_sd_configs:
       - names:
-          - 'tasks.node-exporter'
+          - 'tasks.monitoring_node-exporter'
         type: 'A'
         port: 9100
 ```
@@ -219,7 +219,7 @@ Siehe [grafana-datasource.yml](./assets/grafana-datasource.yml).
 apiVersion: 1
 
 datasources:
-  - name: Prometheus
+  - name: prometheus
     type: prometheus
     access: proxy
     url: http://prometheus:9090
