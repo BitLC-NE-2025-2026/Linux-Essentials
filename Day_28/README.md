@@ -155,9 +155,12 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.47.2
+    command:
+      - '--docker_only=true'
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /dev/disk/:/dev/disk:ro
@@ -307,6 +310,13 @@ sudo docker stack deploy -c assets/docker-stack-monitoring.yml monitoring
    * Importieren Sie die Dashboard-ID **`1860`** (für den Node Exporter / Host-Systemstatus).
    * Importieren Sie die Dashboard-ID **`11600`** (für cAdvisor / Container-Status).
 4. Sie sehen nun Live-Grafiken aller Hosts und Container des Swarm-Clusters!
+
+> [!TIP]
+> **Fehlerbehebung für leere Dashboards (No Data) bei ID 11600:**
+> Falls das Dashboard für den Container-Status leer bleibt, liegt das meist an fehlenden Container-Metadaten (Name, Image) im cAdvisor.
+> 1. **Docker Socket einbinden:** cAdvisor benötigt zwingend Zugriff auf `/var/run/docker.sock:/var/run/docker.sock:ro`. Ohne diesen kann cAdvisor cgroup-IDs nicht in echte Containernamen übersetzen. Da das Dashboard 11600 nach `image!=""` filtert, bleibt es ohne diesen Mount leer.
+> 2. **cgroups v2 Kompatibilität:** Auf modernen Systemen (Debian 12, Rocky Linux 9, Arch) nutzt Linux standardmäßig cgroups v2. Fügen Sie cAdvisor den Parameter `--docker_only=true` (in den Compose `command`-Optionen) hinzu, um zu verhindern, dass cAdvisor versucht, das gesamte Host-Systemd-Verzeichnis zu scannen, was zu Fehlern und leeren Metriken führt.
+> 3. **Stack aktualisieren:** Nach der Anpassung der `docker-stack-monitoring.yml` den Stack neu deployen (`docker stack deploy -c assets/docker-stack-monitoring.yml monitoring`), damit die Änderungen aktiv werden.
 
 ---
 
