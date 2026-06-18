@@ -1,4 +1,4 @@
-name: CI/CD Deployment to Docker Swarm
+name: CI/CD Deployment to Docker Swarm (Self-Hosted)
 
 on:
   push:
@@ -11,6 +11,7 @@ env:
 
 jobs:
   build-and-push:
+    # Build processes run on GitHub's hosted runners
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,17 +38,12 @@ jobs:
 
   deploy-to-swarm:
     needs: build-and-push
-    runs-on: ubuntu-latest
+    # This job executes on our own self-hosted runner inside the private network!
+    runs-on: self-hosted
 
     steps:
-      - name: Deploy Stack via SSH on Swarm Manager
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: 172.16.7.42
-          username: admin
-          key: ${{ secrets.SWARM_SSH_PRIVATE_KEY }}
-          envs: GITHUB_TOKEN
-          script: |
-            # Pull target image on Swarm Nodes & update the stack
-            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-            docker service update --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ticketsplease_web
+      - name: Trigger Rolling Update on Swarm
+        run: |
+          # The runner is already inside the private LAN on the manager node
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker service update --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ticketsplease_web

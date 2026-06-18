@@ -14,7 +14,9 @@ scrape_configs:
         type: 'A'
         port: 8080
 
-  - job_name: 'docker-nodes'
-    # Scrapes Docker daemon metrics (requires metrics-addr in daemon.json)
-    static_configs:
-      - targets: ['172.16.7.42:9323', '172.16.7.111:9323']
+  - job_name: 'node-exporter'
+    dns_sd_configs:
+      - names:
+          - 'tasks.node-exporter'
+        type: 'A'
+        port: 9100
