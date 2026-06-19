@@ -103,8 +103,8 @@ DAY_THEMES = {
     25: ("Boot-Prozess & Container", "BIOS/UEFI, GRUB2-Bootloader & Docker-Virtualisierung", "VIRTUALIZATION"),
     26: ("Docker, Kubernetes & Containerd", "Container-Runtimes, Orchestrierung & Cloud-Native", "VIRTUALIZATION"),
     27: ("Docker Multi-Host-Networking", "Overlay-Netzwerke & Swarm-Modus in Subnetzen", "VIRTUALIZATION"),
-    28: ("Kryptographie & MTAs", "GPG-Verschlüsselung, SSH-Tunnel & Mail Transfer Agents", "SECURITY"),
-    29: ("LPIC-1 Simulation 101", "Prüfungssimulation 101-500 mit 60 Fragen & Analyse", "GENERIC"),
+    28: ("Docker Swarm Monitoring & CI/CD", "Prometheus, Grafana, Node Exporter & GitHub Actions", "VIRTUALIZATION"),
+    29: ("Textmanipulation mit AWK & sed", "Datenstrom-Filterung und Tabellenverarbeitung", "TEXT"),
     30: ("LPIC-1 Simulation 102", "Prüfungssimulation 102-500 mit 60 Fragen & Analyse", "GENERIC"),
 }
 
@@ -136,8 +136,8 @@ DAY_TAGS = {
     25: ["LPIC-1", "GRUB2", "DOCKER"],
     26: ["LPIC-1", "CONTAINERS", "KUBERNETES"],
     27: ["LPIC-1", "DOCKER", "OVERLAY-NET"],
-    28: ["LPIC-1", "GPG", "MTA-MAIL"],
-    29: ["LPIC-1", "EXAM-101", "SIMULATION"],
+    28: ["LPIC-1", "SWARM", "MONITORING"],
+    29: ["LPIC-1", "AWK", "SED"],
     30: ["LPIC-1", "EXAM-102", "SIMULATION"],
 }
 
