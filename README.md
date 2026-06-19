@@ -47,7 +47,8 @@ flowchart TD
         D24 --> D25["Tag 25: Boot-Prozess & Docker"]
           D26["Tag 26: Container & K8s"] --> D27["Tag 27: Multi-Host Net"]
         D27 --> D28["Tag 28: Swarm Mon & CI/CD"]
-        D28 -.-> D29_30["Tag 29-30: LPIC-1 Sim & Abschluss (⏳)"]
+        D28 --> D29["Tag 29: AWK & sed"]
+        D29 -.-> D30["Tag 30: LPIC-1 Sim & Abschluss (⏳)"]
     end
 
     D05 --> D06
@@ -60,8 +61,8 @@ flowchart TD
     classDef completed fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
     classDef pending fill:#1e293b,stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5,color:#94a3b8;
 
-    class D01,D02,D03,D04,D05,D06,D07,D08,D09,D10,D11,D12,D13,D14,D15,D16,D17,D18,D19,D20,D21,D22,D23,D24,D25,D26,D27,D28 completed;
-    class D29_30 pending;
+    class D01,D02,D03,D04,D05,D06,D07,D08,D09,D10,D11,D12,D13,D14,D15,D16,D17,D18,D19,D20,D21,D22,D23,D24,D25,D26,D27,D28,D29 completed;
+    class D30 pending;
 
     %% Subgraph Styles
     style W1 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
@@ -166,7 +167,8 @@ Die aktuelle Woche behandelt fortgeschrittene Boot- und Logging-Systeme sowie di
 | **Tag 26** | ✅ | Container, Containerd & K8s | Container-Runtimes im Vergleich, Architektur von Kubernetes (Control Plane, Worker Nodes) und Container-Orchestrierung. | [📖 README](./Day_26/README.md) |
 | **Tag 27** | ✅ | Docker Multi-Host-Networking | Container-Kommunikation über getrennte Subnetze mittels Overlay-Netzwerk (VXLAN) und Swarm-Modus. | [📖 README](./Day_27/README.md) |
 | **Tag 28** | ✅ | Docker Swarm Monitoring & CI/CD | Zentralisiertes Monitoring mit Prometheus, Grafana und cAdvisor sowie automatisierte Deployments über GitHub Actions. | [📖 README](./Day_28/README.md) |
-| **Tag 29 - 30** | ⏳ | LPIC-1 Sim & Abschluss | Abschließende System-Härtung (Limits), Mail Transfer Agents (MTA) und umfassende Testprüfungen zur Vorbereitung auf die LPIC-1 Exams. | [📖 README](./Day_29/README.md) |
+| **Tag 29** | ✅ | Textmanipulation mit AWK & sed | Datenstrom-Filterung und Tabellenverarbeitung. Zeilenweise Bearbeitung mit `sed`, Spalten- und Array-Auswertung mit `awk`. | [📖 README](./Day_29/README.md) |
+| **Tag 30** | ⏳ | LPIC-1 Sim & Abschluss | Abschließende System-Härtung (Limits), Mail Transfer Agents (MTA) und umfassende Testprüfungen zur Vorbereitung auf die LPIC-1 Exams. | [📖 README](./Day_30/README.md) |
 
 ---
 
