@@ -1,0 +1,18 @@
+# Am Ende von /etc/postfix/main.cf hier für rocky1A, Rocky im Netz A
+# Für rocky2B muss ebenfalls die main.cf eingerichtet werden
+
+# 1. die Identität des Servers
+myhostname = rocky1A.netzA.local
+mydomain = netzA.local
+myorigin = $mydomain
+
+# 2. Erlaube Postfix auf allen IP-Schnittstellen zu lauschen
+inet_interfaces = all
+inet_protokols = all
+
+# 3. Für welche Domains nimmt dieser Server Mails endgültig an?
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+
+# 4. Sicherheit: Wer darf über diesen Server Mails versenden?
+# Nur localhost und dem lokalen Netz A (172.16.7.0/24)
+mynetzworks = 127.0.0.0/8, 172.16.7.0/24

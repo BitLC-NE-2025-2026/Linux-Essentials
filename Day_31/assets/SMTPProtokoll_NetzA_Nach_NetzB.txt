@@ -1,0 +1,39 @@
+# SMTP Protokoll von Netz A nach NetzB, rocky1A nach rocky2B
+1. Öffnen der SMTP Verbindung:
+Telnet rocky2B.netzB.local 25
+Die IP von rocky2B erscheint und WillKommens-Grüße des Servers Statuscode 220
+
+2. Begrüßung 
+EHLO rocky1A.netzA.local
+
+3. Absender definieren hier vom root
+MAIL FROM:<root@netzA.local>
+
+4. Empfänger definieren
+RCPT TO:<root@netzB.local
+
+5. Inhalt ankündigen:
+DATA
+
+6. Der eigentilche Text (kann beliebig sein):
+Hallo aus Netz A! Unser Server-zu-Server Routing funktioniert perfekt.
+
+7. Mail absenden (Wichtig: ein einzelner Punkt in einer leeren Zeile):
+.
+
+(danach muss Server B mit 250 2.0.0 Ok: queued as … antworten)
+
+8. Verbindung beenden:
+QUIT
+
+9. abrufen der Email auf rocky2B
+sudo tail -n 50 /var/mail/root
+
+Bei Problemen:
+Überprüfen ob Postfix auf dem Port 25 lauscht:
+sudo ss -tulpn | grep :25
+
+Hier sollten Sie eine Joker IP auf Port 25 0.0.0.0:25 sehen. Sehen Sie 127.0.0.0:25 lauscht Postfix nur lokal.
+
+Die Firewall sollte auf beiden Systemen gestoppt werden oder der Port 25 erlaubt werden.
+
