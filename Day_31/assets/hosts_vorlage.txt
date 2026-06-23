@@ -1,0 +1,11 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+172.16.7.33	rocky-router.netzA.local	rocky-router
+172.16.7.97	rocky-router.netzB.local	rocky-router
+172.16.7.37	rocky1A.netzA.local		rocky1A
+172.16.7.42	mint1A.netzA.local		mint1A
+172.16.7.47	cachyos1A.netzA.local		cachyos1A
+172.16.7.101	rocky2B.netzB.local		rocky2B
+172.16.7.106	manjaro2B.netzB.local		manjaro2B
+172.16.7.111	debina2B.netzB.local		debian2B

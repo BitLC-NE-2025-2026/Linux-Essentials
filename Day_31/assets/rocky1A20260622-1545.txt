@@ -1,0 +1,125 @@
+    1  ip a
+    2  ip r
+    3  nmcli connection modify ens160 ipv4.addresses 172.16.7.37/27
+    4  nmcli connection modify ens160 ipv4.method manual 
+    5  nmcli connection modify ens160 ipv4.gateway 172.16.7.33
+    6  nmcli connection down ens160
+    7  nmcli connection up ens160
+    8  ping 172.16.7.33
+    9  ping -c3 172.16.7.33
+   10  clear
+   11  ip a
+   12  ncmli connection show
+   13  nmcli connection show
+   14  nmcli connection modify ens160 ipv4.dns 1.1.1.3
+   15  nmcli connection modify down ens160
+   16  nmcli connection down ens160
+   17  nmcli connection up ens160
+   18  ping -c3 www.google.com
+   19  hostname
+   20  sudo hostnamectl set-hostname rocky-1A
+   21  su -
+   22  sudo hostnamectl set-hostname rocky-1A
+   23  id pumus
+   24  sudo hostnamectl set-hostname rocky-1A
+   25  hostname
+   26  ping -c3 172.16.7.33
+   27  ping -c3 172.16.7.97
+   28  sudo firewall-cmd --add-port=2377/tcp --permanent
+   29  sudo firewall-cmd --add-port=7946/tcp --permanent
+   30  sudo firewall-cmd --add-port=7946/udp --permanent
+   31  sudo firewall-cmd --add-port=4789/udp --permanent
+   32  sudo firewall-cmd --reload
+   33  sudo docker swarm init --advertise-addr 172.16.7.37
+   34  sudo dnf update
+   35  sudo dnf install epel-release
+   36  sudo dnf remove -y podman buildah runc
+   37  sudo dnf install -y dnf-plugins-core
+   38  sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+   39  sudo dnf install -y docker-ce-cli containerd.io docker-compose-plugin
+   40  sudo systemctl start docker
+   41  sudo dnf clean all
+   42  sudo dnf install -y --allowerasing docker-ce docker-ce-cli containerd.io docker-compose-plugin
+   43  sudo systemctl enable --now docker
+   44  sudo systemctl status docker
+   45  sudo docker swarm init --advertise-addr 172.16.7.37
+   46  vi dockerJoin
+   47  ping rocky-2B
+   48  ssh-keygen
+   49  ssh-copy-id 172.16.7.33
+   50  clear
+   51  ssh 172.16.7.33
+   52  clear
+   53  ip a
+   54  hostname
+   55  ssh-copy-id simus@172.16.7.33
+   56  ssh simus@rocky-router
+   57  ssh simus@172.16.7.33
+   58  clear
+   59  hostname
+   60  sudo docker network create --driver overlay --attachable mein-mircoservice-netz
+   61  sudo docker service create -d --name web-node1 --network mein-microservice-netz --constraint 'node.hostname==rocky-1A' nginx:alpine
+   62  sudo docker service create -d --name web-node1 --network mein-mircoservice-netz --constraint 'node.hostname==rocky-1A' nginx:alpine
+   63  sudo docker service create -d --name web-node1 --network mein-mircoservice-netz --constraint 'node.hostname==rocky-2B' nginx:alpine
+   64  sudo docker service create -d --name web-node2 --network mein-mircoservice-netz --constraint 'node.hostname==rocky-2B' nginx:alpine
+   65  sudo docker node ps
+   66  sudo docker ps
+   67  sudo docker exec -it web-node1.1.g5ecxxeu702dxnhvntkruf sh
+   68  sudo docker swarm leave --force
+   69  sudo docker network create --driver overlay --attachable mein-microservice-netz
+   70  sudo docker swarm init --advertise-addr 172.16.7.37
+   71  nano dockerJoin 
+   72  ps a
+   73  ps -al
+   74  ps -ef
+   75  killall kwrite
+   76  sudo docker swarm join-token worker
+   77  sudo docker swarm join-token worker > dockerJoin 
+   78  cat dockerJoin 
+   79  sudo docker network create --driver overlay --attachable mein-microservice-netz
+   80  sudo docker service create -d --name web-node1 --network mein-microservice-netz --constraint 'node.hostname==rocky-1A' nginx:alpine
+   81  sudo docker service create -d --name web-node2 --network mein-microservice-netz --constraint 'node.hostname==rocky-2B' nginx:alpine
+   82  sudo docker node ps
+   83  sudo docker ps
+   84  sudo docker exec -it web-node1.1.k0cgkyd1p2f1lhk2rwzy7s sh
+   85  sudo docker node ls
+   86  sudo docker exec -it web-node1.1.k0cgkyd1p2f1lhk2rwzy7s sh
+   87  sudo systemctl status docker
+   88  clear
+   89  sudo docker ps
+   90  sudo docker exec -it web-node1.1.k0cgkyd1p2f1lhk2rwzy7soxf sh
+   91  ping -c3 172.16.7.101
+   92  cd /etc
+   93  find hosts
+   94  cd ~
+   95  hostname
+   96  cat hosts_vorlage.txt 
+   97  sudo vi /etc/hosts
+   98  ping -c3 mint1A
+   99  ping -c3 rocky-router
+  100  hostname -d
+  101  ping -c3 rocky2B
+  102  clear
+  103  ping -c3 manjaro2B
+  104  sudo dnf install -y postfix
+  105  sudo systemctl enable postfix --now
+  106  systemclt status postfix
+  107  systemctl status postfix
+  108  clear
+  109  sudo vi /etc/postfix/main.cf
+  110  sudo systemctl restart postfix
+  111  telnet rocky2B.netzB.local 25
+  112  sudo postfix check
+  113  sudo systemctl stop firewalld
+  114  tail -50 /var/mail/root
+  115  sudo tail -50 /var/mail/root
+  116  sudo ss -tupln | grep :25
+  117  clear
+  118  history 100 | less
+  119  hostname -d
+  120  hostname -s
+  121  hostname -F
+  122  hostnamme -f
+  123  hostname -f
+  124  nano /etc/postfix/main.cf
+  125  history > rocky1A$(date +%Y%m%d-%H%M).txt
