@@ -48,7 +48,13 @@ flowchart TD
           D26["Tag 26: Container & K8s"] --> D27["Tag 27: Multi-Host Net"]
         D27 --> D28["Tag 28: Swarm Mon & CI/CD"]
         D28 --> D29["Tag 29: AWK & sed"]
-        D29 -.-> D30["Tag 30: LPIC-1 Sim & Abschluss (⏳)"]
+        D29 --> D30["Tag 30: LPIC-1 Sim & Abschluss"]
+    end
+
+    subgraph W7["📅 Woche 7: Mail, DNS & Vertiefung"]
+        D30 --> D31["Tag 31: Postfix E-Mail"]
+        D31 --> D32["Tag 32: Admin & Regex Quiz"]
+        D32 --> D33["Tag 33: BIND DNS-Server (⏳)"]
     end
 
     D05 --> D06
@@ -61,8 +67,8 @@ flowchart TD
     classDef completed fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
     classDef pending fill:#1e293b,stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5,color:#94a3b8;
 
-    class D01,D02,D03,D04,D05,D06,D07,D08,D09,D10,D11,D12,D13,D14,D15,D16,D17,D18,D19,D20,D21,D22,D23,D24,D25,D26,D27,D28,D29 completed;
-    class D30 pending;
+    class D01,D02,D03,D04,D05,D06,D07,D08,D09,D10,D11,D12,D13,D14,D15,D16,D17,D18,D19,D20,D21,D22,D23,D24,D25,D26,D27,D28,D29,D30,D31,D32 completed;
+    class D33 pending;
 
     %% Subgraph Styles
     style W1 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
@@ -71,6 +77,7 @@ flowchart TD
     style W4 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
     style W5 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
     style W6 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
+    style W7 fill:#0f172a,stroke:#1e293b,stroke-width:2px,color:#e2e8f0
 ```
 
 ---
@@ -168,7 +175,10 @@ Die aktuelle Woche behandelt fortgeschrittene Boot- und Logging-Systeme sowie di
 | **Tag 27** | ✅ | Docker Multi-Host-Networking | Container-Kommunikation über getrennte Subnetze mittels Overlay-Netzwerk (VXLAN) und Swarm-Modus. | [📖 README](./Day_27/README.md) |
 | **Tag 28** | ✅ | Docker Swarm Monitoring & CI/CD | Zentralisiertes Monitoring mit Prometheus, Grafana und cAdvisor sowie automatisierte Deployments über GitHub Actions. | [📖 README](./Day_28/README.md) |
 | **Tag 29** | ✅ | Textmanipulation mit AWK & sed | Datenstrom-Filterung und Tabellenverarbeitung. Zeilenweise Bearbeitung mit `sed`, Spalten- und Array-Auswertung mit `awk`. | [📖 README](./Day_29/README.md) |
-| **Tag 30** | ⏳ | LPIC-1 Sim & Abschluss | Abschließende System-Härtung (Limits), Mail Transfer Agents (MTA) und umfassende Testprüfungen zur Vorbereitung auf die LPIC-1 Exams. | [📖 README](./Day_30/README.md) |
+| **Tag 30** | ✅ | LPIC-1 Sim & Abschluss | Abschließende System-Härtung (Limits), Mail Transfer Agents (MTA) und umfassende Testprüfungen zur Vorbereitung auf die LPIC-1 Exams. | [📖 README](./Day_30/README.md) |
+| **Tag 31** | ✅ | E-Mail-Server mit Postfix & Docker | Konfiguration von Postfix (main.cf) auf Rocky Linux & Debian, Relaying-Richtlinien, SMTP-Überprüfung per CLI und Server-zu-Server-Routing. | [📖 README](./Day_31/README.md) |
+| **Tag 32** | ✅ | System-Administration & Regex | Wiederholung von Rechten, Prozessen, vi, LVM-Storage sowie fortgeschrittenes Port- und IP-Parsing aus Logs mittels Regex. | [📖 README](./Day_32/README.md) |
+| **Tag 33** | ✅ | DNS-Infrastruktur mit BIND | Installation und Konfiguration des ISC BIND DNS-Servers auf dem Router, Forward & Reverse Zones (tobias.lan) und Client-Testing. | [📖 README](./Day_33/README.md) |
 
 ---
 
