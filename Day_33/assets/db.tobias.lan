@@ -1,0 +1,34 @@
+# /var/named/zones/db.tobias.lan
+$TTL    86400
+@       IN      SOA     srv-rocky.tobias.lan. root.tobias.lan. (
+                              2026062402        ; Serial (Erhöht für Zonen-Update)
+                                  604800        ; Refresh
+                                   86400        ; Retry
+                                 2419200        ; Expire
+                                   86400 )      ; Negative Cache TTL
+;
+; Name Server Definition
+@       IN      NS      srv-rocky.tobias.lan.
+srv-rocky    IN      A       172.16.7.33
+
+; --- Globale Domänen-TXT-Einträge ---
+@       IN      TXT     "v=spf1 ip4:172.16.7.33 ip4:172.16.7.97 -all"
+@       IN      TXT     "owner=Tobias Boyke"
+@       IN      TXT     "description=Tobias BitLC Lab Network"
+
+; --- Netz A (Subdomain: netz1.tobias.lan / Bereich 172.16.7.32/27) ---
+srv-deb-01.netz1.tobias.lan.   IN      A       172.16.7.42
+srv-deb-01.netz1.tobias.lan.   IN      TXT     "role=Docker-Swarm-Manager; app=TicketsPlease-Web"
+
+ws-cachy.netz1.tobias.lan.     IN      A       172.16.7.47
+ws-cachy.netz1.tobias.lan.     IN      TXT     "os=CachyOS; role=Developer-Workstation"
+
+; --- Netz B (Subdomain: netz2.tobias.lan / Bereich 172.16.7.96/27) ---
+srv-deb-02.netz2.tobias.lan.   IN      A       172.16.7.111
+srv-deb-02.netz2.tobias.lan.   IN      TXT     "role=Docker-Swarm-Worker; app=TicketsPlease-Web-Replica"
+
+ws-manjaro.netz2.tobias.lan.   IN      A       172.16.7.106
+ws-manjaro.netz2.tobias.lan.   IN      TXT     "os=Manjaro; role=Testing-Client"
+
+; --- Infrastruktur-TXT-Einträge ---
+srv-rocky.tobias.lan.          IN      TXT     "role=Central-Router-Gateway"

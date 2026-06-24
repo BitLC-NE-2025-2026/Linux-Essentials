@@ -1,0 +1,61 @@
+✘ tobias@srv-debian-02  ~  dig -x 172.16.7.42
+
+; <<>> DiG 9.20.23-1~deb13u1-Debian <<>> -x 172.16.7.42
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 19052
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: c5379cf9069adb71010000006a3bc3c839d4fd0681d694fa (good)
+;; QUESTION SECTION:
+;42.7.16.172.in-addr.arpa.	IN	PTR
+
+;; ANSWER SECTION:
+42.7.16.172.in-addr.arpa. 86400	IN	PTR	srv-deb-01.netz1.tobias.lan.
+
+obias@srv-debian-02  ~  dig root.tobias.lan
+
+; <<>> DiG 9.20.23-1~deb13u1-Debian <<>> root.tobias.lan
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 64333
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 410e4db91928f376010000006a3bc3eda2700275346a9a5d (good)
+;; QUESTION SECTION:
+;root.tobias.lan.		IN	A
+
+;; AUTHORITY SECTION:
+tobias.lan.		86400	IN	SOA	srv-rocky.tobias.lan. root.tobias.lan. 2026062402 604800 86400 2419200 86400
+
+;; Query time: 8 msec
+;; SERVER: 172.16.7.33#53(172.16.7.33) (UDP)
+;; WHEN: Wed Jun 24 13:47:58 CEST 2026
+;; MSG SIZE  rcvd: 118
+ tobias@srv-debian-02  ~  dig google.de
+
+; <<>> DiG 9.20.23-1~deb13u1-Debian <<>> google.de
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 10059
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: fe07e5f8cb975fc8010000006a3bc43f9f0e25ff9c1e82de (good)
+;; QUESTION SECTION:
+;google.de.			IN	A
+
+;; ANSWER SECTION:
+google.de.		300	IN	A	142.251.13.94
+
+;; Query time: 32 msec
+;; SERVER: 172.16.7.33#53(172.16.7.33) (UDP)
+;; WHEN: Wed Jun 24 13:49:19 CEST 2026
+;; MSG SIZE  rcvd: 82
+
+ tobias@srv-debian-02  ~ 

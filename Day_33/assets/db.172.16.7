@@ -1,0 +1,21 @@
+$TTL    86400
+@       IN      SOA     srv-rocky.tobias.lan. root.tobias.lan. (
+                              2026062401        ; Serial
+                                  604800        ; Refresh
+                                   86400        ; Retry
+                                 2419200        ; Expire
+                                   86400 )      ; Negative Cache TTL
+
+@       IN      NS      srv-rocky.tobias.lan.
+
+; --- Router / Gateways ---
+33      IN      PTR     srv-rocky.tobias.lan.
+97      IN      PTR     srv-rocky.tobias.lan.
+
+; --- Netz A ---
+42      IN      PTR     srv-deb-01.netz1.tobias.lan.
+47      IN      PTR     ws-cachy.netz1.tobias.lan.
+
+; --- Netz B ---
+111     IN      PTR     srv-deb-02.netz2.tobias.lan.
+106     IN      PTR     ws-manjaro.netz2.tobias.lan.

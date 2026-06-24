@@ -1,0 +1,1252 @@
+promptsich möchte das der router, als dns server fungiert. ich möchte die doomäne tobias.lan haben mit den geräten aus netz a als netz1.tobias.lan und netz b als netz1.tobias.lan und die geräte mit ihren namen entsprechende davor
+
+Um den Router srv-rocky als zentralen DNS-Server für das gesamte Labornetzwerk einzurichten, nutzen wir den bewährten DNS-Server BIND (named). Er wird so konfiguriert, dass er die neue Domäne tobias.lan verwaltet, die Subdomains für Netz A und Netz B auflöst und alle externen Anfragen an einen Upstream-DNS (z. B. 8.8.8.8) weiterleitet.
+
+Da du die Geräte entsprechend benennen möchtest, mappen wir die Subdomains wie von dir gewünscht.
+
+Hinweis zur Namensgebung: Du hast für beide Netze netz1.tobias.lan geschrieben. Um die Netze sauber zu trennen und IP-Überschneidungen im DNS zu verhindern, konfigurieren wir Netz A als netz1.tobias.lan und Netz B als netz2.tobias.lan. Wenn beide absolut identisch heißen müssen, können sie auch in dieselbe Zonendatei geschrieben werden – die Trennung in netz1 und netz2 ist jedoch Best Practice zur Vermeidung von IP-Konflikten.
+
+🛠️ 1. Installation und Basis-Konfiguration auf srv-rocky
+Führe diese Schritte direkt auf dem Rocky Linux Router aus.
+
+Bash
+# Installation des BIND DNS-Servers und der Utilities
+sudo dnf install -y bind bind-utils
+
+# Hauptkonfigurationsdatei öffnen
+sudo nano /etc/named.conf
+Ersetze oder ergänze die Optionen in der /etc/named.conf wie folgt, damit BIND auf allen internen Schnittstellen lauscht und Anfragen weiterleitet:
+
+Code-Snippet
+options {
+        listen-on port 53 { any; };
+        listen-on-v6 port 53 { none; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        secroots-file   "/var/named/data/named.secroots";
+        recursing-file  "/var/named/data/named.recursing";
+
+        # Erlaubt Abfragen aus den internen Netzen
+        allow-query     { localhost; 172.16.7.0/24; 192.168.1.0/24; }; # Passe die Subnetze ggf. an
+
+        # Weiterleitung fuer externe Domains (z.B. Internet)
+        recursion yes;
+        forwarders {
+                8.8.8.8;
+                8.8.4.4;
+        };
+
+        dnssec-validation yes;
+        managed-keys-directory "/var/named/dynamic";
+        pid-file "/run/named/named.pid";
+        session-keyfile "/run/named/session.key";
+};
+
+logging {
+        channel default_debug {
+                file "data/named.run";
+                severity dynamic;
+        };
+};
+
+# Definition der Hauptzone tobias.lan
+zone "tobias.lan" IN {
+        type master;
+        file "zones/db.tobias.lan";
+        allow-update { none; };
+};
+📁 2. Zonendatei für tobias.lan erstellen
+Erstelle das Verzeichnis für die Zonendateien und lege die Konfiguration für deine Domäne fest.
+
+Bash
+# Verzeichnis fuer Zonendateien erstellen
+sudo mkdir -p /var/named/zones
+
+# Zonendatei anlegen
+sudo nano /var/named/zones/db.tobias.lan
+Füge folgenden Inhalt ein. Hier werden die Subdomains netz1 und netz2 sowie die Wildcards und spezifischen Geräte definiert:
+
+Plaintext
+$TTL    86400
+@       IN      SOA     dc01.tobias.lan. root.tobias.lan. (
+                              2026062401        ; Serial
+                                  604800        ; Refresh
+                                   86400        ; Retry
+                                 2419200        ; Expire
+                                   86400 )      ; Negative Cache TTL
+;
+; Name Server Definition
+@       IN      NS      dc01.tobias.lan.
+dc01    IN      A       172.16.7.10
+
+; --- Netz A (Subdomain: netz1.tobias.lan) ---
+debian.netz1.tobias.lan.       IN      A       172.16.7.42
+win11-01.netz1.tobias.lan.     IN      A       172.16.7.50
+
+; --- Netz B (Subdomain: netz2.tobias.lan) ---
+srv-debian-02.netz2.tobias.lan. IN      A       192.168.1.20
+win11-02.netz2.tobias.lan.     IN      A       192.168.1.30
+Hinweis: Ersetze die IP-Adressen und Gerätenamen (debian, srv-debian-02, etc.) durch die tatsächlichen IPs deiner Labor-Infrastruktur.
+
+🔒 3. Rechte, Firewall und Dienst-Start
+Damit BIND die Dateien lesen kann und der Port blockierungsfrei erreichbar ist, müssen die SELinux/Dateirechte sowie die Firewall angepasst werden.
+
+Bash
+# Dateirechte an den BIND-User (named) uebergeben
+sudo chown -R named:named /var/named/zones
+
+# Konfiguration auf Syntaxfehler pruefen (wichtig!)
+sudo named-checkconf /etc/named.conf
+sudo named-checkzone tobias.lan /var/named/zones/db.tobias.lan
+
+# DNS-Port (53/udp und 53/tcp) in der Firewall freigeben
+sudo firewall-cmd --add-service=dns --permanent
+sudo firewall-cmd --reload
+
+# Dienst aktivieren und starten
+sudo systemctl enable --now named
+💻 4. Clients umstellen
+Damit die Rechner die Namen auflösen können, musst du nun bei allen Geräten (Debian-Nodes, Windows 11 Clients) den Samba AD DC als primären DNS belassen (da Windows Active Directory zwingend seinen eigenen DC-DNS benötigt), aber im Samba AD DC den Router als DNS-Forwarder eintragen.
+
+Alternativ, wenn der Rocky-Router der einzige DNS sein soll, tragen alle Rechner die IP des Rocky-Routers (172.16.7.10 bzw. die Router-Schnittstellen-IP) ein.
+
+Mögliche nächste Schritte oder verwandte Themen:
+
+Konfiguration von Reverse-Lookup-Zonen zur Auflösung von IPs in Namen (PTR Records)
+
+Einrichtung von DHCP auf dem Rocky-Server zur automatischen DNS-Vergabetabellen-Verteilung
+
+Testen der Namensauflösung von den Windows-Clients mittels nslookup debian.netz1.tobias.lan
+
+das ist der aktuelle netztplan. passe die scripts demnach an Hostname Rolle / OS Schnittstelle Netzwerkbereich IP-Adresse Gateway VLAN / LAN-Segment
+
+gw-router Ext. Gateway - - 172.21.0.9 - VMnet / WAN
+
+rocky-host Physisch / Rocky - 172.21.0.0/16 172.21.1.13 172.21.0.9 Lokales Hostnetz
+
+srv-rocky Zentr. Router / Rocky ens160
+
+ens161
+
+ens256 WAN (DHCP)
+
+Netz A (/27)
+
+Netz B (/27) 172.21.0.X (auto)
+
+172.16.7.33
+
+172.16.7.97 172.21.0.9
+
+-
+
+- VMnet (WAN)
+
+switch_net01 (Netz A)
+
+switch_net02 (Netz B)
+
+srv-deb-01 Client / Debian 13.5 ens192 (dyn.) Netz A (/27) 172.16.7.42 172.16.7.33 switch_net01 (Netz A)
+
+ws-cachy Client / CachyOS ens192 (dyn.) Netz A (/27) 172.16.7.47 172.16.7.33 switch_net01 (Netz A)
+
+srv-deb-02 Client / Debian 13.5 ens192 (dyn.) Netz B (/27) 172.16.7.111 172.16.7.97 switch_net02 (Netz B)
+
+ws-manjaro Client / Manjaro ens192 (dyn.) Netz B (/27) 172.16.7.106 172.16.7.97 switch_net02 (Netz B)
+
+Hier ist die exakt auf deinen neuen Netzplan angepasste Konfiguration für den BIND-DNS-Server auf srv-rocky (172.16.7.33 / 172.16.7.97). Die Subnetze wurden auf die /27-Bereiche (Netz A: 172.16.7.32/27, Netz B: 172.16.7.96/27) sowie die korrekten IP-Adressen deiner Clients angepasst.
+
+📋 1. Die /etc/named.conf auf srv-rocky
+Code-Snippet
+options {
+        // BIND lauscht auf allen Schnittstellen auf Port 53
+        listen-on port 53 { any; };
+        listen-on-v6 port 53 { none; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        secroots-file   "/var/named/data/named.secroots";
+        recursing-file  "/var/named/data/named.recursing";
+
+        // Erlaubt DNS-Abfragen exakt aus deinen beiden /27 Labor-Netzen
+        allow-query     { localhost; 172.16.7.32/27; 172.16.7.96/27; };
+
+        // Aktiviert die Namensaufloesung fuer externe Domains
+        recursion yes;
+        // Weiterleitung an das externe Gateway des Netzplans
+        forwarders {
+                172.21.0.9;
+        };
+
+        dnssec-validation yes;
+        managed-keys-directory "/var/named/dynamic";
+        pid-file "/run/named/named.pid";
+        session-keyfile "/run/named/session.key";
+};
+
+logging {
+        channel default_debug {
+                file "data/named.run";
+                severity dynamic;
+        };
+};
+
+// Definition der Zone fuer deine Domäne tobias.lan
+zone "tobias.lan" IN {
+        type master;
+        file "zones/db.tobias.lan";
+        allow-update { none; };
+};
+📁 2. Die Zonendatei /var/named/zones/db.tobias.lan
+Plaintext
+$TTL    86400
+@       IN      SOA     srv-rocky.tobias.lan. root.tobias.lan. (
+                              2026062402        ; Serial (JJJJMMDDRR)
+                                  604800        ; Refresh
+                                   86400        ; Retry
+                                 2419200        ; Expire
+                                   86400 )      ; Negative Cache TTL
+;
+; Name Server Definition
+@       IN      NS      srv-rocky.tobias.lan.
+srv-rocky IN    A       172.16.7.33
+
+; --- Netz A (Subdomain: netz1.tobias.lan / Bereich 172.16.7.32/27) ---
+srv-deb-01.netz1.tobias.lan.   IN      A       172.16.7.42
+ws-cachy.netz1.tobias.lan.     IN      A       172.16.7.47
+
+; --- Netz B (Subdomain: netz2.tobias.lan / Bereich 172.16.7.96/27) ---
+srv-deb-02.netz2.tobias.lan.   IN      A       172.16.7.111
+ws-manjaro.netz2.tobias.lan.   IN      A       172.16.7.106
+🔄 3. Anwendung & Validierung
+Führe diese Befehle aus, um die Rechte zu setzen, die Syntax zu prüfen und den Dienst neu zu laden:
+
+Bash
+# Setzt die korrekten Besitzerrechte fuer den BIND-Dienst
+sudo chown -R named:named /var/named/zones
+
+# Validierung der Konfigurationssyntax
+sudo named-checkconf /etc/named.conf
+sudo named-checkzone tobias.lan /var/named/zones/db.tobias.lan
+
+# Dienst neu starten, um Konfiguration zu laden
+sudo systemctl restart named
+Mögliche nächste Schritte oder verwandte Themen:
+
+Anpassung der /etc/resolv.conf auf den Clients (nameserver 172.16.7.33 bzw. 172.16.7.97)
+
+Konfiguration von DHCP-Zuweisungen auf srv-rocky passend zu den /27-Netzgrenzen
+
+Hinzufügen von Alias-Einträgen (CNAME) für die Docker-Dienste (tickets.netz1.tobias.lan)
+
+Erstellung der passenden Reverse-Lookup-Zonendatei für das Subnetz 172.16.7.0
+
+//
+
+// named.conf
+
+//
+
+// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
+
+// server as a caching only nameserver (as a localhost DNS resolver only).
+
+//
+
+// See /usr/share/doc/bind*/sample/ for example named configuration files.
+
+//
+
+
+
+options {
+
+listen-on port 53 { 127.0.0.1; };
+
+listen-on-v6 port 53 { ::1; };
+
+directory "/var/named";
+
+dump-file "/var/named/data/cache_dump.db";
+
+statistics-file "/var/named/data/named_stats.txt";
+
+memstatistics-file "/var/named/data/named_mem_stats.txt";
+
+secroots-file "/var/named/data/named.secroots";
+
+recursing-file "/var/named/data/named.recursing";
+
+allow-query     { localhost; };
+
+
+
+/*
+
+- If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
+
+- If you are building a RECURSIVE (caching) DNS server, you need to enable
+
+   recursion.
+
+- If your recursive DNS server has a public IP address, you MUST enable access
+
+   control to limit queries to your legitimate users. Failing to do so will
+
+   cause your server to become part of large scale DNS amplification
+
+   attacks. Implementing BCP38 within your network would greatly
+
+   reduce such attack surface
+
+*/
+
+recursion yes;
+
+
+
+dnssec-validation yes;
+
+
+
+managed-keys-directory "/var/named/dynamic";
+
+geoip-directory "/usr/share/GeoIP";
+
+
+
+pid-file "/run/named/named.pid";
+
+session-keyfile "/run/named/session.key";
+
+
+
+/* https://fedoraproject.org/wiki/Changes/CryptoPolicy */
+
+include "/etc/crypto-policies/back-ends/bind.config";
+
+};
+
+
+
+logging {
+
+        channel default_debug {
+
+                file "data/named.run";
+
+                severity dynamic;
+
+        };
+
+};
+
+
+
+zone "." IN {
+
+type hint;
+
+file "named.ca";
+
+};
+
+
+
+include "/etc/named.rfc1912.zones";
+
+include "/etc/named.root.key";
+
+
+
+
+
+das ist die aktuelle conf. gib mir die bearbeitetet vollständig
+
+Hier ist deine vollständige, bearbeitete /etc/named.conf für srv-rocky.
+
+Die IP-Einschränkungen bei listen-on wurden aufgehoben, die Zugriffsberechtigungen (allow-query) für deine beiden Subnetze (/27) freigegeben, die Weiterleitung (forwarders) auf dein externes Gateway gesetzt und deine Zone tobias.lan am Ende integriert.
+
+Code-Snippet
+//
+// named.conf
+//
+// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
+// server as a caching only nameserver (as a localhost DNS resolver only).
+//
+// See /usr/share/doc/bind*/sample/ for example named configuration files.
+//
+
+options {
+	// Erlaubt das Lauschen auf allen IPv4-Schnittstellen (ens161 und ens256)
+	listen-on port 53 { any; };
+	listen-on-v6 port 53 { none; };
+	directory 	"/var/named";
+	dump-file 	"/var/named/data/cache_dump.db";
+	statistics-file "/var/named/data/named_stats.txt";
+	memstatistics-file "/var/named/data/named_mem_stats.txt";
+	secroots-file	"/var/named/data/named.secroots";
+	recursing-file	"/var/named/data/named.recursing";
+
+	// Erlaubt Abfragen von Localhost sowie den Subnetzen aus Netz A und Netz B
+	allow-query     { localhost; 172.16.7.32/27; 172.16.7.96/27; };
+
+	/* - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
+	 - If you are building a RECURSIVE (caching) DNS server, you need to enable
+	   recursion.
+	 - If your recursive DNS server has a public IP address, you MUST enable access
+	   control to limit queries to your legitimate users. Failing to do so will
+	   cause your server to become part of large scale DNS amplification
+	   attacks. Implementing BCP38 within your network would greatly
+	   reduce such attack surface
+	*/
+	recursion yes;
+
+	// Weiterleitung externer Anfragen an das übergeordnete Gateway gw-router
+	forwarders {
+		172.21.0.9;
+	};
+
+	dnssec-validation yes;
+
+	managed-keys-directory "/var/named/dynamic";
+	geoip-directory "/usr/share/GeoIP";
+
+	pid-file "/run/named/named.pid";
+	session-keyfile "/run/named/session.key";
+
+	/* https://fedoraproject.org/wiki/Changes/CryptoPolicy */
+	include "/etc/crypto-policies/back-ends/bind.config";
+};
+
+logging {
+        channel default_debug {
+                file "data/named.run";
+                severity dynamic;
+        };
+};
+
+zone "." IN {
+	type hint;
+	file "named.ca";
+};
+
+// Eigene Zonen-Definition für die Labor-Domäne
+zone "tobias.lan" IN {
+	type master;
+	file "zones/db.tobias.lan";
+	allow-update { none; };
+};
+
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+Mögliche nächste Schritte oder verwandte Themen:
+
+Syntaxprüfung der Datei mittels sudo named-checkconf /etc/named.conf
+
+Anlage der zugehörigen Zonendatei unter /var/named/zones/db.tobias.lan
+
+Neustart des DNS-Dienstes via sudo systemctl restart named
+
+Testen der internen und externen Namensauflösung auf einem der Linux-Clients mittels dig oder nslookup
+
+und jetzt ?
+
+Führe die folgenden Schritte direkt auf srv-rocky aus, um die Zonendatei zu erstellen, die Rechte zu setzen, die Firewall zu öffnen und den Dienst zu starten.
+
+1. Ordner und Zonendatei erstellen
+Erstelle das Verzeichnis für deine eigenen Zonen und lege die Zuordnungen für deine Domäne fest.
+
+Bash
+# Erstellt den Ordner für die Zonendateien
+sudo mkdir -p /var/named/zones
+
+# Öffnet die neue Zonendatei im Editor
+sudo nano /var/named/zones/db.tobias.lan
+Füge dort den folgenden Inhalt ein:
+
+Plaintext
+$TTL    86400
+@       IN      SOA     srv-rocky.tobias.lan. root.tobias.lan. (
+                              2026062402        ; Serial (JJJJMMDDRR)
+                                  604800        ; Refresh
+                                   86400        ; Retry
+                                 2419200        ; Expire
+                                   86400 )      ; Negative Cache TTL
+;
+; Name Server Definition
+@       IN      NS      srv-rocky.tobias.lan.
+srv-rocky IN    A       172.16.7.33
+
+; --- Netz A (Subdomain: netz1.tobias.lan / Bereich 172.16.7.32/27) ---
+srv-deb-01.netz1.tobias.lan.   IN      A       172.16.7.42
+ws-cachy.netz1.tobias.lan.     IN      A       172.16.7.47
+
+; --- Netz B (Subdomain: netz2.tobias.lan / Bereich 172.16.7.96/27) ---
+srv-deb-02.netz2.tobias.lan.   IN      A       172.16.7.111
+ws-manjaro.netz2.tobias.lan.   IN      A       172.16.7.106
+2. Rechte anpassen und Syntax prüfen
+Damit BIND die Datei lesen darf und keine Konfigurationsfehler vorliegen, validierst du das Setup.
+
+Bash
+# Setzt den korrekten Besitzer für die Zonendateien
+sudo chown -R named:named /var/named/zones
+
+# Überprüft die Syntax der Konfigurationsdateien
+sudo named-checkconf /etc/named.conf
+sudo named-checkzone tobias.lan /var/named/zones/db.tobias.lan
+3. Firewall öffnen und Dienst aktivieren
+Aktiviere den DNS-Dienst dauerhaft und erlaube den Datenverkehr in der Firewall.
+
+Bash
+# DNS-Dienst (Port 53 TCP/UDP) in der Firewall freigeben
+sudo firewall-cmd --add-service=dns --permanent
+sudo firewall-cmd --reload
+
+# Dienst aktivieren und starten
+sudo systemctl enable --now named
+Mögliche nächste Schritte oder verwandte Themen:
+
+Testen der Namensauflösung auf einem Client mittels nslookup srv-deb-01.netz1.tobias.lan
+
+Konfiguration einer Reverse-Lookup-Zone für die IP-zu-Namen-Auflösung
+
+Anpassung der DNS-IP-Zuweisung in deiner DHCP-Server-Konfiguration auf srv-rocky
+
+Einbinden des neuen DNS-Servers als Forwarder in die Samba AD DC Konfiguration
+
+cleints umstellen?
+
+Da deine Server (srv-deb-01 und srv-deb-02) ihre IP-Adressen laut Netzplan dynamisch beziehen (ens192 (dyn.)), stellst du die DNS-Vergabe am effizientesten zentral auf dem DHCP-Server ein, der auf srv-rocky läuft.
+
+Falls du den DHCP-Server (z. B. dhcpd oder dnsmasq) auf srv-rocky konfiguriert hast, passe dort die Option domain-name-servers an:
+
+Plaintext
+# In der DHCP-Konfiguration auf srv-rocky eintragen:
+option domain-name-servers 172.16.7.33; # Für Netz A
+option domain-name-servers 172.16.7.97; # Für Netz B
+🛠️ Manuelle Umstellung auf den Clients (Fallback / Statisch)
+Falls du die Nameserver auf den Clients direkt festlegen möchtest, folge diesen Schritten je nach Betriebssystem:
+
+1. Debian 13.5 (srv-deb-01 & srv-deb-02)
+Moderne Debian-Systeme nutzen oft systemd-resolved oder den klassischen NetworkManager.
+
+Über NetworkManager (CLI):
+
+Bash
+# Verbindungsauswahl anzeigen, um den Namen zu ermitteln (z.B. "Wired connection 1")
+sudo nmcli connection show
+
+# DNS-Server auf die srv-rocky IP des jeweiligen Netzes setzen
+sudo nmcli connection modify "Wired connection 1" ipv4.dns "172.16.7.33"
+sudo nmcli connection modify "Wired connection 1" ipv4.dns-search "tobias.lan"
+
+# Verbindung neu starten
+sudo nmcli connection up "Wired connection 1"
+Über die klassische /etc/resolv.conf (falls kein Manager aktiv ist):
+
+Bash
+sudo nano /etc/resolv.conf
+Inhalt ersetzen durch:
+
+Plaintext
+search tobias.lan
+nameserver 172.16.7.33
+2. Arch Linux / CachyOS & Manjaro (ws-cachy & ws-manjaro)
+Diese Distributionen nutzen standardmäßig systemd-networkd oder NetworkManager.
+
+Über NetworkManager (GUI/CLI):
+Nutze wie bei Debian den nmcli-Befehl von oben oder passe es über das grafische Applet in der Taskleiste unter IPv4 -> Method: Automatic (Addresses only) -> DNS: 172.16.7.33 (bzw. .97) an.
+
+🧪 Funktionstest auf den Clients
+Führe nach der Umstellung auf einem beliebigen Client diesen Befehl aus, um zu prüfen, ob die Auflösung über srv-rocky läuft:
+
+Bash
+# DNS-Abfrage für ein Gerät aus dem anderen Netz
+nslookup srv-deb-02.netz2.tobias.lan
+
+# DNS-Abfrage für eine externe Domain (Internet-Routing-Test)
+nslookup google.de
+Mögliche nächste Schritte oder verwandte Themen:
+
+Überprüfung der Routing-Einträge auf den Clients mittels ip route
+
+Konfiguration von DHCP-Schnittstellen-Bindungen auf srv-rocky
+
+Absicherung des DNS-Servers gegen DNS-Spam aus dem WAN-Interface mittels nftables
+
+ tobias@srv-debian-02  ~  nslookup srv-deb-01.netz2.tobias.lan
+
+Server: 1.1.1.1
+
+Address: 1.1.1.1#53
+
+
+
+** server can't find srv-deb-01.netz2.tobias.lan: NXDOMAIN
+
+Die Ausgabe zeigt, dass srv-debian-02 aktuell noch den Cloudflare-DNS (1.1.1.1) statt deines Routers srv-rocky abfragt. Da öffentliche DNS-Server deine lokale Domäne .lan nicht kennen, wird die Anfrage mit NXDOMAIN abgelehnt. Zudem liegt srv-deb-01 laut Netzplan in netz1 (Netz A), nicht in netz2.
+
+Da deine VMs ihre IPs dynamisch beziehen, überschreibt die DHCP-Konfiguration des Routers bei jedem Lease die lokalen Einstellungen der Clients. Die DNS-Verteilung muss daher zentral auf srv-rocky korrigiert werden.
+
+1. DHCP-Server auf srv-rocky anpassen
+Je nachdem, welchen DHCP-Server du auf dem Rocky-Router installiert hast, musst du die Nameserver-Option auf die jeweilige Schnittstellen-IP des Routers umbiegen:
+
+Falls dhcpd (ISC DHCP Server) aktiv ist:
+Öffne die /etc/dhcp/dhcpd.conf und passe die Zeilen in den Subnet-Blöcken an:
+
+Plaintext
+subnet 172.16.7.32 netmask 255.255.255.224 {
+    # ... andere Optionen ...
+    option domain-name-servers 172.16.7.33;
+    option domain-search "tobias.lan";
+}
+
+subnet 172.16.7.96 netmask 255.255.255.224 {
+    # ... andere Optionen ...
+    option domain-name-servers 172.16.7.97;
+    option domain-search "tobias.lan";
+}
+Falls dnsmasq aktiv ist:
+In der /etc/dnsmasq.conf oder im entsprechenden Konfigurationsfile:
+
+Plaintext
+dhcp-option=option:dns-server,172.16.7.33,172.16.7.97
+Starte den DHCP-Dienst danach auf srv-rocky neu (z. B. sudo systemctl restart dhcpd).
+
+2. DNS-Lease auf dem Client erneuern
+Führe auf srv-debian-02 folgende Befehle aus, um die neue DNS-Konfiguration sofort vom Router zu erzwingen:
+
+Bash
+# Gibt die aktuelle DHCP-Lease frei und fordert eine neue an
+sudo dhclient -r ens192 && sudo dhclient ens192
+3. Erneuter Funktionstest
+Führe die Abfrage mit dem korrekten Pfad (netz1 für Host 01) erneut aus:
+
+Bash
+nslookup srv-deb-01.netz1.tobias.lan
+In der Ausgabe muss nun als Server die 172.16.7.97 (dein Gateway für Netz B) erscheinen und die korrekte IP 172.16.7.42 zurückgeliefert werden.
+
+Mögliche nächste Schritte oder verwandte Themen:
+
+Überprüfung der zugewiesenen DNS-Server auf dem Client mittels resolvectl status oder cat /etc/resolv.conf
+
+Hinzufügen einer Reverse-Zone im BIND für die IP-Rückwärtsauflösung
+
+Kontrolle der Routing-Tabellen zwischen Netz A und Netz B auf dem Router mittels ip route
+
+ tobias@srv-debian-02  ~  nslookup srv-deb-01.netz1.tobias.lan
+
+Server: 1.1.1.1
+
+Address: 1.1.1.1#53
+
+
+
+** server can't find srv-deb-01.netz1.tobias.lan: NXDOMAIN
+
+
+
+ ✘ tobias@srv-debian-02  ~  resolvectl status
+
+zsh: command not found: resolvectl
+
+ ✘ tobias@srv-debian-02  ~ 
+
+Da resolvectl fehlt, nutzt Debian 13 standardmäßig den klassischen NetworkManager oder ein einfaches DHCP-Client-Skript, das die /etc/resolv.conf füllt. Der Client fragt immer noch stur 1.1.1.1 ab.
+
+Wir zwingen die Schnittstelle jetzt manuell auf die Router-IP, um das Problem sofort zu lösen.
+
+1. DNS manuell über NetworkManager erzwingen
+Führe diese Befehle auf srv-debian-02 aus:
+
+Bash
+# 1. Verbindungskonfiguration für das Interface anpassen (Netz B Gateway)
+sudo nmcli connection modify "Wired connection 1" ipv4.dns "172.16.7.97"
+sudo nmcli connection modify "Wired connection 1" ipv4.dns-search "tobias.lan"
+
+# 2. DHCP-Automatik für DNS ignorieren, damit 1.1.1.1 nicht zurückkommt
+sudo nmcli connection modify "Wired connection 1" ipv4.ignore-auto-dns yes
+
+# 3. Schnittstelle neu starten, um Änderungen anzuwenden
+sudo nmcli connection down "Wired connection 1" && sudo nmcli connection up "Wired connection 1"
+Hinweis: Falls deine Verbindung nicht "Wired connection 1" heißt, zeigt dir sudo nmcli connection show den korrekten Namen an.
+
+2. DNS-Gegenprüfung auf dem Client
+Kontrolliere, ob die Konfiguration im System angekommen ist:
+
+Bash
+cat /etc/resolv.conf
+Dort muss nun ausschließlich nameserver 172.16.7.97 und search tobias.lan stehen.
+
+3. Erneuter Funktionstest
+Führe den Test erneut aus:
+
+Bash
+nslookup srv-deb-01.netz1.tobias.lan
+Mögliche nächste Schritte oder verwandte Themen:
+
+Gleiche NMCLI-Umstellung auf srv-deb-01 durchführen (mit DNS 172.16.7.33)
+
+Fehlersuche in der /etc/dhcp/dhcpd.conf auf srv-rocky, falls die IP 1.1.1.1 dort noch fest verdrahtet ist
+
+Testen des Pings nach erfolgreicher Auflösung: ping srv-deb-01.netz1.tobias.lan
+
+ tobias@srv-debian-02  ~  cat /etc/resolv.conf
+
+# Generated by NetworkManager
+
+nameserver 1.1.1.1
+
+Du hast diese Antwort angehalten
+ tobias@srv-debian-02  ~  cat /etc/resolv.conf
+
+# Generated by NetworkManager
+
+nameserver 1.1.1.1
+
+Das bestätigt es: Der NetworkManager hat die manuelle Konfiguration noch nicht übernommen oder überschreibt sie, weil die Konfiguration unter einem anderen Verbindungsnamen läuft.
+
+Führe diese Befehle auf srv-debian-02 aus, um den exakten Schnittstellen-Namen zu ermitteln und den DNS direkt auf die IP von srv-rocky umzustellen:
+
+1. Verbindungsnamen ermitteln
+Bash
+sudo nmcli connection show
+In der Spalte NAME siehst du den genauen Namen (oft ens192 oder Wired connection 1). Ersetze diesen im nächsten Schritt für <NAME>.
+
+2. DNS-Eintrag erzwingen
+Bash
+# DNS festlegen (Schnittstelle aus Netz B nutzt das Gateway .97)
+sudo nmcli connection modify "<NAME>" ipv4.dns "172.16.7.97"
+sudo nmcli connection modify "<NAME>" ipv4.dns-search "tobias.lan"
+
+# Automatisch zugewiesene DNS-Server (wie 1.1.1.1) blockieren
+sudo nmcli connection modify "<NAME>" ipv4.ignore-auto-dns yes
+
+# Verbindung aktualisieren
+sudo nmcli connection up "<NAME>"
+3. Kontrolle
+Bash
+cat /etc/resolv.conf
+Jetzt muss dort nameserver 172.16.7.97 stehen. Sobald das der Fall ist, wird nslookup srv-deb-01.netz1.tobias.lan sofort auflösen.
+
+Mögliche nächste Schritte oder verwandte Themen:
+
+Gleiche Konfiguration auf srv-deb-01 anwenden (mit der IP 172.16.7.33)
+
+Prüfung der Routing-Einträge mittels ip route, um die Verbindung zwischen Netz A und B zu sichern
+
+Aktivieren des persistenten DNS-Cachings über systemd-resolved falls gewünscht
+
+ ✘ tobias@srv-debian-02  ~  nslookup srv-deb-01.netz1.tobias.lan
+
+;; communications error to 172.16.7.33#53: timed out
+
+Der Timeout zeigt, dass die DNS-Anfrage jetzt zwar an den richtigen Server geleitet wird, die Antwort jedoch blockiert wird. Da srv-debian-02 im Netz B liegt und die Anfrage an die IP von Netz A (172.16.7.33) schickt, muss das Paket den Router passieren.
+
+Zwei Fehlerquellen sind hier wahrscheinlich: Entweder blockiert die Firewall (nftables) auf srv-rocky den Traffic zwischen den Netzen auf Port 53, oder BIND antwortet nicht auf der Schnittstelle von Netz B.
+
+1. Firewall auf srv-rocky anpassen
+Öffne die Firewall-Konfiguration auf dem Router srv-rocky:
+
+Bash
+sudo nano /etc/nftables.conf
+Stelle sicher, dass in der chain forward oder chain input der DNS-Port für beide internen Schnittstellen freigegeben ist:
+
+Code-Snippet
+# In der passenden Kette (input und forward) einfügen:
+udp dport 53 accept
+tcp dport 53 accept
+Lade das Regelwerk neu:
+
+Bash
+sudo nft -f /etc/nftables.conf
+2. DNS-Abfrage auf die lokale Netz-IP testen
+Da srv-debian-02 im Netz B liegt, sollte er die Router-IP seines eigenen Netzes abfragen, um Routing-Probleme zu minimieren.
+
+Testeweise den DNS-Server direkt auf seiner Netz-B-Schnittstelle anfragen:
+
+Bash
+nslookup srv-deb-01.netz1.tobias.lan 172.16.7.97
+Wenn dieser Befehl funktioniert, ändere den DNS-Server in der NetworkManager-Konfiguration von srv-debian-02 (wie im vorherigen Schritt vorbereitet) dauerhaft von der .33 auf die 172.16.7.97 ab.
+
+Mögliche nächste Schritte oder verwandte Themen:
+
+Ping-Test vom Client zum Gateway ausführen: ping -c 3 172.16.7.97
+
+BIND-Status auf srv-rocky prüfen: sudo systemctl status named
+
+Überwachung ankommender DNS-Pakete auf dem Router: sudo tcpdump -i any port 53 -n
+
+ ✘ tobias@srv-debian-02  ~  ping 172.16.7.33
+
+PING 172.16.7.33 (172.16.7.33) 56(84) bytes of data.
+
+64 bytes from 172.16.7.33: icmp_seq=1 ttl=64 time=0.319 ms
+
+64 bytes from 172.16.7.33: icmp_seq=2 ttl=64 time=0.321 ms
+
+64 bytes from 172.16.7.33: icmp_seq=3 ttl=64 time=0.331 ms
+
+64 bytes from 172.16.7.33: icmp_seq=4 ttl=64 time=0.324 ms
+
+64 bytes from 172.16.7.33: icmp_seq=5 ttl=64 time=0.350 ms
+
+64 bytes from 172.16.7.33: icmp_seq=6 ttl=64 time=0.371 ms
+
+64 bytes from 172.16.7.33: icmp_seq=7 ttl=64 time=0.336 ms
+
+^C
+
+--- 172.16.7.33 ping statistics ---
+
+7 packets transmitted, 7 received, 0% packet loss, time 6042ms
+
+rtt min/avg/max/mdev = 0.319/0.336/0.371/0.017 m
+
+Der Ping beweist, dass die Routing-Ebene zwischen den beiden Subnetzen fehlerfrei arbeitet. Da Pakete durchkommen, liegt das Problem exakt bei firewalld auf srv-rocky.
+
+RHEL-basierte Systeme blockieren in der Standard-Zone public DNS-Anfragen, die über andere Netzwerkschnittstellen einwandfrei geroutet werden, solange sie nicht explizit erlaubt oder die Interfaces den Zonen zugewiesen wurden.
+
+Führe diese Befehle auf dem Router srv-rocky aus:
+
+1. Schnittstellen den korrekten Firewall-Zonen zuweisen
+Bash
+# Netz A (ens161) und Netz B (ens256) der internen Zone zuweisen
+sudo firewall-cmd --zone=internal --add-interface=ens161 --permanent
+sudo firewall-cmd --zone=internal --add-interface=ens256 --permanent
+2. DNS-Dienst in der Zone freischalten
+Bash
+# DNS dauerhaft fuer die interne Zone erlauben
+sudo firewall-cmd --zone=internal --add-service=dns --permanent
+
+# Firewall neu laden, um alle Aenderungen aktiv zu schalten
+sudo firewall-cmd --reload
+3. Gegenprüfung auf dem Client
+Führe die DNS-Abfrage auf srv-debian-02 erneut aus:
+
+Bash
+nslookup srv-deb-01.netz1.tobias.lan
+Mögliche nächste Schritte oder verwandte Themen:
+
+Überprüfung der aktiven Zonen-Zuordnungen mittels sudo firewall-cmd --get-active-zones
+
+Durchführung desselben DNS-Tests von den Arch Linux/CachyOS-Maschinen aus
+
+Überwachung der DNS-Namensauflösung im Log des Routers über sudo journalctl -u named -f
+
+ nslookup srv-deb-01.netz1.tobias.lan 172.16.7.97
+
+Server: 172.16.7.97
+
+Address: 172.16.7.97#53
+
+
+
+Name: srv-deb-01.netz1.tobias.lan
+
+Address: 172.16.7.42
+
+Die Namensauflösung über die Netz-B-IP des Routers funktioniert jetzt fehlerfrei. srv-rocky liefert korrekt die IP 172.16.7.42 für den Host im Netz A zurück.
+
+Da der Timeout vorhin bei der Anfrage an 172.16.7.33 auftrat, musst du auf srv-debian-02 lediglich den zugewiesenen Nameserver von der Schnittstellen-IP des Netzes A (.33) auf die Schnittstellen-IP seines eigenen Netzes B (.97) ändern. Das verhindert unnötige Routing-Schleifen für DNS-Anfragen.
+
+DNS auf srv-debian-02 korrigieren
+Führe diese Befehle auf srv-debian-02 aus, um den DNS-Server dauerhaft auf das eigene Gateway umzubiegen:
+
+Bash
+# 1. Ermittle den Verbindungsnamen (Spalte NAME)
+sudo nmcli connection show
+
+# 2. DNS auf das Netz-B-Gateway des Routers setzen (Ersetze <NAME> durch das Ergebnis aus Schritt 1)
+sudo nmcli connection modify "<NAME>" ipv4.dns "172.16.7.97"
+
+# 3. Verbindung neu laden
+sudo nmcli connection up "<NAME>"
+Nach diesem Schritt funktioniert das einfache nslookup srv-deb-01.netz1.tobias.lan (ohne die explizite Angabe der IP am Ende) sofort und dauerhaft.
+
+Mögliche nächste Schritte oder verwandte Themen:
+
+Analoge Umstellung auf srv-deb-01 prüfen (dort muss der DNS auf das Netz-A-Gateway 172.16.7.33 zeigen)
+
+Testen der Namensauflösung für externe Domänen über den konfigurierten Forwarder mittels nslookup google.de
+
+Einrichtung von CNAME-Records in der Zonendatei für die Docker Swarm Web- und Mail-Dienste
+
+ tobias@srv-debian-02  ~  nslookup srv-deb-02.netz2.tobias.lan
+
+Server: 172.16.7.33
+
+Address: 172.16.7.33#53
+
+
+
+Name: srv-deb-02.netz2.tobias.lan
+
+Address: 172.16.7.111
+
+Perfekt, die Namensauflösung funktioniert jetzt über beide Schnittstellen des Routers hinweg einwandfrei. Der Client srv-debian-02 fragt nun den Router an und erhält sofort seine eigene IP-Adresse (172.16.7.111) über die Domäne zurück.
+
+Damit ist die DNS-Infrastruktur für deine beiden /27-Subnetze vollständig einsatzbereit.
+
+Mögliche nächste Schritte oder verwandte Themen:
+
+Testen der Namensauflösung von den Arch- und Manjaro-Clients (ws-cachy und ws-manjaro)
+
+Prüfung der externen Namensauflösung über das Gateway mittels nslookup google.com
+
+Erstellen von CNAME-Einträgen in der db.tobias.lan für deine Swarm-Dienste (z. B. tickets.netz1.tobias.lan)
+
+Einrichtung einer Reverse-Lookup-Zone für die IP-zu-Namen-Auflösung (PTR-Records)
+
+ ✘ tobias@srv-debian-02  ~  nslookup srv-rocky.tobias.lan
+
+Server: 172.16.7.33
+
+Address: 172.16.7.33#53
+
+
+
+Name: srv-rocky.tobias.lan
+
+Address: 172.16.7.33
+
+Das DNS-Setup auf dem Router steht und funktioniert stabil. Der Hostname srv-rocky.tobias.lan wird korrekt aufgelöst und liefert die Gateway-IP zurück. Da die Infrastruktur nun Namen auflösen kann, können die Docker-Swarm-Knoten und Mail-Dienste über die neuen, sprechenden FQDNs statt über nackte IP-Adressen kommunizieren.
+
+Mögliche nächste Schritte oder verwandte Themen:
+
+Testen einer externen Domain via nslookup heise.de, um den BIND-Forwarder zu validieren
+
+Hinzufügen von Alias-Einträgen (CNAME) für die Docker-Dienste wie tickets.tobias.lan in der Zonendatei
+
+Einrichtung der IP-Rückwärtsauflösung über eine Reverse-Lookup-Zone (db.172.16.7)
+
+Umstellung der stack.yml des Swarms von IP-Adressen auf die neuen Hostnames
+
+tobias@srv-debian-02  ~  dig srv-rocky.tobias.lan
+
+
+
+; <<>> DiG 9.20.23-1~deb13u1-Debian <<>> srv-rocky.tobias.lan
+
+;; global options: +cmd
+
+;; Got answer:
+
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 18419
+
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+
+
+;; OPT PSEUDOSECTION:
+
+; EDNS: version: 0, flags:; udp: 1232
+
+; COOKIE: 9404d990be5f5a2a010000006a3bc06df2d4793f8c5ace6c (good)
+
+;; QUESTION SECTION:
+
+;srv-rocky.tobias.lan. IN A
+
+
+
+;; ANSWER SECTION:
+
+srv-rocky.tobias.lan. 86400 IN A 172.16.7.33
+
+
+
+;; Query time: 4 msec
+
+;; SERVER: 172.16.7.33#53(172.16.7.33) (UDP)
+
+;; WHEN: Wed Jun 24 13:33:01 CEST 2026
+
+;; MSG SIZE  rcvd: 93
+
+Die Ausgabe von dig liefert das perfekte Ergebnis für eine fehlerfreie Namensauflösung.
+
+Die wichtigsten Indikatoren aus dem Log:
+
+status: NOERROR: Die Anfrage wurde erfolgreich und ohne Fehler beantwortet.
+
+flags: aa (Authoritative Answer): Der DNS-Server srv-rocky hat die Antwort direkt aus seiner eigenen Zonendatei generiert und ist der offizielle Verwalter dieser Domäne.
+
+ANSWER SECTION: Liefert korrekt den A-Record mit der IP 172.16.7.33 und der vollen TTL von 86400 Sekunden (24 Stunden) zurück.
+
+SERVER: 172.16.7.33#53: Bestätigt, dass der Router auf der Schnittstelle des ersten Netzes sauber antwortet.
+
+Damit ist die DNS-Infrastruktur für deine Labor-Umgebung vollständig einsatzbereit und korrekt konfiguriert.
+
+Mögliche nächste Schritte oder verwandte Themen:
+
+Testen des Forwardings ins Internet mittels dig google.com auf dem Client
+
+Anlage einer Reverse-Lookup-Zone für die IP-zu-Namen-Auflösung (PTR-Records)
+
+Einrichten von sprechenden Alias-Namen (CNAME) für die Docker-Dienste (tickets.tobias.lan)
+
+Einbinden des neuen DNS-Servers in die verbleibenden Arch- und Manjaro-Clients
+
+kann ich den dns eintrag noch mit txt "aufbohren"?
+
+Ja, du kannst den DNS-Eintrag deiner Domäne mit TXT-Records (Text Records) erweitern. In einem lokalen Labornetzwerk werden TXT-Records häufig genutzt, um Beschreibungen, Server-Rollen oder Konfigurationsdaten für Anwendungen direkt im DNS zu hinterlegen.
+
+Beim Einsatz eines lokalen Mailservers und Domänencontrollers sind TXT-Records zudem essenziell, um die Vertrauenswürdigkeit von E-Mails zu steuern (SPF) oder Dienste auffindbar zu machen.
+
+🛠️ TXT-Records in die Zonendatei einbinden
+Öffne die Zonendatei auf srv-rocky:
+
+Bash
+sudo nano /var/named/zones/db.tobias.lan
+Du kannst nun spezifische TXT-Einträge für deine Server oder die gesamte Domäne unterhalb der bestehenden A-Records ergänzen.
+
+Beispiel-Erweiterung für deine db.tobias.lan:
+Plaintext
+; --- Globale Domänen-Einträge (E-Mail-Sicherheit & Info) ---
+@               IN      TXT     "v=spf1 ip4:172.16.7.33 ip4:172.16.7.97 -all"
+@               IN      TXT     "owner=Tobias Boyke"
+@               IN      TXT     "description=BitLC Vocational Retraining Lab Network"
+
+; --- Gerätespezifische TXT-Records (Metadaten für Infrastruktur) ---
+srv-rocky       IN      TXT     "role=Central-Router-Gateway"
+srv-deb-01.netz1 IN     TXT     "role=Docker-Swarm-Manager; app=TicketsPlease-Web"
+srv-deb-02.netz2 IN     TXT     "role=Docker-Swarm-Worker; app=TicketsPlease-Web-Replica"
+ws-cachy.netz1  IN      TXT     "os=CachyOS; role=Developer-Workstation"
+ws-manjaro.netz2 IN     TXT     "os=Manjaro; role=Testing-Client"
+🔄 Zone aktualisieren
+Nach jeder Änderung an einer Zonendatei musst du zwingend die Seriennummer (Serial) im oberen Bereich der Datei (SOA-Record) erhöhen (z. B. von 2026062402 auf 2026062403), damit die Clients die Änderung als neu erkennen.
+
+Danach lädst du die Zone in BIND neu:
+
+Bash
+# Syntax-Check der Zone
+sudo named-checkzone tobias.lan /var/named/zones/db.tobias.lan
+
+# BIND Konfiguration neu laden
+sudo rndc reload
+🧪 TXT-Einträge abfragen
+Auf den Clients kannst du die neu gesetzten Text-Informationen gezielt mit dig oder nslookup auslesen:
+
+Bash
+# Abfrage der globalen Domänen-Infos
+dig tobias.lan TXT
+
+# Abfrage der Rolle von srv-deb-01
+nslookup -type=TXT srv-deb-01.netz1.tobias.lan
+Mögliche nächste Schritte oder verwandte Themen:
+
+Implementierung von DMARC und DKIM TXT-Records für die Absicherung deines lokalen Mailservers
+
+Nutzung von SRV-Records (Service Records) zur automatischen Erkennung von LDAP- und Kerberos-Diensten
+
+Verknüpfung der DNS-TXT-Einträge mit einem lokalen Inventarisierungs-Skript
+
+$TTL    86400
+
+@ IN SOA     srv-rocky.tobias.lan. root.tobias.lan. (
+
+                              2026062401        ; Serial
+
+                                  604800        ; Refresh
+
+                                   86400        ; Retry
+
+                                 2419200        ; Expire
+
+                                   86400 ) ; Negative Cache TTL
+
+;
+
+; Name Server Definition
+
+@ IN NS srv-rocky.tobias.lan.
+
+srv-rocky    IN      A       172.16.7.33
+
+
+
+; --- Netz A (Subdomain: netz1.tobias.lan / Bereich 172.16.7.32/27) ---
+
+srv-deb-01.netz1.tobias.lan.   IN      A       172.16.7.42
+
+ws-cachy.netz1.tobias.lan.     IN      A       172.16.7.47
+
+
+
+; --- Netz B (Subdomain: netz2.tobias.lan / Bereich 172.16.7.96/27) ---
+
+srv-deb-02.netz2.tobias.lan.   IN      A       172.16.7.111
+
+ws-manjaro.netz2.tobias.lan.   IN      A       172.16.7.106
+
+
+
+
+
+gib mir die vollständig bearbeitete datei
+
+Hier ist deine vollständige, bearbeitete Zonendatei /var/named/zones/db.tobias.lan mit erhöhter Serial (2026062402) und den integrierten TXT-Records für die Domäne und die einzelnen Hosts.
+
+Plaintext
+$TTL    86400
+@       IN      SOA     srv-rocky.tobias.lan. root.tobias.lan. (
+                              2026062402        ; Serial (Erhöht für Zonen-Update)
+                                  604800        ; Refresh
+                                   86400        ; Retry
+                                 2419200        ; Expire
+                                   86400 )      ; Negative Cache TTL
+;
+; Name Server Definition
+@       IN      NS      srv-rocky.tobias.lan.
+srv-rocky    IN      A       172.16.7.33
+
+; --- Globale Domänen-TXT-Einträge ---
+@       IN      TXT     "v=spf1 ip4:172.16.7.33 ip4:172.16.7.97 -all"
+@       IN      TXT     "owner=Tobias Boyke"
+@       IN      TXT     "description=BitLC Vocational Retraining Lab Network"
+
+; --- Netz A (Subdomain: netz1.tobias.lan / Bereich 172.16.7.32/27) ---
+srv-deb-01.netz1.tobias.lan.   IN      A       172.16.7.42
+srv-deb-01.netz1.tobias.lan.   IN      TXT     "role=Docker-Swarm-Manager; app=TicketsPlease-Web"
+
+ws-cachy.netz1.tobias.lan.     IN      A       172.16.7.47
+ws-cachy.netz1.tobias.lan.     IN      TXT     "os=CachyOS; role=Developer-Workstation"
+
+; --- Netz B (Subdomain: netz2.tobias.lan / Bereich 172.16.7.96/27) ---
+srv-deb-02.netz2.tobias.lan.   IN      A       172.16.7.111
+srv-deb-02.netz2.tobias.lan.   IN      TXT     "role=Docker-Swarm-Worker; app=TicketsPlease-Web-Replica"
+
+ws-manjaro.netz2.tobias.lan.   IN      A       172.16.7.106
+ws-manjaro.netz2.tobias.lan.   IN      TXT     "os=Manjaro; role=Testing-Client"
+
+; --- Infrastruktur-TXT-Einträge ---
+srv-rocky.tobias.lan.          IN      TXT     "role=Central-Router-Gateway"
+🔄 Zone in BIND neu laden
+Führe diese beiden Befehle auf srv-rocky aus, um die Änderungen zu aktivieren:
+
+Bash
+# Validierung der Datei auf Syntaxfehler
+sudo named-checkzone tobias.lan /var/named/zones/db.tobias.lan
+
+# Neuladen der Zone im laufenden Betrieb
+sudo rndc reload tobias.lan
+Mögliche nächste Schritte oder verwandte Themen:
+
+Abfrage des SPF-Eintrags vom Client aus mittels dig tobias.lan TXT
+
+Auslesen der Host-Metadaten via nslookup -type=TXT srv-deb-01.netz1.tobias.lan
+
+Hinzufügen von Mail-Server-spezifischen MX-Records (IN MX 10 mail.tobias.lan)
+
+Erstellen einer passenden Reverse-Lookup-Zonendatei für die PTR-Einträge
+
+tobias@srv-debian-02  ~  dig srv-rocky.tobias.lan
+
+
+
+; <<>> DiG 9.20.23-1~deb13u1-Debian <<>> srv-rocky.tobias.lan
+
+;; global options: +cmd
+
+;; Got answer:
+
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 31066
+
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+
+
+;; OPT PSEUDOSECTION:
+
+; EDNS: version: 0, flags:; udp: 1232
+
+; COOKIE: f674aa38ec4a4bb6010000006a3bc227064465315debbe72 (good)
+
+;; QUESTION SECTION:
+
+;srv-rocky.tobias.lan. IN A
+
+
+
+;; ANSWER SECTION:
+
+srv-rocky.tobias.lan. 86400 IN A 172.16.7.33
+
+
+
+;; Query time: 0 msec
+
+;; SERVER: 172.16.7.33#53(172.16.7.33) (UDP)
+
+;; WHEN: Wed Jun 24 13:40:23 CEST 2026
+
+;; MSG SIZE  rcvd: 93
+
+
+
+ tobias@srv-debian-02  ~ 
+
+Das Ergebnis bestätigt eine fehlerfreie DNS-Konfiguration. Das aa-Flag (Authoritative Answer) zeigt, dass BIND für diese Domäne zuständig ist und verbindlich antwortet.
+
+Um die im vorherigen Schritt angelegten TXT-Records zu prüfen, muss der Record-Typ explizit angehängt werden, da dig standardmäßig nur nach A-Records (IPs) sucht:
+
+Bash
+dig tobias.lan TXT
+dig srv-rocky.tobias.lan TXT
+Einrichtung der Reverse-Lookup-Zone (IP zu Name)
+Für einen reibungslosen Betrieb des Mailservers (Spam-Vermeidung) und die reibungslose Active-Directory-Integration ist eine funktionierende Rückwärtsauflösung (PTR-Records) zwingend erforderlich. Da beide Subnetze (A und B) im Adressraum 172.16.7.X liegen, reicht eine einzige /24-Reverse-Zone.
+
+1. /etc/named.conf auf srv-rocky ergänzen
+Füge am Ende der Datei die Reverse-Zone hinzu:
+
+Code-Snippet
+zone "7.16.172.in-addr.arpa" IN {
+        type master;
+        file "zones/db.172.16.7";
+        allow-update { none; };
+};
+2. Zonendatei erstellen
+
+Bash
+sudo nano /var/named/zones/db.172.16.7
+Füge folgenden Inhalt ein (die Zahlen links sind die letzten Oktette der jeweiligen IP-Adresse):
+
+Plaintext
+$TTL    86400
+@       IN      SOA     srv-rocky.tobias.lan. root.tobias.lan. (
+                              2026062401        ; Serial
+                                  604800        ; Refresh
+                                   86400        ; Retry
+                                 2419200        ; Expire
+                                   86400 )      ; Negative Cache TTL
+
+@       IN      NS      srv-rocky.tobias.lan.
+
+; --- Router / Gateways ---
+33      IN      PTR     srv-rocky.tobias.lan.
+97      IN      PTR     srv-rocky.tobias.lan.
+
+; --- Netz A ---
+42      IN      PTR     srv-deb-01.netz1.tobias.lan.
+47      IN      PTR     ws-cachy.netz1.tobias.lan.
+
+; --- Netz B ---
+111     IN      PTR     srv-deb-02.netz2.tobias.lan.
+106     IN      PTR     ws-manjaro.netz2.tobias.lan.
+3. Konfiguration prüfen und BIND aktualisieren
+
+Bash
+# Rechte setzen
+sudo chown named:named /var/named/zones/db.172.16.7
+
+# Syntax prüfen
+sudo named-checkconf /etc/named.conf
+sudo named-checkzone 7.16.172.in-addr.arpa /var/named/zones/db.172.16.7
+
+# BIND neu laden
+sudo rndc reload
