@@ -1,0 +1,1378 @@
+
+QUESTION 1:
+
+On Linux systems, which file typically now points to a shell program instead of holding a
+shell program?
+A.	 /bin/bash
+B.	 /bin/dash
+C.	 /bin/zsh
+D.	 /bin/sh
+E.	 /bin/tcsh
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 2:
+
+To see only the current Linux kernel version, which command should you use?
+A.	 uname
+B.	 echo $BASH_VERSION
+C.	 uname -r
+D.	 uname -a
+E.	 echo $SHELL
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 3:
+
+What will the echo \^New \^Style command display?
+A.	 \^New \^Style
+B.	 New Style
+C.	 Style New
+D.	 ^New ^Style
+E.	 \ew \tyle
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 4:
+
+You need to determine if the fortytwo.sh program is in a $PATH directory. Which of the
+following commands will assist you in this task? (Choose all that apply.)
+A.	 which fortytwo.sh
+B.	 cat fortytwo.sh
+C.	 echo $PATH
+D.	 fortytwo.sh
+E.	 /usr/bin/fortytwo.sh
+Answer: A C D
+
+Explanation:::
+ 
+
+QUESTION 5:
+
+You want to edit the file SpaceOpera.txt and decide to use the vim editor to complete this
+task. Which of the following are vim modes you might employ? (Choose all that apply.)
+A.	Insert
+B.	Change
+C.	Command
+D.	Ex
+E.	Edit
+Answer: A C D
+
+Explanation:::
+ 
+
+QUESTION 6:
+
+You have a lengthy file named FileA.txt. What will the head -15 FileA.txt
+command do?
+A.	 Display all but the last 15 lines of the file
+B.	 Display all but the first 15 lines of the file
+C.	 Display the first 15 lines of the file
+D.	 Display the last 15 lines of the file
+E.	 Generate an error message
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 7:
+
+You are trying to peruse a rather large text file. A co-worker suggests you use a pager.
+Which of the following best describes what your co-worker is recommending?
+A.	 Use a utility that allows you to view the first few lines of the file.
+B.	 Use a utility that allows you to view one text page at time.
+C.	 Use a utility that allows you to search through the file.
+D.	 Use a utility that allows you to filter out text in the file.
+E.	 Use a utility that allows you to view the last few lines of the file.
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 8:
+
+Which of the following does not describe the less utility?
+A.	 It does not read the entire file prior to displaying the file's first page.
+B.	 You can use the up and down arrow keys to move through the file.
+C.	 You press the spacebar to move forward a page.
+D.	 You can use the Esc+V key combination to move backward a page.
+E.	 You can press the X key to exit from the utility.
+Answer: D E
+
+Explanation:::
+ 
+
+QUESTION 9:
+
+The cat -E MyFile.txt command is entered and at the end of every line displayed is a $.
+What does this indicate?
+A.	 The text file has been corrupted somehow.
+B.	 The text file records end in the ASCII character NUL.
+C.	 The text file records end in the ASCII character LF.
+D.	 The text file records end in the ASCII character $.
+E.	 The text file records contain a $ at their end.
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 10:
+
+The cut utility often needs delimiters to process text records. Which of the following best
+describes a delimiter?
+A.	 One or more characters that designate the beginning of a line in a record
+B.	 One or more characters that designate the end of a line in a record
+C.	 One or more characters that designate the end of a text file to a command-line text processing utility
+D.	 A single space or a colon (:) that creates a boundary between different data items in a record
+E.	 One or more characters that create a boundary between different data items in a record
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 11:
+
+Which of the following utilities can change text within a file? (Choose all that apply.)
+A.	 cut
+B.	 sort
+C.	 vim
+D.	 nano
+E.	 sed
+Answer: C D E
+
+Explanation:::
+ 
+
+QUESTION 12:
+
+A Unicode-encoded text file, MyUCode.txt, needs to be perused. Before you decide what
+utility to use in order to view the file's contents, you employ the wc command on it. This
+utility displays 2020 6786 11328 to STDOUT. What of the following is true? (Choose all
+that apply.)
+A.	 The file has 2,020 lines in it.
+B.	 The file has 2,020 characters in it.
+C.	 The file has 6,786 words in it.
+D.	 The file has 11,328 characters in it.
+E.	 The file has 11,328 lines in it.
+Answer: A C
+
+Explanation:::
+ 
+
+QUESTION 13:
+
+The grep utility can employ regular expressions in its PATTERN. Which of the following best
+describes a regular expression?
+A.	 A series of characters you define for a utility, which uses the characters to match the same characters in text files
+B.	 ASCII characters, such as LF and NUL, that a utility uses to filter text
+C.	 Wildcard characters, such as * and ?, that a utility uses to filter text
+D.	 A pattern template you define for a utility, which uses the pattern to filter text
+E.	 Quotation marks (single or double) used around characters to prevent unexpected
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 14:
+
+Which of the following is a BRE pattern that could be used with the grep command?
+(Choose all that apply.)
+A.	 Sp?ce
+B.	 "Space, the .*frontier"
+C.	 ^Space
+D.	 (lasting | final)
+E.	 frontier$
+Answer: A B C E
+
+Explanation:::
+ 
+
+QUESTION 15:
+
+You need to search through a large text file and find any record that contains either Luke or
+Laura at the record's beginning. Also, the phrase "Father is" must be located somewhere
+in the record's middle. Which of the following is an ERE pattern that could be used with
+the egrep command to find this record?
+A.	"Luke$|Laura$.*Father is"
+B.	"^Luke|^Laura.Father is"
+C.	"(^Luke|^Laura).Father is"
+D.	"(Luke$|Laura$).* Father is$"
+E.	"(^Luke|^Laura).*Father is.* "
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 16:
+
+Which of the following best defines a file descriptor?
+A.	 An environment variable, such as $PS1
+B.	 A number that represents a process's open files
+C.	 Another term for the file's name
+D.	 A six character name that represents standard output
+E.	 A symbol that indicates the file's classification
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 17:
+
+A file data.txt needs to be sorted numerically and its output saved to a new file
+newdata.txt. Which of the following commands can accomplish this task? (Choose
+all that apply.)
+A.	 sort -n -o newdata.txt data.txt
+B.	 sort -n data.txt > newdata.txt
+C.	 sort -n -o data.txt newdata.txt
+D.	 sort -o newdata.txt data.txt
+E.	 sort data.txt > newdata.txt
+Answer: A B
+
+Explanation:::
+ 
+
+QUESTION 18:
+
+By default, STDOUT goes to what item?
+A.	 /dev/ttyn, where n is a number
+B.	 /dev/null
+C.	 >
+D.	 /dev/tty
+E.	 pwd
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 19:
+
+Which of the following commands will display the file SpaceOpera.txt to output as well
+as a copy of it to the file SciFi.txt?
+A.	 cat SpaceOpera.txt | tee SciFi.txt
+B.	 cat SpaceOpera.txt > SciFi.txt
+C.	 cat SpaceOpera.txt 2> SciFi.txt
+D.	 cat SpaceOpera.txt SciFi.txt
+E.	 cat SpaceOpera.txt &> SciFi.txt
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 20:
+
+Which of the following commands will put any generated error messages into the
+black hole?
+A.	 sort SpaceOpera.txt 2> BlackHole
+B.	 sort SpaceOpera.txt &> BlackHole
+C.	 sort SpaceOpera.txt > BlackHole
+D.	 sort SpaceOpera.txt 2> /dev/null
+E.	 sort SpaceOpera.txt > /dev/null
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 21:
+
+On Linux, systems package manager databases typically contain what types of information? (Choose all that apply.)
+A.	 Application files
+B.	 Application file directory locations
+C.	 Installation by username
+D.	 Software version
+E.	 Library dependencies
+Answer: A B D E
+
+Explanation:::
+ 
+
+QUESTION 22:
+
+What filename extension does the CentOS Linux distribution use for packages?
+A.	 .deb
+B.	 .zypp
+C.	 .dpkg
+D.	 .yum
+E.	 .rpm
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 23:
+
+Carol needs to install packages from a Red Hat-based repository. What programs can she
+use? (Choose all that apply.)
+A.	 dpkg
+B.	 zypper
+C.	 yum
+D.	 apt-get
+E.	 dnf
+Answer: C E
+
+Explanation:::
+ 
+
+QUESTION 24:
+
+Scott wants to add a third-party repository to his Red Hat-based package management system. Where should he place a new configuration file to add it?
+A.	 /etc/yum.repos.d/
+B.	 /etc/apt/sources.list
+C.	 /usr/lib/
+D.	 /bin/
+E.	 /etc/
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 25:
+
+You need to extract files from an .rpm package file for review prior to installing them.
+What utilities should you employ to accomplish this task? (Choose all that apply.)
+A.	 cpio2rpm
+B.	 rpm
+C.	 rpm2cpio
+D.	 cpio
+E.	 yum
+Answer: C D
+
+Explanation:::
+ 
+
+QUESTION 26:
+
+Natasha needs to install a new package on her Ubuntu Linux system. The package was distributed as a .deb file. What tool should she use?
+A.	 rpm
+B.	 yum
+C.	 dnf
+D.	 dpkg
+E.	 zypper
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 27:
+
+On his Debian-based package managed system, Tony wants to list all currently installed
+packages with missing dependencies. What command should he use?
+A.	 apt-cache unmet
+B.	 apt-cache stats
+C.	 apt-cache showpkg
+D.	 apt-cache search
+E.	 apt-cache depends
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 28:
+
+You've installed and configured a .deb package but did something incorrectly in the configuration process, and now the package will not run. What should you do next?
+A.	 Purge the package, and reinstall it.
+B.	 Uninstall the package, and then reinstall it.
+C.	 Reconfigure the package via the dpkg-reconfigure utility.
+D.	 Reconfigure the package via the debconf-show utility.
+E.	 Reconfigure the package via the dpkg or apt-get utilities.
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 29:
+
+Steve is working on an open source software development team to create a new application.
+He's completed a new shared library the program will be using and has moved it to the correct location. What command should Steve employ to update the system's library cache?
+A.	 ldd
+B.	 ldconfig
+C.	 ldcache
+D.	 ld.so
+E.	 ld-linux-x86-64.so.2
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 30:
+
+Library file locations may be stored where? (Choose all that apply.)
+A.	The /usr/bin*/ directories
+B.	The /ld.so.conf file
+C.	The /etc/ld.so.conf.d/ directory
+D.	The LD_LIBRARY_PATH environment variable
+E.	The /lib* and /usr/lib*/ folders
+Answer: C D E
+
+Explanation:::
+ 
+
+QUESTION 31:
+
+What are the types of option styles available for the ps command? (Choose all that apply.)
+A.	 BSD style
+B.	 Linux style
+C.	 Unix style
+D.	 GNU style
+E.	 Numeric style
+Answer: A C D
+
+Explanation:::
+ 
+
+QUESTION 32:
+
+By default, if you specify no command-line options, what does the ps command display?
+A.	 All processes running on the terminal
+B.	 All active processes
+C.	 All sleeping processes
+D.	 All processes run by the current shell
+E.	 All processes run by the current user
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 33:
+
+Peter noticed that his Linux system is running slow and needs to find out what application
+is causing the problem. What tool should he use to show the current CPU utilization of all
+the processes running on his system?
+A.	 top
+B.	 ps
+C.	 lsof
+D.	 free
+E.	 uptime
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 34:
+
+What top command displays cumulative CPU time instead of relative CPU time?
+A.	 l
+B.	 F
+C.	 r
+D.	 y
+E.	 S
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 35:
+
+Natasha just created a new window using the GNU Screen utility and detached from it. She
+now wants to reattach to it. What command or keystroke sequence will allow Natasha to
+view her detached window's ID?
+A.	 screen
+B.	 screen -r
+C.	 tmux ls
+D.	 screen -ls
+E.	 Ctrl+A and D
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 36:
+
+Scott wants to run his large number crunching application in background mode in his terminal session. What symbol should he add to his command that runs the program in order
+to accomplish that?
+A.	 >
+B.	 &
+C.	 |
+D.	 >>
+E.	 %
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 37:
+
+How can you temporarily pause a program from running in foreground in a terminal
+session?
+A.	 Press the Ctrl+Z key combination
+B.	 Press the Ctrl+C key combination
+C.	 Start the command with the nohup command
+D.	 Start the command with the ampersand (&) command
+E.	 Start the command with the fg command
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 38:
+
+Scott has decided to run a program in the background due to its time to process. However,
+he realizes several hours later that the program is not operating correctly and may have
+been consuming large amounts of CPU time unnecessarily. He decides to stop the background job. What command should he first employ?
+A.	 Scott should issue the ps -ef command to see all his background jobs.
+B.	 Scott should issue the jobs -l command to see all his background jobs.
+C.	 Scott should issue the kill %1 command to stop his background job.
+D.	 Scott should issue the kill 1 command to stop his background job.
+E.	 Scott should issue the kill -9 1 command to stop his background job.
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 39:
+
+Hope has an application that crunches lots of numbers and uses a lot of system resources.
+She wants to run the application with a lower priority so it doesn't interfere with other
+applications on the system. What tool should she use to start the application program?
+A.	 renice
+B.	 bash
+C.	 nice
+D.	 nohup
+E.	 lower
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 40:
+
+Carol used the ps command to find the process ID of an application that she needs to stop.
+What command-line tool should she use to stop the application?
+A.	 killall
+B.	 pkill
+C.	 TERM
+D.	 kill
+E.	 pgrep
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 41:
+
+What program does the workstation firmware start at boot time?
+A.	 A boot loader
+B.	The fsck program
+C.	 The Windows OS
+D.	The mount command
+E.	The mkinitrd program
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 42:
+
+Where does the firmware first look for a Linux boot loader program?
+A.	The /boot/grub directory
+B.	 The master boot record (MBR)
+C.	The /var/log directory
+D.	 A boot partition
+E.	The /etc directory
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 43:
+
+Where does the workstation BIOS attempt to find a boot loader program? (Choose all that
+apply.)
+A.	 An internal hard drive
+B.	 An external hard drive
+C.	 A DVD drive
+D.	 A USB memory stick
+E.	 A network server
+Answer: A B C D E
+
+Explanation:::
+ 
+
+QUESTION 44:
+
+Where is the master boot record located? (Choose all that apply.)
+A.	 The first sector of the first hard drive on the system
+B.	 The boot partition of any hard drive on the system
+C.	 The last sector of the first hard drive on the system
+D.	 Any sector on any hard drive on the system
+E.	 The first sector of the second hard drive on the system
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 45:
+
+The EFI System Partition (ESP) is stored in the
+A.	 /boot
+B.	 /etc
+C.	 /var
+D.	 /boot/efi
+E.	 /boot/grub
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 46:
+
+The firmware method has replaced BIOS on most modern IBM-compatible computers.
+A.	FTP
+B.	UEFI
+C.	PXE
+D.	NFS
+E.	HTTPS
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 47:
+
+Which type of storage device uses integrated circuits to store data with no moving parts?
+A.	SSD
+B.	SATA
+C.	SCSI
+D.	HDD
+E.	PATA
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 48:
+
+What raw device file would Linux create for the second SCSI drive connected to the system?
+A.	 /dev/hdb
+B.	 /dev/sdb
+C.	 /dev/sdb1
+D.	 /dev/hdb1
+E.	 /dev/sda
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 49:
+
+What tool creates a logical volume from multiple physical partitions?
+A.	 mkfs
+B.	 pvcreate
+C.	 lvcreate
+D.	 fdisk
+E.	 vgcreate
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 50:
+
+Which RAID levels can easily recover from a single failed hard drive? (Choose all that
+apply.)
+A.	 RAID 0
+B.	 RAID 4
+C.	 RAID 10
+D.	 RAID 5
+E.	 RAID 1
+Answer: B C D E
+
+Explanation:::
+ 
+
+QUESTION 51:
+
+Which partitioning tool provides a graphical interface?
+A.	 gdisk
+B.	 gparted
+C.	 fdisk
+D.	 parted
+E.	 fsck
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 52:
+
+Which fdisk command displays the current partition table on the hard drive?
+A.	 v
+B.	 n
+C.	 m
+D.	 p
+E.	 d
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 53:
+
+Linux uses .......  to add the filesystem on a new storage device to the virtual
+directory.
+A.	 Mount points
+B.	 Drive letters
+C.	 /dev files
+D.	 /proc directory
+E.	 /sys directory
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 54:
+
+What filesystem is the latest version of the original Linux file system?
+A.	reiserFS
+B.	btrfs
+C.	ext3
+D.	ext4
+E.	nfs
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 55:
+
+What tool do you use to create a new filesystem on a partition?
+A.	 fdisk
+B.	 mkfs
+C.	 fsck
+D.	 gdisk
+E.	 parted
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 56:
+
+Which filesystem type should you create to help extend the physical memory installed in a
+Linux workstation?
+A.	ext3
+B.	btrfs
+C.	swap
+D.	ext4
+E.	NTFS
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 57:
+
+What tool do you use to manually add a filesystem to the virtual directory?
+A.	 fsck
+B.	 mount
+C.	 umount
+D.	 fdisk
+E.	 mkfs
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 58:
+
+Which command allows you to remove a partition from the virtual directory on a running
+Linux system?
+A.	 mount
+B.	 umount
+C.	 fsck
+D.	 dmesg
+E.	 mkinitramfs
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 59:
+
+The program is a handy tool for repairing corrupted filesystems.
+A.	 fsck
+B.	 mount
+C.	 umount
+D.	 fdisk
+E.	 mkfs
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 60:
+
+What tool should you use to determine the disk space used by a specific user account on the
+Linux system?
+A.	 df
+B.	 iostat
+C.	 du
+D.	 lsblk
+E.	 blkid
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 61:
+
+When choosing a filename to create on a Linux system, what characters should be avoided?
+(Choose all that apply.)
+A.	 Asterisk (*)
+B.	Space
+C.	 Dash (-)
+D.	 Ampersand (&)
+E.	 Underscore (_)
+Answer: A B D
+
+Explanation:::
+ 
+
+QUESTION 62:
+
+You need to list all the filenames that contain the word data and have the .txt file extension in the present working directory. Which command should you use?
+A.	 ls data*.txt
+B.	 ls data?.txt
+C.	 ls *data.txt
+D.	 ls ?data?.txt
+E.	 ls *data*.txt
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 63:
+
+You need to list all the filenames that start with the word File, end with a single number,
+and have no file extension. Which command should you use?
+A.	 ls File?
+B.	 ls File*
+C.	 ls File[0-9]
+D.	 ls File[^0-9]
+E.	 ls File[a-z]
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 64:
+
+You are looking at a directory that you have not viewed in a long time and need to determine which files are actually directories. Which command is the best one to use?
+A.	 mkdir -v
+B.	 ls
+C.	 ls -F
+D.	 ls -i
+E.	 ll
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 65:
+
+You are using the ls command to look at a directory file's metadata but keep seeing metadata for the files within it instead. What command option will rectify this situation?
+A.	 -a
+B.	 -d
+C.	 -F
+D.	 -l
+E.	 -R
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 66:
+
+You have just created an empty directory called MyDir. Which command most likely did
+you use?
+A.	 mkdir -v MyDir
+B.	 touch MyDir
+C.	 cp -R TheDir MyDir
+D.	 mv -r TheDir MyDir
+E.	 rmdir MyDir
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 67:
+
+A long-time server administrator has left the company, and now you are in charge of her
+system. Her old user account directory tree, /home/Zoe/, has been backed up. Which
+command is the best one to use to quickly remove her files?
+A.	 cp -R /home/Zoe/ /dev/null/
+B.	 mv -R /home/zoe/ /dev/null/
+C.	 rm -Rf /home/Zoe/
+D.	 rm -ri /home/Zoe/
+E.	 rm -rI /home/Zoe
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 68:
+
+An administrator needs to create a full backup using the tar utility, compress it as much
+as possible, and view the files as they are being copied into the archive. What tar options
+should the admin employ?
+A.	 -xzvf
+B.	 -xJvf
+C.	 -czvf
+D.	 -cJf
+E.	 -cJvf
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 69:
+
+You need to create a low-level backup of all the data on the /dev/sdc drive and want to use
+the /dev/sde drive to store it on. Which dd command should you use?
+A.	 dd of=/dev/sde if=/dev/sdc
+B.	 dd of=/dev/sdc if=/dev/sde
+C.	 dd of=/dev/sde if=/dev/sdc count=5
+D.	 dd if=/dev/sde of=/dev/sdc count=5
+E.	 dd if=/dev/zero of=/dev/sdc
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 70:
+
+Which of the following can be used as backup utilities? (Choose all that apply.)
+A.	The gzip utility
+B.	The zip utility
+C.	The tar utility
+D.	The bzcat utility
+E.	The dd utility
+Answer: B C E
+
+Explanation:::
+ 
+
+QUESTION 71:
+
+You are trying to decide whether to use a hard link or a symbolic link for a data file. The
+file is 5 GB, has mission-critical data, and is accessed via the command line by three other
+people. What should you do?
+A.	 Create a hard link so the file can reside on a different filesystem for data protection.
+B.	 Create three hard links and provide the links to the three other people for data protection.
+C.	 Create three symbolic links and protect the links from the three other people for data protection.
+D.	 Create a symbolic link so that the file can reside on a different filesystem.
+E.	 Create a symbolic link so that the links can share an inode number.
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 72:
+
+What command can you use to change the owner assigned to a file?
+A.	 chmod
+B.	 chown
+C.	 ln
+D.	 owner
+E.	 chgrp
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 73:
+
+Which of the following commands would change a file named endgame.txt with the
+current permission string of rwxrw-r-- to rw-rw-r--? (Choose all that apply.)
+A.	 umask 0100
+B.	 chmod o-x endgame.txt
+C.	 chmod u-x endgame.txt
+D.	 chmod 664 endgame.txt
+E.	 chmod o=rw endgame.txt
+Answer: C D
+
+Explanation:::
+ 
+
+QUESTION 74:
+
+Which umask setting would cause created directories to have a permission of rwxrwxrw-?
+A.	 0777
+B.	 0001
+C.	 0776
+D.	 7770
+E.	 1000
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 75:
+
+What special permissions bit allows standard users to run an application with root
+­privileges?
+A.	 The sticky bit
+B.	 The SUID bit
+C.	 The SGID bit
+D.	Execute
+E.	Write
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 76:
+
+What special bit should you set to prevent users from deleting shared files created by someone else?
+A.	SUID
+B.	SGID
+C.	 Sticky bit
+D.	Read
+E.	Write
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 77:
+
+You are trying to find a file on your Linux server whose name is conf. Employing the
+locate conf command for your search shows many directories that contain the letters
+conf. What is the best description for why this is happening?
+A.	The locate utility searches for only for directory names.
+B.	 You did not employ the -d skip switch.
+C.	 It is most likely because the locate database is corrupted.
+D.	 You did not employ the appropriate regular expression.
+E.	 It is due to file globbing on the pattern name.
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 78:
+
+You want to search for a particular file, main.conf, using the find utility. This file most
+likely is located somewhere in the /etc/ directory tree. Which of the following commands
+is the best one to use in this situation?
+A.	 find -r /etc -name main.conf
+B.	 find / -name main.conf
+C.	 find /etc -maxdepth -name main.conf
+D.	 find /etc -name main.conf
+E.	 find main.conf /etc
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 79:
+
+Yesterday a co-worker, Michael, was fired for nefarious behavior. His account and home
+directory were immediately deleted. You need to audit the server to see if he left any files he
+owns out in the virtual directory system. Which of the following commands is the best one
+to use in this situation?
+A.	 find / -name Michael
+B.	 find / -user Michael
+C.	 find / -mmin 1440
+D.	 find ~ -user Michael
+E.	 find / -nouser
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 80:
+
+Due to an unusual emergency, Carol needs to quickly locate the stonetracker command's
+source code files. Which of the following is the best command to use in this case?
+A.	 which
+B.	 whereis
+C.	 locate
+D.	 find
+E.	 type
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 81:
+
+What memory area does Linux use to store boot messages?
+A.	BIOS
+B.	 GRUB boot loader
+C.	MBR
+D.	 Initrd RAM disk
+E.	 Kernel ring buffer
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 82:
+
+Which of the following commands may allow you to examine the most recent boot messages? (Choose all that apply.)
+A.	 less /var/log/kernel.log
+B.	 less /var/log/boot
+C.	 less /var/log/boot.log
+D.	 dmesg
+E.	 journalctl
+Answer: B C D E
+
+Explanation:::
+ 
+
+QUESTION 83:
+
+What program does a system's firmware start at boot time?
+A.	 A boot loader
+B.	 The BIOS program
+C.	 The UEFI program
+D.	The POST command
+E.	The init program
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 84:
+
+Where does the BIOS firmware first look for a Linux boot loader program?
+A.	The /boot/grub/ directory
+B.	 Master boot record (MBR)
+C.	The /var/log/ directory
+D.	 A boot partition
+E.	The /etc/ directory
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 85:
+
+The EFI System Partition (ESP) is stored in which directory on a Linux system?
+A.	 /boot/
+B.	 /boot/grub/
+C.	 /boot/grub2/
+D.	 /boot/efi/
+E.	 /boot/esp/
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 86:
+
+What file extension does UEFI bootloader files use?
+A.	 .cfg
+B.	 .uefi
+C.	 .lst
+D.	 .conf
+E.	 .efi
+Answer: E
+
+Explanation:::
+ 
+
+QUESTION 87:
+
+A system admin needs to view her GRUB Legacy configuration files. Where should she
+look?
+A.	 /boot/grub
+B.	 /boot/grub2
+C.	 /boot/efi
+D.	 /etc/grub
+E.	 /etc/grub2
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 88:
+
+An administrator wants to change one of his GRUB Legacy boot menu options displayed
+from Windows 10 to That Other OS. What word should start the line he should change in
+his GRUB Legacy configuration file ?
+A.	 hiddenmenu
+B.	 kernel
+C.	 title
+D.	 menuentry
+E.	 rootnoverify
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 89:
+
+What command must you run to install GRUB Legacy to the MBR?
+A.	 grub-mkconfig
+B.	 grub2-mkconfig
+C.	 update-grub
+D.	 grub-install
+E.	 No need to install
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 90:
+
+You need to specify the root partition in your GRUB2 configuration file. The /boot directory is on /dev/sdb2. What line would you include?
+A.	 root(hd1,2)
+B.	 set root=(hd1,2)
+C.	 set root= \
+D.	 root(hd1,1)
+E.	 set root=(hd1,1)
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 91:
+
+Rey is troubleshooting a startup problem on her Linux system that employs GRUB2. She
+would like to enable kernel debugging. What should she do when she reaches the GRUB2
+boot menu?
+A.	 Edit the appropriate boot menu entry, find the line starting with linux*, go to the end of the line, add a space, and then type debug and press Ctrl+C.
+B.	 Select the appropriate GRUB 2 menu option, and then use the Force while GRUB2 is loading the correct Linux kernel.
+C.	 Edit the appropriate boot menu entry, find the line starting with linux*, go to the end of the line, add a space, and then type debug and press Ctrl+X.
+D.	 Edit the appropriate boot menu entry, find the line starting with kernel, go to the end of the line, add a space, and then type debug and press Ctrl+C.
+E.	 Edit the appropriate boot menu entry, find the line starting with kernel, go to the end of the line, add a space, and then type debug and press Ctrl+X.
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 92:
+
+Which of the following is true concerning systemd service units? (Choose all that apply.)
+A.	 Services can be started at system boot time.
+B.	 Services can be started in parallel.
+C.	 Backward compatibility to SysVinit runlevels is offered.
+D.	 A service can be started after all other services are started.
+E.	 A service can be prevented from starting at system boot time.
+Answer: A B C D E
+
+Explanation:::
+ 
+
+QUESTION 93:
+
+Which of the following is not a systemd target unit?
+A.	 runlevel7.target
+B.	 emergency.target
+C.	 graphical.target
+D.	 multi-user.target
+E.	 rescue.target
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 94:
+
+You need to modify a systemd service unit configuration. Where should the modified file be
+located?
+A.	 /etc/system/systemd/
+B.	 /usr/lib/system/systemd/
+C.	 /etc/systemd/system/
+D.	 /usr/lib/systemd/system/
+E.	 /run/system/systemd/
+Answer: C
+
+Explanation:::
+ 
+
+QUESTION 95:
+
+You have modified an openSSH service's configuration file, /etc/ssh/ssh_config. The
+service is already running. What is the best command to use with systemctl to make this
+modified file take immediate effect?
+A.	 reload
+B.	 daemon-reload
+C.	 restart
+D.	 mask
+E.	 unmask
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 96:
+
+You need to change the system's default target. What systemctl command should you use
+to accomplish this task?
+A.	 get-default
+B.	 set-default
+C.	 isolate
+D.	 is-enabled
+E.	 is-active
+Answer: B
+
+Explanation:::
+ 
+
+QUESTION 97:
+
+Your older Debian-based Linux distribution system uses SysV init. It soon is going to be
+upgraded to a Debian-based distro that uses systemd. To start some analysis, you enter
+the runlevel command. Which of the following are results you may see? (Choose all that
+apply.)
+A.	 N 5
+B.	 3 5
+C.	 N 2
+D.	 2 3
+E.	 1 2
+Answer: C E
+
+Explanation:::
+ 
+
+QUESTION 98:
+
+You've recently become the system administrator for an older Linux server, which still uses
+SysVinit. You determine that its default runlevel is 3. What file did you find that information in?
+A.	 /etc/inittab
+B.	 /etc/rc.d
+C.	 /etc/init.d/rc
+D.	 /etc/rc.d/rc
+E.	 /etc/rc.local
+Answer: A
+
+Explanation:::
+ 
+
+QUESTION 99:
+
+System administrator Luke is training an intern, Rey. Luke manages a systemd system
+whose users are primarily software developers and project leaders. He has planned a system
+reboot and informed the various system users via many methods several days in advance.
+However, before the system reboot, Luke wants to demonstrate to Rey how the wall command will notify some users, but not others. What command should he employ to show her
+which users will receive the wall messages?
+A.	 systemctl reboot
+B.	 shutdown -r now "System rebooting…"
+C.	 reboot
+D.	 who -T
+E.	 mesg
+Answer: D
+
+Explanation:::
+ 
+
+QUESTION 100:
+
+Kilo has just cloned 10 VMs from a clone system image. He needs to ensure that the clones
+can all run together on the same local network segment. What items should he check and
+modify if needed? (Choose all that apply.)
+A.	 NIC MAC address
+B.	 VM template
+C.	 Host name
+D.	 CPU extensions
+E.	 Machine ID
+Answer: A C E
+
+Explanation:::

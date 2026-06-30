@@ -1,0 +1,370 @@
+
+QUESTION 1:
+
+What is true regarding the command
+  ls >files
+if files does not exist?
+A. The output of ls is printed to the terminal
+B. files is created and contains the output of ls
+C. An error message is shown and ls is not executed
+D. The command files is executed and receives the output of ls
+E. Any output of ls is discarded
+Answer: B
+
+Explanation: correct answer: B
+
+QUESTION 2:
+
+Which of the following files will be looked for and used by GNU make, if one of them exists, unless
+a different file is specified on the command line when trying to compile software from source
+code? (Choose two.)
+A.  configure
+B.  config.h.in
+C.  makefile
+D.  Makefile
+E.  Makefile.in
+Answer: C D
+
+Explanation: correct answer: C D
+
+QUESTION 3:
+
+Which of the following is a CD-ROM filesystem standard?
+A.  OSI 9660
+B.  ISO 9660
+C.  SR0FS
+D.  ISO 8859
+E.  ROM-EO
+Answer: B
+
+Explanation: correct answer: B
+
+QUESTION 4:
+
+Which command is used to install a GRUB boot loader into the master boot record?
+A.  grub-install
+B.  grub-mkconfig
+C.  grub-install-mbr
+D.  grub-glue-mbr
+E.  grub-mbr-setup
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 5:
+
+If the file containing the Linux kernel is deleted, what happens when the system boots?
+A. The system starts normally since the bootloader copies the kernel to the master boot record of the hard disk
+B.  Instead of the kernel, the initramfs is loaded and instructed to mount the root filesystem and reinstall the kernel from the original package or from source
+C.  The bootloader mounts the root filesystem read-only and launches /bin/sh directly in order to allow the administrator to reinstall the kernel
+D.  Without a kernel system cannot boot and, depending on the bootloader, an error is displayed
+Answer: D
+
+Explanation: correct answer: D
+
+QUESTION 6:
+
+A Linux server running systemd booted to rescue.target for maintenance. Which commands are
+used to restore the server to its usual target? (Choose two.)
+A.  telinit 0
+B.  systemctl default
+C.  sync
+D.  systemctl emergency
+E.  systemctl reboot
+Answer: B E
+
+Explanation: correct answer: B E
+
+QUESTION 7:
+
+What is the purpose of an initramfs during the Linux system start?
+A.  It loads required modules and starts subsytems like LVM to make the root file system accessible to the kernel
+B.  It moves the kernel from normal system memory to initram memory to speed up kernel access
+C.  It copies the root file system's content to RAM to speed up the system and reduce writes to disk
+D.  It creates a ram disk to store volatile data for directories like /tmp to reduce writes to disk
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 8:
+
+After manually compiling and installing a new kernel, what has to be done regarding the initramfs?
+A.  To initramfs is independent of the kernel and should not be modified unless the hardware configuration of the machine has changed
+B.  Since the initramfs contains kernel modules, a new initramfs must be built for the new kernel
+C.  During the compilation of the Linux kernel, a new initramfs is built automatically. The new initramfs only needs to be installed 
+D.  The system should be restarted since the initramfs reconfigures itself for the new kernel during the startup of the system
+Answer: B
+
+Explanation: correct answer: B
+
+QUESTION 9:
+
+With DOS MBR only storage devices with a size lower than 3TB could be handled.
+Which storage device size can be used with GPT (GUID Partition Table)?
+(Please chose TWO answers)
+A. up to 10TB
+B. up to 9.6 ZB
+C. up to 9.600 Million TB
+D. up to 3.4 PB
+Answer: B C
+
+Explanation: correct answer: B C
+ 
+
+QUESTION 10:
+
+Using DOS MBR, 4 primary partitons with some logical partitions are possible. 
+How many partitions are generally allowed With GPT?
+A. 14
+B. 1000
+C. 128
+D. 64
+E. 256 
+Answer: C
+
+Explanation: correct answer: C
+
+QUESTION 11:
+
+How do you install groups of packages (GNOME-Desktop = gnome-desktop-environment) with yum? (Choose THREE)
+A. yum install group gnome-desktop-environment 
+B. yum installgroup gnome-desktop-environment
+C. yum groupinstall gnome-desktop-environment
+D. yum group install gnome-desktop-environment
+E. yum groups install gnome-desktop-environment
+Answer: C D E
+
+Explanation: correct answer: C D E 
+
+QUESTION 12:
+
+What's right about MBR and GPT? (TWO Answers)
+A. Up to 4 primary partitions can be created at MBR
+B. Up to 128 partitions can be created with GPT
+C. Up to 64 partitions can be created with GPT
+D. With MBR, the size of a partition is limited to 3.7 TB
+E. A GPT hard drive can be up to 9.4 terabytes in size
+Answer: A B
+
+Explanation: correct answer: A B 
+
+QUESTION 13:
+
+Wich maximum size could be used by a file in an ext4 filesystem?
+A. 16 ExaByte
+B. 16 PetaByte
+C. 16 TeraByte
+D. 4 TeraByte
+Answer: C
+
+Explanation: correct answer: C
+
+QUESTION 14:
+
+How can you find the PID of an individual program like prog_name in linux?
+A. pgrep prog_name
+B. grep progname | ps axl
+C. ps axl | grep prog_name-id
+D. ps ax -id prog_name
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 15:
+
+How can I repair an installation? "apt -fix-broken install" <--- ?!
+A. dpkg --configure -a
+B. apt-get update -fix-missing
+C. abcdef
+D. zgdfgdfg
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 16:
+
+How can you access the section 1 of the 'man command'?
+A. man command section 1
+B. man 1 command
+C. man s1 command
+D. man command (1)
+Answer: B
+
+Explanation: correct answer: B
+
+QUESTION 17:
+
+What config entry could be used in GRUB? 
+A. menuentrie
+B. timeout
+C. set title
+D. set defaults
+Answer: B
+
+Explanation: correct answer: B
+
+QUESTION 18:
+
+How can the inode be displayed? (TWO answers)
+A. ls
+B. stat 
+C. showinodes
+D. lsinode
+Answer: A B
+
+Explanation: correct answer: A B
+
+QUESTION 19:
+
+What is korrekt using this sed substitution? 
+  echo 'ABCabc' | sed 's/[ABC][abc]/xxx/'
+A. ABxxxbc 
+B. xxxxxx
+C. xxABCabcxx
+D. ABCabc
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 20:
+
+Which important config files are in /boot/ ?
+A. /boot/grub/grub.cfg
+B. /boot/grub.configuration
+C. /boot/config.x86_64
+D. /boot/vmlinuz.exe
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 21:
+
+Which of the following commands erases the contents of the /dev/sdb3
+partition?
+A. rm /dev/sdb3
+B. dd if=/dev/zero of=/dev/sdb3
+C. dd of=/dev/zero if=/dev/sdb3
+D. umount /dev/sdb3
+Answer: B
+
+Explanation: correct answer: B
+
+QUESTION 22:
+
+Which of the following commands restores only those files containing lpi in
+their name from the archive lpifiles.tar.gz?
+A. tar xvzf lpifiles.tar.gz --wildcards ‘*lpi*'
+B. tar xvzwf lpifiles.tar.gz ‘*lpi*'
+C. tar -xvfz lpifiles.tar.gz --deep ‘*lpi*'
+D. tar -xvzf lpifiles.tar.gz --subdirs ‘*lpi*'
+E. tar xvzf lpifiles.tar.gz --globbing ‘*lpi*'
+Answer: A
+
+Explanation: correct answer: A
+	--wildcards is the default
+
+QUESTION 23:
+
+Which of the following is a CD-ROM filesystem standard?
+A. OSI 9660
+B. ISO 9660
+C. SR0FS
+D. ISO 8859
+E. ROM-EO
+Answer: B
+
+Explanation: correct answer: B
+
+QUESTION 24:
+
+Which command is used to install a GRUB boot loader into the master boot record?
+A. grub-install
+B. grub-mkconfig
+C. grub-install-mbr
+D. grub-glue-mbr
+E. grub-mbr-setup
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 25:
+
+If the file containing the Linux kernel is deleted, what happens when the system boots?
+A. The system starts normally since the bootloader copies the kernel to the master boot record of the hard disk
+B. Instead of the kernel, the initramfs is loaded and instructed to mount the root filesystem and reinstall the kernel from the original package or from source
+C. The bootloader mounts the root filesystem read-only and launches /bin/sh directly in order to allow the administrator to reinstall the kernel
+D. Without a kernel system cannot boot and, depending on the bootloader, an error is displayed
+Answer: D
+
+Explanation: correct answer: D
+
+QUESTION 26:
+
+A Linux server running systemd booted to rescue.target for maintenance.
+Which commands are used to restore the server to its usual target? (Choose two.)
+A. telinit 0
+B. systemctl default
+C. sync
+D. systemctl emergency
+E. systemctl reboot
+Answer: B E
+
+Explanation: correct answer: B E
+
+QUESTION 27:
+
+Frage mit multi-user.target? 
+Select the command to switch from graphical.target to multi-user.target as default target.
+A. systemctl switch2default multi-user.target 
+B. systemctl set default.target multi-user.target
+C. systemctl set-default multi-user.target
+D. systemctl switch graphical.target multi-user.target
+Answer: C
+
+Explanation: correct answer: C
+
+QUESTION 28:
+
+What is the purpose of an initramfs during the Linux system start?
+A. It loads required modules and starts sub sytems like LVM to make the root file system accessible to the kernel
+B. It moves the kernel from normal system memory to initram memory to speed up kernel access
+C. It copies the root file system's content to RAM to speed up the system and reduce writes to disk
+D. It creates a ram disk to store volatile data for directories like /tmp to reduce writes to disk
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 29:
+
+After manually compiling and installing a new kernel, what has to be done regarding the initramfs?
+A. To initramfs is independent of the kernel and should not be modified unless the hardware configuration of the machine has changed
+B. Since the initramfs contains kernel modules, a new initramfs must be built for the new kernel
+C. During the compilation of the Linux kernel, a new initramfs is built automatically. The new initramfs only needs to be installed
+D. The system should be restarted since the initramfs reconfigures itself for the new kernel during the startup of the system
+Answer: C
+
+Explanation: correct answer: C
+
+QUESTION 30:
+
+How is the source code for the main Linux kernel modules distributed?
+A. It is included with the Linux kernel source code
+B. The kernel modules are downloaded on demand as they are used during compilation
+C. The kernel modules have their own release cycle and can be maintained separately from the Linux kernel source
+D. It is provided as a separate download alongside the Linux kernel source code for the same version
+Answer: A
+
+Explanation: correct answer: A
+
+QUESTION 31:
+
+In which directory tree are files modified when changing kernel parameters using the command sysctl?
+A. /sys/kernel/
+B. /proc/kernel/
+C. /proc/sys/
+D. /lib/sys/
+E. /sys/proc/
+Answer: C
+
+Explanation: correct answer: C
+
